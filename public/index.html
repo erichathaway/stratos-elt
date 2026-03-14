@@ -582,9 +582,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 /* ── RISK MATRIX ── */
 .rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
-.rm-y-axis{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-right:10px;gap:0}
+.rm-y-axis{display:flex;flex-direction:column;align-items:center;padding-right:10px;padding-top:28px}
 .rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
-.rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;box-sizing:border-box;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
+.rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
 .rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:12px;overflow:hidden;min-height:210px}
 .rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;padding:8px;min-height:70px}
 .mc-ll{background:rgba(52,211,153,.03)}
@@ -1409,7 +1409,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <!-- Y-axis label -->
     <div class="rm-y-axis">
       <div class="rm-axis-label">IMPACT</div>
-      <div class="rm-axis-ticks" style="padding:33px 0 33px 0"><span>HIGH</span><span>MED</span><span>LOW</span></div>
+      <div class="rm-axis-ticks" style="padding:30px 0 0 0"><span>HIGH</span><span>MED</span><span>LOW</span></div>
     </div>
 
     <div style="flex:1;min-width:0">
