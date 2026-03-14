@@ -584,7 +584,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
 .rm-y-axis{display:flex;flex-direction:column;align-items:center;padding-right:10px;padding-top:8px}
 .rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
-.rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
+.rm-axis-ticks{position:relative;height:auto;min-height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;position:absolute;right:0;padding:4px 0;text-align:right}
 .rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:12px;overflow:hidden;min-height:210px}
 .rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;padding:8px;min-height:70px}
 .mc-ll{background:rgba(52,211,153,.03)}
@@ -1409,7 +1409,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <!-- Y-axis label -->
     <div class="rm-y-axis">
       <div class="rm-axis-label">IMPACT</div>
-      <div class="rm-axis-ticks" style="display:flex;flex-direction:column;height:210px;justify-content:space-between;padding:30px 0 5px 0"><span>HIGH</span><span>MED</span><span>LOW</span></div>
+      <div class="rm-axis-ticks"><span id="rm-tick-0">HIGH</span><span id="rm-tick-1">MED</span><span id="rm-tick-2">LOW</span></div>
     </div>
 
     <div style="flex:1;min-width:0">
@@ -2943,7 +2943,6 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
   </div>
 </div></div>
-</div>
   <!-- CROSS-FUNCTIONAL DEPENDENCIES -->
   <div style="margin-top:28px">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
@@ -3015,7 +3014,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
 
     </div>
-  </div>
+  
+</div>
+</div>
 
   <div id="tab-board" class="panel">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -3132,6 +3133,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 function showTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  if (id === 'risk') setTimeout(function(){ if(window._alignRiskAxis) window._alignRiskAxis(); }, 50);
   document.querySelectorAll('.tab').forEach(t => {
     if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + id + "'")) t.classList.add('active');
   });
@@ -4363,6 +4365,38 @@ function openGovDoc() {
     }
   }
 }
+
+// ── RISK MATRIX AXIS ALIGNMENT ────────────────────────────────────────────
+function alignRiskAxisTicks() {
+  var grid = document.querySelector('.rm-grid');
+  var ticks = document.querySelector('.rm-axis-ticks');
+  if (!grid || !ticks) return;
+  var cells = document.querySelectorAll('.rm-cell');
+  if (cells.length < 9) return;
+  // Row 0 = cells 0-2 (HIGH), row 1 = cells 3-5 (MED), row 2 = cells 6-8 (LOW)
+  var rows = [cells[0], cells[3], cells[6]];
+  var ticksRect = ticks.getBoundingClientRect();
+  var spans = ticks.querySelectorAll('span');
+  rows.forEach(function(row, i) {
+    var rowRect = row.getBoundingClientRect();
+    var rowCenter = rowRect.top + rowRect.height / 2;
+    var spanH = spans[i] ? spans[i].offsetHeight : 10;
+    var top = rowCenter - ticksRect.top - spanH / 2;
+    if (spans[i]) spans[i].style.top = Math.round(top) + 'px';
+  });
+  // Set ticks container height to cover the grid
+  var gridRect = grid.getBoundingClientRect();
+  ticks.style.height = Math.round(gridRect.height) + 'px';
+}
+// Run on load and on data population
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(alignRiskAxisTicks, 100);
+  setTimeout(alignRiskAxisTicks, 500);
+  setTimeout(alignRiskAxisTicks, 1500);
+});
+window.addEventListener('resize', alignRiskAxisTicks);
+// Also expose so tab switch can trigger it
+window._alignRiskAxis = alignRiskAxisTicks;
 
 </script>
 </body>
