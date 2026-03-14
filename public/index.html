@@ -557,6 +557,66 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .ri-ms-detail{font-size:11.5px;color:#334155;line-height:1.6;transition:color .2s}
 .ri-milestone:hover .ri-ms-detail{color:#475569}
 
+
+/* ── RISK MATRIX ── */
+.rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
+.rm-y-axis{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding-right:10px;padding-bottom:28px}
+.rm-axis-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
+.rm-axis-ticks{writing-mode:vertical-rl;transform:rotate(180deg);display:flex;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0}
+.rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden;min-height:210px}
+.rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:10px;min-height:70px}
+.mc-ll{background:rgba(52,211,153,.03)}
+.mc-ml{background:rgba(245,158,11,.03)}
+.mc-hl{background:rgba(245,158,11,.04)}
+.mc-lm{background:rgba(245,158,11,.04)}
+.mc-mm{background:rgba(245,158,11,.06)}
+.mc-hm{background:rgba(239,68,68,.06)}
+.mc-lh{background:rgba(245,158,11,.05)}
+.mc-mh{background:rgba(239,68,68,.07)}
+.mc-hh{background:rgba(239,68,68,.1)}
+.rm-corner{position:absolute;top:5px;left:7px;font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.05em}
+.rm-corner.act{color:#fca5a5}
+.rm-x-axis{display:flex;justify-content:space-around;padding-top:8px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;position:relative}
+.rm-urgency{font-size:9px;font-weight:700;letter-spacing:.07em;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:4px}
+.rm-urgency.act{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
+.rm-urgency.manage{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b}
+.rm-urgency.monitor{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399}
+.rm-legend-item{display:flex;align-items:center;gap:5px;font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em}
+.rm-leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:1.5px solid}
+
+/* Risk dots */
+.rm-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;cursor:pointer;transition:transform .18s,box-shadow .18s;border:2px solid transparent;z-index:2;flex-shrink:0;overflow:hidden}
+.rm-dot:hover{transform:scale(1.18);box-shadow:0 0 14px rgba(255,255,255,.15)}
+.rm-dot.active{transform:scale(1.22);box-shadow:0 0 0 3px rgba(239,68,68,.25)}
+.rm-dot.ceo{border-color:rgba(45,212,191,.6);background:rgba(45,212,191,.15);color:#2dd4bf}
+.rm-dot.cfo{border-color:rgba(52,211,153,.6);background:rgba(52,211,153,.15);color:#34d399}
+.rm-dot.chro{border-color:rgba(244,114,182,.6);background:rgba(244,114,182,.15);color:#f472b4}
+.rm-dot.cto{border-color:rgba(56,189,248,.6);background:rgba(56,189,248,.15);color:#38bdf8}
+.rm-dot.legal{border-color:rgba(129,140,248,.6);background:rgba(129,140,248,.15);color:#818cf8}
+.rm-dot.multi{border-color:rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#f87171}
+
+/* Risk detail panel */
+.risk-detail{display:none;margin-top:12px;border:1px solid rgba(239,68,68,.2);border-radius:10px;overflow:hidden;background:rgba(4,9,20,.97)}
+.risk-detail.open{display:block;animation:fadeSlide .18s ease}
+.risk-detail-bar{height:3px;background:linear-gradient(90deg,#ef4444,rgba(239,68,68,.15))}
+.risk-detail-body{padding:16px 18px}
+.rdb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.rdb-owner{font-size:9px;font-weight:700;letter-spacing:.06em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px}
+.rdb-domain{font-size:9px;font-weight:700;letter-spacing:.06em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
+.rdb-close{font-size:14px;color:#475569;cursor:pointer;padding:0 4px;flex-shrink:0}
+.rdb-close:hover{color:#94a3b8}
+.rdb-title{font-family:'Fraunces',serif;font-size:16px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:6px;line-height:1.3}
+.rdb-desc{font-size:12px;color:#64748b;line-height:1.65;margin-bottom:10px}
+.rdb-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.rdb-badge{font-size:9px;font-weight:700;letter-spacing:.07em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px}
+.rdb-badge.imp-high{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
+.rdb-badge.imp-med{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
+.rdb-badge.imp-low{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399}
+.rdb-badge.prob-high{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#fca5a5}
+.rdb-badge.prob-med{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:#fcd34d}
+.rdb-badge.prob-low{background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.2);color:#94a3b8}
+.rdb-mitigation{padding:10px 14px;background:rgba(52,211,153,.04);border-left:2px solid rgba(52,211,153,.25);border-radius:0 6px 6px 0;font-size:11px;color:#64748b;line-height:1.6}
+
 </style>
 </head>
 <body>
@@ -1038,217 +1098,242 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
   <div id="tab-risk" class="panel">
 
-  <!-- SECTION 1: WINS BY DEPARTMENT ───────────────────────────────────────── -->
-  <button class="info-btn" onclick="showInfo('risk',this)" title="About this view" style="float:right;position:relative;top:0;left:0;transform:none;display:inline-flex;color:rgba(255,255,255,.3);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none';this.setAttribute('data-q','?')" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.querySelector('span').style.display=''"><span>i</span></button>
-  <div class="ri-section-header">
-    <div class="ri-section-eyebrow">BEFORE THE RISKS — WHAT THIS DECISION WINS</div>
-    <div class="ri-section-title">Department-by-Department Upside</div>
-    <div class="ri-section-sub">Organized by time horizon. Every team is touched. <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · 7 roles · unanimous conditional approval · strategic_feasibility: LOW means the return justifies the risk, not that upside is absent</div></span></div>
+  <!-- HEADER ROW ─────────────────────────────────────────────────────────── -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="ri-section-eyebrow">RISK &amp; INTELLIGENCE</div>
+      <div class="ri-section-title">Exposure Matrix + Department Upside</div>
+      <div class="ri-section-sub">6 risks plotted by consensus impact × probability. Click any dot to expand. Wins by role follow below.</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#2dd4bf;border-color:#2dd4bf"></div>CEO</div>
+      <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#34d399;border-color:#34d399"></div>CFO</div>
+      <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#f472b4;border-color:#f472b4"></div>CHRO</div>
+      <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#38bdf8;border-color:#38bdf8"></div>CTO</div>
+      <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#818cf8;border-color:#818cf8"></div>LEGAL</div>
+      <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#f87171;border-color:#f87171"></div>MULTI</div>
+    </div>
   </div>
 
+  <!-- RISK MATRIX ────────────────────────────────────────────────────────── -->
+  <div class="rm-wrap">
+
+    <!-- Y-axis label -->
+    <div class="rm-y-axis">
+      <div class="rm-axis-label">IMPACT</div>
+      <div class="rm-axis-ticks"><span>HIGH</span><span>MED</span><span>LOW</span></div>
+    </div>
+
+    <div style="flex:1;min-width:0">
+      <!-- Context bar -->
+      <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+        <div style="display:flex;gap:6px">
+          <div class="rm-urgency act">● ACT NOW</div>
+          <div class="rm-urgency manage">● MANAGE</div>
+          <div class="rm-urgency monitor">● MONITOR</div>
+        </div>
+        <div style="font-size:10px;color:#334155;flex:1;min-width:140px">Top-right = highest urgency. Click any dot to see owner, exposure, and mitigation plan.</div>
+      </div>
+
+      <!-- 3×3 Grid -->
+      <div class="rm-grid">
+
+        <!-- ROW 1: HIGH impact ─── -->
+        <div class="rm-cell mc-hl">
+          <div class="rm-corner">MONITOR</div>
+        </div>
+        <div class="rm-cell mc-hm">
+          <div class="rm-corner">MANAGE</div>
+          <!-- CHRO: EU hiring timeline -->
+          <div class="rm-dot chro" data-risk="hiring"
+               data-tip="EU Hiring Timeline · CHRO · 16-20 weeks per hire across 3 jurisdictions"
+               onclick="openRiskDot('hiring',this)">
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top">
+          </div>
+        </div>
+        <div class="rm-cell mc-hh">
+          <div class="rm-corner act">ACT NOW</div>
+          <!-- MULTI: GDPR timeline -->
+          <div class="rm-dot multi" data-risk="gdpr"
+               data-tip="GDPR Timeline · CTO + LEGAL · Commercial launch blocked if slips past May 2025"
+               onclick="openRiskDot('gdpr',this)">L+C</div>
+        </div>
+
+        <!-- ROW 2: MEDIUM impact ─── -->
+        <div class="rm-cell mc-lm">
+          <div class="rm-corner">LOW</div>
+          <!-- LEGAL: CBA discovery -->
+          <div class="rm-dot legal" data-risk="board"
+               data-tip="Board Rejection · CEO · Phase 1 delayed 1+ quarters, 3 prospects may lapse"
+               onclick="openRiskDot('board',this)">
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top">
+          </div>
+        </div>
+        <div class="rm-cell mc-mm">
+          <div class="rm-corner">MANAGE</div>
+          <!-- CFO: CAC ceiling -->
+          <div class="rm-dot cfo" data-risk="cac"
+               data-tip="EU CAC Ceiling · CFO · Kill trigger fires above $50K — Phase 2 halts"
+               onclick="openRiskDot('cac',this)">
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top">
+          </div>
+        </div>
+        <div class="rm-cell mc-hm">
+          <div class="rm-corner">MANAGE</div>
+          <!-- CEO: competitor window -->
+          <div class="rm-dot ceo" data-risk="competitor"
+               data-tip="Competitor X Window · CEO · Q3 2025 launch delay cedes first-mover advantage"
+               onclick="openRiskDot('competitor',this)">
+            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top">
+          </div>
+        </div>
+
+        <!-- ROW 3: LOW impact ─── -->
+        <div class="rm-cell mc-ll">
+          <div class="rm-corner">LOW</div>
+        </div>
+        <div class="rm-cell mc-ml">
+          <div class="rm-corner">MONITOR</div>
+          <!-- CHRO: comp equity -->
+          <div class="rm-dot chro" data-risk="comp"
+               data-tip="EU Comp Bands · CHRO · No EU comp bands exist yet — must build before first offer"
+               onclick="openRiskDot('comp',this)" style="border-color:rgba(244,114,182,.4);font-size:8px;font-weight:700;color:#f472b4">CH</div>
+        </div>
+        <div class="rm-cell mc-ml">
+          <div class="rm-corner">MONITOR</div>
+        </div>
+
+      </div><!-- /rm-grid -->
+
+      <!-- X-axis -->
+      <div class="rm-x-axis">
+        <span>LOW</span><span>MED</span><span>HIGH</span>
+        <div class="rm-axis-label" style="position:absolute;right:0;top:0">PROBABILITY ›</div>
+      </div>
+    </div>
+
+  </div><!-- /rm-wrap -->
+
+  <!-- EXPANDABLE RISK DETAIL ─────────────────────────────────────────────── -->
+  <div class="risk-detail" id="risk-detail">
+    <div class="risk-detail-bar"></div>
+    <div class="risk-detail-body" id="risk-detail-body"></div>
+  </div>
+
+  <!-- SECTION DIVIDER ──────────────────────────────────────────────────────── -->
+  <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
+    <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">BEFORE THE RISKS — WHAT THIS DECISION WINS</div>
+    <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
+  </div>
+
+  <!-- WINS BY DEPARTMENT ─────────────────────────────────────────────────── -->
   <div class="ri-wins-grid">
 
     <div class="ri-win-card">
       <div class="ri-win-role">CEO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item short"><span class="ri-horizon short">NOW</span>Board approval signal — demonstrates decisive execution to investors <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 conf 82% · 'governance gate, not an analytical one' · board approval at Feb 15 is the controlling event</div></span></div>
-        <div class="ri-win-item mid"><span class="ri-horizon mid">6MO</span>3 named EU enterprise logos validate international GTM thesis <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 conf 81% · 3 inbound EU prospects confirmed · closing even 1 of 3 generates $175K LTV · validates addressable market</div></span></div>
-        <div class="ri-win-item long"><span class="ri-horizon long">12MO+</span>EU market footprint as competitive moat vs Competitor X — first-mover position secured</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Board approval signal — decisive execution to investors {cite("CEO·R2","CEO R2 conf 82% · 'governance gate, not an analytical one' · board approval at Feb 15 is the controlling event")}</div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>3 named EU enterprise logos validate international GTM thesis {cite("CSO·R2","CSO R2 · 3 inbound EU prospects confirmed active pipeline · closing even 1 generates $175K LTV")}</div>
+        <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU market footprint as competitive moat vs Competitor X</div>
       </div>
     </div>
 
     <div class="ri-win-card">
       <div class="ri-win-role">CFO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item short"><span class="ri-horizon short">NOW</span>Two-tranche structure limits exposure to $150K until May GO/NO-GO passes <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 1 $150K clears compliance gates before any FTE spend · Phase 2 $350K locked behind GO/NO-GO</div></span></div>
-        <div class="ri-win-item mid"><span class="ri-horizon mid">6MO</span>$525K LTV pipeline validated at 3.5× return floor on every closed logo <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K · CAC ceiling $50K · 3.5× minimum return · $525K total pipeline at 3 targets</div></span></div>
-        <div class="ri-win-item long"><span class="ri-horizon long">12MO+</span>EU revenue stream diversifies ARR concentration risk — currently 100% US-dependent</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Two-tranche structure limits exposure to $150K until May GO/NO-GO {cite("CFO·R2","CFO R2 · Phase 1 $150K clears compliance gates before any FTE spend commits · Phase 2 $350K locked behind GO/NO-GO")}</div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>$525K LTV pipeline at 3.5× return floor on every closed logo {cite("CFO·R1","CFO R1 · LTV $175K · CAC ceiling $50K · 3.5× minimum return · immediately accretive below ceiling")}</div>
+        <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU revenue diversifies ARR concentration — currently 100% US-dependent</div>
       </div>
     </div>
 
     <div class="ri-win-card">
       <div class="ri-win-role">CTO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item short"><span class="ri-horizon short">NOW</span>GDPR architecture built once, reusable across all future EU customers — no rebuild cost per deal</div>
-        <div class="ri-win-item mid"><span class="ri-horizon mid">6MO</span>EU data residency certification becomes sales asset — unlocks procurement approvals in regulated industries <span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 conf 72% · 'GDPR-compliant data residency architecture feasibility within $150K Phase 1 budget' · core open question that Phase 1 resolves</div></span></div>
-        <div class="ri-win-item long"><span class="ri-horizon long">12MO+</span>UK + Germany + France infrastructure playbook scales to additional EU markets without restart</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>GDPR architecture built once, reusable across all future EU customers {cite("CTO·R1","CTO R1 · GDPR data residency architecture feasibility is the core Phase 1 question · resolves before any FTE spend")}</div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>EU data residency certification becomes sales asset in regulated verticals</div>
+        <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>UK + Germany + France infra playbook scales to additional markets without restart</div>
       </div>
     </div>
 
     <div class="ri-win-card">
       <div class="ri-win-role">CHRO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item short"><span class="ri-horizon short">NOW</span>Phased hiring — no FTE offers until GO/NO-GO clears — eliminates irreversible labor commitment risk <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 conf 76% · 'OPT-2 is only option that sequences compliance before revenue — legally mandatory' · no FTE offers before GDPR gate</div></span></div>
-        <div class="ri-win-item mid"><span class="ri-horizon mid">6MO</span>3-jurisdiction EU employment model built (UK, Germany, France) — reusable template for future hires</div>
-        <div class="ri-win-item long"><span class="ri-horizon long">12MO+</span>EU comp bands and hiring playbook established — future EU headcount adds weeks, not months</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Phased hiring — no FTE offers until GO/NO-GO — eliminates irreversible labor risk {cite("CHRO·R2","CHRO R2 conf 76% · OPT-2 sequences compliance before revenue — legally mandatory · no FTE offers before GDPR gate")}</div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>3-jurisdiction EU employment model built (UK/Germany/France) — reusable template</div>
+        <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU comp bands and hiring playbook established — future hires take weeks, not months</div>
       </div>
     </div>
 
     <div class="ri-win-card">
       <div class="ri-win-role">LEGAL</div>
       <div class="ri-win-items">
-        <div class="ri-win-item short"><span class="ri-horizon short">NOW</span>DPA and SCC frameworks executed before first customer — clean legal foundation, no remediation risk <span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 conf 72% · DPAs and SCCs must be executed before EU customer onboarding · IP assignment agreements must be jurisdiction-specific</div></span></div>
-        <div class="ri-win-item mid"><span class="ri-horizon mid">6MO</span>GDPR certification becomes a commercial differentiator in regulated EU verticals — competitor advantage</div>
-        <div class="ri-win-item long"><span class="ri-horizon long">12MO+</span>EU legal entity framework supports future M&A, partnerships, and regulatory engagement at scale</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>DPA and SCC frameworks executed before first customer — clean legal foundation {cite("LEGAL·R2","LEGAL R2 conf 72% · DPAs and SCCs must execute before EU customer onboarding · IP assignments must be jurisdiction-specific")}</div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>GDPR certification becomes commercial differentiator in regulated EU verticals</div>
+        <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU legal entity framework supports future M&A and regulatory engagement at scale</div>
       </div>
     </div>
 
     <div class="ri-win-card">
       <div class="ri-win-role">COO + CSO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item short"><span class="ri-horizon short">NOW</span>3 active inbound EU prospects — demand signal exists before first dollar of GTM spend <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · 3 inbound EU prospects confirmed active · pipeline validated before capital deployment</div></span></div>
-        <div class="ri-win-item mid"><span class="ri-horizon mid">6MO</span>EU GTM playbook built from real deal cycles — not assumptions — creates replicable sales motion</div>
-        <div class="ri-win-item long"><span class="ri-horizon long">12MO+</span>Operational EU presence enables response SLAs and support coverage that pure remote models cannot match</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>3 active inbound EU prospects — demand signal before first GTM dollar {cite("CSO·R2","CSO R2 · 3 inbound EU prospects confirmed · pipeline validated before capital deployment · no speculation")}</div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>EU GTM playbook built from real deal cycles — not assumptions</div>
+        <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU presence enables response SLAs that pure remote models cannot match</div>
       </div>
     </div>
 
-  </div>
+  </div><!-- /wins grid -->
 
-  <!-- SECTION 2: RISKS + MITIGATION ──────────────────────────────────────── -->
-  <div class="ri-section-header" style="margin-top:28px">
-    <div class="ri-section-eyebrow">WHAT COULD STOP THIS</div>
-    <div class="ri-section-title">Risks — with Planned Mitigation</div>
-    <div class="ri-section-sub">Action-oriented. Each risk has an owner, a specific response, and a decision point. No open questions.</div>
-  </div>
-
-  <div class="ri-risks-list">
-
-    <div class="ri-risk-card">
-      <div class="ri-risk-header">
-        <div class="ri-risk-left">
-          <div class="ri-risk-badge high">HIGH</div>
-          <div class="ri-risk-name">GDPR timeline slips past May 2025 GO/NO-GO <span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 · open question: is GDPR-compliant data residency feasible within $150K Phase 1? · CTO sign-off required before May 2025 GO/NO-GO</div></span></div>
-        </div>
-        <div class="ri-risk-owner">CTO + LEGAL</div>
-      </div>
-      <div class="ri-risk-body">
-        <div class="ri-risk-col">
-          <div class="ri-risk-col-label">IF THIS HAPPENS</div>
-          <div class="ri-risk-col-text">Commercial launch pushed past Q3 2025. 3 inbound prospects may commit to competitor. Phase 2 capital does not release. May require board re-brief on revised timeline.</div>
-        </div>
-        <div class="ri-risk-col mitigation">
-          <div class="ri-risk-col-label">PLANNED RESPONSE</div>
-          <div class="ri-risk-col-text"><strong>By Feb 28:</strong> EU counsel engaged. <strong>By Mar 31:</strong> architecture scoped with cost estimate. <strong>Weekly:</strong> CTO + LEGAL status gate. If slipping: activate GO/NO-GO extension protocol before April 15 — do not wait for May.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ri-risk-card">
-      <div class="ri-risk-header">
-        <div class="ri-risk-left">
-          <div class="ri-risk-badge high">HIGH</div>
-          <div class="ri-risk-name">EU CAC exceeds $50K ceiling after first 2 deals <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · EU CAC ceiling $50K · first-cohort CAC likely 30-50% higher than US $35K baseline · LTV/CAC ratio goes negative above ceiling</div></span></div>
-        </div>
-        <div class="ri-risk-owner">CFO</div>
-      </div>
-      <div class="ri-risk-body">
-        <div class="ri-risk-col">
-          <div class="ri-risk-col-label">IF THIS HAPPENS</div>
-          <div class="ri-risk-col-text">Unit economics break. Phase 2 GTM spend does not release. CFO must remodel assumptions before any further deployment. Kill trigger fires — not a pause, a full stop.</div>
-        </div>
-        <div class="ri-risk-col mitigation">
-          <div class="ri-risk-col-label">PLANNED RESPONSE</div>
-          <div class="ri-risk-col-text"><strong>Track CAC from day 1</strong> — not at deal close. <strong>At deal 1:</strong> provisional CAC estimated. <strong>At deal 2:</strong> hard measurement. If above $50K: halt Phase 2 release, CFO presents revised model to board within 30 days.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ri-risk-card">
-      <div class="ri-risk-header">
-        <div class="ri-risk-left">
-          <div class="ri-risk-badge med">MED</div>
-          <div class="ri-risk-name">EU hiring timeline extends beyond Q3 2025 <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 · EU hiring timelines 16-20 weeks across 3 jurisdictions · works councils in Germany · mandatory notice periods · IR35 in UK</div></span></div>
-        </div>
-        <div class="ri-risk-owner">CHRO</div>
-      </div>
-      <div class="ri-risk-body">
-        <div class="ri-risk-col">
-          <div class="ri-risk-col-label">IF THIS HAPPENS</div>
-          <div class="ri-risk-col-text">Sales coverage gap in EU during active pipeline. COO must cover with contractor/EOR model. Revenue ramp delayed. EU comp bands need to be built before first offer — currently none exist.</div>
-        </div>
-        <div class="ri-risk-col mitigation">
-          <div class="ri-risk-col-label">PLANNED RESPONSE</div>
-          <div class="ri-risk-col-text"><strong>Now:</strong> draft JDs for all 3 EU FTE roles. <strong>By GO/NO-GO:</strong> EU comp bands benchmarked (Radford EMEA). <strong>If slipping:</strong> EOR (Employer of Record) for speed — no entity required, 2-week hire cycle. CHRO confirms EOR vendor by Apr 15.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ri-risk-card">
-      <div class="ri-risk-header">
-        <div class="ri-risk-left">
-          <div class="ri-risk-badge med">MED</div>
-          <div class="ri-risk-name">Board does not approve $500K at Feb 15</div>
-        </div>
-        <div class="ri-risk-owner">CEO</div>
-      </div>
-      <div class="ri-risk-body">
-        <div class="ri-risk-col">
-          <div class="ri-risk-col-label">IF THIS HAPPENS</div>
-          <div class="ri-risk-col-text">Full Phase 1 delayed by 1+ quarters. 3 active EU prospects may lapse. Competitor X window widens. Pre-authorized $150K tranche does not release without board sign-off on full envelope.</div>
-        </div>
-        <div class="ri-risk-col mitigation">
-          <div class="ri-risk-col-label">PLANNED RESPONSE</div>
-          <div class="ri-risk-col-text"><strong>Pre-brief by Feb 8:</strong> CEO 1:1 with each board member. <strong>By Feb 12:</strong> pre-read distributed with CFO unit economics model. <strong>If rejected:</strong> request conditional approval of $150K Phase 1 only — keep compliance work moving while full approval is sought.</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- SECTION 3: MILESTONE CHECK-INS ──────────────────────────────────────── -->
-  <div class="ri-section-header" style="margin-top:28px">
-    <div class="ri-section-eyebrow">POST-DECISION GOVERNANCE</div>
-    <div class="ri-section-title">Milestone Check-Ins</div>
-    <div class="ri-section-sub">Decisions are made here. Each gate has a specific owner, a binary outcome, and a consequence if it fails.</div>
+  <!-- MILESTONE TIMELINE ─────────────────────────────────────────────────── -->
+  <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
+    <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">POST-DECISION GOVERNANCE</div>
+    <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
   <div class="ri-milestones">
-
     <div class="ri-milestone">
       <div class="ri-ms-dot gate1"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">FEB 15, 2025</div>
-        <div class="ri-ms-title">Board Approval Gate <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 · 'Board must approve $500K at Feb 15 meeting' — cited by all 7 roles · listed kill criterion on OPT-2</div></span></div>
-        <div class="ri-ms-detail">Owner: CEO. Binary: approved or not. If yes → $150K Phase 1 tranche authorized, GDPR and entity work begins. If no → Phase 1 paused pending re-brief, EU prospects placed in hold status.</div>
+        <div class="ri-ms-title">Board Approval Gate {cite("CEO·R2","CEO R2 · Board must approve $500K at Feb 15 meeting — cited by all 7 roles · listed kill criterion on OPT-2")}</div>
+        <div class="ri-ms-detail">Owner: CEO. Binary. Yes → $150K Phase 1 authorized. No → Phase 1 paused, prospects placed on hold.</div>
       </div>
     </div>
-
     <div class="ri-milestone">
       <div class="ri-ms-dot"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">APR 15, 2025</div>
         <div class="ri-ms-title">Mid-Phase 1 Health Check</div>
-        <div class="ri-ms-detail">Owner: CTO + CFO. Not a gate — a pulse. GDPR architecture scoped and on track? EU counsel engaged? Comp bands benchmarked? Prospect pipeline still active (≥2 of 3)? If any red: accelerate to May GO/NO-GO with updated assumptions.</div>
+        <div class="ri-ms-detail">Owner: CTO + CFO. Pulse — not a gate. GDPR on track? EU counsel engaged? ≥2 of 3 prospects still active? If any red: escalate to May GO/NO-GO with updated assumptions.</div>
       </div>
     </div>
-
     <div class="ri-milestone">
       <div class="ri-ms-dot gate2"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">MAY 2025</div>
-        <div class="ri-ms-title">GO / NO-GO Gate — Phase 2 Capital Release <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 1 $150K clears GDPR and entity gates before any FTE spend · Phase 2 $350K unlocks only on GO/NO-GO passage · 'binding — failure halts Phase 2 entirely'</div></span></div>
-        <div class="ri-ms-detail">Owner: CEO + CFO + CTO + LEGAL. Must pass ALL: (1) GDPR certified by external counsel, (2) EU entity formed, (3) ≥2 active EU prospects confirmed pipeline, (4) total Phase 1 spend ≤$150K. If all green → $350K Phase 2 releases. If any fail → full stop, board notified within 5 business days.</div>
+        <div class="ri-ms-title">GO / NO-GO Gate — Phase 2 Capital Release {cite("CFO·R2","CFO R2 · Phase 2 $350K unlocks only on GO/NO-GO passage · GDPR certified · EU entity formed · ≥2 prospects active · Phase 1 spend ≤$150K")}</div>
+        <div class="ri-ms-detail">Owner: CEO + CFO + CTO + LEGAL. Must pass ALL 4 criteria. If all green → $350K Phase 2 releases. Any fail → full stop, board notified within 5 business days.</div>
       </div>
     </div>
-
     <div class="ri-milestone">
       <div class="ri-ms-dot"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">JUL 2025</div>
-        <div class="ri-ms-title">CAC Measurement Checkpoint <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · EU CAC ceiling $50K · 'at $50K CAC and $175K LTV, every customer is immediately accretive' · above ceiling: decision architecture reopens</div></span></div>
-        <div class="ri-ms-detail">Owner: CFO. After first 2 EU deals close. Hard measurement: actual CAC vs $50K ceiling. If below → continue Phase 2 deployment. If above → halt remaining GTM spend, CFO remodels, board informed. This checkpoint is not optional.</div>
+        <div class="ri-ms-title">CAC Measurement Checkpoint {cite("CFO·R1","CFO R1 · EU CAC ceiling $50K · hard measurement after first 2 deals · above ceiling: halt Phase 2, CFO remodels, board informed")}</div>
+        <div class="ri-ms-detail">Owner: CFO. After first 2 EU deals close. Hard number vs $50K ceiling. Not optional.</div>
       </div>
     </div>
-
     <div class="ri-milestone">
       <div class="ri-ms-dot gate3"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">Q3 2025</div>
         <div class="ri-ms-title">EU Launch Readiness Review</div>
-        <div class="ri-ms-detail">Owner: COO + CSO. All 3 EU FTEs onboarded, GDPR operational, EU entity commercially active. Target: 1 EU logo closed, 2 in active negotiation. If on track → full EU GTM motion begins. If behind → board decision on whether to extend runway or restructure EU approach.</div>
+        <div class="ri-ms-detail">Owner: COO + CSO. All 3 EU FTEs onboarded, GDPR operational, entity commercially active. Target: 1 logo closed, 2 in active negotiation.</div>
       </div>
     </div>
-
   </div>
 
 </div>
@@ -2156,6 +2241,98 @@ function buildRejectedOptions(data) {
 
     container.appendChild(card);
   });
+}
+
+
+// ── RISK MATRIX DATA ──
+const RISK_DATA = {
+  gdpr: {
+    owner: 'CTO + LEGAL', ownerColor: '#f87171', domain: 'COMPLIANCE + TECHNICAL',
+    title: 'GDPR Timeline Slips Past May 2025 GO/NO-GO',
+    desc: '<strong style="color:#fca5a5">What happens if this fires:</strong> Commercial launch blocked entirely. 3 inbound EU prospects may commit to competitor during delay. Phase 2 $350K does not release. Board must be re-briefed on revised timeline. This is the highest-urgency risk — it controls every other date.',
+    impact: 'HIGH', prob: 'HIGH',
+    mitigation: '<strong>By Feb 28:</strong> EU external counsel engaged. <strong>By Mar 31:</strong> GDPR architecture scoped with cost estimate confirmed within $150K Phase 1 budget. <strong>Weekly:</strong> CTO + LEGAL status gate. <strong>If slipping:</strong> Activate GO/NO-GO extension protocol before April 15 — do not wait for May. Early flag = options remain. Late flag = full stop.'
+  },
+  hiring: {
+    owner: 'CHRO', ownerColor: '#f472b4', domain: 'TALENT ACQUISITION',
+    title: 'EU Hiring Timeline Extends Beyond Q3 2025',
+    desc: '<strong style="color:#f9a8d4">What happens if this fires:</strong> Sales coverage gap during active pipeline. COO must cover with contractor/EOR model at higher cost. Revenue ramp delayed. EU comp bands do not exist yet — offers cannot go out without them. 3 FTE hires across UK, Germany, France could take 16–20 weeks from posting to start date.',
+    impact: 'HIGH', prob: 'MEDIUM',
+    mitigation: '<strong>Now:</strong> Draft JDs for all 3 EU FTE roles. <strong>By GO/NO-GO:</strong> EU comp bands benchmarked using Radford EMEA data. <strong>If slipping:</strong> Activate EOR (Employer of Record) — no entity required, 2-week hire cycle. CHRO confirms EOR vendor by Apr 15 as backup path.'
+  },
+  cac: {
+    owner: 'CFO', ownerColor: '#34d399', domain: 'FINANCIAL',
+    title: 'EU CAC Exceeds $50K Ceiling After First 2 Deals',
+    desc: '<strong style="color:#86efac">What happens if this fires:</strong> Unit economics break. LTV/CAC ratio goes negative. Phase 2 GTM budget release halts. CFO must remodel assumptions before any further deployment. This is a kill trigger — not a pause, a full stop on remaining GTM spend. First-cohort EU CAC is likely 30–50% higher than US $35K baseline due to market unfamiliarity, longer sales cycles, and localization costs.',
+    impact: 'MEDIUM', prob: 'MEDIUM',
+    mitigation: '<strong>Track CAC from day 1</strong> — not at deal close. <strong>At deal 1:</strong> provisional CAC estimated and flagged. <strong>At deal 2:</strong> hard measurement vs $50K ceiling. If above: halt Phase 2 release immediately, CFO presents revised model to board within 30 days. No exceptions on timing.'
+  },
+  board: {
+    owner: 'CEO', ownerColor: '#2dd4bf', domain: 'STRATEGIC + GOVERNANCE',
+    title: 'Board Does Not Approve $500K at Feb 15',
+    desc: '<strong style="color:#99f6e4">What happens if this fires:</strong> Full Phase 1 delayed by 1+ quarters. 3 active EU prospects may lapse — they have indicated timelines. Competitor X window widens. The pre-authorized $150K tranche does not release without board sign-off on the full envelope.',
+    impact: 'MEDIUM', prob: 'LOW',
+    mitigation: '<strong>Pre-brief by Feb 8:</strong> CEO 1:1 with each board member. <strong>By Feb 12:</strong> pre-read distributed with CFO unit economics model and phased risk structure. <strong>If rejected:</strong> Request conditional approval of $150K Phase 1 only — keep GDPR and entity work moving while full envelope approval is sought at next board meeting.'
+  },
+  competitor: {
+    owner: 'CEO + CSO', ownerColor: '#2dd4bf', domain: 'STRATEGIC',
+    title: 'Competitor X Captures EU Prospects During Delay',
+    desc: '<strong style="color:#99f6e4">What happens if this fires:</strong> Loss of 1–3 inbound EU logos to Competitor X during any delay in Phase 1 execution. Each lost logo represents $175K LTV and a 6–12 month setback in EU revenue trajectory. CSO flagged the 3 current prospects as time-sensitive — they have active evaluation timelines.',
+    impact: 'MEDIUM', prob: 'MEDIUM',
+    mitigation: '<strong>Keep prospects warm actively</strong> during Phase 1. CSO maintains bi-weekly touchpoints with all 3 EU prospects. If board approval is delayed, CSO communicates a specific timeline commitment — not a vague "coming soon." Speed of Phase 1 execution is the primary mitigation.'
+  },
+  comp: {
+    owner: 'CHRO', ownerColor: '#f472b4', domain: 'COMPENSATION',
+    title: 'EU Comp Bands Below Market — Offers Cannot Go Out',
+    desc: '<strong style="color:#f9a8d4">What happens if this fires:</strong> First FTE offers delayed because no EU comp bands exist. EU compensation typically runs 20–35% above US equivalent roles at senior levels (Radford EMEA estimate). Without benchmarking, any offer risks either being uncompetitive (losing the candidate) or being above budget (busting the Phase 2 model).',
+    impact: 'LOW', prob: 'MEDIUM',
+    mitigation: '<strong>CHRO builds EU comp bands by GO/NO-GO</strong> using Radford EMEA data for UK, Germany, France. This is a prerequisite for any offer, not a parallel track. If Radford data is unavailable, use Levels.fyi + local salary surveys as proxy. Three weeks of work — should be done in Phase 1.'
+  }
+};
+
+let _activeRisk = null;
+
+function openRiskDot(id, el) {
+  const detail = document.getElementById('risk-detail');
+  const body = document.getElementById('risk-detail-body');
+  const data = RISK_DATA[id];
+  if (!data || !detail || !body) return;
+
+  if (_activeRisk === id && detail.classList.contains('open')) {
+    closeRiskDot(); return;
+  }
+  _activeRisk = id;
+  document.querySelectorAll('.rm-dot').forEach(d => d.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  const impCls = data.impact === 'HIGH' ? 'imp-high' : data.impact === 'MEDIUM' ? 'imp-med' : 'imp-low';
+  const probCls = data.prob === 'HIGH' ? 'prob-high' : data.prob === 'MEDIUM' ? 'prob-med' : 'prob-low';
+
+  body.innerHTML = `
+    <div class="rdb-top">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <div class="rdb-owner" style="background:${data.ownerColor}18;border:1px solid ${data.ownerColor}44;color:${data.ownerColor}">${data.owner}</div>
+        <div class="rdb-domain">${data.domain}</div>
+      </div>
+      <div class="rdb-close" onclick="closeRiskDot()">✕</div>
+    </div>
+    <div class="rdb-title">${data.title}</div>
+    <div class="rdb-desc">${data.desc}</div>
+    <div class="rdb-badges">
+      <span class="rdb-badge ${impCls}">IMPACT: ${data.impact}</span>
+      <span class="rdb-badge ${probCls}">PROBABILITY: ${data.prob}</span>
+    </div>
+    <div class="rdb-mitigation"><strong style="color:#94a3b8">Mitigation plan:</strong> ${data.mitigation}</div>
+  `;
+  detail.classList.add('open');
+  setTimeout(function(){ detail.scrollIntoView({behavior:'smooth',block:'nearest'}); }, 60);
+}
+
+function closeRiskDot() {
+  const detail = document.getElementById('risk-detail');
+  if (detail) detail.classList.remove('open');
+  _activeRisk = null;
+  document.querySelectorAll('.rm-dot').forEach(d => d.classList.remove('active'));
 }
 
 // Boot on DOMContentLoaded
