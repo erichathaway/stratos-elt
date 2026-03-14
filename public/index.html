@@ -4757,5 +4757,19 @@ window.addEventListener('resize', alignRiskAxisTicks);
 window._alignRiskAxis = alignRiskAxisTicks;
 
 </script>
+  <script>
+document.addEventListener('DOMContentLoaded',function(){
+  var ROLES=['CEO','CFO','COO','CHRO','CTO','CSO','LEGAL','CMO','CRO','CIO'];
+  document.querySelectorAll('.cite-btn').forEach(function(btn){
+    var t=btn.textContent.trim();
+    var icon='';
+    if(ROLES.some(function(r){return t.startsWith(r+'\u00b7')||t.startsWith(r+' ');})) icon='👤';
+    else if(/\bEI\b|\bRX\b/.test(t)) icon='🌐';
+    else if(/PINECONE/i.test(t)) icon='📄';
+    else icon='📊';
+    btn.textContent=icon+'\u202f'+t;
+  });
+});
+</script>
 </body>
 </html>
