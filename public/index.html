@@ -55,9 +55,10 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 /* ── INFO BUTTON ── */
 .info-btn{position:relative;top:auto;left:auto;transform:none;width:16px;height:16px;border-radius:50%;background:transparent;border:none;color:rgba(255,255,255,.2);font-size:10px;display:inline-flex;align-items:center;justify-content:center;cursor:help;transition:color .18s;z-index:2;font-family:'DM Mono',monospace;font-style:italic;font-weight:400;user-select:none;overflow:hidden;vertical-align:middle;flex-shrink:0;margin-left:4px}
 .info-btn:hover{color:rgba(255,255,255,.65);font-style:normal}
-.info-btn span{transition:opacity .15s;font-size:10px}
+.info-btn span{transition:opacity .2s ease;font-size:10px}
 .info-btn:hover span{opacity:0}
-.info-btn::after{content:'?';position:absolute;opacity:0;transition:opacity .15s;font-style:normal;font-size:10px;font-weight:600}
+.info-btn::after{content:'?';position:absolute;opacity:0;transition:opacity .2s ease;font-style:normal;font-size:10px;font-weight:600;color:rgba(255,255,255,.6)}
+.info-btn:hover{color:rgba(255,255,255,.6)}
 .info-btn:hover::after{opacity:1}
 /* Cards and zones retain position:relative for other purposes */
 .card{position:relative}
@@ -1515,9 +1516,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
             <div class="rm-dot-mini ceo-border">
               <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" alt="CEO">
             </div>
-            <div class="rm-dot-mini cso-border">
-              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" alt="CSO">
-            </div>
+            <div class="rm-dot-mini cso-border" style="background:#0f172a;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#818cf8;font-family:monospace">CSO</div>
           </div>
         </div>
 
@@ -2032,30 +2031,30 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
     <div class="cc-chart-body">
-      <svg class="cc-svg" viewBox="0 0 400 80">
-        <line x1="30" y1="0" x2="400" y2="0" stroke="#1e293b" stroke-width="1"/>
-        <line x1="30" y1="40" x2="400" y2="40" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-        <line x1="30" y1="80" x2="400" y2="80" stroke="#1e293b" stroke-width="1"/>
-        <text x="0" y="5" font-size="7" fill="#334155" font-family="monospace">90%</text>
-        <text x="0" y="44" font-size="7" fill="#334155" font-family="monospace">70%</text>
-        <text x="0" y="80" font-size="7" fill="#334155" font-family="monospace">50%</text>
+      <svg class="cc-svg" viewBox="0 0 1000 80" preserveAspectRatio="none" style="width:100%;height:80px">
+        <line x1="0" y1="0" x2="1000" y2="0" stroke="#1e293b" stroke-width="1"/>
+        <line x1="0" y1="40" x2="1000" y2="40" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="0" y1="80" x2="1000" y2="80" stroke="#1e293b" stroke-width="1"/>
+        <text x="2" y="7" font-size="18" fill="#334155" font-family="monospace">90%</text>
+        <text x="2" y="44" font-size="18" fill="#334155" font-family="monospace">70%</text>
+        <text x="2" y="80" font-size="18" fill="#334155" font-family="monospace">50%</text>
         <!-- Confidence line R0=68(y=33) R1=72(y=27) R2=76(y=21) -->
-        <polyline points="80,44 200,36 340,28" fill="none" stroke="rgba(6,182,212,0.6)" stroke-width="2"/>
-        <circle cx="80" cy="44" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
-        <circle cx="200" cy="36" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
-        <circle cx="340" cy="28" r="5" fill="var(--brand-primary)" stroke="var(--brand-primary)" stroke-width="2"/>
-        <text x="80" y="38" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">68%</text>
-        <text x="200" y="30" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">72%</text>
-        <text x="340" y="22" font-size="9" fill="var(--brand-primary)" text-anchor="middle" font-family="monospace" font-weight="700">76%</text>
+        <polyline points="200,44 500,36 800,28" fill="none" stroke="rgba(6,182,212,0.6)" stroke-width="2"/>
+        <circle cx="200" cy="44" r="8" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
+        <circle cx="500" cy="36" r="8" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
+        <circle cx="800" cy="28" r="10" fill="var(--brand-primary)" stroke="var(--brand-primary)" stroke-width="2"/>
+        <text x="200" y="34" font-size="18" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">68%</text>
+        <text x="500" y="27" font-size="18" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">72%</text>
+        <text x="800" y="20" font-size="20" fill="var(--brand-primary)" text-anchor="middle" font-family="monospace" font-weight="700">76%</text>
         <!-- Spread: R0=17pp(y=9) R1=10pp(y=30) R2=10pp(y=30) -->
-        <polyline points="80,12 200,40 340,40" fill="none" stroke="rgba(139,92,246,0.7)" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <circle cx="80" cy="12" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
-        <circle cx="200" cy="40" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
-        <circle cx="340" cy="40" r="4" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
-        <text x="80" y="8" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±17pp</text>
-        <text x="240" y="57" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±10pp — held</text>
-        <line x1="140" y1="0" x2="140" y2="80" stroke="#1e293b" stroke-width="1"/>
-        <line x1="270" y1="0" x2="270" y2="80" stroke="#1e293b" stroke-width="1"/>
+        <polyline points="200,12 500,40 800,40" fill="none" stroke="rgba(139,92,246,0.7)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="200" cy="12" r="6" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+        <circle cx="500" cy="40" r="6" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+        <circle cx="800" cy="40" r="8" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="200" y="8" font-size="16" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±17pp</text>
+        <text x="650" y="57" font-size="16" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±10pp — held</text>
+        <line x1="333" y1="0" x2="333" y2="80" stroke="#1e293b" stroke-width="1"/>
+        <line x1="666" y1="0" x2="666" y2="80" stroke="#1e293b" stroke-width="1"/>
       </svg>
     </div>
     <div class="cc-round-labels">
@@ -3270,17 +3269,16 @@ function toggleExpand(id) {
     if (!tipContent) return;
     // Rebuild content every time
     tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
-    // Clear all inline styles first so CSS controls width
-    tip.style.cssText = '';
-    tip.style.display = 'block';
+    // Position off-screen first to measure height, then move to final position
     tip.style.left = '-9999px';
-    tip.style.top = '-9999px';
+    tip.style.top = '0px';
+    tip.style.display = 'block';
     var h = tip.offsetHeight;
     var w = 360;
     var rect = btn.getBoundingClientRect();
     var x = rect.left + rect.width / 2 - w / 2;
     var y = rect.top - h - 10;
-    if (y < 8) y = rect.bottom + 8;
+    if (rect.top - h - 10 < 8) y = rect.bottom + 8;
     x = Math.max(10, Math.min(x, window.innerWidth - w - 10));
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
@@ -3721,6 +3719,15 @@ let _activeTourSteps = TOUR_STEPS;
 let _activeTabId = 'command'; // tracks current tab
 
 function startContextTour() {
+  if (_activeTabId === 'risk') {
+    _activeTourSteps = RISK_TOUR_STEPS;
+    _tourStep = 0;
+    _tourActive = true;
+    document.getElementById('tour-backdrop').classList.add('active');
+    var dots = document.getElementById('tour-dots');
+    if (dots) dots.innerHTML = _activeTourSteps.map(function(_,i){ return '<div class="tour-dot'+(i===0?' active':'')+'"></div>'; }).join('');
+    showTourStep(0); return;
+  }
   if (_activeTabId === 'room') {
     _activeTourSteps = ROOM_TOUR_STEPS;
     _tourStep = 0;
