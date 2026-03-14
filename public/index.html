@@ -564,7 +564,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
 .rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
 .rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden;min-height:210px}
-.rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:10px;min-height:70px}
+.rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;padding:8px;min-height:70px}
 .mc-ll{background:rgba(52,211,153,.03)}
 .mc-ml{background:rgba(245,158,11,.03)}
 .mc-hl{background:rgba(245,158,11,.04)}
@@ -616,6 +616,49 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .rdb-badge.prob-med{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:#fcd34d}
 .rdb-badge.prob-low{background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.2);color:#94a3b8}
 .rdb-mitigation{padding:10px 14px;background:rgba(52,211,153,.04);border-left:2px solid rgba(52,211,153,.25);border-radius:0 6px 6px 0;font-size:11px;color:#64748b;line-height:1.6}
+
+
+/* ── Q&A TWO-COL ── */
+.ri-qa-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+@media(max-width:900px){.ri-qa-row{grid-template-columns:1fr}}
+
+/* Gaps panel */
+.gaps-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.confirmed-wrap{border-color:rgba(52,211,153,.15)}
+.gaps-header{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.gaps-eyebrow{font-size:9px;font-weight:700;letter-spacing:.1em;color:#f59e0b;font-family:'DM Mono',monospace;margin-bottom:4px}
+.gaps-eyebrow.confirmed{color:#34d399}
+.gaps-title{font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:2px}
+.gaps-sub{font-size:11px;color:#475569;line-height:1.45}
+
+.gap-item{display:flex;gap:12px;align-items:flex-start;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.04)}
+.gap-item:last-child{border-bottom:none}
+.confirmed-item{background:rgba(52,211,153,.02)}
+.confirmed-item:hover{background:rgba(52,211,153,.04)}
+.gap-rank{width:26px;height:26px;border-radius:5px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#f59e0b;font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
+.confirmed-rank{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.2);color:#34d399;font-size:13px}
+.gap-body{flex:1;min-width:0}
+.gap-question{font-size:12.5px;font-weight:500;color:#cbd5e1;line-height:1.4;margin-bottom:5px}
+.gap-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.gap-owner{font-size:8.5px;font-weight:700;letter-spacing:.05em;font-family:'DM Mono',monospace;padding:2px 6px;border-radius:3px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.18);color:#f59e0b}
+.confirmed-item .gap-owner{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.2);color:#34d399}
+.gap-blocker{font-size:8.5px;font-weight:700;letter-spacing:.05em;font-family:'DM Mono',monospace;padding:2px 6px;border-radius:3px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#f87171}
+.gap-cite-count{font-size:10px;color:#334155;font-family:'DM Mono',monospace}
+
+/* Toggle */
+.gap-toggle{display:flex;align-items:center;gap:5px;font-size:10px;color:#334155;cursor:pointer;user-select:none;margin-top:2px;font-family:'DM Mono',monospace;letter-spacing:.03em}
+.gap-toggle:hover{color:#475569}
+.gap-caret{display:inline-block;transition:transform .2s;font-size:13px;line-height:1}
+.gap-caret.open{transform:rotate(90deg)}
+.gap-detail{display:none;font-size:11px;color:#475569;line-height:1.6;margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.02);border-radius:5px;border-left:2px solid rgba(255,255,255,.07)}
+.gap-detail.open{display:block;animation:fadeSlide .15s ease}
+.confirmed-item .gap-detail{border-left-color:rgba(52,211,153,.2)}
+
+/* Dot hover tooltip */
+.rm-dot[data-tip]{position:relative}
+.rm-dot[data-tip]::after{content:attr(data-tip);display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#0d1628;border:1px solid rgba(239,68,68,.25);border-radius:7px;padding:8px 12px;font-size:11px;color:#94a3b8;white-space:normal;z-index:300;pointer-events:none;font-weight:400;letter-spacing:0;font-family:'DM Sans',sans-serif;width:220px;text-align:left;line-height:1.55;box-shadow:0 6px 20px rgba(0,0,0,.5)}
+.rm-dot[data-tip]::before{content:'';display:none;position:absolute;bottom:calc(100% + 3px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#0d1628;z-index:301;pointer-events:none}
+.rm-dot[data-tip]:hover::after,.rm-dot[data-tip]:hover::before{display:block}
 
 </style>
 </head>
@@ -1220,10 +1263,155 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="risk-detail-body" id="risk-detail-body"></div>
   </div>
 
-  <!-- SECTION DIVIDER ──────────────────────────────────────────────────────── -->
+  <!-- Q&A + WINS BELOW MATRIX ──────────────────────────────────────────────── -->
+
+  <!-- ROW 1: What couldn't we answer / What we confirmed — side by side -->
+  <div class="ri-qa-row">
+
+    <!-- LEFT: UNRESOLVED ──────────────────────────────────────────────────── -->
+    <div class="gaps-wrap">
+      <div class="gaps-header">
+        <div class="gaps-eyebrow">RESEARCH GAPS · 4 UNRESOLVED</div>
+        <div class="gaps-title">What the room couldn't answer</div>
+        <div class="gaps-sub">Ranked by urgency. Each carries execution risk. Owner must close before the gate it blocks.</div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-rank">01</div>
+        <div class="gap-body">
+          <div class="gap-question">Is GDPR-compliant data residency feasible within the $150K Phase 1 budget?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">CTO · OWNER</span>
+            <span class="gap-blocker">KILL GATE · MAY GO/NO-GO</span>
+            <span class="gap-cite-count">5 roles flagged</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>Why this matters</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">CTO flagged this as the controlling technical unknown across R1 and R2. No prior EU data residency implementation at this company. $150K estimate is provisional — if architecture requires a separate EU cloud region, costs escalate materially. Must be scoped and confirmed with external EU counsel before the May GO/NO-GO. If unresolvable within Phase 1 budget, the entire two-tranche structure must be re-priced.</div>
+        </div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-rank">02</div>
+        <div class="gap-body">
+          <div class="gap-question">Do any EU collective bargaining agreements restrict unilateral hiring terms in UK, Germany, or France?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">LEGAL · OWNER</span>
+            <span class="gap-blocker">KILL GATE · PRE-HIRE</span>
+            <span class="gap-cite-count">4 roles flagged</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>Why this matters</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">Germany's co-determination laws and France's works council requirements can block unilateral employment decisions above certain headcount thresholds. If a CBA or equivalent provision applies, FTE hiring terms must be negotiated, not imposed — adding 60–90 days to any timeline. LEGAL confirmed this review was not completed before R2 vote. Must complete before any FTE offer goes out.</div>
+        </div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-rank">03</div>
+        <div class="gap-body">
+          <div class="gap-question">What is EU GTM pipeline velocity and actual ACV for the 3 target prospects?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">CSO · OWNER</span>
+            <span class="gap-blocker">PAUSE GATE · APR 15</span>
+            <span class="gap-cite-count">3 roles flagged</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>Why this matters</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">The $525K LTV pipeline is based on $175K per prospect at 3 logos — but EU enterprise sales cycles are 2× longer than US and ACV may differ materially. CSO has 3 inbound prospects confirmed but close probability and timeline are unquantified. If only 1 of 3 closes in the Phase 2 window, the return profile changes significantly. Must be re-assessed at Apr 15 pulse check.</div>
+        </div>
+      </div>
+
+      <div class="gap-item">
+        <div class="gap-rank">04</div>
+        <div class="gap-body">
+          <div class="gap-question">What are EU comp bands for the 3 target FTE roles across UK, Germany, France?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">CHRO · OWNER</span>
+            <span class="gap-cite-count">3 roles flagged</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>Why this matters</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">No EU compensation benchmarks exist for this company. Radford EMEA data was cited but not pulled. EU senior roles typically run 20–35% above US equivalent. Without benchmarking, CHRO cannot issue competitive offers — or risks over-paying relative to the Phase 2 budget model. Prerequisite for any FTE offer letter.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: CONFIRMED ───────────────────────────────────────────────────── -->
+    <div class="gaps-wrap confirmed-wrap">
+      <div class="gaps-header">
+        <div class="gaps-eyebrow confirmed">CONFIRMED · 4 RESOLVED</div>
+        <div class="gaps-title">What the room answered</div>
+        <div class="gaps-sub">Questions that were raised and closed during deliberation. These are no longer blockers.</div>
+      </div>
+
+      <div class="gap-item confirmed-item">
+        <div class="gap-rank confirmed-rank">✓</div>
+        <div class="gap-body">
+          <div class="gap-question">Is the $500K total investment sufficient to cover Phase 1 + Phase 2?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">CFO · ANSWERED R1</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>How it was resolved</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">CFO modeled Phase 1 at $150K (entity, GDPR, legal counsel) and Phase 2 at $350K (3 FTEs, GTM). Total $500K confirmed sufficient with 16.7 months runway remaining post-investment. Budget includes 15% contingency buffer. The two-tranche structure ensures Phase 2 only deploys if Phase 1 gates pass.</div>
+        </div>
+      </div>
+
+      <div class="gap-item confirmed-item">
+        <div class="gap-rank confirmed-rank">✓</div>
+        <div class="gap-body">
+          <div class="gap-question">Are there active EU prospects to justify the investment?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">CSO · ANSWERED R0</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>How it was resolved</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">CSO confirmed 3 inbound EU prospects — UK, Germany, France respectively — with active evaluation cycles. All 3 initiated contact within the past 90 days. Pipeline is real, not speculative. At $175K LTV each, total addressable pipeline = $525K. CSO committed to bi-weekly prospect status reporting through Phase 1.</div>
+        </div>
+      </div>
+
+      <div class="gap-item confirmed-item">
+        <div class="gap-rank confirmed-rank">✓</div>
+        <div class="gap-body">
+          <div class="gap-question">Does OPT-2 sequence compliance correctly before commercial activity?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">LEGAL + CHRO · ANSWERED R1</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>How it was resolved</span><span class="gap-caret'>›</span>
+          </div>
+          <div class="gap-detail">LEGAL confirmed OPT-2's Phase 1 gate structure (GDPR before data processing, entity formation before FTE hiring) is the correct legal sequence. CHRO confirmed no FTE offers before GO/NO-GO is the only compliant path. OPT-1 was rejected specifically because it violated this sequence. OPT-2 is the only option that gets the order right.</div>
+        </div>
+      </div>
+
+      <div class="gap-item confirmed-item">
+        <div class="gap-rank confirmed-rank">✓</div>
+        <div class="gap-body">
+          <div class="gap-question">Is there a defensible return case at current investment level?</div>
+          <div class="gap-meta">
+            <span class="gap-owner">CFO · ANSWERED R1</span>
+          </div>
+          <div class="gap-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.gap-caret').classList.toggle('open')">
+            <span>How it was resolved</span><span class="gap-caret">›</span>
+          </div>
+          <div class="gap-detail">CFO built the unit economics model: $175K LTV ÷ $50K CAC ceiling = 3.5× return floor on every closed logo. At 3 logos, total return = $525K vs $500K invested — positive at minimum case. Below the CAC ceiling, every customer is immediately accretive. Above it, the kill trigger fires. The model is clean and was accepted by all 7 roles as the financial basis for the decision.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION DIVIDER -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">BEFORE THE RISKS — WHAT THIS DECISION WINS</div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">BEFORE THE RISKS — DEPARTMENT UPSIDE</div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
