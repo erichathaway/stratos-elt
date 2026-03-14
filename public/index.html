@@ -3967,7 +3967,7 @@ const OPTIONS_TOUR_STEPS = [
     selector: "#opt-rejected-container",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
-    cardPos: "below"
+    cardPos: "above"
   },
   {
     selector: "#opt-compare-grid",
@@ -4006,7 +4006,7 @@ function startContextTour() {
     { selector: '#mgmt-top-actions-card', title: 'Top 3 Actions — In Sequence',
       body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps. No other workstream starts until the board vote clears.', cardPos: 'below' },
     { selector: '#mgmt-dept-briefs', title: 'Department Briefs — Select a Role',
-      body: 'Click any role pill to see their complete Phase 1 brief. Action table with timing, success metrics, Phase 2 commitments, and what each role owns in execution. CEO brief shown by default.', cardPos: 'below' },
+      body: 'Click any role pill to see their complete Phase 1 brief. Action table with timing, success metrics, Phase 2 commitments, and what each role owns in execution. CEO brief shown by default.', cardPos: 'above' },
     { selector: '.cf-grid', title: 'Cross-Functional Dependencies',
       body: '4 workstreams spanning departments. Each has a named gate — if either side slips, execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
   ];
@@ -4132,7 +4132,7 @@ function renderTourStep() {
     var cardW = 300, cardH = 200, margin = 16;
     var cx, cy;
 
-    var tallElement = rh > window.innerHeight * 0.55;
+    var tallElement = rh > window.innerHeight * 0.45;
     if (tallElement) {
       // For tall elements: anchor card near the top-visible part of the element
       cy = Math.max(ry + margin, 10);
