@@ -913,8 +913,8 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .cc-chart-legend{display:flex;gap:12px}
 .cc-legend-item{display:flex;align-items:center;gap:5px;font-size:9px;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.06em}
 .cc-legend-dot{width:8px;height:3px;border-radius:2px;flex-shrink:0}
-.cc-chart-body{position:relative;height:80px;margin-bottom:10px}
-.cc-svg{width:100%;height:100%;overflow:visible}
+.cc-chart-body{position:relative;height:80px;margin-bottom:10px;overflow:visible}
+.cc-svg{width:100%;height:80px;display:block;overflow:visible}
 .cc-round-labels{display:flex;justify-content:space-around;padding:0 4px}
 .cc-round-lbl{font-size:8px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.08em;text-align:center;flex:1}
 .cc-round-lbl.active{color:var(--brand-primary)}
@@ -2032,7 +2032,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
     <div class="cc-chart-body">
-      <svg class="cc-svg" viewBox="0 0 400 80" preserveAspectRatio="none">
+      <svg class="cc-svg" viewBox="0 0 400 80">
         <line x1="30" y1="0" x2="400" y2="0" stroke="#1e293b" stroke-width="1"/>
         <line x1="30" y1="40" x2="400" y2="40" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
         <line x1="30" y1="80" x2="400" y2="80" stroke="#1e293b" stroke-width="1"/>
@@ -2077,13 +2077,13 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
   <!-- ZONE 1: STANCE EVOLUTION TABLE -->
-  <div>
+  <div style="width:100%">
     <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">STANCE EVOLUTION · R0→R1→R2 · Hover any cell for source <button class="info-btn" onclick="showInfo('stanceevo',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="overflow-x:auto">
-      <table style="width:100%;border-collapse:separate;border-spacing:1px">
+      <table style="width:100%;border-collapse:separate;border-spacing:1px;table-layout:fixed">
         <thead>
           <tr>
-            <th class="evo-th" style="width:140px">ROLE</th>
+            <th class="evo-th" style="width:160px">ROLE</th>
             <th class="evo-th">
               <div style="font-size:8px;font-weight:700;letter-spacing:.1em;color:#94a3b8;font-family:'DM Mono',monospace">R0 · EXPLORE</div>
               <div style="font-size:9px;color:#64748b;margin-top:2px">Initial read-in</div>
@@ -3215,7 +3215,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
       <div style="text-align:right">
         <div class="fin-block-label" style="margin-bottom:6px;display:flex;align-items:center;gap:5px">COMPLEXITY INDICATORS <button class="info-btn" onclick="showInfo('complexind', this)" title="What is this?"><span>i</span></button></div>
-        <div style="font-size:12px;margin-bottom:3px;color:#f87171">Execution Complexity: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f87171">Risk Exposure: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f59e0b">Dependency Density: <strong>5 cross-dept</strong></div><div style="font-size:12px;margin-bottom:3px;color:#64748b">Research Gap Score: <strong>4 unresolved</strong></div>
+        <div style="font-size:12px;margin-bottom:3px;color:#f87171">Execution Complexity: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f59e0b">Managed Risk Exposure: <strong>MEDIUM-HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f59e0b">Dependency Density: <strong>5 cross-dept</strong></div><div style="font-size:12px;margin-bottom:3px;color:#64748b">Research Gap Score: <strong>4 unresolved</strong></div>
       </div>
     </div>
   </div>
