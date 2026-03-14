@@ -1304,7 +1304,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   </div>
 
   <div id="tab-financials" class="panel">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+    <div id="fin-header-section" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
       <div>
         <div class="ri-section-eyebrow">FINANCIAL MODEL</div>
         <div class="ri-section-title">Investment Structure &amp; Returns <button class="info-btn" onclick="showInfo('finmodel', this)" title="What is this?"><span>i</span></button></div>
@@ -3005,7 +3005,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
-  <div class="fin-scenarios" style="margin-bottom:14px">
+  <div class="fin-scenarios" id="mgmt-top-actions-card" style="margin-bottom:14px">
     <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:5px;flex-wrap:wrap">TOP 3 ACTIONS · ELT CONSENSUS · SEQUENCE-DEPENDENT <button class="info-btn" onclick="showInfo('top3actions', this)" title="What is this?"><span>i</span></button> <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet executive_summary · top_3_actions · 3 ELT-consensus actions · ACT-001 must precede ACT-002 and ACT-003 · all sequence-dependent</div></span></div>
     <div style="display:flex;flex-direction:column;gap:8px">
       <div class="mh-priority-action">
@@ -3367,7 +3367,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <button id="board-gov-doc-btn" class="muted" onclick="openGovDoc()" style="margin-top:6px">⬡ Governance Doc ↗</button>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+  <div id="board-vote-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
     <div class="gaps-wrap">
       <div class="gaps-header">
         <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">VOTE RECORD · R2 FINAL <button class="info-btn" onclick="showInfo('voterec',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
@@ -3425,7 +3425,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
-  <div class="fin-scenarios" style="margin-bottom:14px">
+  <div id="board-conditions-section" class="fin-scenarios" id="mgmt-dept-card" style="margin-bottom:14px">
     <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:6px">CONDITIONS ON APPROVAL <button class="info-btn" onclick="showInfo('conditions',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button> <span class="cite"><button class="cite-btn">F1·ALL·ROLES</button><div class="cite-tip">F1 outputs all rounds · 123 approval gates logged across 7 roles · every role placed conditions · none dissented</div></span></div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">
       <div class="board-condition"><span class="gap-blocker">KILL GATE</span> Board must approve $500K at Feb 15 meeting</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> GDPR compliance certified before EU data processing</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> EU CAC ≤$50K measured after first 2 EU deals</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> EU entity formation before any FTE hiring commitment</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> Phase 1 spend ≤$150K before GO/NO-GO</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> 12-month runway floor maintained post-investment</div>
@@ -3935,12 +3935,12 @@ const OPTIONS_TOUR_STEPS = [
     selector: "#opt-rejected-container",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
-    cardPos: "below"
+    cardPos: "above"
   },
   {
-    selector: ".opt-chart-wrap",
+    selector: "#opt-compare-grid",
     title: "How the Options Compare",
-    body: "OPT-2 wins on <strong>RISK, RETURN, and REVERSIBILITY</strong> simultaneously. OPT-1 had higher speed but HIGH risk. OPT-3 through OPT-5 had low or negative returns. Hover any bar in the chart to see the specific CFO/LEGAL rationale for each dimension score.",
+    body: "OPT-2 wins on <strong>RISK, RETURN, and REVERSIBILITY</strong> simultaneously. OPT-1 had higher speed but HIGH risk. OPT-3 through OPT-5 had low or negative returns.",
     cardPos: "above"
   }
 ];
@@ -3952,27 +3952,34 @@ let _activeTabId = 'command'; // tracks current tab
 function startContextTour() {
   var tab = _activeTabId;
   // Build step arrays inline for mgmt/board (no const needed)
+  var FIN_STEPS = [
+    { selector: '#tab-financials .fin-unit-row', title: 'CFO Unit Economics',
+      body: 'The five financial anchors for this decision — LTV per customer, CAC ceiling (kill trigger), return floor, runway requirement, and total pipeline across 3 confirmed prospects. Every number is cited to a specific role and round.', cardPos: 'below' },
+    { selector: '#tab-financials .fin-waterfall', title: 'Two-Tranche Structure',
+      body: '<strong>Phase 1 ($150K) gates Phase 2 ($350K).</strong> The GO/NO-GO in May 2025 is binding — Phase 2 capital does not release until Phase 1 proves GDPR feasibility, entity formation, and active pipeline.', cardPos: 'above' },
+    { selector: '#tab-financials .fin-scenarios', title: 'Three Scenarios',
+      body: 'Stress (1 logo = Phase 1 only recovers), Base (3 logos = break-even Q4 2025), Upside (5 logos = +$375K net). The two-tranche structure means stress case exposure is capped at $150K if Phase 2 does not release.', cardPos: 'above' },
+  ];
   var MGMT_STEPS = [
-    { selector: ".mh-priority-action", title: "Top 3 Actions — In Sequence",
-      body: "ACT-001 (Board approval) must happen before ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps.", cardPos: "below" },
-    { selector: ".mh-pill-tabs", title: "Department Briefs",
-      body: "Select any role to see their full Phase 1 action plan: timing, success metric, and what they own.", cardPos: "below" },
-    { selector: ".mh-actions-table", title: "Action Format",
-      body: "Every action has timing, success metric, and color: teal = forward motion, amber = time-sensitive, red = kill gate.", cardPos: "above" },
-    { selector: ".cf-grid", title: "Cross-Functional Dependencies",
-      body: "4 workstreams that span departments. Each has a named gate — if either side slips, downstream execution halts. CTO-LEGAL is the highest-risk pairing.", cardPos: "above" },
+    { selector: '#mgmt-top-actions-card', title: 'Top 3 Actions — In Sequence',
+      body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. These are ELT consensus — every role agreed these are the controlling first steps. No other workstream can start until the board vote clears.', cardPos: 'below' },
+    { selector: '#mgmt-dept-card', title: 'Department Briefs',
+      body: 'Select any role to see their complete Phase 1 action plan: specific timing, success metric per action, and what they own in the execution architecture.', cardPos: 'below' },
+    { selector: '.cf-grid', title: 'Cross-Functional Dependencies',
+      body: '4 workstreams that span departments. Each has a named gate — if either side slips, downstream execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
   ];
   var BOARD_STEPS = [
-    { selector: ".ri-section-title", title: "The Governance Record",
-      body: "Everything a board member needs to understand the decision, vote record, and financial controls — in under 5 minutes.", cardPos: "below" },
-    { selector: ".gaps-wrap", title: "Vote Record — 7-0",
-      body: "Every role's final vote, confidence %, and one-line rationale. No dissents. The fiduciary record of who voted what and why.", cardPos: "below" },
-    { selector: ".board-condition", title: "Kill Gate Conditions",
-      body: "Three hard kill gates that halt execution if breached. Board is notified within 5 business days. These are binding commitments.", cardPos: "above" },
+    { selector: '#tab-board .ri-section-title', title: 'One-Page Decision Record',
+      body: 'Everything a board member needs for fiduciary review — decision rationale, vote record, financial guardrails, open risks, and binding kill gate conditions. Readable in under 5 minutes.', cardPos: 'below' },
+    { selector: '#board-vote-grid', title: 'Vote Record + Financial Guardrails',
+      body: '<strong>7-0 conditional approval</strong> — every executive approved with conditions. Right side: CFO-validated financial controls including $50K CAC kill trigger and 3.5× return floor. These are binding thresholds, not targets.', cardPos: 'below' },
+    { selector: '#board-conditions-section', title: 'Conditions on Approval',
+      body: 'The specific conditions attached to every vote. Board is notified within 5 business days if any kill gate fires. These are binding commitments the ELT made when they voted.', cardPos: 'above' },
   ];
 
   var steps = null;
-  if (tab === 'risk')        steps = RISK_TOUR_STEPS;
+  if (tab === 'financials') steps = FIN_STEPS;
+  else if (tab === 'risk')        steps = RISK_TOUR_STEPS;
   else if (tab === 'options') steps = OPTIONS_TOUR_STEPS;
   else if (tab === 'room')   steps = ROOM_TOUR_STEPS;
   else if (tab === 'mgmt')   steps = MGMT_STEPS;
@@ -4040,18 +4047,17 @@ function renderTourStep() {
     else endTour();
     return;
   }
-  var elCheck = el.getBoundingClientRect();
-  if (elCheck.width === 0 && elCheck.height === 0) {
-    if (_tourStep < _activeTourSteps.length - 1) { _tourStep++; renderTourStep(); }
-    else endTour();
-    return;
-  }
-
-  // Scroll element into view smoothly, then recompute rect after scroll settles
+  // Scroll element into view, wait for layout to settle, then compute
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   function computeAndRender() {
     var rect = el.getBoundingClientRect();
+    // Zero-rect check AFTER settle — catches hidden/transitioning elements
+    if (rect.width === 0 && rect.height === 0) {
+      if (_tourStep < _activeTourSteps.length - 1) { _tourStep++; renderTourStep(); }
+      else endTour();
+      return;
+    }
     var pad = 10;
     var rx = rect.left - pad, ry = rect.top - pad;
     var rw = rect.width + pad*2, rh = rect.height + pad*2;
@@ -4655,8 +4661,8 @@ function selectMgmtRole(role) {
 }
 
 const ROOM_TOUR_STEPS = [
-  { selector: ".movement-bar", title: "Deliberation at a Glance", body: "4 roles moved their position across 3 rounds. 3 held throughout. Zero final dissents — unanimous conditional. The groupthink badge means the engine flagged unusually fast convergence among CFO, CTO, and LEGAL.", cardPos: "below" },
-  { selector: ".evo-th", title: "Stance Evolution Table", body: "Every role's position across R0 (exploration), R1 (deliberation), and R2 (final vote). Teal highlight = role moved. <strong>Hover any cell</strong> to see the source quote from that role in that round.", cardPos: "below" },
+  { selector: ".movement-bar", title: "Deliberation at a Glance", body: "4 roles moved across 3 rounds. 3 held. Zero final dissents — unanimous conditional. The groupthink badge means the engine flagged unusually fast convergence among CFO, CTO, and LEGAL.", cardPos: "below" },
+  { selector: ".cc-chart-wrap", title: "Confidence × Convergence", body: "Team confidence rose as spread narrowed — deliberation was working. R0=68% avg with ±17pp spread, R2=76% with only ±10pp. CFO moved the most (+16pp). The delta chart below ranks every role by how much they moved.", cardPos: "below" },
   { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back to the table if the decision reversed.", cardPos: "above" },
   { selector: ".zone3-groupthink", title: "Groupthink Flag", body: "HIGH-severity — CFO, CTO, and LEGAL converged without independently stress-testing the GDPR cost estimate or EU hiring timeline. Assign a devil's advocate before Phase 1 execution begins.", cardPos: "above" },
 ];
