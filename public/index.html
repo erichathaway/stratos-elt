@@ -451,7 +451,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
 /* ── OPTIONS DELIBERATION CARDS ── */
-.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;margin-bottom:14px;opacity:.65;transition:opacity .2s,border-color .2s,background .2s}
+.opt-delib-card:hover{opacity:1;border-color:rgba(239,68,68,.25);background:rgba(239,68,68,.02)}
+.opt-delib-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
 .opt-delib-id{font-size:9px;font-weight:700;letter-spacing:.1em;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:4px}
 .opt-delib-name{font-size:16px;color:#cbd5e1;line-height:1.3;font-weight:500}
 .opt-delib-verdict{font-size:9px;font-weight:700;letter-spacing:.08em;padding:4px 10px;border-radius:20px;white-space:nowrap;font-family:'DM Mono',monospace;flex-shrink:0;align-self:flex-start;margin-top:2px}
