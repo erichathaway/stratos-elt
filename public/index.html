@@ -262,7 +262,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .tl-num{font-size:9px;font-weight:700;letter-spacing:.14em;font-family:'DM Mono',monospace;color:#1e293b;margin-bottom:8px;text-align:center}
 .tl-phase.active .tl-num{color:#94a3b8}
 .tl-node-wrap{position:relative;transition:transform .18s;display:flex;align-items:center;justify-content:center;width:52px;height:52px;flex-shrink:0}
-.tl-node{width:44px;height:44px;border-radius:50%;border:1.5px solid;transition:all .22s;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'DM Mono',monospace}
+.tl-node{background:var(--bg-page);width:44px;height:44px;border-radius:50%;border:1.5px solid;transition:all .22s;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'DM Mono',monospace}
 .tl-node.kill{border-color:#ef4444;color:#f87171;box-shadow:0 0 0 3px rgba(239,68,68,.08)}
 .tl-node.pause{border-color:#f59e0b;color:#f59e0b;font-size:14px;box-shadow:0 0 0 3px rgba(245,158,11,.07)}
 .tl-node.monitor{border-color:var(--brand-primary);color:var(--brand-primary);box-shadow:0 0 0 3px rgba(6,182,212,.07)}
@@ -4757,10 +4757,11 @@ window.addEventListener('resize', alignRiskAxisTicks);
 window._alignRiskAxis = alignRiskAxisTicks;
 
 </script>
-  <script>
-document.addEventListener('DOMContentLoaded',function(){
-  var ROLES=['CEO','CFO','COO','CHRO','CTO','CSO','LEGAL','CMO','CRO','CIO'];
+<script>
+var ROLES=['CEO','CFO','COO','CHRO','CTO','CSO','LEGAL','CMO','CRO','CIO'];
+function addCiteIcons(){
   document.querySelectorAll('.cite-btn').forEach(function(btn){
+    if(btn.dataset.iconDone) return;
     var t=btn.textContent.trim();
     var icon='';
     if(ROLES.some(function(r){return t.startsWith(r+'\u00b7')||t.startsWith(r+' ');})) icon='👤';
@@ -4768,8 +4769,10 @@ document.addEventListener('DOMContentLoaded',function(){
     else if(/PINECONE/i.test(t)) icon='📄';
     else icon='📊';
     btn.textContent=icon+'\u202f'+t;
+    btn.dataset.iconDone='1';
   });
-});
+}
+new MutationObserver(addCiteIcons).observe(document.body,{childList:true,subtree:true});
 </script>
 </body>
 </html>
