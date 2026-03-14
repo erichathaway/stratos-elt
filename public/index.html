@@ -1443,7 +1443,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">PAYBACK + SENSITIVITY</div>
       <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div id="fin-payback-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div style="background:#0f172a;border:1px solid #334155;border-radius:16px;padding:18px 20px">
         <div class="fin-block-label" style="margin-bottom:10px">PAYBACK ANALYSIS</div>
         <div style="display:flex;flex-direction:column;gap:0">
@@ -1494,7 +1494,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">INVESTOR & BOARD VIEW</div>
       <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+    <div id="fin-investor-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
       <div style="background:#0f172a;border:1px solid #334155;border-radius:16px;padding:18px 20px">
         <div class="fin-block-label" style="margin-bottom:12px">LTV:CAC COHORT MODEL</div>
         <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
@@ -1624,7 +1624,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
 
     <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
-    <div>
+    <div id="opt-rejected-section">
       <div class="zone-title" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
       <div id="opt-rejected-container">
         <!-- JS populated -->
@@ -1632,7 +1632,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
 
     <!-- POSITION MOVEMENT ACROSS ROUNDS -->
-    <div class="zone3" style="margin-top:4px">
+    <div class="zone3" id="opt-position-movement" style="margin-top:4px">
       <div class="zone-header">
         <div>
           <div class="zone-title" style="display:flex;align-items:center;gap:6px">POSITION MOVEMENT · HOW THE TEAM MOVED <button class="info-btn" onclick="showInfo('movement',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
@@ -2192,7 +2192,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   </div>
 
 
-  <div class="cc-chart-wrap" style="margin-top:0">
+  <div class="cc-chart-wrap" id="room-delta-chart" style="margin-top:0">
     <div class="cc-chart-header" style="margin-bottom:12px">
       <div>
         <div class="cc-chart-title">WHO MOVED · CONFIDENCE DELTA R0 → R2</div>
@@ -3382,7 +3382,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
     <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
   </div>
-  <div style="background:linear-gradient(135deg,rgba(6,182,212,.07),rgba(14,165,233,.04));border:1px solid rgba(6,182,212,.2);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:14px">
+  <div id="board-verdict-hero" style="background:linear-gradient(135deg,rgba(6,182,212,.07),rgba(14,165,233,.04));border:1px solid rgba(6,182,212,.2);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:14px">
     <div>
       <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:var(--brand-primary);letter-spacing:.1em;margin-bottom:6px">FINAL DECISION</div>
       <div style="font-size:30px;font-weight:900;color:var(--text-primary);letter-spacing:-.02em;line-height:1.1">Approve With<br>Conditions</div>
@@ -3959,15 +3959,21 @@ const OPTIONS_TOUR_STEPS = [
     cardPos: "below"
   },
   {
-    selector: "#opt-rejected-container",
+    selector: "#opt-rejected-section",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
-    cardPos: "above"
+    cardPos: "below"
   },
   {
     selector: "#opt-compare-grid",
     title: "How the Options Compare",
-    body: "OPT-2 wins on <strong>RISK, RETURN, and REVERSIBILITY</strong> simultaneously. OPT-1 had higher speed but HIGH risk. OPT-3 through OPT-5 had low or negative returns.",
+    body: "OPT-2 wins on <strong>RISK, RETURN, and REVERSIBILITY</strong> simultaneously. OPT-1 had higher speed but unacceptable risk. OPT-3 through OPT-5 failed on returns or feasibility.",
+    cardPos: "above"
+  },
+  {
+    selector: "#opt-position-movement",
+    title: "Position Movement Across Rounds",
+    body: "How consensus formed: which roles moved between R0 and R2, what evidence shifted them, and what conditions they attached before approving. OPT-1 died in R0. OPT-3–5 eliminated in R1. R2 was consensus formation, not new deliberation.",
     cardPos: "above"
   }
 ];
@@ -3980,28 +3986,36 @@ function startContextTour() {
   var tab = _activeTabId;
   // Build step arrays inline for mgmt/board (no const needed)
   var FIN_STEPS = [
-    { selector: '#tab-financials .fin-unit-row', title: 'CFO Unit Economics',
-      body: 'The five financial anchors for this decision — LTV per customer, CAC ceiling (kill trigger), return floor, runway requirement, and total pipeline across 3 confirmed prospects. Every number is cited to a specific role and round.', cardPos: 'below' },
-    { selector: '#tab-financials .fin-waterfall', title: 'Two-Tranche Structure',
-      body: '<strong>Phase 1 ($150K) gates Phase 2 ($350K).</strong> The GO/NO-GO in May 2025 is binding — Phase 2 capital does not release until Phase 1 proves GDPR feasibility, entity formation, and active pipeline.', cardPos: 'above' },
+    { selector: '#tab-financials .fin-unit-row', title: 'Unit Economics',
+      body: 'The five financial anchors — LTV per customer ($175K), CAC kill trigger ($50K), return floor (3.5×), runway floor (12mo), and total pipeline ($525K across 3 confirmed prospects). Every number sourced from a specific role and round.', cardPos: 'below' },
+    { selector: '#tab-financials .fin-waterfall', title: 'Two-Tranche Investment',
+      body: '<strong>Phase 1 ($150K) gates Phase 2 ($350K).</strong> The GO/NO-GO in May 2025 is binding — Phase 2 does not release until Phase 1 proves GDPR feasibility, entity formation, and active pipeline.', cardPos: 'above' },
     { selector: '#tab-financials .fin-scenarios', title: 'Three Scenarios',
-      body: 'Stress (1 logo = Phase 1 only recovers), Base (3 logos = break-even Q4 2025), Upside (5 logos = +$375K net). The two-tranche structure means stress case exposure is capped at $150K if Phase 2 does not release.', cardPos: 'above' },
+      body: 'Stress (1 logo = Phase 1 only recovers), Base (3 logos = +$25K net), Upside (5 logos = +$375K net). Two-tranche structure caps stress case at $150K if Phase 2 never releases.', cardPos: 'above' },
+    { selector: '#fin-payback-grid', title: 'Payback + CAC Sensitivity',
+      body: 'Phase 1 recovers at just 1 closed logo. Full $500K breaks even at 3 logos (Q4 2025 base case). CAC sensitivity shows: every $15K over the $50K ceiling reduces return by ~0.8×. Kill trigger fires at $80K.', cardPos: 'above' },
+    { selector: '#fin-investor-grid', title: 'Investor & Board View',
+      body: 'LTV:CAC cohort model across 4 scenarios (US parity → kill trigger). Comparable B2B SaaS EU entry benchmarks. 12-month cash flow projection: -$500K spend, +$525K return, +$25K net at base case.', cardPos: 'above' },
   ];
   var MGMT_STEPS = [
     { selector: '#mgmt-top-actions-card', title: 'Top 3 Actions — In Sequence',
-      body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. These are ELT consensus — every role agreed these are the controlling first steps. No other workstream can start until the board vote clears.', cardPos: 'below' },
-    { selector: '.mh-pill-tabs', title: 'Department Briefs',
-      body: 'Select any role to see their complete Phase 1 action plan: specific timing, success metric per action, and what they own in the execution architecture.', cardPos: 'below' },
+      body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps. No other workstream starts until the board vote clears.', cardPos: 'below' },
+    { selector: '.mh-pill-tabs', title: 'Select a Department',
+      body: 'Each role pill shows their Phase 1 brief. Click any role to see their complete action plan: timing, success metric, and what they own.', cardPos: 'below' },
+    { selector: '.mh-brief-header', title: 'Department Brief — Full Detail',
+      body: 'The selected role's complete execution brief: Phase 1 action table with timing and success metrics, Phase 2 commitments, what they own, and the evidence gap the board needs to address before they can begin.', cardPos: 'above' },
     { selector: '.cf-grid', title: 'Cross-Functional Dependencies',
-      body: '4 workstreams that span departments. Each has a named gate — if either side slips, downstream execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
+      body: '4 workstreams spanning departments. Each has a named gate — if either side slips, execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
   ];
   var BOARD_STEPS = [
-    { selector: '#tab-board .ri-section-title', title: 'One-Page Decision Record',
-      body: 'Everything a board member needs for fiduciary review — decision rationale, vote record, financial guardrails, open risks, and binding kill gate conditions. Readable in under 5 minutes.', cardPos: 'below' },
+    { selector: '#board-verdict-hero', title: 'The Decision',
+      body: '<strong>7-0 conditional approval — Approve With Conditions.</strong> OPT-2: Phased EU Entry. Phase 2 $350K locked behind May 2025 GO/NO-GO. 76% avg confidence, range 72–82%. Click Governance Doc to export the full packet.', cardPos: 'below' },
     { selector: '#board-vote-grid', title: 'Vote Record + Financial Guardrails',
-      body: '<strong>7-0 conditional approval</strong> — every executive approved with conditions. Right side: CFO-validated financial controls including $50K CAC kill trigger and 3.5× return floor. These are binding thresholds, not targets.', cardPos: 'below' },
+      body: '<strong>Every role's final vote, confidence %, and one-line rationale.</strong> Right panel: CFO-validated financial controls — $50K CAC kill trigger, 3.5× return floor, $500K total envelope. These are binding thresholds.', cardPos: 'below' },
     { selector: '#board-conditions-section', title: 'Conditions on Approval',
-      body: 'The specific conditions attached to every vote. Board is notified within 5 business days if any kill gate fires. These are binding commitments the ELT made when they voted.', cardPos: 'above' },
+      body: 'The specific conditions attached to every vote. Board notified within 5 business days if any kill gate fires. These are binding commitments the ELT made when they voted — not recommendations.', cardPos: 'above' },
+    { selector: '#board-gov-doc-btn', title: 'Export Governance Doc',
+      body: 'Exports a one-page PDF of this entire board packet — decision, vote record, financial guardrails, and kill gate conditions — formatted for board distribution and fiduciary filing.', cardPos: 'above' },
   ];
 
   var steps = null;
@@ -4689,8 +4703,9 @@ function selectMgmtRole(role) {
 
 const ROOM_TOUR_STEPS = [
   { selector: ".movement-bar", title: "Deliberation at a Glance", body: "4 roles moved across 3 rounds. 3 held. Zero final dissents — unanimous conditional. The groupthink badge means the engine flagged unusually fast convergence among CFO, CTO, and LEGAL.", cardPos: "below" },
-  { selector: ".cc-chart-wrap", title: "Confidence × Convergence", body: "Team confidence rose as spread narrowed — deliberation was working. R0=68% avg with ±17pp spread, R2=76% with only ±10pp. CFO moved the most (+16pp). The delta chart below ranks every role by how much they moved.", cardPos: "below" },
-  { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back to the table if the decision reversed.", cardPos: "above" },
+  { selector: ".cc-chart-wrap", title: "Confidence × Convergence", body: "Team confidence rose as spread narrowed. R0: 68% avg with ±17pp spread. R2: 76% avg with ±10pp held. The chart below shows exactly who moved and by how much.", cardPos: "below" },
+  { selector: "#room-delta-chart", title: "Who Moved — Delta R0→R2", body: "CFO moved the most (+16pp, from 58% to 74%). LEGAL held firmest (+2pp). 5 of 7 roles classified as PERSUADABLE during deliberation — evidence mattered.", cardPos: "above" },
+  { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back if the decision reversed.", cardPos: "above" },
   { selector: ".zone3-groupthink", title: "Groupthink Flag", body: "HIGH-severity — CFO, CTO, and LEGAL converged without independently stress-testing the GDPR cost estimate or EU hiring timeline. Assign a devil's advocate before Phase 1 execution begins.", cardPos: "above" },
 ];
 
