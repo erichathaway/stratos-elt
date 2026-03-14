@@ -907,13 +907,13 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
 /* ── CONFIDENCE × CONVERGENCE CHART ── */
-.cc-chart-wrap{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:16px 20px;margin-bottom:16px}
+.cc-chart-wrap{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:20px 24px;margin-bottom:16px;width:100%}
 .cc-chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
 .cc-chart-title{font-size:11px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.1em;color:#64748b}
 .cc-chart-legend{display:flex;gap:12px}
 .cc-legend-item{display:flex;align-items:center;gap:5px;font-size:9px;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.06em}
 .cc-legend-dot{width:8px;height:3px;border-radius:2px;flex-shrink:0}
-.cc-chart-body{position:relative;height:60px;margin-bottom:8px}
+.cc-chart-body{position:relative;height:80px;margin-bottom:10px}
 .cc-svg{width:100%;height:100%;overflow:visible}
 .cc-round-labels{display:flex;justify-content:space-around;padding:0 4px}
 .cc-round-lbl{font-size:8px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.08em;text-align:center;flex:1}
@@ -926,7 +926,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .cc-role-conf-val{font-size:8px;font-family:'DM Mono',monospace;color:#64748b}
 
 /* ── MULTI-OWNER RISK DOTS ── */
-.rm-dot-group{display:flex;gap:-6px;position:relative;cursor:pointer;transition:transform .15s}
+.rm-dot-group{display:inline-flex;gap:0;position:relative;cursor:pointer;transition:transform .15s;align-items:center}
 .rm-dot-group:hover{transform:scale(1.08)}
 .rm-dot-group .rm-dot-mini{width:30px;height:30px;border-radius:50%;background:#0f172a;border:2px solid #334155;overflow:hidden;flex-shrink:0;position:relative;transition:border-color .15s}
 .rm-dot-group .rm-dot-mini:not(:first-child){margin-left:-8px;z-index:1}
@@ -2032,30 +2032,30 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
     <div class="cc-chart-body">
-      <svg class="cc-svg" viewBox="0 0 400 60" preserveAspectRatio="none">
+      <svg class="cc-svg" viewBox="0 0 400 80" preserveAspectRatio="none">
         <line x1="30" y1="0" x2="400" y2="0" stroke="#1e293b" stroke-width="1"/>
-        <line x1="30" y1="30" x2="400" y2="30" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
-        <line x1="30" y1="60" x2="400" y2="60" stroke="#1e293b" stroke-width="1"/>
+        <line x1="30" y1="40" x2="400" y2="40" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="30" y1="80" x2="400" y2="80" stroke="#1e293b" stroke-width="1"/>
         <text x="0" y="5" font-size="7" fill="#334155" font-family="monospace">90%</text>
-        <text x="0" y="35" font-size="7" fill="#334155" font-family="monospace">70%</text>
-        <text x="0" y="62" font-size="7" fill="#334155" font-family="monospace">50%</text>
+        <text x="0" y="44" font-size="7" fill="#334155" font-family="monospace">70%</text>
+        <text x="0" y="80" font-size="7" fill="#334155" font-family="monospace">50%</text>
         <!-- Confidence line R0=68(y=33) R1=72(y=27) R2=76(y=21) -->
-        <polyline points="80,33 200,27 340,21" fill="none" stroke="rgba(6,182,212,0.6)" stroke-width="2"/>
-        <circle cx="80" cy="33" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
-        <circle cx="200" cy="27" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
-        <circle cx="340" cy="21" r="5" fill="var(--brand-primary)" stroke="var(--brand-primary)" stroke-width="2"/>
-        <text x="80" y="26" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">68%</text>
-        <text x="200" y="20" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">72%</text>
-        <text x="340" y="14" font-size="9" fill="var(--brand-primary)" text-anchor="middle" font-family="monospace" font-weight="700">76%</text>
+        <polyline points="80,44 200,36 340,28" fill="none" stroke="rgba(6,182,212,0.6)" stroke-width="2"/>
+        <circle cx="80" cy="44" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
+        <circle cx="200" cy="36" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
+        <circle cx="340" cy="28" r="5" fill="var(--brand-primary)" stroke="var(--brand-primary)" stroke-width="2"/>
+        <text x="80" y="38" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">68%</text>
+        <text x="200" y="30" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">72%</text>
+        <text x="340" y="22" font-size="9" fill="var(--brand-primary)" text-anchor="middle" font-family="monospace" font-weight="700">76%</text>
         <!-- Spread: R0=17pp(y=9) R1=10pp(y=30) R2=10pp(y=30) -->
-        <polyline points="80,9 200,30 340,30" fill="none" stroke="rgba(139,92,246,0.7)" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <circle cx="80" cy="9" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
-        <circle cx="200" cy="30" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
-        <circle cx="340" cy="30" r="4" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
-        <text x="80" y="5" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±17pp</text>
-        <text x="240" y="44" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±10pp — held</text>
-        <line x1="140" y1="0" x2="140" y2="60" stroke="#1e293b" stroke-width="1"/>
-        <line x1="270" y1="0" x2="270" y2="60" stroke="#1e293b" stroke-width="1"/>
+        <polyline points="80,12 200,40 340,40" fill="none" stroke="rgba(139,92,246,0.7)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="80" cy="12" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+        <circle cx="200" cy="40" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+        <circle cx="340" cy="40" r="4" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="80" y="8" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±17pp</text>
+        <text x="240" y="57" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±10pp — held</text>
+        <line x1="140" y1="0" x2="140" y2="80" stroke="#1e293b" stroke-width="1"/>
+        <line x1="270" y1="0" x2="270" y2="80" stroke="#1e293b" stroke-width="1"/>
       </svg>
     </div>
     <div class="cc-round-labels">
@@ -3138,7 +3138,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div style="font-size:13px;color:#64748b;margin-top:8px;line-height:1.5;max-width:460px">7-0 conditional approval of OPT-2: Phased EU Entry. Phase 2 $350K locked behind May 2025 GO/NO-GO. <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · vote_summary: 7×APPROVE_WITH_CONDITIONS · OPT-2 unanimous · convergence_flag: true</div></span></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-      <div style="font-size:48px;font-weight:900;color:var(--brand-primary);line-height:1">76<span style="font-size:18px;color:#34d399">%</span></div>
+      <div style="font-size:48px;font-weight:900;color:var(--brand-primary);line-height:1"><span id="board-conf-num">76</span><span style="font-size:18px;color:#34d399">%</span></div>
       <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.08em;text-align:right">AVG CONFIDENCE<br>RANGE 72–82% <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet confidence_summary · avg 76% · min 72% (CTO, LEGAL) · max 82% (CEO) · spread 10pp — tight convergence</div></span></div>
       <button id="board-gov-doc-btn" class="muted" onclick="openGovDoc()" style="margin-top:6px">⬡ Governance Doc ↗</button>
     </div>
@@ -4075,6 +4075,9 @@ function populateDashboard(d) {
 
   // Override the counter animation target
   window._confTarget = Math.round(avgConf);
+  // Also sync board confidence number
+  var boardConfEl = document.getElementById('board-conf-num');
+  if (boardConfEl) boardConfEl.textContent = Math.round(avgConf);
   const confBig = document.querySelector('.conf-big');
   if (confBig) confBig.textContent = Math.round(avgConf);
 
