@@ -148,9 +148,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .conf-num{display:flex;align-items:baseline;gap:2px;justify-content:flex-end}
 .conf-big{font-size:40px;font-weight:900;color:var(--text-primary);line-height:1}
 .conf-pct{font-size:14px;color:#475569}
-.conf-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.08em;text-align:right}
-.conf-range{font-size:10px;color:#475569;text-align:right;margin-top:1px}
-.conf-bar{margin-top:4px;position:relative;height:3px;background:rgba(255,255,255,.06);border-radius:2px}
+.conf-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.08em;text-align:right;margin-top:6px}
+.conf-range{font-size:10px;color:#475569;text-align:right;margin-top:6px}
+.conf-bar{margin-top:8px;position:relative;height:3px;background:rgba(255,255,255,.06);border-radius:2px}
 .conf-fill{position:absolute;height:100%;background:rgba(6,182,212,.35);border-radius:2px}
 .conf-avg{position:absolute;width:3px;height:100%;background:var(--brand-primary);transform:translateX(-50%)}
 .roles-meta{font-size:10px;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:8px;text-align:right}
@@ -300,6 +300,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 /* ── ENTRANCE ANIMATIONS ── */
 @keyframes zoneUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 .zone1,.zone2,.zone3,.zone4{animation:zoneUp .55s cubic-bezier(.22,.68,0,1.1) both}
+#tab-command .zone1,#tab-command .zone2,#tab-command .zone3,#tab-command .zone4{margin-bottom:28px}
 .zone1{animation-delay:.05s}
 .zone2{animation-delay:.15s}
 .zone3{animation-delay:.25s}
