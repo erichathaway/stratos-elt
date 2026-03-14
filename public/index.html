@@ -3962,7 +3962,7 @@ const OPTIONS_TOUR_STEPS = [
     cardPos: "below"
   },
   {
-    selector: "#opt-rejected-label",
+    selector: "#opt-rejected-section",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
     cardPos: "below"
@@ -4003,8 +4003,8 @@ function startContextTour() {
   var MGMT_STEPS = [
     { selector: '#mgmt-top-actions-card', title: 'Top 3 Actions — In Sequence',
       body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps. No other workstream starts until the board vote clears.', cardPos: 'below' },
-    { selector: '#mgmt-briefs-card', title: 'Department Briefs — Select a Role',
-      body: 'Click any role pill to see their complete Phase 1 brief: action table with timing and success metrics, what they own, and their Phase 2 commitments. CEO brief is shown by default.', cardPos: 'below' },
+    { selector: '.mh-pill-tabs', title: 'Department Briefs — Select a Role',
+      body: 'Click any role pill to see their complete Phase 1 brief. Action table with timing, success metrics, Phase 2 commitments, and what each role owns in execution. CEO brief shown by default.', cardPos: 'below' },
     { selector: '.cf-grid', title: 'Cross-Functional Dependencies',
       body: '4 workstreams spanning departments. Each has a named gate — if either side slips, execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
   ];
