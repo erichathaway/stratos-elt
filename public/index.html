@@ -31,8 +31,8 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .stub-desc{font-size:12px;color:#64748b;max-width:300px;text-align:center;line-height:1.6}
 .stub-tag{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-top:4px}
 /* ── INFO BUTTON ── */
-.info-btn{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.35);font-size:9px;font-weight:700;font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s;z-index:20;line-height:1;user-select:none}
-.info-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.32);color:rgba(255,255,255,.75);transform:translateX(-50%) scale(1.15)}
+.info-btn{position:absolute;top:-9px;left:50%;transform:translateX(-50%) translateY(50%);width:18px;height:18px;border-radius:50%;background:#0b1424;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.18);font-size:9px;display:flex;align-items:center;justify-content:center;cursor:help;transition:all .22s;z-index:2;font-family:'DM Mono',monospace;font-style:normal}
+.info-btn:hover{transform:translateX(-50%) translateY(0);z-index:12;color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.3);background:rgba(15,26,46,.98)}
 /* zone1 needs relative positioning already; zone3/4 have it. For zone2 cards: */
 .card{position:relative}
 .concern-card{position:relative}
@@ -145,7 +145,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .gt-badge:hover{background:rgba(245,158,11,.12)}
 
 /* ── ZONE 2 ── */
-.zone2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.zone2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px;transition:border-color .18s,background .18s,box-shadow .18s}
 .card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.035);box-shadow:0 0 0 1px rgba(45,212,191,.08) inset}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -153,7 +153,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .card-link{background:none;border:none;cursor:pointer;font-size:9px;color:#2dd4bf;font-family:'DM Mono',monospace}
 .reasons{display:flex;flex-direction:column;gap:6px}
 .reason{padding:8px 9px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05);font-size:12px;color:#cbd5e1;line-height:1.55}
-.right-col{display:flex;flex-direction:column;gap:8px}
+.right-col{display:flex;flex-direction:column;gap:20px}
 
 /* ── EXPANDABLE CARDS — fixed layout ── */
 /* No overflow:hidden on cards — that was clipping the content */
@@ -311,9 +311,9 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .conf-avg.loaded{opacity:1}
 
 /* ── SECTION TITLE underline grow ── */
-.zone-title,.card-title{position:relative;display:inline-block}
-.zone-title::after,.card-title::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:rgba(45,212,191,.4);transition:width .3s ease}
-.zone3:hover .zone-title::after,.zone4:hover .zone-title::after,.card:hover .card-title::after{width:100%}
+.zone-title,.card-title,.concern-title,.openq-title{position:relative;display:inline-block}
+.zone-title::after,.card-title::after,.concern-title::after,.openq-title::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:rgba(45,212,191,.4);transition:width .3s ease}
+.zone3:hover .zone-title::after,.zone4:hover .zone-title::after,.card:hover .card-title::after,.concern-card:hover .concern-title::after,.openq-card:hover .openq-title::after{width:100%}
 
 /* ── KPI CELL subtle hover glow ── */
 .kpi-cell{transition:background .15s}
@@ -419,6 +419,26 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .reversal-then{font-size:11px;color:#475569;padding:7px 10px;background:rgba(239,68,68,.04);border-left:2px solid rgba(239,68,68,.22);border-radius:0 4px 4px 0;line-height:1.5}
 .reversal-then strong{color:#fca5a5}
 
+
+/* ── OPTIONS DELIBERATION CARDS ── */
+.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;transition:border-color .2s,background .2s}
+.opt-delib-card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.028)}
+.opt-delib-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.opt-delib-id{font-size:9px;font-weight:700;letter-spacing:.1em;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:4px}
+.opt-delib-name{font-family:'Fraunces',serif;font-size:16px;color:#cbd5e1;line-height:1.3;font-weight:500}
+.opt-delib-verdict{font-size:9px;font-weight:700;letter-spacing:.08em;padding:4px 10px;border-radius:20px;white-space:nowrap;font-family:'DM Mono',monospace;flex-shrink:0;align-self:flex-start;margin-top:2px}
+.opt-delib-verdict.rejected{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:#f87171}
+.opt-delib-verdict.deferred{background:rgba(100,116,139,.08);border:1px solid rgba(100,116,139,.2);color:#94a3b8}
+.opt-delib-votes{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.opt-vote-pip{min-width:34px;height:22px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:0 6px;letter-spacing:.04em}
+.opt-vote-pip.defer{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.2);color:#64748b}
+.opt-vote-pip.avc{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
+.opt-vote-pip.approve{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:#34d399}
+.opt-delib-reasons{display:flex;flex-direction:column;gap:10px}
+.opt-delib-reason{display:flex;gap:12px;padding:12px 14px;background:rgba(255,255,255,.012);border-radius:7px;border-left:2px solid rgba(255,255,255,.06)}
+.opt-reason-role{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.06em;min-width:44px;padding-top:1px;flex-shrink:0}
+.opt-reason-text{font-size:12px;color:#64748b;line-height:1.6}
+
 </style>
 </head>
 <body>
@@ -436,8 +456,8 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
   <div class="tabs">
     <button class="tab active" onclick="showTab('command',this)">⬡ Command Center</button>
-    <button class="tab" onclick="showTab('options',this)">◈ Options</button>
     <button class="tab" onclick="showTab('risk',this)">◉ Risk &amp; Intelligence</button>
+    <button class="tab" onclick="showTab('options',this)">◈ Options</button>
     <button class="tab" onclick="showTab('room',this)">◎ The Room</button>
     <button class="tab" onclick="showTab('mgmt',this)">◧ Management</button>
     <button class="tab" onclick="showTab('board',this)">◪ Board</button>
@@ -802,113 +822,100 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
   <div id="tab-options" class="panel">
 
-    <!-- WINNER HERO -->
+    <!-- WINNER HERO — compact, no duplicate numbers row -->
     <div class="opt-hero">
-      <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7 AWC</div>
+      <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7–0 CONDITIONAL APPROVE</div>
       <div class="opt-hero-title" id="opt-winner-label">Phased EU Entry (Conservative)</div>
       <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM</div>
       <div class="opt-hero-meta">
         <span class="opt-risk-badge" id="opt-risk-badge">● MEDIUM RISK</span>
-        <span class="opt-hero-note" id="opt-vs-note">vs HIGH on immediate full entry</span>
-      </div>
-      <div class="opt-stats">
-        <div class="opt-stat"><div class="opt-stat-n" id="stat-investment">$500K</div><div class="opt-stat-l">TOTAL INVESTMENT</div></div>
-        <div class="opt-stat"><div class="opt-stat-n" id="stat-cac">$50K</div><div class="opt-stat-l">CAC CEILING</div></div>
-        <div class="opt-stat"><div class="opt-stat-n" id="stat-ltv">$175K</div><div class="opt-stat-l">LTV / CUSTOMER</div></div>
-        <div class="opt-stat"><div class="opt-stat-n" id="stat-votes">7 AWC</div><div class="opt-stat-l">FINAL VOTE</div></div>
+        <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3</span>
       </div>
     </div>
 
-    <!-- REJECTED OPTIONS -->
-    <div>
-      <div class="zone-title" style="font-size:11px;margin-bottom:8px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY</div>
-      <div class="opt-rejected-row" id="opt-rejected-row">
-        <!-- populated by data layer -->
-        <div class="opt-rejected">
-          <div class="opt-rejected-label">OPT-1 · IMMEDIATE FULL ENTRY</div>
-          <div class="opt-rejected-name">Full $500K deployment, Q1 start</div>
-          <div class="opt-rejected-votes">
-            <div class="opt-vote-pip defer">CEO</div><div class="opt-vote-pip defer">CFO</div>
-            <div class="opt-vote-pip defer">CTO</div><div class="opt-vote-pip defer">LEGAL</div>
-            <div class="opt-vote-pip defer">CHRO</div><div class="opt-vote-pip defer">COO</div>
-            <div class="opt-vote-pip defer">CSO</div>
-          </div>
-          <div class="opt-rejected-fatal"><strong>Why it failed:</strong> No GDPR gate before EU customer data processing. LEGAL blocked — DPA and SCC execution precedes all commercial contracts. Timeline infeasible.</div>
+    <!-- DELIBERATION RECORD — what didn't win and why -->
+    <div class="zone-title" style="font-size:11px;margin-bottom:12px">OPTIONS CONSIDERED · DELIBERATION RECORD</div>
+
+    <!-- OPT-1 -->
+    <div class="opt-delib-card" id="opt-delib-1">
+      <div class="opt-delib-header">
+        <div>
+          <div class="opt-delib-id">OPT-1 · REJECTED</div>
+          <div class="opt-delib-name">Immediate Full Entry — $500K deployed Q1, no gates</div>
         </div>
-        <div class="opt-rejected">
-          <div class="opt-rejected-label">OPT-3 · PARTNERSHIP / RESELLER MODEL</div>
-          <div class="opt-rejected-name">Indirect entry via EU channel partners</div>
-          <div class="opt-rejected-votes">
-            <div class="opt-vote-pip defer">CEO</div><div class="opt-vote-pip defer">CFO</div>
-            <div class="opt-vote-pip defer">CTO</div><div class="opt-vote-pip defer">LEGAL</div>
-            <div class="opt-vote-pip avc">CHRO</div><div class="opt-vote-pip defer">COO</div>
-            <div class="opt-vote-pip defer">CSO</div>
-          </div>
-          <div class="opt-rejected-fatal"><strong>Why it failed:</strong> Revenue capture ~40% of direct model. CSO flagged pipeline velocity risk — partner sales cycles 2× longer. Does not achieve $525K LTV target within runway constraint.</div>
+        <div class="opt-delib-verdict rejected">UNANIMOUS DEFER</div>
+      </div>
+      <div class="opt-delib-votes" id="opt1-votes">
+        <div class="opt-vote-pip defer">CEO</div>
+        <div class="opt-vote-pip defer">CFO</div>
+        <div class="opt-vote-pip defer">CTO</div>
+        <div class="opt-vote-pip defer">LEGAL</div>
+        <div class="opt-vote-pip defer">CHRO</div>
+        <div class="opt-vote-pip defer">COO</div>
+        <div class="opt-vote-pip defer">CSO</div>
+      </div>
+      <div class="opt-delib-reasons">
+        <div class="opt-delib-reason">
+          <div class="opt-reason-role">LEGAL</div>
+          <div class="opt-reason-text">Hard block. GDPR compliance infrastructure must be certified operational before any EU customer data is processed. DPAs and SCCs must be executed before any commercial contracts. No legal pathway to Q1 commercial activity without completing these steps first — minimum 90-day setup timeline.</div>
+        </div>
+        <div class="opt-delib-reason">
+          <div class="opt-reason-role">CFO</div>
+          <div class="opt-reason-text">Full $500K deployment with no intermediate gate eliminates the option to stop if early signals are negative. Phase 2 spend ($350K in FTE commitments) creates 12-month cost obligations that cannot be unwound quickly. The two-tranche structure in OPT-2 preserves that optionality at zero additional cost.</div>
+        </div>
+        <div class="opt-delib-reason">
+          <div class="opt-reason-role">CTO</div>
+          <div class="opt-reason-text">EU employment law in UK, Germany, and France has mandatory terms, works council requirements, and termination protections that differ materially from US templates. Hiring before legal review of jurisdiction-specific obligations creates ratchet risk — obligations that cannot be easily reversed once FTEs are onboarded.</div>
         </div>
       </div>
     </div>
 
-    <!-- FINANCIAL MECHANICS -->
-    <div class="zone3">
+    <!-- OPT-3 -->
+    <div class="opt-delib-card" id="opt-delib-3">
+      <div class="opt-delib-header">
+        <div>
+          <div class="opt-delib-id">OPT-3 · NOT SELECTED</div>
+          <div class="opt-delib-name">Partnership / Reseller Model — indirect entry via EU channel partners</div>
+        </div>
+        <div class="opt-delib-verdict deferred">DEFER FOR PHASE 3</div>
+      </div>
+      <div class="opt-delib-votes" id="opt3-votes">
+        <div class="opt-vote-pip defer">CEO</div>
+        <div class="opt-vote-pip defer">CFO</div>
+        <div class="opt-vote-pip defer">CTO</div>
+        <div class="opt-vote-pip defer">LEGAL</div>
+        <div class="opt-vote-pip avc">CHRO</div>
+        <div class="opt-vote-pip defer">COO</div>
+        <div class="opt-vote-pip defer">CSO</div>
+      </div>
+      <div class="opt-delib-reasons">
+        <div class="opt-delib-reason">
+          <div class="opt-reason-role">CSO</div>
+          <div class="opt-reason-text">Pipeline velocity is the controlling variable. Partner-led sales cycles run 2× longer than direct — 9–12 months vs 4–6 months. With only 3 target logos and a 12-month runway floor, we cannot afford to lose half the selling time to channel friction. OPT-3 does not hit the $525K pipeline target within the financial model's timeframe.</div>
+        </div>
+        <div class="opt-delib-reason">
+          <div class="opt-reason-role">CFO</div>
+          <div class="opt-reason-text">Revenue capture on a reseller model is approximately 40% of direct. At $175K LTV per customer, that drops to ~$70K net per logo — below the unit economics threshold that makes the investment worthwhile. The CAC ceiling analysis breaks down entirely under a reseller margin structure.</div>
+        </div>
+        <div class="opt-delib-reason">
+          <div class="opt-reason-role">CHRO</div>
+          <div class="opt-reason-text">OPT-3 was the only option with a conditional approval vote. CHRO's position: partnership model eliminates the EU employment law exposure that is a primary concern on OPT-1, and could be revisited as a Phase 3 parallel track once direct entry is established and EU operational infrastructure is proven.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT CHANGED — position shifts across rounds -->
+    <div class="zone3" style="margin-top:4px">
       <div class="zone-header">
         <div>
-          <div class="zone-title">FINANCIAL MECHANICS · CFO MODEL</div>
-          <div class="zone-sub" id="fin-headline">The unit economics that closed the debate on OPT-2 vs OPT-1</div>
+          <div class="zone-title">POSITION MOVEMENT · WHAT SHIFTED BETWEEN ROUNDS</div>
+          <div class="zone-sub">How the team moved from R0 exploration to R2 final position</div>
         </div>
       </div>
-      <div id="fin-body" style="font-size:12px;color:#64748b;line-height:1.65;margin-bottom:14px">
-        Two-tranche structure preserves optionality. Phase 1 ($150K) clears GDPR and entity gates before any FTE spend commits. Phase 2 ($350K) unlocks only on May 2025 GO/NO-GO passage — confirmed pipeline, verified CAC, GDPR certified. CFO modeled three scenarios: base, stress, and upside. All three show positive unit economics only if CAC stays at or below $50K ceiling.
-      </div>
-      <div class="kpi-row" id="fin-kpis">
-        <div class="kpi-cell"><div class="kpi-n pos" id="fin-investment">$500K</div><div class="kpi-l">TOTAL BUDGET</div></div>
-        <div class="kpi-cell"><div class="kpi-n warn" id="fin-cac">$50K</div><div class="kpi-l">CAC CEILING</div></div>
-        <div class="kpi-cell"><div class="kpi-n pos" id="fin-ltv">$175K</div><div class="kpi-l">LTV / CUSTOMER</div></div>
-        <div class="kpi-cell"><div class="kpi-n pos" id="fin-pipeline">$525K</div><div class="kpi-l">PIPELINE (3 TARGETS)</div></div>
-      </div>
-      <div style="margin-top:10px;padding:10px 13px;background:rgba(52,211,153,.04);border-left:2px solid rgba(52,211,153,.25);border-radius:0 6px 6px 0;font-size:12px;color:#64748b;line-height:1.6">
-        <strong style="color:#94a3b8">3.5× return floor:</strong> At $50K CAC and $175K LTV, the minimum return on each closed logo is 3.5×. Below the ceiling, every customer is immediately accretive. Above it, the decision architecture reopens.
-        <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU customer · CAC ceiling $50K · "strongest unit economics case for international expansion at this stage"</div></span>
-      </div>
-    </div>
-
-    <!-- REVERSAL PROTOCOL -->
-    <div class="zone3">
-      <div class="zone-header">
-        <div>
-          <div class="zone-title">REVERSAL PROTOCOL · AFTER COMMITMENT</div>
-          <div class="zone-sub">These are not pre-flight conditions — they fire after the decision is already in motion</div>
-        </div>
-        <span class="zone-num" style="color:#f87171">Kill</span>
-      </div>
-      <div id="reversal-items">
-        <div class="reversal-item">
-          <div class="reversal-num">01</div>
-          <div class="reversal-body">
-            <div class="reversal-owner">CFO + BOARD</div>
-            <div class="reversal-title">Total EU spend breaches $500K envelope</div>
-            <div class="reversal-if">IF <strong>any spend commitment exceeds $500K</strong> without explicit Board re-authorization</div>
-            <div class="reversal-then">THEN <strong>immediate halt on all EU activity.</strong> No exceptions, no workarounds. CEO and CFO jointly notify Board within 24 hours. This is not a pause — it is a full stop pending re-authorization.</div>
-          </div>
-        </div>
-        <div class="reversal-item">
-          <div class="reversal-num">02</div>
-          <div class="reversal-body">
-            <div class="reversal-owner">LEGAL</div>
-            <div class="reversal-title">Active CBA or regulatory prohibition found in EU jurisdiction</div>
-            <div class="reversal-if">IF <strong>any collective bargaining agreement or EU regulatory requirement</strong> prohibits unilateral employment changes or commercial activity in UK, Germany, or France</div>
-            <div class="reversal-then">THEN <strong>full stop on all commercial and hiring activity in that jurisdiction.</strong> Minimum 60-day reset. Legal leads, no workaround. Timeline resets entirely for affected markets.</div>
-          </div>
-        </div>
-        <div class="reversal-item">
-          <div class="reversal-num">03</div>
-          <div class="reversal-body">
-            <div class="reversal-owner">CFO</div>
-            <div class="reversal-title">EU CAC exceeds ceiling after first 2 closed deals</div>
-            <div class="reversal-if">IF <strong>EU customer acquisition cost exceeds $50K</strong> after first 2 deals close</div>
-            <div class="reversal-then">THEN <strong>Phase 2 GTM budget release is suspended.</strong> CFO must remodel unit economics before further deployment. Decision architecture reopens — not cancelled, but paused pending new assumptions.</div>
-          </div>
-        </div>
+      <div id="opt-movement-body" style="font-size:12px;color:#64748b;line-height:1.65">
+        <p style="margin:0 0 10px">Round 0 opened with significant spread — several roles flagged OPT-1 as the most direct path before LEGAL's intervention made the compliance timeline concrete. Once the 90-day GDPR setup requirement was quantified, OPT-1 lost support universally by end of R0.</p>
+        <p style="margin:0 0 10px">Round 1 concentrated debate on OPT-2 vs OPT-3. CSO's pipeline velocity argument — backed by specific deal cycle data — moved the remaining OPT-3 supporters. CFO's unit economics model showing the 40% revenue haircut under reseller margins closed the debate. CHRO registered the only dissent, noting OPT-3's employment law advantage, but moved to conditional support of OPT-2 given the financial case.</p>
+        <p style="margin:0">Round 2 was consensus formation, not new deliberation. The 7–0 conditional approval reflects alignment on OPT-2 with each role attaching their domain-specific conditions — not disagreement on direction.</p>
       </div>
     </div>
 
@@ -1445,6 +1452,12 @@ function getRunId() {
 
 function safeArr(v) { return Array.isArray(v) ? v : []; }
 // fmtRaw: handles both numbers AND pre-formatted strings (e.g. "$500K") from Supabase
+function fmt(n) {
+  if (!n && n !== 0) return '—';
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+  return '$' + Math.round(n);
+}
 function fmtRaw(n) {
   if (typeof n === 'string') {
     const stripped = n.replace(/[$,]/g, '');
@@ -1585,7 +1598,7 @@ function populateDashboard(d) {
   if (signalTexts[0]) {
     const t = signalTexts[0];
     const firstText = t.firstChild;
-    if (firstText) firstText.textContent = `${finalRoles.length}–0 conditional · ${allConds.length}+ conditions · ${killCount} KILL gate (spend ceiling)`;
+    if (firstText) firstText.textContent = `${finalRoles.length}–0 conditional · ${allConds.length > 0 ? allConds.length + ' approval gates logged across all roles' : '40+ approval gates'} · 1 hard spend KILL trigger`;
   }
   if (signalTexts[1]) {
     const firstText = signalTexts[1].firstChild;
