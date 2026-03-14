@@ -1625,7 +1625,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
     <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
     <div id="opt-rejected-section">
-      <div class="zone-title" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+      <div class="zone-title" id="opt-rejected-label" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
       <div id="opt-rejected-container">
         <!-- JS populated -->
       </div>
@@ -3049,6 +3049,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
+  <div id="mgmt-briefs-card">
   <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px">DEPARTMENT BRIEFS · SELECT A ROLE <button class="info-btn" onclick="showInfo('deptbriefs', this)" title="What is this?"><span>i</span></button></div>
   <div class="mh-pill-tabs"><button class="mh-pill-btn mh-pill-active" id="mhpill-CEO" onclick="selectMgmtRole('CEO')">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid var(--brand-primary)33;width:28px;height:28px;min-width:28px"></div>
@@ -3298,7 +3299,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 </div></div>
   <!-- CROSS-FUNCTIONAL DEPENDENCIES -->
   <div style="margin-top:28px">
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+    
+</div>
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
       <div style="flex:1;height:1px;background:#1e293b"></div>
       <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">CROSS-FUNCTIONAL DEPENDENCIES &amp; WORKSTREAMS <button class="info-btn" onclick="showInfo('crossfunc',this)" title="What is this?"><span>i</span></button></div>
       <div style="flex:1;height:1px;background:#1e293b"></div>
@@ -3945,7 +3948,7 @@ const TOUR_STEPS = [
 
 const RISK_TOUR_STEPS = [
   { selector: ".rm-grid", title: "The Risk Matrix", body: "6 risks plotted by <strong>impact × probability</strong> — consensus scoring across all 7 roles. Top-right is ACT NOW. Click any dot to expand the owner, financial exposure, and specific mitigation plan with dates.", cardPos: "below" },
-  { selector: ".ri-qa-row", title: "What We Know vs Don't Know", body: "<strong>Left panel:</strong> 4 unresolved questions ranked by urgency — each one has an owner and a gate it blocks. <strong>Right panel:</strong> 4 questions the team answered during deliberation and why they're no longer blockers. Click 'Why this matters' to expand.", cardPos: "below" },
+  { selector: ".ri-qa-row", title: "Open Questions vs Resolved", body: "<strong>Left panel:</strong> 4 unresolved questions ranked by urgency — each with an owner and a gate it blocks. <strong>Right panel:</strong> 4 questions answered during deliberation and why they're no longer blockers. Click 'Why this matters' to expand.", cardPos: "above" },
   { selector: ".fin-wrap", title: "The Financial Model", body: "CFO-validated investment waterfall showing the $150K Phase 1 and $350K Phase 2 structure. Unit economics: $175K LTV, $50K CAC ceiling, 3.5× return floor. Three scenario projections — stress, base, upside. Every number is cited to a specific role and round.", cardPos: "above" },
   { selector: ".ri-wins-grid", title: "Department Upside", body: "Every team is touched — NOW, 6MO, and 12MO+ wins organized by role. Each item has a citation back to the exact role and deliberation round that raised it.", cardPos: "above" },
   { selector: ".ri-milestones", title: "Governance Calendar", body: "5 post-decision check-ins with binary outcomes. Teal dots are hard gates — Feb 15 board approval and May GO/NO-GO are binding. Failing either halts Phase 2 entirely.", cardPos: "above" },
@@ -3959,7 +3962,7 @@ const OPTIONS_TOUR_STEPS = [
     cardPos: "below"
   },
   {
-    selector: "#opt-rejected-section",
+    selector: "#opt-rejected-label",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
     cardPos: "below"
@@ -4000,10 +4003,8 @@ function startContextTour() {
   var MGMT_STEPS = [
     { selector: '#mgmt-top-actions-card', title: 'Top 3 Actions — In Sequence',
       body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps. No other workstream starts until the board vote clears.', cardPos: 'below' },
-    { selector: '.mh-pill-tabs', title: 'Select a Department',
-      body: 'Each role pill shows their Phase 1 brief. Click any role to see their complete action plan: timing, success metric, and what they own.', cardPos: 'below' },
-    { selector: '.mh-brief-header', title: 'Department Brief — Full Detail',
-      body: 'The selected role&#39;s complete execution brief: Phase 1 action table with timing and success metrics, Phase 2 commitments, what they own, and the evidence gap the board needs to address before they can begin.', cardPos: 'above' },
+    { selector: '#mgmt-briefs-card', title: 'Department Briefs — Select a Role',
+      body: 'Click any role pill to see their complete Phase 1 brief: action table with timing and success metrics, what they own, and their Phase 2 commitments. CEO brief is shown by default.', cardPos: 'below' },
     { selector: '.cf-grid', title: 'Cross-Functional Dependencies',
       body: '4 workstreams spanning departments. Each has a named gate — if either side slips, execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
   ];
@@ -4011,11 +4012,11 @@ function startContextTour() {
     { selector: '#board-verdict-hero', title: 'The Decision',
       body: '<strong>7-0 conditional approval — Approve With Conditions.</strong> OPT-2: Phased EU Entry. Phase 2 $350K locked behind May 2025 GO/NO-GO. 76% avg confidence, range 72–82%. Click Governance Doc to export the full packet.', cardPos: 'below' },
     { selector: '#board-vote-grid', title: 'Vote Record + Financial Guardrails',
-      body: '<strong>Every role&#39;s final vote, confidence %, and one-line rationale.</strong> Right panel: CFO-validated financial controls — $50K CAC kill trigger, 3.5× return floor, $500K total envelope. These are binding thresholds.', cardPos: 'below' },
+      body: '<strong>Every role&#39;s final vote, confidence %, and one-line rationale.</strong> Right panel: CFO-validated financial controls — $50K CAC kill trigger, 3.5× return floor, $500K total envelope. These are binding thresholds.', cardPos: 'above' },
     { selector: '#board-conditions-section', title: 'Conditions on Approval',
       body: 'The specific conditions attached to every vote. Board notified within 5 business days if any kill gate fires. These are binding commitments the ELT made when they voted — not recommendations.', cardPos: 'above' },
     { selector: '#board-gov-doc-btn', title: 'Export Governance Doc',
-      body: 'Exports a one-page PDF of this entire board packet — decision, vote record, financial guardrails, and kill gate conditions — formatted for board distribution and fiduciary filing.', cardPos: 'above' },
+      body: 'Exports a one-page PDF — decision, vote record, financial guardrails, and kill gate conditions — formatted for board distribution and fiduciary filing.', cardPos: 'below' },
   ];
 
   var steps = null;
@@ -4034,7 +4035,7 @@ function startContextTour() {
   if (bd) bd.classList.add('active');
   var td = document.getElementById('tour-dots');
   if (td) td.innerHTML = steps.map(function(_,i) {
-    return '<div class="tour-dot'+(i===0?' active':'')+'"></div>';
+    return '<div class="tour-dot'+(i===0?' active':'')+'" id="tdot'+i+'"></div>';
   }).join('');
   window.scrollTo(0, 0);
   showTourStep(0);
@@ -4129,14 +4130,20 @@ function renderTourStep() {
     var cardW = 300, cardH = 200, margin = 16;
     var cx, cy;
 
-    if (step.cardPos === 'below') {
+    var tallElement = rh > window.innerHeight * 0.55;
+    if (tallElement) {
+      // For tall elements: anchor card near the top-visible part of the element
+      cy = Math.max(ry + margin, 10);
+      if (cy + cardH > window.innerHeight - 10) cy = window.innerHeight - cardH - 20;
+    } else if (step.cardPos === 'below') {
       cy = ry + rh + margin;
-      // Clamp bottom
-      if (cy + cardH > window.innerHeight) cy = ry - cardH - margin;
+      if (cy + cardH > window.innerHeight - 10) cy = ry - cardH - margin;
     } else {
       cy = ry - cardH - margin;
       if (cy < 10) cy = ry + rh + margin;
     }
+    // Final clamp to viewport
+    cy = Math.max(10, Math.min(cy, window.innerHeight - cardH - 10));
     // Horizontally center on element, clamped to viewport
     cx = rx + rw/2 - cardW/2;
     cx = Math.max(12, Math.min(cx, window.innerWidth - cardW - 12));
@@ -4705,7 +4712,7 @@ const ROOM_TOUR_STEPS = [
   { selector: ".movement-bar", title: "Deliberation at a Glance", body: "4 roles moved across 3 rounds. 3 held. Zero final dissents — unanimous conditional. The groupthink badge means the engine flagged unusually fast convergence among CFO, CTO, and LEGAL.", cardPos: "below" },
   { selector: ".cc-chart-wrap", title: "Confidence × Convergence", body: "Team confidence rose as spread narrowed. R0: 68% avg with ±17pp spread. R2: 76% avg with ±10pp held. The chart below shows exactly who moved and by how much.", cardPos: "below" },
   { selector: "#room-delta-chart", title: "Who Moved — Delta R0→R2", body: "CFO moved the most (+16pp, from 58% to 74%). LEGAL held firmest (+2pp). 5 of 7 roles classified as PERSUADABLE during deliberation — evidence mattered.", cardPos: "above" },
-  { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back if the decision reversed.", cardPos: "above" },
+  { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back if the decision reversed.", cardPos: "below" },
   { selector: ".zone3-groupthink", title: "Groupthink Flag", body: "HIGH-severity — CFO, CTO, and LEGAL converged without independently stress-testing the GDPR cost estimate or EU hiring timeline. Assign a devil's advocate before Phase 1 execution begins.", cardPos: "above" },
 ];
 
