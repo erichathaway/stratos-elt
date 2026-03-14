@@ -32,7 +32,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .stub-tag{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-top:4px}
 /* ── INFO BUTTON ── */
 .info-btn{position:absolute;top:-9px;left:50%;transform:translateX(-50%) translateY(50%);width:18px;height:18px;border-radius:50%;background:transparent;border:none;color:rgba(255,255,255,.2);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:help;transition:all .22s;z-index:2;font-family:'DM Mono',monospace;font-style:italic;font-weight:300;user-select:none;overflow:hidden}
-.info-btn:hover,.zone3:hover .info-btn,.zone4:hover .info-btn,.card:hover .info-btn,.concern-card:hover .info-btn,.openq-card:hover .info-btn{transform:translateX(-50%) translateY(0);z-index:12;color:rgba(255,255,255,.7);font-style:normal}
+.info-btn:hover,.zone1:hover .info-btn,.zone3:hover .info-btn,.zone4:hover .info-btn,.card:hover .info-btn,.concern-card:hover .info-btn,.openq-card:hover .info-btn{transform:translateX(-50%) translateY(0);z-index:12;color:rgba(255,255,255,.7);font-style:normal}
 .info-btn span{transition:opacity .15s}
 .info-btn:hover span{opacity:0}
 .info-btn::after{content:'?';position:absolute;opacity:0;transition:opacity .15s;font-style:normal;font-size:11px;font-weight:500}
@@ -385,7 +385,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 /* ── OPTIONS TAB ── */
 .opt-hero{background:linear-gradient(135deg,rgba(45,212,191,.06),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.14);border-radius:14px;padding:24px;position:relative;overflow:hidden;display:flex;gap:28px;align-items:stretch}
 .opt-hero-left{flex:1;min-width:0}
-.opt-hero-right{flex-shrink:0;width:320px;display:flex;flex-direction:column;justify-content:center;gap:0}
+.opt-hero-right{flex-shrink:0;width:340px;display:flex;flex-direction:column;justify-content:center;gap:0;padding-left:4px;border-left:1px solid rgba(255,255,255,.06)}
 .opt-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.08),transparent 70%);pointer-events:none}
 .opt-hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:.12em;color:#2dd4bf;font-family:'DM Mono',monospace;margin-bottom:8px}
 .opt-hero-title{font-family:'Fraunces',serif;font-size:clamp(20px,2.8vw,30px);font-weight:600;color:#f1f5f9;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
@@ -464,20 +464,22 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 
 /* ── OPTION COMPARE GRID ── */
-.opt-compare-grid{display:grid;grid-template-columns:44px repeat(4,1fr);gap:3px 6px;align-items:center}
-.opt-ax-label{font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.06em;text-align:center;line-height:1.2}
-.opt-row-label{font-size:8.5px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap}
+.opt-compare-grid{display:grid;grid-template-columns:48px repeat(4,1fr);gap:5px 8px;align-items:center}
+.opt-ax-label{font-size:7px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.07em;text-align:center;line-height:1.2;padding-bottom:2px;border-bottom:1px solid rgba(255,255,255,.05)}
+.opt-row-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;padding:2px 0}
 .opt-row-label.opt-sel{color:#2dd4bf}
-.opt-row-label.opt-not-sel{color:#334155}
-.opt-bar-cell{height:10px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden;position:relative}
-.opt-bar{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.opt-bar-sel{background:linear-gradient(90deg,rgba(45,212,191,.5),rgba(45,212,191,.8))}
-.opt-bar-bad{background:rgba(239,68,68,.35)}
-.opt-bar-good{background:rgba(52,211,153,.35)}
-.opt-bar-med{background:rgba(100,116,139,.35)}
+.opt-row-label.opt-not-sel{color:#2d3748}
+.opt-bar-cell{height:12px;background:rgba(255,255,255,.04);border-radius:3px;overflow:hidden;position:relative}
+.opt-bar{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1) .1s}
+.opt-bar-sel{background:linear-gradient(90deg,rgba(45,212,191,.4),rgba(45,212,191,.85));box-shadow:0 0 8px rgba(45,212,191,.2)}
+.opt-bar-bad{background:linear-gradient(90deg,rgba(239,68,68,.2),rgba(239,68,68,.4))}
+.opt-bar-good{background:linear-gradient(90deg,rgba(52,211,153,.2),rgba(52,211,153,.45))}
+.opt-bar-med{background:linear-gradient(90deg,rgba(100,116,139,.15),rgba(100,116,139,.35))}
+/* selected row highlight */
+.opt-row-sel-cell{background:rgba(45,212,191,.03);border-radius:3px}
 /* Return floor callout */
-.opt-return-callout{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.12);border-radius:8px}
-.opt-return-num{font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#2dd4bf;line-height:1;flex-shrink:0}
+.opt-return-callout{display:flex;align-items:center;gap:10px;margin-top:10px;padding:9px 12px;background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.1);border-radius:7px}
+.opt-return-num{font-family:'Fraunces',serif;font-size:20px;font-weight:400;color:#2dd4bf;line-height:1;flex-shrink:0;letter-spacing:-.02em}
 .opt-return-label{font-size:10px;color:#64748b;line-height:1.5;flex:1}
 
 </style>
@@ -493,7 +495,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <span class="logo-div">|</span>
       <span class="logo-sub">DECISION RESULTS</span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px"><span class="run-meta">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</span><button class="tour-btn" onclick="startTour()" title="Guided tour">Tour <span style="font-size:10px">▸</span></button></div>
+    <div style="display:flex;align-items:center;gap:10px"><span class="run-meta">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</span><button class="tour-btn" id="nav-tour-btn" onclick="startContextTour()" title="Guided tour of current view">Tour <span style="font-size:10px">▸</span></button></div>
   </div>
   <div class="tabs">
     <button class="tab active" onclick="showTab('command',this)">⬡ Command Center</button>
@@ -874,7 +876,6 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
           <span class="opt-risk-badge">● MEDIUM RISK</span>
           <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
           <button class="info-btn" onclick="event.stopPropagation();showInfo('options',this)" title="What is this?" style="position:static;transform:none;z-index:1;display:inline-flex;margin-left:4px"><span>i</span></button>
-          <button class="tour-btn" onclick="startOptionsTour()" style="font-size:9px;padding:3px 9px;margin-left:4px">Tour ▶</button>
         </div>
       </div>
 
@@ -984,6 +985,12 @@ function showTab(id) {
   });
   const panel = document.getElementById('tab-' + id);
   if (panel) panel.classList.add('active');
+  // Keep nav tour button — it routes to correct tour via startContextTour
+  // Optionally update tooltip text
+  const navTourBtn = document.getElementById('nav-tour-btn');
+  if (navTourBtn) {
+    navTourBtn.title = id === 'options' ? 'Guided tour of this options view' : 'Guided tour of Command Center';
+  }
 }
 
 function toggleExpand(id) {
@@ -1006,22 +1013,18 @@ function toggleExpand(id) {
     var tipContent = cite.querySelector('.cite-tip');
     if (!tipContent) return;
     tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
-    // Force wide layout BEFORE measuring height
-    tip.style.width = '380px';
-    tip.style.maxWidth = '440px';
-    tip.style.minWidth = '320px';
-    tip.style.whiteSpace = 'normal';
-    tip.style.display = 'block';
-    tip.style.left = '-9999px'; // off-screen while measuring
+    // Force off-screen first, set explicit width, then measure true height
+    tip.style.cssText = 'display:block;position:fixed;left:-9999px;top:-9999px;width:360px;max-width:360px;white-space:normal;';
+    var h = tip.offsetHeight; // now measures correctly at 360px wide
+    var w = 360;
 
     var rect = btn.getBoundingClientRect();
-    var h = tip.offsetHeight;
-    var w = 380;
-
-    var x = rect.left + rect.width/2 - w/2;
+    var x = rect.left + rect.width / 2 - w / 2;
     var y = rect.top - h - 10;
-    if (y < 8) y = rect.bottom + 10;
-    x = Math.max(12, Math.min(x, window.innerWidth - w - 12));
+    // Flip below if goes off top
+    if (y < 8) y = rect.bottom + 8;
+    // Clamp horizontally
+    x = Math.max(10, Math.min(x, window.innerWidth - w - 10));
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
   });
@@ -1247,6 +1250,13 @@ document.addEventListener('keydown', function(e) {
   var avg  = document.querySelector('.conf-avg');
   if (fill) setTimeout(function() { fill.classList.add('loaded'); }, 300);
   if (avg)  setTimeout(function() { avg.classList.add('loaded');  }, 300);
+// Animate comparison bars in after page load
+setTimeout(function() {
+  document.querySelectorAll('.opt-bar').forEach(function(b, i) {
+    var w = b.style.width; b.style.width = '0';
+    setTimeout(function() { b.style.width = w; }, 100 + i * 60);
+  });
+}, 400);
 })();
 
 // ── CURSOR-AWARE glow on cards ──
@@ -1326,6 +1336,17 @@ const OPTIONS_TOUR_STEPS = [
 
 let _tourStep = 0;
 let _activeTourSteps = TOUR_STEPS;
+
+function startContextTour() {
+  // Determine which tab is active and run the right tour
+  var active = document.querySelector('.tab.active');
+  var tab = active ? (active.getAttribute('onclick') || '').match(/showTab\('([^']+)'/)?.[1] : 'command';
+  if (tab === 'options') {
+    startOptionsTour();
+  } else {
+    startTour(); // default: command center tour
+  }
+}
 
 function startOptionsTour() {
   _activeTourSteps = OPTIONS_TOUR_STEPS;
