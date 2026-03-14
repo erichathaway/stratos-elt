@@ -847,10 +847,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="opt-hero" id="opt-hero">
       <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7–0 CONDITIONAL APPROVE</div>
       <div class="opt-hero-title" id="opt-winner-label">Phased EU Entry (Conservative)</div>
-      <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM</div>
+      <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · option_tally · OPT-2: 7 votes all CONDITIONAL_SUPPORT · confidence range 72% (CTO/LEGAL) to 82% (CEO) · convergence_flag: true</div></span> <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 conf 74% · Two-tranche structure — Phase 1 $150K clears GDPR and entity gates before any FTE spend commits · Phase 2 $350K unlocks only on GO/NO-GO passage</div></span></div>
       <div class="opt-hero-meta">
         <span class="opt-risk-badge">● MEDIUM RISK</span>
-        <span class="opt-hero-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
+        <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
+        <button class="info-btn" onclick="event.stopPropagation();showInfo('options',this)" title="What is this?" style="position:static;transform:none;z-index:1;display:inline-flex;margin-left:4px"><span>i</span></button>
+        <button class="tour-btn" onclick="startOptionsTour()" style="font-size:9px;padding:3px 9px;margin-left:4px">Tour ▶</button>
       </div>
     </div>
 
@@ -871,9 +873,9 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         </div>
       </div>
       <div id="opt-movement-body" style="font-size:12px;color:#64748b;line-height:1.65">
-        <p style="margin:0 0 10px">Round 0 opened with significant spread across all five options. OPT-1 had initial appeal as the most decisive signal to the board, but LEGAL's intervention on the 90-day GDPR setup requirement made the timeline infeasible — OPT-1 lost support universally before R1.</p>
-        <p style="margin:0 0 10px">Round 1 concentrated on OPT-2 vs OPT-4 and OPT-5. CFO's two-tranche model showed OPT-2's Phase 1 gate achieves the same risk management as OPT-4 and OPT-5 at lower cost, while preserving the full $500K capacity if the GO/NO-GO passes. OPT-3's pipeline velocity argument — partner cycles running 2× longer — eliminated OPT-3 from serious consideration.</p>
-        <p style="margin:0">Round 2 was consensus formation. The 7–0 conditional approval on OPT-2 reflects alignment on direction with each role attaching domain-specific conditions — not disagreement on the option itself.</p>
+        <p style="margin:0 0 10px">Round 0 opened with significant spread across all five options. OPT-1 had initial appeal as the most decisive signal to the board, but LEGAL's intervention on the 90-day GDPR setup requirement made the timeline infeasible <span class="cite"><button class="cite-btn">LEGAL·R0</button><div class="cite-tip">LEGAL R0 · External EU counsel GDPR validation required before any data processing · 90-day minimum setup timeline · OPT-1 commercially infeasible before compliance</div></span> — OPT-1 lost support universally before R1.</p>
+        <p style="margin:0 0 10px">Round 1 concentrated on OPT-2 vs OPT-4 and OPT-5. CFO's two-tranche model showed OPT-2's Phase 1 gate achieves the same risk management at lower cost <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · Phase 1 ($150K) achieves same risk gate as OPT-4 and OPT-5 · preserves full $500K capacity if GO/NO-GO passes · no additional downside vs alternatives</div></span> while preserving the full $500K if the GO/NO-GO passes. OPT-3's pipeline velocity argument — partner cycles running 2× longer — eliminated OPT-3 <span class="cite"><button class="cite-btn">CSO·R1</button><div class="cite-tip">CSO R1 · Partner-led EU sales cycles 2× longer than direct (9–12mo vs 4–6mo) · 3 target logos cannot close within runway under reseller model</div></span>.</p>
+        <p style="margin:0">Round 2 was consensus formation. The 7–0 conditional approval <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · option_tally · OPT-2: 7 votes, 7 CONDITIONAL_SUPPORT, 0 opposing · all roles converged · confidence range 72–82%</div></span> on OPT-2 reflects alignment on direction with each role attaching domain-specific conditions — not disagreement on the option itself.</p>
       </div>
     </div>
 
@@ -927,14 +929,15 @@ function toggleExpand(id) {
     tip.style.display = 'block';
 
     var rect = btn.getBoundingClientRect();
-    var w = Math.min(300, Math.max(200, tip.scrollWidth + 28));
+    var w = Math.min(440, Math.max(320, tip.scrollWidth + 32));
     tip.style.maxWidth = w + 'px';
     var h = tip.offsetHeight;
 
     var x = rect.left + rect.width/2 - w/2;
     var y = rect.top - h - 10;
     if (y < 8) y = rect.bottom + 10;
-    x = Math.max(8, Math.min(x, window.innerWidth - w - 8));
+    // clamp to viewport with generous margins for wide tooltips
+    x = Math.max(12, Math.min(x, window.innerWidth - w - 12));
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
   });
@@ -1049,6 +1052,11 @@ const INFO_CONTENT = {
     tag: "COMMAND CENTER — ZONE 4",
     title: "How This Gets Done",
     body: "The execution path from decision to launch. <strong>Phase 1 must clear all three kill gates before Phase 2 capital is released.</strong> The diamond in the middle is a binding GO/NO-GO vote in May 2025 — the ELT decides again before the remaining $350K deploys. The four numbers at the top are the financial guardrails. Click any phase node to see the specific gates and who owns them."
+  },
+  options: {
+    tag: "OPTIONS ANALYSIS",
+    title: "What Was Considered — and Why OPT-2 Won",
+    body: "Five options were formally evaluated across three deliberation rounds. Each role assessed them independently before the team converged on OPT-2. <strong>This tab shows the full deliberation record</strong> — what each rejected option proposed, the specific tradeoffs that eliminated it, and the entry gates that would have needed to change. Every card is sourced from the options blob and the R0→R2 deliberation record, not written after the fact. The position movement section shows exactly how unanimity emerged."
   }
 };
 
@@ -1211,16 +1219,46 @@ const TOUR_STEPS = [
   }
 ];
 
+const OPTIONS_TOUR_STEPS = [
+  {
+    selector: ".opt-hero",
+    title: "The Winning Option",
+    body: "OPT-2 won <strong>7–0 conditional</strong> — every executive approved with conditions. The hero shows the selected path: Phase 1 ($150K) establishes the GDPR and entity gates, then a May 2025 GO/NO-GO before Phase 2 ($350K) releases.",
+    cardPos: "below"
+  },
+  {
+    selector: "#opt-rejected-container",
+    title: "What Was Rejected and Why",
+    body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
+    cardPos: "below"
+  },
+  {
+    selector: ".zone3",
+    title: "How Unanimity Emerged",
+    body: "OPT-1 died in Round 0 on LEGAL's 90-day compliance timeline. OPT-3 through OPT-5 were eliminated in Round 1 on CFO's unit economics. <strong>Round 2 was consensus formation</strong>, not new deliberation. The position movement section shows exactly when and why each role moved.",
+    cardPos: "above"
+  }
+];
+
 let _tourStep = 0;
+let _activeTourSteps = TOUR_STEPS;
+
+function startOptionsTour() {
+  _activeTourSteps = OPTIONS_TOUR_STEPS;
+  _tourStep = 0;
+  showTab('options', document.querySelector('[onclick*=options]'));
+  setTimeout(function() { showTourStep(0); }, 300);
+}
 let _tourActive = false;
 
 function startTour() {
+  _activeTourSteps = TOUR_STEPS;
   _tourStep = 0;
   _tourActive = true;
   document.getElementById('tour-backdrop').classList.add('active');
   // Build dots
   var dots = document.getElementById('tour-dots');
-  dots.innerHTML = TOUR_STEPS.map((_,i) => '<div class="tour-dot" id="tdot'+i+'"></div>').join('');
+  dots.innerHTML = _activeTourSteps.map((_,i) => '<div class="tour-dot" id="tdot'+i+'"></div>').join('');
   renderTourStep();
 }
 
@@ -1239,12 +1277,12 @@ function tourBackdropClick(e) {
 }
 
 function tourStep(dir) {
-  _tourStep = Math.max(0, Math.min(TOUR_STEPS.length - 1, _tourStep + dir));
+  _tourStep = Math.max(0, Math.min(_activeTourSteps.length - 1, _tourStep + dir));
   renderTourStep();
 }
 
 function renderTourStep() {
-  var step = TOUR_STEPS[_tourStep];
+  var step = _activeTourSteps[_tourStep];
   var el = document.querySelector(step.selector);
   if (!el) { tourStep(1); return; }
 
@@ -1299,12 +1337,12 @@ function renderTourStep() {
     card.style.top  = cy + 'px';
 
     // Content
-    document.getElementById('tour-step-label').textContent = 'STEP ' + (_tourStep+1) + ' OF ' + TOUR_STEPS.length;
+    document.getElementById('tour-step-label').textContent = 'STEP ' + (_tourStep+1) + ' OF ' + _activeTourSteps.length;
     document.getElementById('tour-card-title').textContent = step.title;
     document.getElementById('tour-card-body').innerHTML = step.body;
 
     // Dots
-    TOUR_STEPS.forEach(function(_,i) {
+    _activeTourSteps.forEach(function(_,i) {
       var d = document.getElementById('tdot'+i);
       if (d) d.classList.toggle('active', i === _tourStep);
     });
@@ -1313,7 +1351,7 @@ function renderTourStep() {
     document.getElementById('tour-prev').style.opacity = _tourStep === 0 ? '0.3' : '1';
     document.getElementById('tour-prev').disabled = _tourStep === 0;
     var nextBtn = document.getElementById('tour-next');
-    if (_tourStep === TOUR_STEPS.length - 1) {
+    if (_tourStep === _activeTourSteps.length - 1) {
       nextBtn.textContent = 'Done ✓';
       nextBtn.onclick = endTour;
     } else {
@@ -1333,7 +1371,7 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <!-- CITE TOOLTIP -->
-<div id="cite-tooltip"></div>
+<div id="cite-tooltip" style="min-width:320px;max-width:440px;line-height:1.7;font-size:11.5px"></div>
 
 <!-- DRAGGABLE INFO PANEL -->
 <div class="info-panel" id="info-panel">
@@ -1669,6 +1707,36 @@ function buildRejectedOptions(data) {
         '<div class="opt-gates-list">' + gates.map(g => '<span class="opt-gate-chip">' + g + '</span>').join('') + '</div>' +
       '</div>' : '') +
     '</div>';
+    // Add option-specific citations after the card is built
+    const citeMap = {
+      'OPT-1': [
+        { after: 'tradeoffs', tag: 'LEGAL·R0', tip: 'LEGAL R0 · GDPR validation not achievable by May 2025 is a listed kill criterion · EU entity formation required before FTE hiring · no commercial path until compliance certified' },
+        { after: 'mechanics', tag: 'CEO·R0',   tip: 'CEO R0 · Board approval >$250K required as entry gate · Feb 15 board meeting is the controlling go/no-go · "governance gate, not an analytical one"' }
+      ],
+      'OPT-3': [
+        { after: 'tradeoffs', tag: 'CSO·R1',   tip: 'CSO R1 · Reseller partner sales cycles average 9–12 months vs 4–6 months direct · 3 EU target logos will not close within runway under partnership model' },
+        { after: 'tradeoffs', tag: 'CFO·R1',   tip: 'CFO R1 · Reseller revenue capture ~40% of direct · $175K LTV drops to ~$70K net per logo under partner margin structure · breaks unit economics model' }
+      ],
+      'OPT-4': [
+        { after: 'tradeoffs', tag: 'CFO·R1',   tip: 'CFO R1 · OPT-4 deferred hiring achieves same risk gate as OPT-2 Phase 1 · OPT-2 preserves full $500K capacity if GO/NO-GO passes at lower initial commitment' }
+      ],
+      'OPT-5': [
+        { after: 'tradeoffs', tag: 'CEO·R1',   tip: 'CEO R1 · $250K pilot insufficient to close 3 EU logos by Q3 2025 · board expects decisive execution signal · reduced scope may not satisfy investor growth thesis' }
+      ]
+    };
+
+    const cites = citeMap[opt.option_id] || [];
+    cites.forEach(function(c) {
+      var badge = document.createElement('span');
+      badge.className = 'cite';
+      badge.innerHTML = '<button class="cite-btn">' + c.tag + '</button><div class="cite-tip">' + c.tip + '</div>';
+      badge.style.marginLeft = '6px';
+      badge.style.verticalAlign = 'middle';
+      // Append to the tradeoffs col-text
+      var cols = card.querySelectorAll('.opt-delib-col-text');
+      if (cols.length >= 2) cols[1].appendChild(badge);
+    });
+
     container.appendChild(card);
   });
 }
