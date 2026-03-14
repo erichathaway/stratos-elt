@@ -2387,7 +2387,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <td class="evo-td evo-round-cell" data-tip="COO R0 conf 70% · CONDITIONAL from the start · "operational readiness requires entity formation first — cannot commit delivery capacity without infrastructure"">
           <span class="stance-pill sp-conditional">AWC</span>
           <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">70%</span></div>
-        </td><td class="evo-td evo-round-cell" data-tip="COO R2 conf 76% · held CONDITIONAL throughout · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16-20 week direct hire""
+        </td><td class="evo-td evo-round-cell" data-tip="COO R2 conf 76% · held CONDITIONAL throughout · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16-20 week direct hire"
           <span class="stance-pill sp-conditional">AWC</span>
           <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">74%</span></div>
         </td><td class="evo-td evo-round-cell" data-tip="COO R2 conf 76% · held CONDITIONAL throughout · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16-20 week direct hire"">
@@ -4767,6 +4767,7 @@ function addCiteIcons(){
     if(ROLES.some(function(r){return t.startsWith(r+'\u00b7')||t.startsWith(r+' ');})) icon='👤';
     else if(/\bEI\b|\bRX\b/.test(t)) icon='🌐';
     else if(/PINECONE/i.test(t)) icon='📄';
+    else if(/D_PACKET|F[123]/.test(t)) icon='⚙️';
     else icon='📊';
     btn.textContent=icon+'\u202f'+t;
     btn.dataset.iconDone='1';
