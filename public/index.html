@@ -508,7 +508,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 #cite-tooltip{
   display:none;
   position:fixed;
-  width:360px;
+  width:360px !important;
   max-width:360px;
   min-width:280px;
   white-space:normal;
@@ -582,9 +582,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 /* ── RISK MATRIX ── */
 .rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
-.rm-y-axis{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding-right:10px;padding-bottom:28px}
+.rm-y-axis{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-right:10px;gap:0}
 .rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
-.rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
+.rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;box-sizing:border-box;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
 .rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:12px;overflow:hidden;min-height:210px}
 .rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;padding:8px;min-height:70px}
 .mc-ll{background:rgba(52,211,153,.03)}
@@ -1409,7 +1409,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <!-- Y-axis label -->
     <div class="rm-y-axis">
       <div class="rm-axis-label">IMPACT</div>
-      <div class="rm-axis-ticks" style="padding-bottom:24px"><span>HIGH</span><span>MED</span><span>LOW</span></div>
+      <div class="rm-axis-ticks" style="padding:33px 0 33px 0"><span>HIGH</span><span>MED</span><span>LOW</span></div>
     </div>
 
     <div style="flex:1;min-width:0">
@@ -1496,7 +1496,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <!-- X-axis -->
       <div class="rm-x-axis">
         <span>LOW</span><span>MED</span><span>HIGH</span>
-        <div class="rm-axis-label" style="position:absolute;right:0;top:0">PROBABILITY ›</div>
+        <div class="rm-axis-label" style="position:absolute;right:-2px;bottom:2px">PROBABILITY ›</div>
       </div>
     </div>
 
@@ -1604,7 +1604,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <!-- RIGHT: EXTERNAL EVIDENCE WEIGHT ───────────────────────────────────── -->
     <div class="gaps-wrap ext-intel-wrap">
       <div class="gaps-header">
-        <div class="gaps-eyebrow" style="color:#818cf8">EXTERNAL INTELLIGENCE · WHAT THE DATA SAYS</div>
+        <div class="gaps-eyebrow" style="color:#818cf8;display:flex;align-items:center;gap:5px">EXTERNAL INTELLIGENCE · WHAT THE DATA SAYS <button class="info-btn" onclick="showInfo('externalintel', this)" title="What is this?"><span>i</span></button></div>
         <div class="gaps-title">Outside signals that shaped the vote</div>
         <div class="gaps-sub">Deliberation weighted on external market data, competitor intelligence, and regulatory signals — not internal assumptions alone.</div>
       </div>
@@ -1724,7 +1724,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
     <!-- INVESTMENT WATERFALL ──────────────────────────────────────────────── -->
     <div class="fin-waterfall">
-      <div class="fin-block-label">INVESTMENT STRUCTURE</div>
+      <div class="fin-block-label" style="display:flex;align-items:center;gap:5px">INVESTMENT STRUCTURE <button class="info-btn" onclick="showInfo('investstruct', this)" title="What is this?"><span>i</span></button></div>
       <div class="fin-waterfall-row">
         <div class="fin-phase ph1">
           <div class="fin-phase-label">PHASE 1</div>
@@ -1792,7 +1792,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
     <!-- SCENARIO TABLE ────────────────────────────────────────────────────── -->
     <div class="fin-scenarios">
-      <div class="fin-block-label">SCENARIO ANALYSIS · CFO MODEL <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · three scenarios modeled: base (3 logos), stress (1 logo), upside (5 logos) · all at $50K CAC ceiling or below</div></span></div>
+      <div class="fin-block-label" style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">SCENARIO ANALYSIS · CFO MODEL <button class="info-btn" onclick="showInfo('scenarioanalysis', this)" title="What is this?"><span>i</span></button> <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · three scenarios modeled: base (3 logos), stress (1 logo), upside (5 logos) · all at $50K CAC ceiling or below</div></span></div>
       <div class="fin-scenario-grid">
         <div class="fin-sc-header"></div>
         <div class="fin-sc-header">LOGOS CLOSED</div>
@@ -2146,7 +2146,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
   <!-- ZONE 2: ROLE DELIBERATION — LEFT NAV + RIGHT PANEL -->
   <div>
-    <div class="fin-block-label" style="margin-bottom:8px">DELIBERATION RECORD · PER ROLE · Select a role to see their full argument, what moved them, and what would change their position</div>
+    <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap">DELIBERATION RECORD · PER ROLE · Select a role to see their full argument, what moved them, and what would change their position <button class="info-btn" onclick="showInfo('deliberationrec', this)" title="What is this?"><span>i</span></button></div>
     <div class="rc-layout">
       <div class="rc-nav">
         <div class="rc-nav-item rc-nav-active" onclick="selectRoleRoom('CEO')" id="rcnav-CEO">
@@ -2658,7 +2658,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   <div style="padding:14px 18px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:10px">
     <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap">
       <div style="flex:1;min-width:220px">
-        <div class="fin-block-label" style="color:#f87171;margin-bottom:5px">▲ GROUPTHINK · HIGH SEVERITY</div>
+        <div class="fin-block-label" style="color:#f87171;margin-bottom:5px;display:flex;align-items:center;gap:5px">▲ GROUPTHINK · HIGH SEVERITY <button class="info-btn" onclick="showInfo('groupthink', this)" title="What is this?"><span>i</span></button></div>
         <div style="font-size:13px;color:#64748b;line-height:1.65">CFO, CTO, and LEGAL converged on OPT-2 without independently surfacing domain-specific execution risks — unusual for a $500K cross-border commitment. The deliberation record shows alignment on direction but insufficient stress-testing of the implementation assumptions. <span class="cite"><button class="cite-btn">D_PACKET·GT</button><div class="cite-tip">D_packet groupthink_flag · severity: HIGH · CFO + CTO + LEGAL converged without surfacing domain risks · facilitator action recommended: assign devil's advocate role before execution begins</div></span></div>
       </div>
       <div style="flex:1;min-width:180px">
@@ -2680,7 +2680,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
   </div>
   <div class="fin-scenarios" style="margin-bottom:14px">
-    <div class="fin-block-label" style="margin-bottom:10px">TOP 3 ACTIONS · ELT CONSENSUS · SEQUENCE-DEPENDENT <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet executive_summary · top_3_actions · 3 ELT-consensus actions · ACT-001 must precede ACT-002 and ACT-003 · all sequence-dependent</div></span></div>
+    <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:5px;flex-wrap:wrap">TOP 3 ACTIONS · ELT CONSENSUS · SEQUENCE-DEPENDENT <button class="info-btn" onclick="showInfo('top3actions', this)" title="What is this?"><span>i</span></button> <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet executive_summary · top_3_actions · 3 ELT-consensus actions · ACT-001 must precede ACT-002 and ACT-003 · all sequence-dependent</div></span></div>
     <div style="display:flex;flex-direction:column;gap:8px">
       <div class="mh-priority-action">
         <div class="mh-priority-n" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#f87171">01</div>
@@ -2696,7 +2696,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
-  <div class="fin-block-label" style="margin-bottom:8px">DEPARTMENT BRIEFS · SELECT A ROLE</div>
+  <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px">DEPARTMENT BRIEFS · SELECT A ROLE <button class="info-btn" onclick="showInfo('deptbriefs', this)" title="What is this?"><span>i</span></button></div>
   <div class="mh-pill-tabs"><button class="mh-pill-btn mh-pill-active" id="mhpill-CEO" onclick="selectMgmtRole('CEO')">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid var(--brand-primary)33;width:28px;height:28px;min-width:28px"></div>
   <div><div style="font-size:10px;font-weight:700;color:var(--brand-primary);font-family:'DM Mono',monospace">CEO</div><div style="font-size:9px;color:#475569">Officer</div></div>
@@ -3107,11 +3107,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   <div style="padding:14px 18px;background:#0f172a;border:1px solid #1e293b;border-radius:10px">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
       <div>
-        <div class="fin-block-label" style="margin-bottom:6px">AUDIT TRAIL</div>
+        <div class="fin-block-label" style="margin-bottom:6px;display:flex;align-items:center;gap:5px">AUDIT TRAIL <button class="info-btn" onclick="showInfo('audittrail', this)" title="What is this?"><span>i</span></button></div>
         <div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">RUN ID</span>&nbsp;&nbsp;RUN-20260313193333-v9i71lgw</div><div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">DECISION ID</span>&nbsp;&nbsp;DEC-20260313193333-v9i71lgw</div><div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">MODE</span>&nbsp;&nbsp;ELT · 3 ROUNDS · 7 ROLES · R0→R1→R2</div><div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">OUTCOME</span>&nbsp;&nbsp;APPROVED_WITH_CONDITIONS · OPT-2 SELECTED</div>
       </div>
       <div style="text-align:right">
-        <div class="fin-block-label" style="margin-bottom:6px">COMPLEXITY INDICATORS</div>
+        <div class="fin-block-label" style="margin-bottom:6px;display:flex;align-items:center;gap:5px">COMPLEXITY INDICATORS <button class="info-btn" onclick="showInfo('complexind', this)" title="What is this?"><span>i</span></button></div>
         <div style="font-size:12px;margin-bottom:3px;color:#f87171">Execution Complexity: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f87171">Risk Exposure: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f59e0b">Dependency Density: <strong>5 cross-dept</strong></div><div style="font-size:12px;margin-bottom:3px;color:#64748b">Research Gap Score: <strong>4 unresolved</strong></div>
       </div>
     </div>
@@ -3369,6 +3369,51 @@ const INFO_CONTENT = {
     tag: "CROSS-FUNCTIONAL DEPENDENCIES",
     title: "Where Teams Must Coordinate or Execution Stalls",
     body: "4 workstreams that span department boundaries. Each has a named gate — if either side slips, the downstream execution halts. CTO-LEGAL is the highest-risk pairing: GDPR architecture and compliance certification must align before the May GO/NO-GO. CEO-CFO is the Feb 15 bottleneck."
+  },
+  externalintel: {
+    tag: "EXTERNAL INTELLIGENCE",
+    title: "Outside Signals That Shaped the Vote",
+    body: "3 external data points the team incorporated during deliberation. GDPR enforcement is active across all 3 target markets — not hypothetical. Competitor X is confirmed pursuing at least 2 of the same EU accounts. Regulatory signals and competitive intelligence directly constrained the option set."
+  },
+  investstruct: {
+    tag: "INVESTMENT STRUCTURE",
+    title: "Two-Tranche Capital Deployment",
+    body: "The $500K envelope splits into Phase 1 ($150K, pre-gate) and Phase 2 ($350K, post-gate). Phase 2 does not release until all 4 GO/NO-GO criteria pass in May 2025. This structure means maximum downside exposure is capped at $150K if the project fails at the gate."
+  },
+  scenarioanalysis: {
+    tag: "SCENARIO ANALYSIS",
+    title: "CFO-Modeled Return Outcomes",
+    body: "Three scenarios: Stress (1 logo closed, Phase 1 recovers), Base (3 logos, +$25K net), Upside (5 logos, +$375K net). The two-tranche structure means stress case losses are bounded — Phase 2 halts if Phase 1 fails the GO/NO-GO, capping total exposure at $150K."
+  },
+  deliberationrec: {
+    tag: "DELIBERATION RECORD",
+    title: "Full Per-Role Argument Trace",
+    body: "Select any role to see their complete deliberation record: the R2 rationale in their own words, what evidence moved them between rounds, what they pushed back on, their key condition, and what would bring them back to the table. Every field is sourced from engine_stage_outputs."
+  },
+  groupthink: {
+    tag: "GROUPTHINK FLAG",
+    title: "HIGH Severity — Detected by the Engine",
+    body: "CFO, CTO, and LEGAL converged on OPT-2 without independently surfacing domain-specific execution risks. This is flagged as HIGH severity because a $500K cross-border commitment warrants adversarial stress-testing across all three functions. The engine recommends a devil's advocate assignment before Phase 2."
+  },
+  top3actions: {
+    tag: "TOP 3 ACTIONS",
+    title: "ELT Consensus — Cross-Role Priority",
+    body: "Three actions every role agreed on, in sequence order. ACT-001 must precede ACT-002 and ACT-003 — these are not parallel. Each is sourced from the deliberation record and has a named owner, deadline, and kill gate. These are the minimum viable execution steps before Phase 2 capital can release."
+  },
+  deptbriefs: {
+    tag: "DEPARTMENT BRIEFS",
+    title: "Per-Role Action Packages",
+    body: "Select a department to see their complete action brief: Phase 1 actions with timing and success metrics, Phase 2 commitments, their specific ownership area, and the conditions they placed on approval. Every action traces to a specific deliberation output from the role's R2 record."
+  },
+  audittrail: {
+    tag: "AUDIT TRAIL",
+    title: "Full Decision Provenance",
+    body: "Complete governance record: run ID, decision ID, mode, outcome, and timestamp. Every artifact generated by this decision engine is traceable to this run. The run ID is the primary key across all Supabase tables — every role output, condition, risk, and action links back to it."
+  },
+  complexind: {
+    tag: "COMPLEXITY INDICATORS",
+    title: "Decision Difficulty Assessment",
+    body: "Engine-generated complexity ratings across 4 dimensions. HIGH execution complexity reflects the multi-jurisdiction, multi-phase structure. HIGH risk exposure reflects the GDPR + CAC + competitor variables. Cross-department dependency count and research gap score indicate how much uncertainty remains post-vote."
   },
 };
 
