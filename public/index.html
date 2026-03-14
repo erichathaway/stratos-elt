@@ -31,8 +31,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .stub-desc{font-size:12px;color:#64748b;max-width:300px;text-align:center;line-height:1.6}
 .stub-tag{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-top:4px}
 /* ── INFO BUTTON ── */
-.info-btn{position:absolute;top:-9px;left:50%;transform:translateX(-50%) translateY(50%);width:18px;height:18px;border-radius:50%;background:#0b1424;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.18);font-size:9px;display:flex;align-items:center;justify-content:center;cursor:help;transition:all .22s;z-index:2;font-family:'DM Mono',monospace;font-style:normal}
-.info-btn:hover{transform:translateX(-50%) translateY(0);z-index:12;color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.3);background:rgba(15,26,46,.98)}
+.info-btn{position:absolute;top:-9px;left:50%;transform:translateX(-50%) translateY(50%);width:18px;height:18px;border-radius:50%;background:transparent;border:none;color:rgba(255,255,255,.2);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:help;transition:all .22s;z-index:2;font-family:'DM Mono',monospace;font-style:italic;font-weight:300;user-select:none;overflow:hidden}
+.info-btn:hover,.zone3:hover .info-btn,.zone4:hover .info-btn,.card:hover .info-btn,.concern-card:hover .info-btn,.openq-card:hover .info-btn{transform:translateX(-50%) translateY(0);z-index:12;color:rgba(255,255,255,.7);font-style:normal}
+.info-btn span{transition:opacity .15s}
+.info-btn:hover span{opacity:0}
+.info-btn::after{content:'?';position:absolute;opacity:0;transition:opacity .15s;font-style:normal;font-size:11px;font-weight:500}
+.info-btn:hover::after{opacity:1}
 /* zone1 needs relative positioning already; zone3/4 have it. For zone2 cards: */
 .card{position:relative}
 .concern-card{position:relative}
@@ -421,8 +425,11 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 
 /* ── OPTIONS DELIBERATION CARDS ── */
-.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;transition:border-color .2s,background .2s}
-.opt-delib-card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.028)}
+.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;transition:border-color .2s,background .2s,box-shadow .2s}
+.opt-delib-card:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.055);box-shadow:0 0 24px rgba(255,255,255,.03)}
+.opt-delib-card:hover .opt-delib-name{color:#f1f5f9}
+.opt-delib-card:hover .opt-reason-text{color:#94a3b8}
+.opt-delib-card:hover .opt-delib-reason{background:rgba(255,255,255,.025);border-left-color:rgba(255,255,255,.12)}
 .opt-delib-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px;flex-wrap:wrap}
 .opt-delib-id{font-size:9px;font-weight:700;letter-spacing:.1em;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:4px}
 .opt-delib-name{font-family:'Fraunces',serif;font-size:16px;color:#cbd5e1;line-height:1.3;font-weight:500}
@@ -438,6 +445,20 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .opt-delib-reason{display:flex;gap:12px;padding:12px 14px;background:rgba(255,255,255,.012);border-radius:7px;border-left:2px solid rgba(255,255,255,.06)}
 .opt-reason-role{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.06em;min-width:44px;padding-top:1px;flex-shrink:0}
 .opt-reason-text{font-size:12px;color:#64748b;line-height:1.6}
+
+
+/* ── OPTIONS DELIB BODY LAYOUT ── */
+.opt-delib-body{margin-top:4px}
+.opt-delib-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.opt-delib-col{padding:12px 14px;background:rgba(255,255,255,.012);border-radius:7px}
+.opt-delib-col-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.07em;margin-bottom:6px}
+.opt-delib-col-text{font-size:12px;color:#64748b;line-height:1.6;transition:color .2s}
+.opt-delib-card:hover .opt-delib-col-text{color:#94a3b8}
+.opt-delib-card:hover .opt-delib-col{background:rgba(255,255,255,.025)}
+.opt-delib-gates{margin-top:2px}
+.opt-gates-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.opt-gate-chip{font-size:10px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:3px;background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.14);color:#64748b;transition:all .2s}
+.opt-delib-card:hover .opt-gate-chip{background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.22);color:#94a3b8}
 
 </style>
 </head>
@@ -470,7 +491,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 1 -->
     <div class="zone1">
-      <button class="info-btn" onclick=\"showInfo('zone1', this)\" title="What is this?">i</button>
+      <button class="info-btn" onclick=\"showInfo('zone1', this)\" title="What is this?"><span>i</span></button>
       <div class="verdict-grid">
         <div class="verdict-left">
           <span class="decision-label">FINAL DECISION</span>
@@ -587,7 +608,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <!-- ZONE 2 -->
     <div class="zone2">
       <div class="card">
-        <button class="info-btn" onclick=\"showInfo('why', this)\" title="What is this?">i</button>
+        <button class="info-btn" onclick=\"showInfo('why', this)\" title="What is this?"><span>i</span></button>
         <div class="card-header">
           <span class="card-title">WHY THIS DECISION</span>
           <button class="card-link" onclick="showTab('options',document.querySelectorAll('.tab')[1])">OPTIONS →</button>
@@ -610,7 +631,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
         <!-- PRIMARY CONCERN — expandable, no overflow:hidden -->
         <div class="concern-card" id="concern-card">
-          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('concern', this)\" title="What is this?">i</button>
+          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('concern', this)\" title="What is this?"><span>i</span></button>
           <div class="card-trigger" onclick="toggleExpand('concern-card')">
             <div class="concern-title">
               PRIMARY CONCERN
@@ -643,7 +664,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
         <!-- OPEN QUESTION — expandable -->
         <div class="openq-card" id="openq-card">
-          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('openq', this)\" title="What is this?">i</button>
+          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('openq', this)\" title="What is this?"><span>i</span></button>
           <div class="card-trigger" onclick="toggleExpand('openq-card')">
             <div class="openq-title">
               OPEN QUESTION
@@ -679,7 +700,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 3: Conditions -->
     <div class="zone3">
-      <button class="info-btn" onclick=\"showInfo('conditions', this)\" title="What is this?">i</button>
+      <button class="info-btn" onclick=\"showInfo('conditions', this)\" title="What is this?"><span>i</span></button>
       <div class="zone-header">
         <div>
           <div class="zone-title">WHAT HAS TO HAPPEN BEFORE THIS MOVES FORWARD</div>
@@ -733,7 +754,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 4: Execution -->
     <div class="zone4">
-      <button class="info-btn" onclick=\"showInfo('execution', this)\" title="What is this?">i</button>
+      <button class="info-btn" onclick=\"showInfo('execution', this)\" title="What is this?"><span>i</span></button>
       <div class="seq-hdr">
         <div>
           <div class="zone-title">EXECUTION SEQUENCE</div>
@@ -822,100 +843,37 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
   <div id="tab-options" class="panel">
 
-    <!-- WINNER HERO — compact, no duplicate numbers row -->
-    <div class="opt-hero">
+    <!-- WINNER HERO — populated by data layer -->
+    <div class="opt-hero" id="opt-hero">
       <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7–0 CONDITIONAL APPROVE</div>
       <div class="opt-hero-title" id="opt-winner-label">Phased EU Entry (Conservative)</div>
       <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM</div>
       <div class="opt-hero-meta">
-        <span class="opt-risk-badge" id="opt-risk-badge">● MEDIUM RISK</span>
-        <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3</span>
+        <span class="opt-risk-badge">● MEDIUM RISK</span>
+        <span class="opt-hero-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
       </div>
     </div>
 
-    <!-- DELIBERATION RECORD — what didn't win and why -->
-    <div class="zone-title" style="font-size:11px;margin-bottom:12px">OPTIONS CONSIDERED · DELIBERATION RECORD</div>
-
-    <!-- OPT-1 -->
-    <div class="opt-delib-card" id="opt-delib-1">
-      <div class="opt-delib-header">
-        <div>
-          <div class="opt-delib-id">OPT-1 · REJECTED</div>
-          <div class="opt-delib-name">Immediate Full Entry — $500K deployed Q1, no gates</div>
-        </div>
-        <div class="opt-delib-verdict rejected">UNANIMOUS DEFER</div>
-      </div>
-      <div class="opt-delib-votes" id="opt1-votes">
-        <div class="opt-vote-pip defer">CEO</div>
-        <div class="opt-vote-pip defer">CFO</div>
-        <div class="opt-vote-pip defer">CTO</div>
-        <div class="opt-vote-pip defer">LEGAL</div>
-        <div class="opt-vote-pip defer">CHRO</div>
-        <div class="opt-vote-pip defer">COO</div>
-        <div class="opt-vote-pip defer">CSO</div>
-      </div>
-      <div class="opt-delib-reasons">
-        <div class="opt-delib-reason">
-          <div class="opt-reason-role">LEGAL</div>
-          <div class="opt-reason-text">Hard block. GDPR compliance infrastructure must be certified operational before any EU customer data is processed. DPAs and SCCs must be executed before any commercial contracts. No legal pathway to Q1 commercial activity without completing these steps first — minimum 90-day setup timeline.</div>
-        </div>
-        <div class="opt-delib-reason">
-          <div class="opt-reason-role">CFO</div>
-          <div class="opt-reason-text">Full $500K deployment with no intermediate gate eliminates the option to stop if early signals are negative. Phase 2 spend ($350K in FTE commitments) creates 12-month cost obligations that cannot be unwound quickly. The two-tranche structure in OPT-2 preserves that optionality at zero additional cost.</div>
-        </div>
-        <div class="opt-delib-reason">
-          <div class="opt-reason-role">CTO</div>
-          <div class="opt-reason-text">EU employment law in UK, Germany, and France has mandatory terms, works council requirements, and termination protections that differ materially from US templates. Hiring before legal review of jurisdiction-specific obligations creates ratchet risk — obligations that cannot be easily reversed once FTEs are onboarded.</div>
-        </div>
+    <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
+    <div>
+      <div class="zone-title" style="font-size:11px;margin-bottom:12px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY</div>
+      <div id="opt-rejected-container">
+        <!-- JS populated -->
       </div>
     </div>
 
-    <!-- OPT-3 -->
-    <div class="opt-delib-card" id="opt-delib-3">
-      <div class="opt-delib-header">
-        <div>
-          <div class="opt-delib-id">OPT-3 · NOT SELECTED</div>
-          <div class="opt-delib-name">Partnership / Reseller Model — indirect entry via EU channel partners</div>
-        </div>
-        <div class="opt-delib-verdict deferred">DEFER FOR PHASE 3</div>
-      </div>
-      <div class="opt-delib-votes" id="opt3-votes">
-        <div class="opt-vote-pip defer">CEO</div>
-        <div class="opt-vote-pip defer">CFO</div>
-        <div class="opt-vote-pip defer">CTO</div>
-        <div class="opt-vote-pip defer">LEGAL</div>
-        <div class="opt-vote-pip avc">CHRO</div>
-        <div class="opt-vote-pip defer">COO</div>
-        <div class="opt-vote-pip defer">CSO</div>
-      </div>
-      <div class="opt-delib-reasons">
-        <div class="opt-delib-reason">
-          <div class="opt-reason-role">CSO</div>
-          <div class="opt-reason-text">Pipeline velocity is the controlling variable. Partner-led sales cycles run 2× longer than direct — 9–12 months vs 4–6 months. With only 3 target logos and a 12-month runway floor, we cannot afford to lose half the selling time to channel friction. OPT-3 does not hit the $525K pipeline target within the financial model's timeframe.</div>
-        </div>
-        <div class="opt-delib-reason">
-          <div class="opt-reason-role">CFO</div>
-          <div class="opt-reason-text">Revenue capture on a reseller model is approximately 40% of direct. At $175K LTV per customer, that drops to ~$70K net per logo — below the unit economics threshold that makes the investment worthwhile. The CAC ceiling analysis breaks down entirely under a reseller margin structure.</div>
-        </div>
-        <div class="opt-delib-reason">
-          <div class="opt-reason-role">CHRO</div>
-          <div class="opt-reason-text">OPT-3 was the only option with a conditional approval vote. CHRO's position: partnership model eliminates the EU employment law exposure that is a primary concern on OPT-1, and could be revisited as a Phase 3 parallel track once direct entry is established and EU operational infrastructure is proven.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WHAT CHANGED — position shifts across rounds -->
+    <!-- POSITION MOVEMENT ACROSS ROUNDS -->
     <div class="zone3" style="margin-top:4px">
       <div class="zone-header">
         <div>
-          <div class="zone-title">POSITION MOVEMENT · WHAT SHIFTED BETWEEN ROUNDS</div>
-          <div class="zone-sub">How the team moved from R0 exploration to R2 final position</div>
+          <div class="zone-title">POSITION MOVEMENT · HOW THE TEAM MOVED</div>
+          <div class="zone-sub">R0 exploration → R1 convergence → R2 final vote</div>
         </div>
       </div>
       <div id="opt-movement-body" style="font-size:12px;color:#64748b;line-height:1.65">
-        <p style="margin:0 0 10px">Round 0 opened with significant spread — several roles flagged OPT-1 as the most direct path before LEGAL's intervention made the compliance timeline concrete. Once the 90-day GDPR setup requirement was quantified, OPT-1 lost support universally by end of R0.</p>
-        <p style="margin:0 0 10px">Round 1 concentrated debate on OPT-2 vs OPT-3. CSO's pipeline velocity argument — backed by specific deal cycle data — moved the remaining OPT-3 supporters. CFO's unit economics model showing the 40% revenue haircut under reseller margins closed the debate. CHRO registered the only dissent, noting OPT-3's employment law advantage, but moved to conditional support of OPT-2 given the financial case.</p>
-        <p style="margin:0">Round 2 was consensus formation, not new deliberation. The 7–0 conditional approval reflects alignment on OPT-2 with each role attaching their domain-specific conditions — not disagreement on direction.</p>
+        <p style="margin:0 0 10px">Round 0 opened with significant spread across all five options. OPT-1 had initial appeal as the most decisive signal to the board, but LEGAL's intervention on the 90-day GDPR setup requirement made the timeline infeasible — OPT-1 lost support universally before R1.</p>
+        <p style="margin:0 0 10px">Round 1 concentrated on OPT-2 vs OPT-4 and OPT-5. CFO's two-tranche model showed OPT-2's Phase 1 gate achieves the same risk management as OPT-4 and OPT-5 at lower cost, while preserving the full $500K capacity if the GO/NO-GO passes. OPT-3's pipeline velocity argument — partner cycles running 2× longer — eliminated OPT-3 from serious consideration.</p>
+        <p style="margin:0">Round 2 was consensus formation. The 7–0 conditional approval on OPT-2 reflects alignment on direction with each role attaching domain-specific conditions — not disagreement on the option itself.</p>
       </div>
     </div>
 
@@ -1460,6 +1418,12 @@ function fmt(n) {
 }
 function fmtRaw(n) {
   if (typeof n === 'string') {
+    // Handle pre-formatted strings like "$500K", "$1.2M"
+    const upper = n.trim().toUpperCase();
+    const mK = upper.match(/^\$?([\d.]+)K$/);
+    const mM = upper.match(/^\$?([\d.]+)M$/);
+    if (mK) return fmt(parseFloat(mK[1]) * 1000);
+    if (mM) return fmt(parseFloat(mM[1]) * 1000000);
     const stripped = n.replace(/[$,]/g, '');
     const num = parseFloat(stripped);
     if (!isNaN(num)) return fmt(num);
@@ -1633,8 +1597,80 @@ function populateDashboard(d) {
   const zoneNum = document.querySelector('.zone-num');
   if (zoneNum && allConds.length) zoneNum.textContent = allConds.length + '+';
 
+  // ── Populate rejected options from live data ────────────────────────────────
+  buildRejectedOptions(d);
+
   // ── Page title ────────────────────────────────────────────────────────────
   if (question) document.title = 'StratOS — ' + question.slice(0, 60);
+}
+
+// ── Populate rejected options from live optionsBlob ──────────────────────────
+function buildRejectedOptions(data) {
+  const container = document.getElementById('opt-rejected-container');
+  if (!container) return;
+
+  const winId = data.outputBlob?.dashboard?.approved_option_id || 'OPT-2';
+  const opts = data.optionsBlob?.option_set?.option_set || [];
+  const rejected = opts.filter(o => o.option_id !== winId);
+
+  // Vote data from stageOutputs R2
+  const r2Outputs = (data.stageOutputs || []).filter(r => parseInt(r.round) === 2 && r.section === 'D');
+  const voteByRole = {};
+  r2Outputs.forEach(r => { voteByRole[r.role_key] = r.preferred_option_id || winId; });
+  const allRoles = ['CEO','CFO','COO','COO','CSO','CTO','LEGAL','CHRO'];
+
+  // Risk labels
+  const riskLabel = { 'OPT-1': 'HIGH RISK', 'OPT-3': 'LOW RETURN', 'OPT-4': 'MEDIUM RISK', 'OPT-5': 'LOW RISK' };
+  const verdictLabel = { 'OPT-1': 'UNANIMOUS DEFER', 'OPT-3': 'NOT SELECTED', 'OPT-4': 'NOT SELECTED', 'OPT-5': 'NOT SELECTED' };
+  const verdictClass = { 'OPT-1': 'rejected', 'OPT-3': 'deferred', 'OPT-4': 'deferred', 'OPT-5': 'deferred' };
+
+  // Real roles from data
+  const roles = r2Outputs.map(r => r.role_key);
+
+  rejected.forEach(function(opt) {
+    const gates = (opt.gates || []).slice(0, 3);
+    const kills = (opt.kill_criteria || []).slice(0, 3);
+    const verdict = verdictLabel[opt.option_id] || 'NOT SELECTED';
+    const vClass = verdictClass[opt.option_id] || 'deferred';
+
+    // Which roles preferred this option (from R2 data)?
+    const preferredBy = roles.filter(r => voteByRole[r] === opt.option_id);
+
+    // Build vote pips — all went to OPT-2 except potentially some
+    const pipHtml = roles.map(r => {
+      const pref = voteByRole[r] === opt.option_id;
+      const cls = pref ? 'avc' : 'defer';
+      return '<div class="opt-vote-pip ' + cls + '">' + r + '</div>';
+    }).join('');
+
+    const card = document.createElement('div');
+    card.className = 'opt-delib-card';
+    card.innerHTML = '<div class="opt-delib-header">' +
+      '<div>' +
+        '<div class="opt-delib-id">' + opt.option_id + ' · ' + (riskLabel[opt.option_id] || 'NOT SELECTED') + '</div>' +
+        '<div class="opt-delib-name">' + (opt.label || '') + '</div>' +
+      '</div>' +
+      '<div class="opt-delib-verdict ' + vClass + '">' + verdict + '</div>' +
+    '</div>' +
+    '<div class="opt-delib-votes">' + pipHtml + '</div>' +
+    '<div class="opt-delib-body">' +
+      '<div class="opt-delib-row">' +
+        '<div class="opt-delib-col">' +
+          '<div class="opt-delib-col-label">MECHANICS</div>' +
+          '<div class="opt-delib-col-text">' + (opt.mechanics || '') + '</div>' +
+        '</div>' +
+        '<div class="opt-delib-col">' +
+          '<div class="opt-delib-col-label">WHY IT LOST</div>' +
+          '<div class="opt-delib-col-text">' + (opt.tradeoffs || '') + '</div>' +
+        '</div>' +
+      '</div>' +
+      (gates.length ? '<div class="opt-delib-gates">' +
+        '<div class="opt-delib-col-label">ENTRY GATES</div>' +
+        '<div class="opt-gates-list">' + gates.map(g => '<span class="opt-gate-chip">' + g + '</span>').join('') + '</div>' +
+      '</div>' : '') +
+    '</div>';
+    container.appendChild(card);
+  });
 }
 
 // Boot on DOMContentLoaded
