@@ -1625,7 +1625,6 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
         </div>
       </div>
 
-
     <!-- POSITION MOVEMENT ACROSS ROUNDS -->
     <div class="zone3" id="opt-position-movement" style="margin-top:4px">
       <div class="zone-header">
@@ -1641,6 +1640,16 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
 
+
+    <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
+    <div id="opt-rejected-section">
+      <div class="zone-title" id="opt-rejected-label" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+      <div id="opt-cards-wrap"><div id="opt-rejected-container">
+        <!-- JS populated -->
+      </div></div>
+    </div>
+
+
   </div>
   <div id="tab-risk" class="panel">
 
@@ -1649,7 +1658,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;align-items:flex-start;gap:10px">
       <div>
         <div class="ri-section-eyebrow">RISK &amp; INTELLIGENCE</div>
-        <div class="ri-section-title">Exposure Matrix + Financial Model <button class="info-btn" onclick="showInfo('risk', this)" title="What is this?"><span>i</span></button></div>
+        <div class="ri-section-title">Exposure Matrix + Intel <button class="info-btn" onclick="showInfo('risk', this)" title="What is this?"><span>i</span></button></div>
         <div class="ri-section-sub">6 risks plotted by consensus impact × probability. CFO unit economics and scenario analysis below. Click any dot to expand.</div>
       </div>
     </div>
@@ -2095,16 +2104,6 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
-
-
-    <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
-    <div id="opt-rejected-section">
-      <div class="zone-title" id="opt-rejected-label" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
-      <div id="opt-cards-wrap"><div id="opt-rejected-container">
-        <!-- JS populated -->
-      </div></div>
-    </div>
-
 
 </div>
   <div id="tab-room" class="panel">
@@ -3010,6 +3009,8 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
+  
+  <div id="mgmt-briefs-card">
   <div class="fin-scenarios" id="mgmt-top-actions-card" style="margin-bottom:14px">
     <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:5px;flex-wrap:wrap">TOP 3 ACTIONS · ELT CONSENSUS · SEQUENCE-DEPENDENT <button class="info-btn" onclick="showInfo('top3actions', this)" title="What is this?"><span>i</span></button> <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet executive_summary · top_3_actions · 3 ELT-consensus actions · ACT-001 must precede ACT-002 and ACT-003 · all sequence-dependent</div></span></div>
     <div style="display:flex;flex-direction:column;gap:8px">
@@ -3027,18 +3028,6 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
-   id="tab-mgmt" class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;flex-wrap:wrap;gap:10px">
-    <div style="display:flex;align-items:flex-start;gap:10px">
-      <div>
-        <div class="ri-section-eyebrow">MANAGEMENT HANDOFF</div>
-        <div class="ri-section-title">What Each Team Does Next <button class="info-btn" onclick="showInfo('mgmt', this)" title="What is this?"><span>i</span></button></div>
-        <div class="ri-section-sub">Per-department action briefs sourced from the deliberation record. Every item has a timing and success metric. Select a department to see their full brief.</div>
-      </div>
-    </div>
-  </div>
-  
-  <div id="mgmt-briefs-card">
   <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px">DEPARTMENT BRIEFS · SELECT A ROLE <button class="info-btn" onclick="showInfo('deptbriefs', this)" title="What is this?"><span>i</span></button></div>
   <div id="mgmt-dept-briefs"><div class="mh-pill-tabs"><button class="mh-pill-btn mh-pill-active" id="mhpill-CEO" onclick="selectMgmtRole('CEO')">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid var(--brand-primary)33;width:28px;height:28px;min-width:28px"></div>
@@ -3093,7 +3082,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div style="font-size:12.5px;color:#475569;line-height:1.5">Board approval gate · EU strategic mandate · May GO/NO-GO authority</div>
     </div>
   </div>
-</div>
+
 <div id="mhpanel-CFO" style="display:none">
   <div class="mh-brief-header">
     <div style="display:flex;align-items:center;gap:12px">
@@ -3261,7 +3250,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div><div style="font-size:17px;color:var(--text-primary)">CSO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF STRATEGY OFFICER</div></div>
     </div>
     <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #818cf833;border-radius:0 6px 6px 0">Pipeline stewardship and competitive tracking. The 3 EU prospects are the demand signal that drives the GO/NO-GO case. <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 conf 81% · "3 inbound EU prospects confirmed" · "Q3 2025 is a competitive response window, not an internal target" · Competitor X pursuing same logos</div></span></div>
-  </div>
+  </div></div>
   <div class="mh-brief-body">
     <div>
       <div class="mh-section-lbl" style="color:#818cf8">PHASE 1 ACTIONS</div>
@@ -3361,9 +3350,8 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
   
 </div>
-</div>
 
-  <div id="tab-board" class="panel">
+  id="tab-board" class="panel">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">
     <div style="display:flex;align-items:flex-start;gap:10px">
       <div>
@@ -3953,7 +3941,7 @@ const OPTIONS_TOUR_STEPS = [
   {
     selector: "#opt-position-movement",
     title: "Position Movement Across Rounds",
-    body: "How consensus formed: which roles moved between R0 and R2, what evidence shifted them, and what conditions they attached before approving. OPT-1 died in R0. OPT-3–5 eliminated in R1. R2 was consensus formation, not new deliberation.",
+    body: "How consensus formed: which roles moved between R0 and R2, what evidence shifted them, and what conditions they attached. OPT-1 died in R0. OPT-3–5 eliminated in R1. R2 was consensus formation.",
     cardPos: "below"
   },
   {
@@ -3967,6 +3955,7 @@ const OPTIONS_TOUR_STEPS = [
     title: "How the Options Compare",
     body: "OPT-2 wins on <strong>RISK, RETURN, and REVERSIBILITY</strong> simultaneously. OPT-1 had higher speed but unacceptable risk. OPT-3 through OPT-5 failed on returns or feasibility.",
     cardPos: "above"
+
   }
 ];
 
