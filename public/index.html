@@ -793,6 +793,30 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .rc-field-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:4px}
 .rc-field-val{font-size:13px;color:#64748b;line-height:1.6}
 
+
+/* ── MANAGEMENT TAB ── */
+.mh-priority-action{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:7px;border:1px solid rgba(255,255,255,.06)}
+.mh-priority-n{width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0;border:1px solid}
+.mh-priority-body{flex:1}
+.mh-priority-text{font-size:13px;color:#94a3b8;line-height:1.5;margin-bottom:5px}
+.mh-priority-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.mh-pill-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.mh-pill-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);cursor:pointer;transition:all .15s}
+.mh-pill-btn:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+.mh-pill-active{background:rgba(45,212,191,.06) !important;border-color:rgba(45,212,191,.2) !important}
+.mh-brief-header{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;background:#07101f;z-index:2}
+.mh-brief-body{padding:14px 18px;display:flex;flex-direction:column;gap:12px}
+.mh-section-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:5px}
+.mh-actions-table{display:flex;flex-direction:column;gap:2px}
+.mh-action-header{display:grid;grid-template-columns:90px 1fr 150px;gap:8px;padding:4px 8px;font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em}
+.mh-action-row{display:grid;grid-template-columns:90px 1fr 150px;gap:8px;padding:8px;background:rgba(255,255,255,.02);border-radius:5px;align-items:start;margin-bottom:2px}
+.mh-action-timing{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.04em}
+.mh-action-text{font-size:13px;color:#64748b;line-height:1.5}
+.mh-action-metric{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.03em;color:#475569}
+.mh-phase2-item{font-size:12.5px;color:#475569;line-height:1.55;display:flex;align-items:baseline;gap:6px}
+/* ── BOARD TAB ── */
+.board-condition{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:#64748b;padding:7px 10px;background:rgba(255,255,255,.02);border-radius:5px;line-height:1.45}
+
 </style>
 </head>
 <body>
@@ -2525,8 +2549,340 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
 </div>
-  <div id="tab-mgmt" class="panel"><div class="stub"><div class="stub-icon">◧</div><div class="stub-title">Management Handoff</div><div class="stub-desc">Per-role functional mandates, 49 commitments with extracted timelines</div><div class="stub-tag">COMING NEXT</div></div></div>
-  <div id="tab-board" class="panel"><div class="stub"><div class="stub-icon">◪</div><div class="stub-title">Board Pre-Read</div><div class="stub-desc">Board action, ELT vote record, financial overview, audit trail</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-mgmt" class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <div>
+        <div class="ri-section-eyebrow">MANAGEMENT HANDOFF</div>
+        <div class="ri-section-title">What Each Team Does Next</div>
+        <div class="ri-section-sub">Per-department action briefs sourced from the deliberation record. Every item has a timing and success metric. Select a department to see their full brief.</div>
+      </div>
+      <button class="info-btn" onclick="showInfo('mgmt',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+    </div>
+  </div>
+  <div class="fin-scenarios" style="margin-bottom:14px">
+    <div class="fin-block-label" style="margin-bottom:10px">TOP 3 ACTIONS · ELT CONSENSUS · SEQUENCE-DEPENDENT <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet executive_summary · top_3_actions · 3 ELT-consensus actions · ACT-001 must precede ACT-002 and ACT-003 · all sequence-dependent</div></span></div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div class="mh-priority-action">
+        <div class="mh-priority-n" style="background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#f87171">01</div>
+        <div class="mh-priority-body"><div class="mh-priority-text">Secure Board approval of the $500K EU investment envelope at the February 15 Board meeting before any spend commitment beyond the pre-authorized $150K Phase 1 tranche.</div><div class="mh-priority-meta"><span class="gap-owner" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.2);color:#2dd4bf">CEO · OWNER</span><span class="gap-blocker">FEB 15 · KILL GATE</span></div></div>
+      </div>
+      <div class="mh-priority-action">
+        <div class="mh-priority-n" style="background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.2);color:#a78bfa">02</div>
+        <div class="mh-priority-body"><div class="mh-priority-text">Complete external EU legal counsel GDPR validation — legally sufficient certification before any EU customer data is processed or any customer contract executed. Legal sign-off documented by May 2025 GO/NO-GO.</div><div class="mh-priority-meta"><span class="gap-owner" style="background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.2);color:#a78bfa">LEGAL · OWNER</span><span class="gap-blocker">BEFORE MAY GO/NO-GO</span></div></div>
+      </div>
+      <div class="mh-priority-action">
+        <div class="mh-priority-n" style="background:rgba(244,114,180,.08);border-color:rgba(244,114,180,.2);color:#f472b4">03</div>
+        <div class="mh-priority-body"><div class="mh-priority-text">Confirm EU entity legal structure and jurisdiction-specific employment law compliance (UK, Germany, France — works councils, notice periods, termination protections) before any EU FTE hiring commitment.</div><div class="mh-priority-meta"><span class="gap-owner" style="background:rgba(244,114,180,.08);border-color:rgba(244,114,180,.2);color:#f472b4">CHRO · OWNER</span><span class="gap-blocker">BEFORE EU FTE HIRING</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="fin-block-label" style="margin-bottom:8px">DEPARTMENT BRIEFS · SELECT A ROLE</div>
+  <div class="mh-pill-tabs"><button class="mh-pill-btn mh-pill-active" id="mhpill-CEO" onclick="selectMgmtRole('CEO')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #2dd4bf33;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#2dd4bf;font-family:'DM Mono',monospace">CEO</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button><button class="mh-pill-btn " id="mhpill-CFO" onclick="selectMgmtRole('CFO')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:1.5px solid #34d39933;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#34d399;font-family:'DM Mono',monospace">CFO</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button><button class="mh-pill-btn " id="mhpill-CTO" onclick="selectMgmtRole('CTO')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #7dd3fc33;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#7dd3fc;font-family:'DM Mono',monospace">CTO</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button><button class="mh-pill-btn " id="mhpill-LEGAL" onclick="selectMgmtRole('LEGAL')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:1.5px solid #a78bfa33;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#a78bfa;font-family:'DM Mono',monospace">LEGAL</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button><button class="mh-pill-btn " id="mhpill-CHRO" onclick="selectMgmtRole('CHRO')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:1.5px solid #f472b433;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#f472b4;font-family:'DM Mono',monospace">CHRO</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button><button class="mh-pill-btn " id="mhpill-COO" onclick="selectMgmtRole('COO')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #38bdf833;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#38bdf8;font-family:'DM Mono',monospace">COO</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button><button class="mh-pill-btn " id="mhpill-CSO" onclick="selectMgmtRole('CSO')">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #818cf833;width:28px;height:28px;min-width:28px"></div>
+  <div><div style="font-size:10px;font-weight:700;color:#818cf8;font-family:'DM Mono',monospace">CSO</div><div style="font-size:9px;color:#475569">Officer</div></div>
+</button></div>
+  <div style="border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;margin-top:8px;background:#07101f"><div id="mhpanel-CEO" style="display:block">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #2dd4bf33;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CEO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF EXECUTIVE OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #2dd4bf33;border-radius:0 6px 6px 0">Governance and strategic ownership. Board approval on Feb 15 is the controlling event — every other workstream gates on it. <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 conf 82% · "governance gate, not an analytical one" · Feb 15 board vote is the controlling event for the entire decision architecture</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#2dd4bf">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 8</div><div class="mh-action-text">1:1 pre-briefs with each board member before the vote</div><div class="mh-action-metric" style="color:#475569">Board approval probability</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 12</div><div class="mh-action-text">Distribute CFO unit economics model as board pre-read</div><div class="mh-action-metric" style="color:#475569">Board preparedness</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f87171">Feb 15</div><div class="mh-action-text">Facilitate board vote and document formal decision — KILL GATE</div><div class="mh-action-metric" style="color:#f87171">KILL GATE</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#2dd4bf">›</span> May 2025 — Chair all 4 GO/NO-GO sign-offs — CEO sign-off required <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO gate</span></div><div class="mh-phase2-item"><span style="color:#2dd4bf">›</span> Ongoing — Monitor Competitor X EU traction and account overlap <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Competitive intel</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">Board approval gate · EU strategic mandate · May GO/NO-GO authority</div>
+    </div>
+  </div>
+</div>
+<div id="mhpanel-CFO" style="display:none">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:2px solid #34d39933;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CFO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF FINANCIAL OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #34d39933;border-radius:0 6px 6px 0">Financial kill triggers and phase gate enforcement. Phase 2 does not release without CFO sign-off. CAC measurement is not optional. <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · $175K LTV / $50K CAC ceiling = 3.5× return floor · Phase 2 $350K locked behind GO/NO-GO · CAC tracking from first day of EU GTM, not at deal close</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#34d399">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 12</div><div class="mh-action-text">Build board pre-read: two-tranche model and unit economics</div><div class="mh-action-metric" style="color:#475569">Board readiness</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 15+</div><div class="mh-action-text">Track Phase 1 spend vs $150K cap from first day</div><div class="mh-action-metric" style="color:#475569">Budget guard</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 2025</div><div class="mh-action-text">Establish EU CAC measurement methodology before any EU deal</div><div class="mh-action-metric" style="color:#f87171">Kill trigger setup</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#34d399">›</span> Monthly — Confirm 12-month runway floor maintained post-investment <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Runway floor</span></div><div class="mh-phase2-item"><span style="color:#34d399">›</span> Jul 2025 — Hard CAC measurement after 2 EU deals vs $50K ceiling — KILL GATE <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· CAC kill trigger</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">Phase 1 $150K cap · GO/NO-GO financial criteria · CAC kill trigger $50K · Runway floor 12 months</div>
+    </div>
+  </div>
+</div>
+<div id="mhpanel-CTO" style="display:none">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #7dd3fc33;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CTO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF TECHNOLOGY OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #7dd3fc33;border-radius:0 6px 6px 0">GDPR architecture is the controlling technical unknown. Must be scoped and cost-confirmed by May GO/NO-GO or Phase 2 cannot release. <span class="cite"><button class="cite-btn">CTO·R2</button><div class="cite-tip">CTO R2 conf 72% — lowest on table · architecture unscoped · "if separate EU cloud region required, Phase 1 budget insufficient" · weekly status gate with LEGAL required</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#7dd3fc">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Engage external EU counsel — GDPR architecture scoping</div><div class="mh-action-metric" style="color:#475569">Counsel onboarded</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 31</div><div class="mh-action-text">Deliver GDPR cost estimate vs $150K Phase 1 budget</div><div class="mh-action-metric" style="color:#475569">Budget confirmed</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Weekly</div><div class="mh-action-text">CTO + LEGAL status gate on architecture progress</div><div class="mh-action-metric" style="color:#475569">Early warning</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#7dd3fc">›</span> May 2025 — CTO sign-off on GDPR certification before GO/NO-GO — KILL GATE <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO criteria</span></div><div class="mh-phase2-item"><span style="color:#7dd3fc">›</span> Q3 2025 — EU data residency infrastructure live before first customer <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Launch ready</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">GDPR architecture design and cost estimate · EU data residency build · Technical GO/NO-GO sign-off</div>
+    </div>
+  </div>
+</div>
+<div id="mhpanel-LEGAL" style="display:none">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:2px solid #a78bfa33;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">LEGAL</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF LEGAL OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #a78bfa33;border-radius:0 6px 6px 0">Compliance sequence is non-negotiable. No EU data processing until LEGAL certifies GDPR. No FTE offers until entity formation complete. <span class="cite"><button class="cite-btn">LEGAL·R0</button><div class="cite-tip">LEGAL R0 conf 70% · "GDPR is a legal requirement, not a best practice. External EU counsel validation required before any EU customer data is processed — no exceptions"</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#a78bfa">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Engage external EU counsel — GDPR + employment law scope</div><div class="mh-action-metric" style="color:#475569">Counsel onboarded</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Apr 15</div><div class="mh-action-text">Complete EU employment law review (UK, Germany, France)</div><div class="mh-action-metric" style="color:#475569">Hiring cleared</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f87171">Pre-launch</div><div class="mh-action-text">Execute DPAs and SCCs before any customer onboarding — KILL GATE</div><div class="mh-action-metric" style="color:#f87171">KILL GATE</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#a78bfa">›</span> May 2025 — LEGAL sign-off on GDPR compliance — GO/NO-GO criteria <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO gate</span></div><div class="mh-phase2-item"><span style="color:#a78bfa">›</span> Pre-hire — IP assignment agreements jurisdiction-specific per FTE <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Compliance</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">GDPR legal certification · EU employment law compliance · DPA/SCC execution · CBA review</div>
+    </div>
+  </div>
+</div>
+<div id="mhpanel-CHRO" style="display:none">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:2px solid #f472b433;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CHRO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF PEOPLE OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #f472b433;border-radius:0 6px 6px 0">No FTE offers until entity and GDPR validated. EU comp bands must exist before any offer letter is issued. EOR is the contingency, not the plan. <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 conf 76% · "EU hiring timelines 16–20 weeks across 3 jurisdictions" · no FTE offers before GDPR gate · comp bands must exist before any offer letter</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#f472b4">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Draft JDs for all 3 EU FTE target roles (UK, Germany, France)</div><div class="mh-action-metric" style="color:#475569">Hiring-ready</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 31</div><div class="mh-action-text">Pull Radford EMEA comp benchmarks for all 3 EU roles</div><div class="mh-action-metric" style="color:#475569">Comp bands built</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Apr 15</div><div class="mh-action-text">Confirm EOR vendor as backup path — 2-week vs 16-week direct</div><div class="mh-action-metric" style="color:#475569">Contingency ready</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#f472b4">›</span> Pre-offer — EU entity confirmed before any offer letter issued <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Legal prerequisite</span></div><div class="mh-phase2-item"><span style="color:#f472b4">›</span> Q3 2025 — 3 EU FTEs onboarded across UK, Germany, France <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Launch staffed</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">3 EU FTE hires · EU comp bands (Radford EMEA) · EOR vendor selection · Works council compliance</div>
+    </div>
+  </div>
+</div>
+<div id="mhpanel-COO" style="display:none">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #38bdf833;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">COO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF OPERATING OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #38bdf833;border-radius:0 6px 6px 0">Operational delivery model must be confirmed before Phase 2 starts. Current team is at capacity — EU adds require EOR or US backfills. <span class="cite"><button class="cite-btn">COO·R2</button><div class="cite-tip">COO R2 conf 76% · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16–20 week direct" · current team at capacity · EU operational infrastructure required before Q3</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#38bdf8">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Confirm current US team capacity — identify EU coverage gap</div><div class="mh-action-metric" style="color:#475569">Capacity baseline</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Apr 15</div><div class="mh-action-text">Select EOR vendor for fast-track EU hiring contingency</div><div class="mh-action-metric" style="color:#475569">EOR confirmed</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Pre-GO/NO-GO</div><div class="mh-action-text">Define EU operational delivery model (EOR vs direct hire)</div><div class="mh-action-metric" style="color:#475569">Model confirmed</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#38bdf8">›</span> Q3 2025 — EU operational infrastructure ready for launch <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Launch ready</span></div><div class="mh-phase2-item"><span style="color:#38bdf8">›</span> Pre-launch — EU SLA and support coverage model defined and staffed <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Customer-ready</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">EU delivery model · EOR vendor selection · Team capacity plan · EU infrastructure readiness</div>
+    </div>
+  </div>
+</div>
+<div id="mhpanel-CSO" style="display:none">
+  <div class="mh-brief-header">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #818cf833;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
+      <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CSO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF STRATEGY OFFICER</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #818cf833;border-radius:0 6px 6px 0">Pipeline stewardship and competitive tracking. The 3 EU prospects are the demand signal that drives the GO/NO-GO case. <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 conf 81% · "3 inbound EU prospects confirmed" · "Q3 2025 is a competitive response window, not an internal target" · Competitor X pursuing same logos</div></span></div>
+  </div>
+  <div class="mh-brief-body">
+    <div>
+      <div class="mh-section-lbl" style="color:#818cf8">PHASE 1 ACTIONS</div>
+      <div class="mh-actions-table">
+        <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
+        <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Immediate</div><div class="mh-action-text">Bi-weekly touchpoints with all 3 EU prospects — maintain active status</div><div class="mh-action-metric" style="color:#475569">Pipeline active</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 2025</div><div class="mh-action-text">Confirm ACV and close probability for each prospect</div><div class="mh-action-metric" style="color:#475569">Pipeline validated</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Ongoing</div><div class="mh-action-text">Track Competitor X EU GTM activity and account overlap</div><div class="mh-action-metric" style="color:#475569">Competitive intel</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
+      <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#818cf8">›</span> Apr 15 — Confirm ≥2 of 3 EU prospects active — GO/NO-GO criteria <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Pulse check</span></div><div class="mh-phase2-item"><span style="color:#818cf8">›</span> Q3 2025 — First EU logo closed — baseline measurement <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Revenue milestone</span></div></div>
+    </div>
+    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+      <div class="mh-section-lbl">OWNS</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.5">EU prospect pipeline (3 accounts) · Competitive monitoring · Apr 15 pulse check · ACV validation</div>
+    </div>
+  </div>
+</div></div>
+</div>
+  <div id="tab-board" class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <div>
+        <div class="ri-section-eyebrow">BOARD PRE-READ</div>
+        <div class="ri-section-title">One-Page Decision Record</div>
+        <div class="ri-section-sub">Complete governance record for fiduciary review. Decision, vote record, financial guardrails, open risk, audit trail. Readable in under 5 minutes.</div>
+      </div>
+      <button class="info-btn" onclick="showInfo('board',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+    </div>
+    <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
+  </div>
+  <div style="background:linear-gradient(135deg,rgba(45,212,191,.07),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.2);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:14px">
+    <div>
+      <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#2dd4bf;letter-spacing:.1em;margin-bottom:6px">FINAL DECISION</div>
+      <div style="font-family:'Fraunces',serif;font-size:30px;font-weight:400;color:#f1f5f9;letter-spacing:-.02em;line-height:1.1">Approve With<br>Conditions</div>
+      <div style="font-size:13px;color:#64748b;margin-top:8px;line-height:1.5;max-width:460px">7-0 conditional approval of OPT-2: Phased EU Entry. Phase 2 $350K locked behind May 2025 GO/NO-GO. <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · vote_summary: 7×APPROVE_WITH_CONDITIONS · OPT-2 unanimous · convergence_flag: true</div></span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+      <div style="font-family:'Fraunces',serif;font-size:48px;font-weight:300;color:#2dd4bf;line-height:1">76<span style="font-size:18px;color:#34d399">%</span></div>
+      <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.08em;text-align:right">AVG CONFIDENCE<br>RANGE 72–82% <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet confidence_summary · avg 76% · min 72% (CTO, LEGAL) · max 82% (CEO) · spread 10pp — tight convergence</div></span></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+    <div class="gaps-wrap">
+      <div class="gaps-header">
+        <div class="gaps-eyebrow">VOTE RECORD · R2 FINAL</div>
+        <div class="gaps-title" style="font-size:16px">7–0 Conditional Approval</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #2dd4bf33;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#2dd4bf;font-family:'DM Mono',monospace">CEO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">Governance gate, not analytical. Strategic case clear — 3 prospects, EU Pillar 2, Competitor X moving.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#2dd4bf">82%</span></div>
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:1.5px solid #34d39933;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#34d399;font-family:'DM Mono',monospace">CFO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">$525K LTV vs $500K investment. Two-tranche structure sequences spend correctly.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#34d399">74%</span></div>
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:1.5px solid #f472b433;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#f472b4;font-family:'DM Mono',monospace">CHRO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">OPT-2 sequences compliance before revenue — legally mandatory. No FTEs until GO/NO-GO clears.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#f472b4">76%</span></div>
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #38bdf833;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#38bdf8;font-family:'DM Mono',monospace">COO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">Operational delivery confirmed with EOR contingency. Phase 1 gates protect against over-commitment.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#38bdf8">76%</span></div>
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #818cf833;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#818cf8;font-family:'DM Mono',monospace">CSO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">3 confirmed inbound prospects. Q3 2025 is a competitive response window — delay means loss.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#818cf8">81%</span></div>
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #7dd3fc33;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#7dd3fc;font-family:'DM Mono',monospace">CTO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">GDPR architecture must be scoped. Controlling technical unknown — CONDITIONAL pending confirmation.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#7dd3fc">72%</span></div>
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:1.5px solid #a78bfa33;width:30px;height:30px;min-width:30px"></div>
+  <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#a78bfa;font-family:'DM Mono',monospace">LEGAL</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">Compliance sequence non-negotiable. No EU data processing until external counsel certifies GDPR.</div></div>
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#a78bfa">72%</span></div>
+</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="gaps-wrap" style="flex:1">
+        <div class="gaps-header">
+          <div class="gaps-eyebrow">FINANCIAL GUARDRAILS · CFO-VALIDATED</div>
+          <div class="gaps-title" style="font-size:16px">Kill Triggers + Return Floor</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#64748b">Total investment </div><div style="font-family:Fraunces,serif;font-size:18px;color:#f1f5f9">$500K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#64748b">Phase 1 pre-GO/NO-GO </div><div style="font-family:Fraunces,serif;font-size:18px;color:#2dd4bf">$150K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#64748b">Phase 2 post-GO/NO-GO <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 2 $350K locked behind GO/NO-GO · does not release unless all 4 criteria pass</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#38bdf8">$350K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#fbbf24">CAC kill trigger <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · CAC ceiling $50K · above ceiling Phase 2 GTM halts · CFO remodels, board notified within 30 days</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#fbbf24">$50K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#34d399">LTV per customer <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU enterprise customer · 3 prospects confirmed · $525K total pipeline</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#34d399">$175K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#34d399">Minimum return floor </div><div style="font-family:Fraunces,serif;font-size:18px;color:#34d399">3.5×</div></div>
+        </div>
+      </div>
+      <div style="padding:14px 16px;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:10px">
+        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#f59e0b;letter-spacing:.08em;margin-bottom:5px">KEY OPEN QUESTION · UNRESOLVED</div>
+        <div style="font-size:13px;color:#94a3b8;line-height:1.55;margin-bottom:5px">Is GDPR-compliant data residency feasible within the $150K Phase 1 budget? <span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 · controlling technical unknown · 5 roles flagged · must resolve before May GO/NO-GO · if over budget: full repricing required</div></span></div>
+        <div style="font-size:11.5px;color:#475569">CTO + LEGAL must resolve by May 2025. If no → Phase 2 does not release. Board notified within 5 days.</div>
+      </div>
+    </div>
+  </div>
+  <div class="fin-scenarios" style="margin-bottom:14px">
+    <div class="fin-block-label" style="margin-bottom:10px">CONDITIONS ON APPROVAL <span class="cite"><button class="cite-btn">F1·ALL·ROLES</button><div class="cite-tip">F1 outputs all rounds · 123 approval gates logged across 7 roles · every role placed conditions · none dissented</div></span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">
+      <div class="board-condition"><span class="gap-blocker">KILL GATE</span> Board must approve $500K at Feb 15 meeting</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> GDPR compliance certified before EU data processing</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> EU CAC ≤$50K measured after first 2 EU deals</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> EU entity formation before any FTE hiring commitment</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> Phase 1 spend ≤$150K before GO/NO-GO</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> 12-month runway floor maintained post-investment</div>
+    </div>
+  </div>
+  <div style="padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="fin-block-label" style="margin-bottom:6px">AUDIT TRAIL</div>
+        <div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">RUN ID</span>&nbsp;&nbsp;RUN-20260313193333-v9i71lgw</div><div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">DECISION ID</span>&nbsp;&nbsp;DEC-20260313193333-v9i71lgw</div><div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">MODE</span>&nbsp;&nbsp;ELT · 3 ROUNDS · 7 ROLES · R0→R1→R2</div><div style="font-size:12px;color:#475569;margin-bottom:3px"><span style="color:#334155;font-family:DM Mono,monospace;font-size:9px;letter-spacing:.04em">OUTCOME</span>&nbsp;&nbsp;APPROVED_WITH_CONDITIONS · OPT-2 SELECTED</div>
+      </div>
+      <div style="text-align:right">
+        <div class="fin-block-label" style="margin-bottom:6px">COMPLEXITY INDICATORS</div>
+        <div style="font-size:12px;margin-bottom:3px;color:#f87171">Execution Complexity: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f87171">Risk Exposure: <strong>HIGH</strong></div><div style="font-size:12px;margin-bottom:3px;color:#f59e0b">Dependency Density: <strong>5 cross-dept</strong></div><div style="font-size:12px;margin-bottom:3px;color:#64748b">Research Gap Score: <strong>4 unresolved</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <div class="footer">
@@ -2702,6 +3058,16 @@ const INFO_CONTENT = {
     tag: "THE ROOM",
     title: "The Deliberation Record — All 7 Roles",
     body: "This tab shows the deliberation itself — not the outcome. <strong>Stance evolution table:</strong> every role's position across R0 (exploration), R1 (deliberation), R2 (final vote) with hover tooltips sourced from the actual deliberation record. <strong>Role panels:</strong> select any role in the left nav to see their full argument, what evidence moved them, what they pushed back on, and what would change their position. <strong>Groupthink flag:</strong> the engine detected HIGH-severity convergence — CFO, CTO, and LEGAL aligned without independently surfacing domain risks."
+  },
+  mgmt: {
+    tag: "MANAGEMENT HANDOFF",
+    title: "Department-by-Department Action Briefs",
+    body: "Every department gets a specific action brief sourced from the deliberation record. <strong>Top panel:</strong> 3 ELT-consensus actions that must happen in sequence — board approval enables everything else. <strong>Department tabs:</strong> select any role to see Phase 1 immediate actions with timing and success metrics, Phase 2 commitments, and what they own in the execution architecture."
+  },
+  board: {
+    tag: "BOARD PRE-READ",
+    title: "The Governance Record for Fiduciary Review",
+    body: "A one-page decision record readable in under 5 minutes. <strong>Decision banner:</strong> final outcome, vote count, average confidence with range. <strong>Vote record:</strong> every role's vote, confidence %, and one-line rationale. <strong>Financial guardrails:</strong> CFO-validated kill triggers and return floors. <strong>Key open question</strong>, conditions placed on approval, and full audit trail with complexity indicators."
   },
   execution: {
     tag: "COMMAND CENTER — ZONE 4",
@@ -2943,6 +3309,28 @@ function startContextTour() {
     document.getElementById('tour-backdrop').classList.add('active');
     var dots = document.getElementById('tour-dots');
     if (dots) dots.innerHTML = _activeTourSteps.map(function(_,i) { return '<div class="tour-dot' + (i===0?' active':'') + '"></div>'; }).join('');
+    showTourStep(0);
+  } else if (_activeTabId === 'mgmt') {
+    _activeTourSteps = [
+      { selector: ".mh-priority-action", title: "Top 3 Actions — In Sequence", body: "ACT-001 (Board approval) must happen before ACT-002 and ACT-003 can begin. These are ELT consensus, not recommendations — every role agreed these are the controlling first steps.", cardPos: "below" },
+      { selector: ".mh-pill-tabs", title: "Department Briefs", body: "Select any role to see their complete Phase 1 action plan: specific timing, success metric per action, and what they own in the execution architecture.", cardPos: "below" },
+      { selector: ".mh-actions-table", title: "Action Format", body: "Every action has a timing (when), a success metric (how you know it worked), and a color code — teal is forward motion, amber is time-sensitive, red is a kill gate dependency.", cardPos: "above" },
+    ];
+    _tourStep = 0; _tourActive = true;
+    document.getElementById('tour-backdrop').classList.add('active');
+    var td = document.getElementById('tour-dots');
+    if (td) td.innerHTML = _activeTourSteps.map(function(_,i){return '<div class="tour-dot'+(i===0?' active':'')+'"></div>';}).join('');
+    showTourStep(0);
+  } else if (_activeTabId === 'board') {
+    _activeTourSteps = [
+      { selector: ".ri-section-title", title: "The Governance Record", body: "Everything a board member needs to understand the decision, vote record, and financial controls — without reading the full deliberation transcript.", cardPos: "below" },
+      { selector: ".gaps-wrap", title: "Vote Record", body: "Every role's final vote, confidence %, and one-line rationale. 7-0 conditional — no dissents. Fiduciary record of who voted what and why.", cardPos: "below" },
+      { selector: ".board-condition", title: "Kill Gate Conditions", body: "Three hard kill gates that halt execution if breached. If any fires, the board is notified within 5 business days. These aren't soft conditions — they are binding commitments the ELT made when they voted.", cardPos: "above" },
+    ];
+    _tourStep = 0; _tourActive = true;
+    document.getElementById('tour-backdrop').classList.add('active');
+    var td2 = document.getElementById('tour-dots');
+    if (td2) td2.innerHTML = _activeTourSteps.map(function(_,i){return '<div class="tour-dot'+(i===0?' active':'')+'"></div>';}).join('');
     showTourStep(0);
   } else {
     startTour();
@@ -3549,6 +3937,16 @@ function selectRoleRoom(role) {
   roles.forEach(function(r) {
     var p = document.getElementById('rcpanel-' + r);
     if (p) p.style.display = r === role ? 'block' : 'none';
+  });
+}
+
+// ── MANAGEMENT: selectMgmtRole ──
+function selectMgmtRole(role) {
+  ['CEO','CFO','CTO','LEGAL','CHRO','COO','CSO'].forEach(function(r) {
+    var p = document.getElementById('mhpanel-' + r);
+    var b = document.getElementById('mhpill-' + r);
+    if (p) p.style.display = r === role ? 'block' : 'none';
+    if (b) b.classList.toggle('mh-pill-active', r === role);
   });
 }
 
