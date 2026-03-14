@@ -6,11 +6,11 @@
 <title>StratOS — EU Market Entry Decision</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;font-size:17px;font-weight:500;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(14,165,233,.07),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(45,212,191,.04),transparent)}
+*{box-sizing:border-box;margin:0;padding:0}strong{font-weight:600}
+body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;font-size:17px;font-weight:500;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(14,165,233,.07),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(45,212,191,.04),transparent)}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#1e293b;border-radius:3px}
 
-.header{border-bottom:1px solid rgba(255,255,255,.07);background:rgba(7,13,26,.97);position:sticky;top:0;z-index:100}
+.header{border-bottom:1px solid #1e293b;background:rgba(7,13,26,.97);position:sticky;top:0;z-index:100}
 .header-inner{max-width:1060px;margin:0 auto;padding:0 16px}
 .header-top{display:flex;align-items:center;justify-content:space-between;height:48px}
 .logo{display:flex;align-items:center;gap:9px}
@@ -50,7 +50,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .info-panel{display:none;position:fixed;z-index:9000;width:300px;background:#0d1525;border:1px solid rgba(255,255,255,.12);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px rgba(45,212,191,.06);overflow:hidden;user-select:none}
 .info-panel.open{display:block;animation:panelIn .16s ease}
 @keyframes panelIn{from{opacity:0;transform:scale(.95) translateY(-4px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.info-panel-drag{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(255,255,255,.035);border-bottom:1px solid rgba(255,255,255,.07);cursor:grab;gap:8px}
+.info-panel-drag{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#111827;border-bottom:1px solid #1e293b;cursor:grab;gap:8px}
 .info-panel-drag:active{cursor:grabbing}
 .info-panel-drag-dots{display:flex;gap:3px;opacity:.3;flex-shrink:0}
 .info-panel-drag-dots span{width:3px;height:3px;border-radius:50%;background:#94a3b8}
@@ -118,7 +118,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .decision-title span{color:#2dd4bf}
 .decision-q{font-size:12px;color:#64748b;line-height:1.6;max-width:380px;margin-top:8px}
 .winning-option{margin-top:12px;background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.2);border-radius:7px;padding:8px 11px;display:inline-block}
-.wo-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.06em;margin-bottom:1px}
+.wo-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-bottom:1px}
 .wo-name{font-size:12px;font-weight:600;color:#2dd4bf}
 .wo-desc{font-size:11px;color:#475569;margin-top:2px}
 
@@ -132,15 +132,15 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .conf-avg{position:absolute;width:3px;height:100%;background:#2dd4bf;transform:translateX(-50%)}
 .roles-meta{font-size:10px;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:6px;text-align:right}
 .roles-grid{display:flex;gap:4px;flex-wrap:wrap}
-.role-pill{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;flex:1;min-width:52px;transition:border-color .15s,background .15s}
-.role-pill:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.055);cursor:default}
+.role-pill{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px;background:#111827;border:1px solid #334155;border-radius:10px;flex:1;min-width:52px;transition:border-color .15s,background .15s}
+.role-pill:hover{border-color:rgba(255,255,255,.18);background:#162032;cursor:default}
 .role-img-wrap{position:relative}
 .role-img{width:34px;height:34px;border-radius:50%;background-size:cover;background-position:center 20%;flex-shrink:0;display:block;background-color:#0f172a}
 .role-dot{position:absolute;bottom:-2px;right:-2px;width:10px;height:10px;border-radius:50%;border:2px solid #030711}
-.role-key{font-size:8px;font-weight:700;color:#e2e8f0;letter-spacing:.06em;text-align:center}
+.role-key{font-size:8px;font-weight:700;color:#e2e8f0;letter-spacing:.1em;text-align:center}
 .role-conf{font-size:10px;color:#64748b;text-align:center}
 .role-vote{font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px;white-space:nowrap;text-align:center}
-.signals{margin-top:14px;padding-top:11px;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.signals{margin-top:14px;padding-top:11px;border-top:1px solid #1e293b;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .signal{display:flex;align-items:center;gap:5px}
 .signal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .signal-text{font-size:11px;color:#64748b}
@@ -150,13 +150,13 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* ── ZONE 2 ── */
 .zone2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px;transition:border-color .18s,background .18s,box-shadow .18s}
-.card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.035);box-shadow:0 0 0 1px rgba(45,212,191,.08) inset}
+.card{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:15px;transition:border-color .18s,background .18s,box-shadow .18s}
+.card:hover{border-color:rgba(255,255,255,.14);background:#111827;box-shadow:0 0 0 1px rgba(45,212,191,.08) inset}
 .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.card-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.07em;font-family:'DM Mono',monospace}
+.card-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.1em;font-family:'DM Mono',monospace}
 .card-link{background:none;border:none;cursor:pointer;font-size:9px;color:#2dd4bf;font-family:'DM Mono',monospace}
 .reasons{display:flex;flex-direction:column;gap:6px}
-.reason{padding:8px 9px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05);font-size:12px;color:#cbd5e1;line-height:1.55}
+.reason{padding:8px 9px;background:#0f172a;border-radius:6px;border:1px solid #1e293b;font-size:12px;color:#cbd5e1;line-height:1.55}
 .right-col{display:flex;flex-direction:column;gap:20px}
 
 /* ── EXPANDABLE CARDS — fixed layout ── */
@@ -164,7 +164,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .concern-card{background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:12px;flex:1;transition:border-color .18s,box-shadow .18s}
 .concern-card:hover{border-color:rgba(239,68,68,.28);box-shadow:0 0 0 1px rgba(239,68,68,.06) inset}
 .card-trigger{padding:12px 13px;cursor:pointer;display:flex;flex-direction:column;gap:0}
-.concern-title{font-size:11px;font-weight:700;color:#f87171;letter-spacing:.07em;font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.concern-title{font-size:11px;font-weight:700;color:#f87171;letter-spacing:.1em;font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .concern-title .toggle-arrow{font-size:11px;color:#f87171;transition:transform .2s;flex-shrink:0;margin-left:6px}
 .concern-card.open .toggle-arrow{transform:rotate(180deg)}
 .concern-text{font-size:12px;color:#cbd5e1;line-height:1.55}
@@ -181,7 +181,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 .openq-card{background:rgba(129,140,248,.04);border:1px solid rgba(129,140,248,.15);border-radius:12px;flex:1;transition:border-color .18s,box-shadow .18s}
 .openq-card:hover{border-color:rgba(129,140,248,.28);box-shadow:0 0 0 1px rgba(129,140,248,.06) inset}
-.openq-title{font-size:11px;font-weight:700;color:#818cf8;letter-spacing:.07em;font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.openq-title{font-size:11px;font-weight:700;color:#818cf8;letter-spacing:.1em;font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
 .openq-title .toggle-arrow{font-size:11px;color:#818cf8;transition:transform .2s;flex-shrink:0;margin-left:6px}
 .openq-card.open .toggle-arrow{transform:rotate(180deg)}
 .openq-badges{display:flex;gap:3px;margin-bottom:5px}
@@ -190,13 +190,13 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .openq-note{font-size:10px;color:#475569;margin-top:4px}
 
 /* ── ZONE 3 ── */
-.zone3{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:17px;transition:border-color .18s}
+.zone3{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:17px;transition:border-color .18s}
 .zone3:hover{border-color:rgba(255,255,255,.12)}
 .zone-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}
-.zone-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.07em;font-family:'DM Mono',monospace;margin-bottom:2px}
+.zone-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-bottom:2px}
 .zone-sub{font-size:12px;color:#475569}
 .zone-num{font-family:'Fraunces',serif;font-size:18px;font-weight:300;color:#f59e0b;opacity:.6}
-.cond-row{display:flex;gap:9px;padding:9px 5px;border-bottom:1px solid rgba(255,255,255,.05);border-radius:5px;transition:background .12s}
+.cond-row{display:flex;gap:9px;padding:9px 5px;border-bottom:1px solid #1e293b;border-radius:5px;transition:background .12s}
 .cond-row:last-child{border-bottom:none}
 .cond-row:hover{background:rgba(255,255,255,.025)}
 .cond-num{min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0;margin-top:3px}
@@ -213,11 +213,11 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .sev-med{font-size:8px;font-weight:700;color:#818cf8;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);padding:1px 4px;border-radius:3px}
 
 /* ── ZONE 4 ── */
-.zone4{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px 24px;transition:border-color .18s}
+.zone4{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:20px 24px;transition:border-color .18s}
 .zone4:hover{border-color:rgba(255,255,255,.12)}
 .seq-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
 /* KPI row — no overflow:hidden so citations pop above */
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);border-radius:8px;margin-bottom:24px;border:1px solid rgba(255,255,255,.07)}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);border-radius:8px;margin-bottom:24px;border:1px solid #334155}
 .kpi-cell{background:#030711;padding:14px 14px 10px;display:flex;flex-direction:column;gap:4px;transition:background .15s;position:relative}
 .kpi-cell:first-child{border-radius:7px 0 0 7px}
 .kpi-cell:last-child{border-radius:0 7px 7px 0}
@@ -248,7 +248,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .tl-phase.active .tl-node.monitor{background:rgba(45,212,191,.09);box-shadow:0 0 0 4px rgba(45,212,191,.09),0 0 20px rgba(45,212,191,.12)}
 .tl-badge{position:absolute;top:0;right:0;width:16px;height:16px;border-radius:50%;background:#ef4444;font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid #030711;font-family:'DM Mono',monospace;z-index:3}
 .tl-below{margin-top:13px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
-.tl-phase-name{font-size:10px;font-weight:700;letter-spacing:.09em;font-family:'DM Mono',monospace;color:#94a3b8}
+.tl-phase-name{font-size:10px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;color:#94a3b8}
 .tl-gate-name{font-size:13px;font-weight:600;color:#94a3b8;line-height:1.3;margin-top:1px}
 .tl-gate-sub{font-size:11px;color:#334155;margin-top:1px}
 .tl-owner{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:3px;margin-top:4px}
@@ -262,11 +262,11 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .tl-drawer-bar.kill{background:linear-gradient(90deg,#ef4444,rgba(239,68,68,.3))}
 .tl-drawer-bar.pause{background:linear-gradient(90deg,#f59e0b,rgba(245,158,11,.3))}
 .tl-drawer-bar.monitor{background:linear-gradient(90deg,#2dd4bf,rgba(45,212,191,.3))}
-.tl-legend{display:flex;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05);flex-wrap:wrap}
+.tl-legend{display:flex;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid #1e293b;flex-wrap:wrap}
 .tll{display:flex;align-items:center;gap:6px;font-size:10px;color:#475569;font-family:'DM Mono',monospace}
 .tll-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 
-.footer{border-top:1px solid rgba(255,255,255,.05);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.footer{border-top:1px solid #1e293b;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:20px}
 .footer-id{font-size:9px;color:#475569;font-family:'DM Mono',monospace}
 .footer-actions{display:flex;gap:6px}
 .footer-btn{background:none;border:1px solid rgba(255,255,255,.08);color:#475569;font-size:9px;font-family:'DM Mono',monospace;padding:4px 8px;border-radius:4px;cursor:pointer;transition:all .15s}
@@ -287,7 +287,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .zone1-spotlight{position:absolute;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.09) 0%,transparent 65%);width:400px;height:400px;transform:translate(-50%,-50%);transition:opacity .4s;opacity:0}
 
 /* ── CARD HOVER — warmer depth glow ── */
-.card:hover{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.035);box-shadow:0 0 20px rgba(14,165,233,.06),0 0 0 1px rgba(45,212,191,.08) inset}
+.card:hover{border-color:rgba(255,255,255,.16);background:#111827;box-shadow:0 0 20px rgba(14,165,233,.06),0 0 0 1px rgba(45,212,191,.08) inset}
 .concern-card:hover{border-color:rgba(239,68,68,.32);box-shadow:0 0 18px rgba(239,68,68,.07),0 0 0 1px rgba(239,68,68,.06) inset}
 .openq-card:hover{border-color:rgba(129,140,248,.32);box-shadow:0 0 18px rgba(129,140,248,.07),0 0 0 1px rgba(129,140,248,.06) inset}
 .zone3:hover{border-color:rgba(255,255,255,.14);box-shadow:0 0 20px rgba(45,212,191,.04)}
@@ -385,7 +385,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 /* ── OPTIONS TAB ── */
 .opt-hero{background:linear-gradient(135deg,rgba(45,212,191,.06),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.14);border-radius:14px;padding:24px;position:relative;overflow:hidden;display:flex;gap:28px;align-items:stretch}
 .opt-hero-left{flex:1;min-width:0}
-.opt-hero-right{flex-shrink:0;width:340px;display:flex;flex-direction:column;justify-content:center;gap:0;padding-left:4px;border-left:1px solid rgba(255,255,255,.06)}
+.opt-hero-right{flex-shrink:0;width:340px;display:flex;flex-direction:column;justify-content:center;gap:0;padding-left:4px;border-left:1px solid #1e293b}
 .opt-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.08),transparent 70%);pointer-events:none}
 .opt-hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:.12em;color:#2dd4bf;font-family:'DM Mono',monospace;margin-bottom:8px}
 .opt-hero-title{font-family:'Fraunces',serif;font-size:clamp(20px,2.8vw,30px);font-weight:600;color:#f1f5f9;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
@@ -400,7 +400,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* Rejected cards */
 .opt-rejected-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.opt-rejected{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;opacity:.65;transition:all .22s;cursor:default}
+.opt-rejected{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px 18px;opacity:.65;transition:all .22s;cursor:default}
 .opt-rejected:hover{opacity:1;border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.04)}
 .opt-rejected-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.07em;margin-bottom:5px}
 .opt-rejected-name{font-family:'Fraunces',serif;font-size:15px;color:#475569;margin-bottom:8px;line-height:1.3;transition:color .22s}
@@ -410,11 +410,11 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .opt-vote-pip.defer{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.2);color:#475569}
 .opt-vote-pip.avc{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
 .opt-vote-pip.approve{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:#34d399}
-.opt-rejected-fatal{font-size:11px;color:#64748b;line-height:1.55;border-left:2px solid rgba(255,255,255,.07);padding-left:10px;transition:all .22s}
+.opt-rejected-fatal{font-size:11px;color:#64748b;line-height:1.55;border-left:2px solid #1e293b;padding-left:10px;transition:all .22s}
 .opt-rejected:hover .opt-rejected-fatal{border-left-color:rgba(239,68,68,.3);color:#94a3b8}
 
 /* Reversal items */
-.reversal-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start}
+.reversal-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #1e293b;align-items:flex-start}
 .reversal-item:last-child{border-bottom:none}
 .reversal-num{width:28px;height:28px;border-radius:50%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#f87171;font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
 .reversal-body{flex:1}
@@ -428,7 +428,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* ── OPTIONS DELIBERATION CARDS ── */
 .opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;transition:border-color .2s,background .2s,box-shadow .2s}
-.opt-delib-card:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.055);box-shadow:0 0 24px rgba(255,255,255,.03)}
+.opt-delib-card:hover{border-color:rgba(255,255,255,.22);background:#162032;box-shadow:0 0 24px rgba(255,255,255,.03)}
 .opt-delib-card:hover .opt-delib-name{color:#f1f5f9}
 .opt-delib-card:hover .opt-reason-text{color:#94a3b8}
 .opt-delib-card:hover .opt-delib-reason{background:rgba(255,255,255,.025);border-left-color:rgba(255,255,255,.12)}
@@ -445,7 +445,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .opt-vote-pip.approve{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:#34d399}
 .opt-delib-reasons{display:flex;flex-direction:column;gap:10px}
 .opt-delib-reason{display:flex;gap:12px;padding:12px 14px;background:rgba(255,255,255,.012);border-radius:7px;border-left:2px solid rgba(255,255,255,.06)}
-.opt-reason-role{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.06em;min-width:44px;padding-top:1px;flex-shrink:0}
+.opt-reason-role{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.1em;min-width:44px;padding-top:1px;flex-shrink:0}
 .opt-reason-text{font-size:12px;color:#64748b;line-height:1.6}
 
 
@@ -465,7 +465,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* ── OPTION COMPARE GRID ── */
 .opt-compare-grid{display:grid;grid-template-columns:48px repeat(4,1fr);gap:6px 10px;align-items:center}
-.opt-ax-label{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.06em;text-align:center;line-height:1.2;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.08)}
+.opt-ax-label{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.1em;text-align:center;line-height:1.2;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.08)}
 .opt-row-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;padding:3px 0}
 .opt-row-label.opt-sel{color:#2dd4bf}
 .opt-row-label.opt-not-sel{color:#475569}
@@ -525,17 +525,17 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* Risks list */
 .ri-risks-list{display:flex;flex-direction:column;gap:12px}
-.ri-risk-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:16px;transition:all .2s}
+.ri-risk-card{background:#0f172a;border:1px solid #334155;border-radius:10px;padding:16px;transition:all .2s}
 .ri-risk-card:hover{border-color:rgba(255,255,255,.13);background:rgba(255,255,255,.04)}
 .ri-risk-header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;flex-wrap:wrap}
 .ri-risk-left{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:0}
-.ri-risk-badge{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:3px 7px;border-radius:3px;flex-shrink:0;letter-spacing:.06em;margin-top:1px}
+.ri-risk-badge{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:3px 7px;border-radius:3px;flex-shrink:0;letter-spacing:.1em;margin-top:1px}
 .ri-risk-badge.high{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
 .ri-risk-badge.med{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#fbbf24}
 .ri-risk-name{font-size:13px;font-weight:500;color:#cbd5e1;line-height:1.4;flex:1}
 .ri-risk-owner{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;white-space:nowrap;flex-shrink:0}
 .ri-risk-body{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ri-risk-col{padding:10px 12px;background:rgba(255,255,255,.02);border-radius:6px}
+.ri-risk-col{padding:10px 12px;background:#0f172a;border-radius:6px}
 .ri-risk-col.mitigation{background:rgba(45,212,191,.03);border-left:2px solid rgba(45,212,191,.2)}
 .ri-risk-col-label{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;margin-bottom:5px}
 .ri-risk-col-text{font-size:13px;color:#475569;line-height:1.6;transition:color .2s}
@@ -577,7 +577,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .rm-corner{position:absolute;top:5px;left:7px;font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.05em}
 .rm-corner.act{color:#fca5a5}
 .rm-x-axis{display:flex;justify-content:space-around;padding-top:8px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;position:relative}
-.rm-urgency{font-size:9px;font-weight:700;letter-spacing:.07em;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:4px}
+.rm-urgency{font-size:9px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:4px}
 .rm-urgency.act{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
 .rm-urgency.manage{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#f59e0b}
 .rm-urgency.monitor{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399}
@@ -601,14 +601,14 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .risk-detail-bar{height:3px;background:linear-gradient(90deg,#ef4444,rgba(239,68,68,.15))}
 .risk-detail-body{padding:16px 18px}
 .rdb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-.rdb-owner{font-size:9px;font-weight:700;letter-spacing:.06em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px}
-.rdb-domain{font-size:9px;font-weight:700;letter-spacing:.06em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
+.rdb-owner{font-size:9px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px}
+.rdb-domain{font-size:9px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
 .rdb-close{font-size:14px;color:#475569;cursor:pointer;padding:0 4px;flex-shrink:0}
 .rdb-close:hover{color:#94a3b8}
 .rdb-title{font-family:'Fraunces',serif;font-size:16px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:6px;line-height:1.3}
 .rdb-desc{font-size:13px;color:#64748b;line-height:1.65;margin-bottom:10px}
 .rdb-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.rdb-badge{font-size:9px;font-weight:700;letter-spacing:.07em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px}
+.rdb-badge{font-size:9px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px}
 .rdb-badge.imp-high{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
 .rdb-badge.imp-med{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
 .rdb-badge.imp-low{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399}
@@ -623,15 +623,15 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 @media(max-width:900px){.ri-qa-row{grid-template-columns:1fr}}
 
 /* Gaps panel */
-.gaps-wrap{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden}
+.gaps-wrap{background:#0f172a;border:1px solid #334155;border-radius:12px;overflow:hidden}
 .confirmed-wrap{border-color:rgba(52,211,153,.15)}
-.gaps-header{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.gaps-header{padding:16px 18px 12px;border-bottom:1px solid #1e293b}
 .gaps-eyebrow{font-size:9px;font-weight:700;letter-spacing:.1em;color:#f59e0b;font-family:'DM Mono',monospace;margin-bottom:4px}
 .gaps-eyebrow.confirmed{color:#34d399}
 .gaps-title{font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:2px}
 .gaps-sub{font-size:11px;color:#475569;line-height:1.45}
 
-.gap-item{display:flex;gap:12px;align-items:flex-start;padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.04)}
+.gap-item{display:flex;gap:12px;align-items:flex-start;padding:12px 18px;border-bottom:1px solid #1e293b}
 .gap-item:last-child{border-bottom:none}
 .confirmed-item{background:rgba(52,211,153,.02)}
 .confirmed-item:hover{background:rgba(52,211,153,.04)}
@@ -650,7 +650,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .gap-toggle:hover{color:#475569}
 .gap-caret{display:inline-block;transition:transform .2s;font-size:13px;line-height:1}
 .gap-caret.open{transform:rotate(90deg)}
-.gap-detail{display:none;font-size:12.5px;color:#475569;line-height:1.6;margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.02);border-radius:5px;border-left:2px solid rgba(255,255,255,.07)}
+.gap-detail{display:none;font-size:12.5px;color:#475569;line-height:1.6;margin-top:8px;padding:8px 10px;background:#0f172a;border-radius:5px;border-left:2px solid #1e293b}
 .gap-detail.open{display:block;animation:fadeSlide .15s ease}
 .confirmed-item .gap-detail{border-left-color:rgba(52,211,153,.2)}
 
@@ -665,8 +665,8 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .fin-wrap{display:flex;flex-direction:column;gap:16px}
 
 /* Waterfall */
-.fin-block-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.09em;margin-bottom:10px}
-.fin-waterfall{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 20px}
+.fin-block-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.1em;margin-bottom:10px}
+.fin-waterfall{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:18px 20px}
 .fin-waterfall-row{display:flex;gap:0;align-items:stretch}
 .fin-phase{flex:1;padding:12px 14px;border-radius:8px}
 .fin-phase.ph1{background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.12)}
@@ -682,14 +682,14 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .fin-gate-label{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#2dd4bf;letter-spacing:.08em;text-align:center}
 .fin-gate-sub{font-size:8px;color:#475569;font-family:'DM Mono',monospace;text-align:center}
 .fin-gate-crit{font-size:8px;color:#334155;font-family:'DM Mono',monospace;text-align:center;margin-top:2px}
-.fin-total{display:flex;flex-direction:column;justify-content:center;padding:12px 14px;border-left:1px solid rgba(255,255,255,.06);margin-left:16px;flex-shrink:0;min-width:90px}
+.fin-total{display:flex;flex-direction:column;justify-content:center;padding:12px 14px;border-left:1px solid #1e293b;margin-left:16px;flex-shrink:0;min-width:90px}
 .fin-total-label{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;margin-bottom:4px}
 .fin-total-amount{font-family:'Fraunces',serif;font-size:32px;font-weight:300;color:#2dd4bf;letter-spacing:-.02em;line-height:1;margin-bottom:6px}
 .fin-total-sub{font-size:12px;color:#334155;line-height:1.4}
 
 /* Unit economics row */
 .fin-unit-row{display:flex;gap:10px;flex-wrap:wrap}
-.fin-unit-card{flex:1;min-width:100px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px 14px}
+.fin-unit-card{flex:1;min-width:100px;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:14px 14px}
 .fin-unit-card.warn{border-color:rgba(245,158,11,.2);background:rgba(245,158,11,.03)}
 .fin-unit-card.pos{border-color:rgba(52,211,153,.15);background:rgba(52,211,153,.03)}
 .fin-unit-n{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:#f1f5f9;letter-spacing:-.02em;line-height:1;margin-bottom:3px}
@@ -699,9 +699,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .fin-unit-sub{font-size:12px;color:#334155;line-height:1.4}
 
 /* Scenario table */
-.fin-scenarios{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px}
+.fin-scenarios{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px 18px}
 .fin-scenario-grid{display:grid;grid-template-columns:80px repeat(5,1fr);gap:2px 8px;align-items:center;margin-bottom:6px}
-.fin-sc-header{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.fin-sc-header{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;padding:4px 0;border-bottom:1px solid #1e293b}
 .fin-sc-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:8px 0 8px 8px;border-radius:4px 0 0 4px}
 .fin-sc-label.stress{color:#f87171;background:rgba(239,68,68,.04)}
 .fin-sc-label.base{color:#2dd4bf}
@@ -722,9 +722,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* ── EXTERNAL INTEL PANEL ── */
 .ext-intel-wrap{border-color:rgba(129,140,248,.15)}
-.ext-item{padding:12px 18px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:10px;align-items:flex-start}
+.ext-item{padding:12px 18px;border-bottom:1px solid #1e293b;display:flex;gap:10px;align-items:flex-start}
 .ext-item:last-child{border-bottom:none}
-.ext-source-badge{font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:2px;letter-spacing:.06em;white-space:nowrap}
+.ext-source-badge{font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 6px;border-radius:3px;flex-shrink:0;margin-top:2px;letter-spacing:.1em;white-space:nowrap}
 .ext-source-badge.regulatory{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
 .ext-source-badge.competitive{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#fbbf24}
 .ext-source-badge.market{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399}
@@ -736,7 +736,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 /* ── GAP ACTION ROW ── */
 .gap-action-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:5px;padding:6px 8px;background:rgba(45,212,191,.03);border-radius:5px;border-left:2px solid rgba(45,212,191,.18)}
-.gap-action-label{font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#2dd4bf;letter-spacing:.06em;flex-shrink:0;margin-top:1px;padding-top:1px}
+.gap-action-label{font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#2dd4bf;letter-spacing:.1em;flex-shrink:0;margin-top:1px;padding-top:1px}
 .gap-action-text{font-size:12px;color:#64748b;line-height:1.5;flex:1}
 
 /* ── HORIZONTAL MILESTONE TIMELINE ── */
@@ -768,7 +768,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .mb-div{width:1px;background:rgba(255,255,255,.06);align-self:stretch;flex-shrink:0}
 
 /* Stance evolution table */
-.evo-th{background:#0a0f1e;padding:8px 10px;text-align:center;font-size:8px;font-weight:700;letter-spacing:.08em;color:#64748b;font-family:'DM Mono',monospace;white-space:nowrap;border:1px solid rgba(255,255,255,.04)}
+.evo-th{background:#0a0f1e;padding:8px 10px;text-align:center;font-size:8px;font-weight:700;letter-spacing:.08em;color:#64748b;font-family:'DM Mono',monospace;white-space:nowrap;border:1px solid #1e293b}
 .evo-td{border:1px solid rgba(255,255,255,.03);padding:0}
 .evo-role-td{background:#080d1a;padding:8px 12px}
 .evo-round-cell{background:#080d1a;padding:8px 10px;text-align:center;vertical-align:middle}
@@ -777,17 +777,17 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .evo-avatar{border-radius:50%;background:#1e293b;background-size:cover;background-position:center top;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0}
 
 /* Stance pills */
-.stance-pill{font-size:8px;font-weight:700;letter-spacing:.06em;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:4px;white-space:nowrap;display:inline-block}
+.stance-pill{font-size:8px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:4px;white-space:nowrap;display:inline-block}
 .sp-support{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.25);color:#2dd4bf}
 .sp-conditional{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
 .sp-notyet{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.25);color:#64748b}
 .sp-oppose{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
 
 /* Role layout */
-.rc-layout{display:grid;grid-template-columns:190px 1fr;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;min-height:400px}
-.rc-nav{background:#060b17;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column}
-.rc-nav-item{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);transition:all .15s}
-.rc-nav-item:hover{background:rgba(255,255,255,.03)}
+.rc-layout{display:grid;grid-template-columns:190px 1fr;gap:0;border:1px solid #334155;border-radius:12px;overflow:hidden;min-height:400px}
+.rc-nav{background:#060b17;border-right:1px solid #1e293b;display:flex;flex-direction:column}
+.rc-nav-item{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid #1e293b;transition:all .15s}
+.rc-nav-item:hover{background:#111827}
 .rc-nav-active{background:rgba(45,212,191,.05) !important;border-left:2px solid #2dd4bf}
 .rc-panel{background:#07101f;padding:18px 20px;overflow-y:auto;max-height:640px}
 .rc-field-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:4px}
@@ -795,29 +795,42 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 
 /* ── MANAGEMENT TAB ── */
-.mh-priority-action{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:7px;border:1px solid rgba(255,255,255,.06)}
+.mh-priority-action{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;background:#0f172a;border-radius:7px;border:1px solid #1e293b}
 .mh-priority-n{width:28px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0;border:1px solid}
 .mh-priority-body{flex:1}
 .mh-priority-text{font-size:13px;color:#94a3b8;line-height:1.5;margin-bottom:5px}
 .mh-priority-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .mh-pill-tabs{display:flex;gap:6px;flex-wrap:wrap}
-.mh-pill-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);cursor:pointer;transition:all .15s}
+.mh-pill-btn{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#0f172a;cursor:pointer;transition:all .15s}
 .mh-pill-btn:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
 .mh-pill-active{background:rgba(45,212,191,.06) !important;border-color:rgba(45,212,191,.2) !important}
-.mh-brief-header{padding:16px 18px 12px;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;background:#07101f;z-index:2}
+.mh-brief-header{padding:16px 18px 12px;border-bottom:1px solid #1e293b;position:sticky;top:0;background:#07101f;z-index:2}
 .mh-brief-body{padding:14px 18px;display:flex;flex-direction:column;gap:12px}
 .mh-section-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:5px}
 .mh-actions-table{display:flex;flex-direction:column;gap:2px}
 .mh-action-header{display:grid;grid-template-columns:90px 1fr 150px;gap:8px;padding:4px 8px;font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em}
-.mh-action-row{display:grid;grid-template-columns:90px 1fr 150px;gap:8px;padding:8px;background:rgba(255,255,255,.02);border-radius:5px;align-items:start;margin-bottom:2px}
+.mh-action-row{display:grid;grid-template-columns:90px 1fr 150px;gap:8px;padding:8px;background:#0f172a;border-radius:5px;align-items:start;margin-bottom:2px}
 .mh-action-timing{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.04em}
 .mh-action-text{font-size:13px;color:#64748b;line-height:1.5}
 .mh-action-metric{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.03em;color:#475569}
 .mh-phase2-item{font-size:12.5px;color:#475569;line-height:1.55;display:flex;align-items:baseline;gap:6px}
 /* ── BOARD TAB ── */
-.board-condition{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:#64748b;padding:7px 10px;background:rgba(255,255,255,.02);border-radius:5px;line-height:1.45}
+.board-condition{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:#64748b;padding:7px 10px;background:#0f172a;border-radius:5px;line-height:1.45}
 
 /* ── BRAND OVERRIDES P1.1 ── */
+/* Table / evo cells */
+.evo-td{background:#0a0f1e;border:1px solid #1e293b}
+.evo-th{background:#0a0f1e;border:1px solid #1e293b}
+/* Movement bar */
+.movement-bar{background:#0f172a;border-color:#334155}
+/* Section wrappers */
+.gaps-wrap{background:#0f172a;border:1px solid #334155}
+.rc-wrap{background:#0f172a;border:1px solid #334155}
+/* Board conditions */
+.board-condition{background:#0f172a;border:1px solid #334155}
+/* Fin blocks */
+.fin-block{background:#0f172a;border:1px solid #334155}
+.fin-scenarios{background:#0f172a;border:1px solid #334155}
 .card{background:#0f172a !important;border-color:#334155 !important}
 .card:hover{background:#162032 !important;border-color:#475569 !important}
 .zone3{background:#0f172a !important;border-color:#334155 !important}
@@ -835,7 +848,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .mh-action-expand-trigger:hover{color:#64748b}
 .mh-expand-section{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .mh-expand-section.open{max-height:500px}
-.mh-expand-inner{padding:8px 0 4px;border-top:1px solid rgba(255,255,255,.05);margin-top:6px}
+.mh-expand-inner{padding:8px 0 4px;border-top:1px solid #1e293b;margin-top:6px}
 .mh-expand-row{font-size:11px;color:#475569;line-height:1.6;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
 .mh-expand-row:last-child{border-bottom:none}
 .mh-expand-lbl{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.08em;color:#334155;margin-bottom:1px;margin-top:6px}
@@ -875,10 +888,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 1 -->
     <div class="zone1">
-      <button class="info-btn" onclick="showInfo('zone1', this)" title="What is this?"><span>i</span></button>
       <div class="verdict-grid">
         <div class="verdict-left">
-          <span class="decision-label">FINAL DECISION</span>
+          <span class="decision-label">FINAL DECISION <button class="info-btn" onclick="showInfo('zone1', this)" title="What is this?"><span>i</span></button></span>
           <div class="decision-title">Approve With<br><span>Conditions</span></div>
           <div class="decision-q">Should TechFlow proceed with a phased EU market entry, allocating $500K to establish GDPR-compliant infrastructure, hire 3 EU FTEs, and close 3 enterprise logos in UK, Germany, and France by Q3 2025?</div>
           <div class="winning-option">
@@ -992,9 +1004,8 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <!-- ZONE 2 -->
     <div class="zone2">
       <div class="card">
-        <button class="info-btn" onclick="showInfo('why', this)" title="What is this?"><span>i</span></button>
         <div class="card-header">
-          <span class="card-title">WHY THIS DECISION</span>
+          <span class="card-title">WHY THIS DECISION <button class="info-btn" onclick="showInfo('why', this)" title="What is this?"><span>i</span></button></span>
           <button class="card-link" onclick="showTab('options',document.querySelectorAll('.tab')[1])">OPTIONS →</button>
         </div>
         <div class="reasons">
@@ -1015,10 +1026,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
         <!-- PRIMARY CONCERN — expandable, no overflow:hidden -->
         <div class="concern-card" id="concern-card">
-          <button class="info-btn" onclick="event.stopPropagation();showInfo('concern', this)" title="What is this?"><span>i</span></button>
           <div class="card-trigger" onclick="toggleExpand('concern-card')">
             <div class="concern-title">
-              PRIMARY CONCERN
+              PRIMARY CONCERN <button class="info-btn" onclick="event.stopPropagation();showInfo('concern', this)" title="What is this?"><span>i</span></button>
               <span class="toggle-arrow">▾</span>
             </div>
             <div class="concern-text">CFO, CTO, and LEGAL converged without surfacing domain-specific risks — unusual for a $500K cross-border commitment. The deliberation record warrants a second look before execution.
@@ -1048,10 +1058,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
         <!-- OPEN QUESTION — expandable -->
         <div class="openq-card" id="openq-card">
-          <button class="info-btn" onclick="event.stopPropagation();showInfo('openq', this)" title="What is this?"><span>i</span></button>
           <div class="card-trigger" onclick="toggleExpand('openq-card')">
             <div class="openq-title">
-              OPEN QUESTION
+              OPEN QUESTION <button class="info-btn" onclick="event.stopPropagation();showInfo('openq', this)" title="What is this?"><span>i</span></button>
               <span class="toggle-arrow">▾</span>
             </div>
             <div class="openq-badges" style="margin-top:4px"><span class="openq-badge">CTO</span><span class="openq-badge">LEGAL</span><span class="openq-badge">CFO</span></div>
@@ -1084,10 +1093,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 3: Conditions -->
     <div class="zone3">
-      <button class="info-btn" onclick="showInfo('conditions', this)" title="What is this?"><span>i</span></button>
       <div class="zone-header">
         <div>
-          <div class="zone-title">WHAT HAS TO HAPPEN BEFORE THIS MOVES FORWARD</div>
+          <div class="zone-title">WHAT HAS TO HAPPEN BEFORE THIS MOVES FORWARD <button class="info-btn" onclick="showInfo('conditions', this)" title="What is this?"><span>i</span></button></div>
           <div class="zone-sub">Top conditions by cross-role frequency — each must clear before execution</div>
         </div>
         <span class="zone-num">40+</span>
@@ -1138,10 +1146,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 4: Execution -->
     <div class="zone4">
-      <button class="info-btn" onclick="showInfo('execution', this)" title="What is this?"><span>i</span></button>
       <div class="seq-hdr">
         <div>
-          <div class="zone-title">EXECUTION SEQUENCE</div>
+          <div class="zone-title">EXECUTION SEQUENCE <button class="info-btn" onclick="showInfo('execution', this)" title="What is this?"><span>i</span></button></div>
           <div class="zone-sub">Gate-dependency chain — Phase 2 capital locked until GO/NO-GO clears</div>
         </div>
       </div>
@@ -1243,7 +1250,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
       <!-- RIGHT: option comparison visual -->
       <div class="opt-hero-right" id="opt-hero-right">
-        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px">OPTION COMPARISON · 5 DIMENSIONS <span style="color:#475569;font-weight:400">· hover any bar</span></div>
+        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:12px;border-bottom:1px solid #1e293b;padding-bottom:8px">OPTION COMPARISON · 5 DIMENSIONS <span style="color:#475569;font-weight:400">· hover any bar</span></div>
         <div id="opt-chart-hover-panel">
           <div id="opt-hover-stat" style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:3px"></div>
           <div id="opt-hover-opt" style="font-size:10px;font-weight:700;font-family:'DM Mono',monospace;color:#f1f5f9;margin-bottom:4px"></div>
@@ -1335,10 +1342,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div style="display:flex;align-items:flex-start;gap:10px">
       <div>
         <div class="ri-section-eyebrow">RISK &amp; INTELLIGENCE</div>
-        <div class="ri-section-title">Exposure Matrix + Financial Model</div>
+        <div class="ri-section-title">Exposure Matrix + Financial Model <button class="info-btn" onclick="showInfo('risk', this)" title="What is this?"><span>i</span></button></div>
         <div class="ri-section-sub">6 risks plotted by consensus impact × probability. CFO unit economics and scenario analysis below. Click any dot to expand.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('risk',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#2dd4bf;border-color:#2dd4bf"></div>CEO</div>
@@ -1901,10 +1907,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div style="display:flex;align-items:flex-start;gap:10px">
       <div>
         <div class="ri-section-eyebrow">THE ROOM</div>
-        <div class="ri-section-title">How 7 Executives Deliberated to Unanimity</div>
+        <div class="ri-section-title">How 7 Executives Deliberated to Unanimity <button class="info-btn" onclick="showInfo('room', this)" title="What is this?"><span>i</span></button></div>
         <div class="ri-section-sub">Not the outcome — the deliberation itself. How each role entered, what evidence moved them, where they pushed back, and what would bring them back to the table.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('room',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
   </div>
 
@@ -2172,7 +2177,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="rc-panel">
         <div id="rcpanel-CEO" style="display:block">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #2dd4bf44;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CEO</div>
@@ -2185,7 +2190,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-support">APPROVE</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">72%</div></div>
@@ -2228,7 +2233,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 </div><div id="rcpanel-CFO" style="display:none">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:2px solid #34d39944;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CFO</div>
@@ -2241,7 +2246,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-notyet">NOT YET</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">58%</div></div>
@@ -2284,7 +2289,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 </div><div id="rcpanel-CHRO" style="display:none">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:2px solid #f472b444;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CHRO</div>
@@ -2297,7 +2302,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-support">APPROVE</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">65%</div></div>
@@ -2340,7 +2345,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 </div><div id="rcpanel-COO" style="display:none">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #38bdf844;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">COO</div>
@@ -2353,7 +2358,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">70%</div></div>
@@ -2362,7 +2367,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div style="color:#334155;font-size:12px">›</div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#38bdf8;font-family:'DM Mono',monospace;font-weight:700">76%</div></div>
     </div>
-    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:2px 8px;border-radius:4px'>HELD</div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:#111827;border:1px solid #1e293b;padding:2px 8px;border-radius:4px'>HELD</div>
   </div>
 
   <!-- Rationale -->
@@ -2396,7 +2401,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 </div><div id="rcpanel-CSO" style="display:none">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #818cf844;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CSO</div>
@@ -2409,7 +2414,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-support">APPROVE</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">75%</div></div>
@@ -2452,7 +2457,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 </div><div id="rcpanel-CTO" style="display:none">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #7dd3fc44;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CTO</div>
@@ -2465,7 +2470,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">65%</div></div>
@@ -2474,7 +2479,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div style="color:#334155;font-size:12px">›</div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#7dd3fc;font-family:'DM Mono',monospace;font-weight:700">72%</div></div>
     </div>
-    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:2px 8px;border-radius:4px'>HELD</div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:#111827;border:1px solid #1e293b;padding:2px 8px;border-radius:4px'>HELD</div>
   </div>
 
   <!-- Rationale -->
@@ -2508,7 +2513,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 </div><div id="rcpanel-LEGAL" style="display:none">
   <!-- Header -->
-  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #1e293b">
     <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:2px solid #a78bfa44;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
     <div style="flex:1">
       <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">LEGAL</div>
@@ -2521,7 +2526,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- Position trajectory -->
-  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:#0f172a;border-radius:7px">
     <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
     <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">70%</div></div>
@@ -2530,7 +2535,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div style="color:#334155;font-size:12px">›</div>
       <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#a78bfa;font-family:'DM Mono',monospace;font-weight:700">72%</div></div>
     </div>
-    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:2px 8px;border-radius:4px'>HELD</div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:#111827;border:1px solid #1e293b;padding:2px 8px;border-radius:4px'>HELD</div>
   </div>
 
   <!-- Rationale -->
@@ -2587,10 +2592,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div style="display:flex;align-items:flex-start;gap:10px">
       <div>
         <div class="ri-section-eyebrow">MANAGEMENT HANDOFF</div>
-        <div class="ri-section-title">What Each Team Does Next</div>
+        <div class="ri-section-title">What Each Team Does Next <button class="info-btn" onclick="showInfo('mgmt', this)" title="What is this?"><span>i</span></button></div>
         <div class="ri-section-sub">Per-department action briefs sourced from the deliberation record. Every item has a timing and success metric. Select a department to see their full brief.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('mgmt',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
   </div>
   <div class="fin-scenarios" style="margin-bottom:14px">
@@ -2633,13 +2637,13 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #818cf833;width:28px;height:28px;min-width:28px"></div>
   <div><div style="font-size:10px;font-weight:700;color:#818cf8;font-family:'DM Mono',monospace">CSO</div><div style="font-size:9px;color:#475569">Officer</div></div>
 </button></div>
-  <div style="border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;margin-top:8px;background:#07101f"><div id="mhpanel-CEO" style="display:block">
+  <div style="border:1px solid #334155;border-radius:12px;overflow:hidden;margin-top:8px;background:#07101f"><div id="mhpanel-CEO" style="display:block">
   <div class="mh-brief-header">
     <div style="display:flex;align-items:center;gap:12px">
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #2dd4bf33;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CEO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF EXECUTIVE OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #2dd4bf33;border-radius:0 6px 6px 0">Governance and strategic ownership. Board approval on Feb 15 is the controlling event — every other workstream gates on it. <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 conf 82% · "governance gate, not an analytical one" · Feb 15 board vote is the controlling event for the entire decision architecture</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #2dd4bf33;border-radius:0 6px 6px 0">Governance and strategic ownership. Board approval on Feb 15 is the controlling event — every other workstream gates on it. <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 conf 82% · "governance gate, not an analytical one" · Feb 15 board vote is the controlling event for the entire decision architecture</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2659,7 +2663,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#2dd4bf">›</span> May 2025 — Chair all 4 GO/NO-GO sign-offs — CEO sign-off required <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO gate</span></div><div class="mh-phase2-item"><span style="color:#2dd4bf">›</span> Ongoing — Monitor Competitor X EU traction and account overlap <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Competitive intel</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">Board approval gate · EU strategic mandate · May GO/NO-GO authority</div>
     </div>
@@ -2671,7 +2675,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:2px solid #34d39933;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CFO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF FINANCIAL OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #34d39933;border-radius:0 6px 6px 0">Financial kill triggers and phase gate enforcement. Phase 2 does not release without CFO sign-off. CAC measurement is not optional. <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · $175K LTV / $50K CAC ceiling = 3.5× return floor · Phase 2 $350K locked behind GO/NO-GO · CAC tracking from first day of EU GTM, not at deal close</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #34d39933;border-radius:0 6px 6px 0">Financial kill triggers and phase gate enforcement. Phase 2 does not release without CFO sign-off. CAC measurement is not optional. <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · $175K LTV / $50K CAC ceiling = 3.5× return floor · Phase 2 $350K locked behind GO/NO-GO · CAC tracking from first day of EU GTM, not at deal close</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2691,7 +2695,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#34d399">›</span> Monthly — Confirm 12-month runway floor maintained post-investment <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Runway floor</span></div><div class="mh-phase2-item"><span style="color:#34d399">›</span> Jul 2025 — Hard CAC measurement after 2 EU deals vs $50K ceiling — KILL GATE <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· CAC kill trigger</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">Phase 1 $150K cap · GO/NO-GO financial criteria · CAC kill trigger $50K · Runway floor 12 months</div>
     </div>
@@ -2703,7 +2707,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #7dd3fc33;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CTO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF TECHNOLOGY OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #7dd3fc33;border-radius:0 6px 6px 0">GDPR architecture is the controlling technical unknown. Must be scoped and cost-confirmed by May GO/NO-GO or Phase 2 cannot release. <span class="cite"><button class="cite-btn">CTO·R2</button><div class="cite-tip">CTO R2 conf 72% — lowest on table · architecture unscoped · "if separate EU cloud region required, Phase 1 budget insufficient" · weekly status gate with LEGAL required</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #7dd3fc33;border-radius:0 6px 6px 0">GDPR architecture is the controlling technical unknown. Must be scoped and cost-confirmed by May GO/NO-GO or Phase 2 cannot release. <span class="cite"><button class="cite-btn">CTO·R2</button><div class="cite-tip">CTO R2 conf 72% — lowest on table · architecture unscoped · "if separate EU cloud region required, Phase 1 budget insufficient" · weekly status gate with LEGAL required</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2723,7 +2727,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#7dd3fc">›</span> May 2025 — CTO sign-off on GDPR certification before GO/NO-GO — KILL GATE <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO criteria</span></div><div class="mh-phase2-item"><span style="color:#7dd3fc">›</span> Q3 2025 — EU data residency infrastructure live before first customer <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Launch ready</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">GDPR architecture design and cost estimate · EU data residency build · Technical GO/NO-GO sign-off</div>
     </div>
@@ -2735,7 +2739,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:2px solid #a78bfa33;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">LEGAL</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF LEGAL OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #a78bfa33;border-radius:0 6px 6px 0">Compliance sequence is non-negotiable. No EU data processing until LEGAL certifies GDPR. No FTE offers until entity formation complete. <span class="cite"><button class="cite-btn">LEGAL·R0</button><div class="cite-tip">LEGAL R0 conf 70% · "GDPR is a legal requirement, not a best practice. External EU counsel validation required before any EU customer data is processed — no exceptions"</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #a78bfa33;border-radius:0 6px 6px 0">Compliance sequence is non-negotiable. No EU data processing until LEGAL certifies GDPR. No FTE offers until entity formation complete. <span class="cite"><button class="cite-btn">LEGAL·R0</button><div class="cite-tip">LEGAL R0 conf 70% · "GDPR is a legal requirement, not a best practice. External EU counsel validation required before any EU customer data is processed — no exceptions"</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2755,7 +2759,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#a78bfa">›</span> May 2025 — LEGAL sign-off on GDPR compliance — GO/NO-GO criteria <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO gate</span></div><div class="mh-phase2-item"><span style="color:#a78bfa">›</span> Pre-hire — IP assignment agreements jurisdiction-specific per FTE <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Compliance</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">GDPR legal certification · EU employment law compliance · DPA/SCC execution · CBA review</div>
     </div>
@@ -2767,7 +2771,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:2px solid #f472b433;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CHRO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF PEOPLE OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #f472b433;border-radius:0 6px 6px 0">No FTE offers until entity and GDPR validated. EU comp bands must exist before any offer letter is issued. EOR is the contingency, not the plan. <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 conf 76% · "EU hiring timelines 16–20 weeks across 3 jurisdictions" · no FTE offers before GDPR gate · comp bands must exist before any offer letter</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #f472b433;border-radius:0 6px 6px 0">No FTE offers until entity and GDPR validated. EU comp bands must exist before any offer letter is issued. EOR is the contingency, not the plan. <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 conf 76% · "EU hiring timelines 16–20 weeks across 3 jurisdictions" · no FTE offers before GDPR gate · comp bands must exist before any offer letter</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2787,7 +2791,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#f472b4">›</span> Pre-offer — EU entity confirmed before any offer letter issued <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Legal prerequisite</span></div><div class="mh-phase2-item"><span style="color:#f472b4">›</span> Q3 2025 — 3 EU FTEs onboarded across UK, Germany, France <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Launch staffed</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">3 EU FTE hires · EU comp bands (Radford EMEA) · EOR vendor selection · Works council compliance</div>
     </div>
@@ -2799,7 +2803,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #38bdf833;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">COO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF OPERATING OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #38bdf833;border-radius:0 6px 6px 0">Operational delivery model must be confirmed before Phase 2 starts. Current team is at capacity — EU adds require EOR or US backfills. <span class="cite"><button class="cite-btn">COO·R2</button><div class="cite-tip">COO R2 conf 76% · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16–20 week direct" · current team at capacity · EU operational infrastructure required before Q3</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #38bdf833;border-radius:0 6px 6px 0">Operational delivery model must be confirmed before Phase 2 starts. Current team is at capacity — EU adds require EOR or US backfills. <span class="cite"><button class="cite-btn">COO·R2</button><div class="cite-tip">COO R2 conf 76% · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16–20 week direct" · current team at capacity · EU operational infrastructure required before Q3</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2819,7 +2823,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#38bdf8">›</span> Q3 2025 — EU operational infrastructure ready for launch <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Launch ready</span></div><div class="mh-phase2-item"><span style="color:#38bdf8">›</span> Pre-launch — EU SLA and support coverage model defined and staffed <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Customer-ready</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">EU delivery model · EOR vendor selection · Team capacity plan · EU infrastructure readiness</div>
     </div>
@@ -2831,7 +2835,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #818cf833;width:44px;height:44px;min-width:44px;border-radius:50%"></div>
       <div><div style="font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9">CSO</div><div style="font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.04em">CHIEF STRATEGY OFFICER</div></div>
     </div>
-    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:rgba(255,255,255,.02);border-left:2px solid #818cf833;border-radius:0 6px 6px 0">Pipeline stewardship and competitive tracking. The 3 EU prospects are the demand signal that drives the GO/NO-GO case. <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 conf 81% · "3 inbound EU prospects confirmed" · "Q3 2025 is a competitive response window, not an internal target" · Competitor X pursuing same logos</div></span></div>
+    <div style="margin-top:10px;font-size:13px;color:#64748b;line-height:1.6;padding:8px 12px;background:#0f172a;border-left:2px solid #818cf833;border-radius:0 6px 6px 0">Pipeline stewardship and competitive tracking. The 3 EU prospects are the demand signal that drives the GO/NO-GO case. <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 conf 81% · "3 inbound EU prospects confirmed" · "Q3 2025 is a competitive response window, not an internal target" · Competitor X pursuing same logos</div></span></div>
   </div>
   <div class="mh-brief-body">
     <div>
@@ -2851,7 +2855,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#818cf8">›</span> Apr 15 — Confirm ≥2 of 3 EU prospects active — GO/NO-GO criteria <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Pulse check</span></div><div class="mh-phase2-item"><span style="color:#818cf8">›</span> Q3 2025 — First EU logo closed — baseline measurement <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Revenue milestone</span></div></div>
     </div>
-    <div style="padding:8px 12px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05)">
+    <div style="padding:8px 12px;background:#0f172a;border-radius:6px;border:1px solid #1e293b">
       <div class="mh-section-lbl">OWNS</div>
       <div style="font-size:12.5px;color:#475569;line-height:1.5">EU prospect pipeline (3 accounts) · Competitive monitoring · Apr 15 pulse check · ACV validation</div>
     </div>
@@ -2863,10 +2867,9 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div style="display:flex;align-items:flex-start;gap:10px">
       <div>
         <div class="ri-section-eyebrow">BOARD PRE-READ</div>
-        <div class="ri-section-title">One-Page Decision Record</div>
+        <div class="ri-section-title">One-Page Decision Record <button class="info-btn" onclick="showInfo('board', this)" title="What is this?"><span>i</span></button></div>
         <div class="ri-section-sub">Complete governance record for fiduciary review. Decision, vote record, financial guardrails, open risk, audit trail. Readable in under 5 minutes.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('board',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
       <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
@@ -2890,31 +2893,31 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">VOTE RECORD · R2 FINAL <button class="info-btn" onclick="showInfo('voterec',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
         <div class="gaps-title" style="font-size:16px">7–0 Conditional Approval</div>
       </div>
-      <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #2dd4bf33;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#2dd4bf;font-family:'DM Mono',monospace">CEO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">Governance gate, not analytical. Strategic case clear — 3 prospects, EU Pillar 2, Competitor X moving.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#2dd4bf">82%</span></div>
-</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:1.5px solid #34d39933;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#34d399;font-family:'DM Mono',monospace">CFO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">$525K LTV vs $500K investment. Two-tranche structure sequences spend correctly.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#34d399">74%</span></div>
-</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:1.5px solid #f472b433;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#f472b4;font-family:'DM Mono',monospace">CHRO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">OPT-2 sequences compliance before revenue — legally mandatory. No FTEs until GO/NO-GO clears.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#f472b4">76%</span></div>
-</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #38bdf833;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#38bdf8;font-family:'DM Mono',monospace">COO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">Operational delivery confirmed with EOR contingency. Phase 1 gates protect against over-commitment.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#38bdf8">76%</span></div>
-</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #818cf833;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#818cf8;font-family:'DM Mono',monospace">CSO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">3 confirmed inbound prospects. Q3 2025 is a competitive response window — delay means loss.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#818cf8">81%</span></div>
-</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #7dd3fc33;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#7dd3fc;font-family:'DM Mono',monospace">CTO</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">GDPR architecture must be scoped. Controlling technical unknown — CONDITIONAL pending confirmation.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#7dd3fc">72%</span></div>
-</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
+</div><div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid #1e293b">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:1.5px solid #a78bfa33;width:30px;height:30px;min-width:30px"></div>
   <div style="flex:1"><div style="font-size:10px;font-weight:700;color:#a78bfa;font-family:'DM Mono',monospace">LEGAL</div><div style="font-size:12px;color:#64748b;line-height:1.4;margin-top:1px">Compliance sequence non-negotiable. No EU data processing until external counsel certifies GDPR.</div></div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0"><span class="stance-pill sp-conditional" style="font-size:7px">AWC</span><span style="font-size:9px;font-family:'DM Mono',monospace;color:#a78bfa">72%</span></div>
@@ -2927,12 +2930,12 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
           <div class="gaps-title" style="font-size:16px">Kill Triggers + Return Floor</div>
         </div>
         <div style="padding:10px 16px;display:flex;flex-direction:column;gap:6px">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#64748b">Total investment </div><div style="font-family:Fraunces,serif;font-size:18px;color:#f1f5f9">$500K</div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#64748b">Phase 1 pre-GO/NO-GO </div><div style="font-family:Fraunces,serif;font-size:18px;color:#2dd4bf">$150K</div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#64748b">Phase 2 post-GO/NO-GO <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 2 $350K locked behind GO/NO-GO · does not release unless all 4 criteria pass</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#38bdf8">$350K</div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#fbbf24">CAC kill trigger <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · CAC ceiling $50K · above ceiling Phase 2 GTM halts · CFO remodels, board notified within 30 days</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#fbbf24">$50K</div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#34d399">LTV per customer <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU enterprise customer · 3 prospects confirmed · $525K total pipeline</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#34d399">$175K</div></div>
-<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:12px;color:#34d399">Minimum return floor </div><div style="font-family:Fraunces,serif;font-size:18px;color:#34d399">3.5×</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e293b"><div style="font-size:12px;color:#64748b">Total investment </div><div style="font-family:Fraunces,serif;font-size:18px;color:#f1f5f9">$500K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e293b"><div style="font-size:12px;color:#64748b">Phase 1 pre-GO/NO-GO </div><div style="font-family:Fraunces,serif;font-size:18px;color:#2dd4bf">$150K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e293b"><div style="font-size:12px;color:#64748b">Phase 2 post-GO/NO-GO <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 2 $350K locked behind GO/NO-GO · does not release unless all 4 criteria pass</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#38bdf8">$350K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e293b"><div style="font-size:12px;color:#fbbf24">CAC kill trigger <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · CAC ceiling $50K · above ceiling Phase 2 GTM halts · CFO remodels, board notified within 30 days</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#fbbf24">$50K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e293b"><div style="font-size:12px;color:#34d399">LTV per customer <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU enterprise customer · 3 prospects confirmed · $525K total pipeline</div></span> </div><div style="font-family:Fraunces,serif;font-size:18px;color:#34d399">$175K</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1e293b"><div style="font-size:12px;color:#34d399">Minimum return floor </div><div style="font-family:Fraunces,serif;font-size:18px;color:#34d399">3.5×</div></div>
         </div>
       </div>
       <div style="padding:14px 16px;background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:10px">
@@ -2948,7 +2951,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="board-condition"><span class="gap-blocker">KILL GATE</span> Board must approve $500K at Feb 15 meeting</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> GDPR compliance certified before EU data processing</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> EU CAC ≤$50K measured after first 2 EU deals</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> EU entity formation before any FTE hiring commitment</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> Phase 1 spend ≤$150K before GO/NO-GO</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> 12-month runway floor maintained post-investment</div>
     </div>
   </div>
-  <div style="padding:14px 18px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px">
+  <div style="padding:14px 18px;background:#0f172a;border:1px solid #1e293b;border-radius:10px">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
       <div>
         <div class="fin-block-label" style="margin-bottom:6px">AUDIT TRAIL</div>
@@ -3010,7 +3013,8 @@ function toggleExpand(id) {
     if (!tipContent) return;
     // Rebuild content every time
     tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
-    // Show off-screen to measure true height at CSS-defined width (360px)
+    // Clear all inline styles first so CSS controls width
+    tip.style.cssText = '';
     tip.style.display = 'block';
     tip.style.left = '-9999px';
     tip.style.top = '-9999px';
@@ -3081,7 +3085,7 @@ function openTLGate(id, el) {
   const c = GATE_COLORS[data.type];
   inner.innerHTML = `
     <div class="tl-drawer-bar ${data.type}"></div>
-    <div style="padding:14px 18px 10px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;gap:12px">
+    <div style="padding:14px 18px 10px;border-bottom:1px solid #1e293b;display:flex;justify-content:space-between;gap:12px">
       <div>
         <div style="font-size:9px;font-weight:700;letter-spacing:.1em;color:${c};font-family:'DM Mono',monospace;margin-bottom:4px">${data.phase}</div>
         <div style="font-family:'Fraunces',serif;font-size:16px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:3px">${data.title}</div>
@@ -3090,7 +3094,7 @@ function openTLGate(id, el) {
       <div onclick="openTLGate('${id}',null)" style="cursor:pointer;font-size:16px;color:#475569;padding:2px 6px;flex-shrink:0">✕</div>
     </div>
     ${data.items.map(item=>`
-    <div style="padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:12px;align-items:flex-start">
+    <div style="padding:13px 18px;border-bottom:1px solid #1e293b;display:flex;gap:12px;align-items:flex-start">
       <div style="flex-shrink:0;margin-top:2px">
         <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:3px;white-space:nowrap;color:${c};background:rgba(0,0,0,.3);border:1px solid ${c}44">${item.owner}</div>
         <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 5px;border-radius:3px;margin-top:3px;white-space:nowrap;color:#94a3b8;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08)">${item.gate}</div>
