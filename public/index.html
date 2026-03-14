@@ -3257,39 +3257,49 @@ function toggleExpand(id) {
 (function() {
   var tip = document.getElementById('cite-tooltip');
   if (!tip) return;
-  var activeBtn = null;
 
-  document.addEventListener('mouseover', function(e) {
-    var btn = e.target.closest('.cite-btn');
-    if (!btn) { tip.style.display = 'none'; activeBtn = null; return; }
-    activeBtn = btn;
+  function showTip(btn) {
     var cite = btn.closest('.cite');
     if (!cite) return;
     var tipContent = cite.querySelector('.cite-tip');
     if (!tipContent) return;
-    // Rebuild content every time
     tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
-    // Position off-screen first to measure height, then move to final position
+    tip.style.display = 'block';
     tip.style.left = '-9999px';
     tip.style.top = '0px';
-    tip.style.display = 'block';
     var h = tip.offsetHeight;
     var w = 360;
     var rect = btn.getBoundingClientRect();
     var x = rect.left + rect.width / 2 - w / 2;
     var y = rect.top - h - 10;
-    if (rect.top - h - 10 < 8) y = rect.bottom + 8;
+    if (y < 8) y = rect.bottom + 8;
     x = Math.max(10, Math.min(x, window.innerWidth - w - 10));
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
+  }
+
+  function hideTip() {
+    tip.style.display = 'none';
+  }
+
+  document.addEventListener('mouseover', function(e) {
+    var btn = e.target.closest('.cite-btn');
+    if (btn) { showTip(btn); }
   });
 
   document.addEventListener('mouseout', function(e) {
-    if (!e.target.closest('.cite-btn')) return;
+    var btn = e.target.closest('.cite-btn');
+    if (!btn) return;
     var rt = e.relatedTarget;
-    if (rt && (rt.closest('.cite-btn') || rt === tip || rt.closest('#cite-tooltip'))) return;
-    tip.style.display = 'none';
-    activeBtn = null;
+    // Only hide if mouse left the btn entirely (not moving to a child or the tooltip)
+    if (!rt || (!rt.closest('.cite-btn') && rt !== tip && !tip.contains(rt))) {
+      hideTip();
+    }
+  });
+
+  // Hide on any click outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.cite-btn') && !tip.contains(e.target)) hideTip();
   });
 })();
 
