@@ -135,7 +135,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .zone1::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.07),transparent 70%);pointer-events:none}
 .verdict-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .verdict-left{flex:1;min-width:220px}
-.verdict-right{display:flex;flex-direction:column;gap:14px;min-width:200px}
+.verdict-right{display:flex;flex-direction:column;gap:22px;min-width:200px}
 .decision-label{font-size:9px;font-weight:700;letter-spacing:.12em;color:#f59e0b;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace}
 .decision-title{font-size:clamp(22px,3vw,36px);font-weight:900;letter-spacing:-.03em;line-height:1.1;color:var(--text-primary);margin-top:9px;letter-spacing:-.02em}
 .decision-title span{color:var(--brand-primary)}
@@ -153,7 +153,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .conf-bar{margin-top:4px;position:relative;height:3px;background:rgba(255,255,255,.06);border-radius:2px}
 .conf-fill{position:absolute;height:100%;background:rgba(6,182,212,.35);border-radius:2px}
 .conf-avg{position:absolute;width:3px;height:100%;background:var(--brand-primary);transform:translateX(-50%)}
-.roles-meta{font-size:10px;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:6px;text-align:right}
+.roles-meta{font-size:10px;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:8px;text-align:right}
 .roles-grid{display:flex;gap:4px;flex-wrap:wrap}
 .role-pill{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px;background:#111827;border:1px solid #334155;border-radius:12px;flex:1;min-width:52px;transition:border-color .15s,background .15s}
 .role-pill:hover{border-color:rgba(255,255,255,.18);background:#162032;cursor:default}
@@ -582,7 +582,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
 /* ── RISK MATRIX ── */
-.rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
+.rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:8px}
 .rm-y-axis{display:flex;flex-direction:column;align-items:center;padding-right:10px;padding-top:8px}
 .rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
 .rm-axis-ticks{position:relative;height:212px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
@@ -643,7 +643,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
 /* ── Q&A TWO-COL ── */
-.ri-qa-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.ri-qa-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
 @media(max-width:900px){.ri-qa-row{grid-template-columns:1fr}}
 
 /* Gaps panel */
@@ -2304,7 +2304,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="flex:1;height:1px;background:#1e293b"></div>
   </div>
   <!-- ZONE 1: STANCE EVOLUTION TABLE -->
-  <div style="width:100%">
+  <div style="width:100%;background:#0f172a;border:1px solid #334155;border-radius:16px;padding:20px 24px">
     <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">STANCE EVOLUTION · R0→R1→R2 · Hover any cell for source <button class="info-btn" onclick="showInfo('stanceevo',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="overflow-x:auto">
       <table style="width:100%;border-collapse:separate;border-spacing:1px;table-layout:fixed">
@@ -2479,7 +2479,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="flex:1;height:1px;background:#1e293b"></div>
   </div>
   <!-- ZONE 2: ROLE DELIBERATION — LEFT NAV + RIGHT PANEL -->
-  <div>
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:16px;padding:20px 24px">
     <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap">DELIBERATION RECORD · PER ROLE · Select a role to see their full argument, what moved them, and what would change their position <button class="info-btn" onclick="showInfo('deliberationrec', this)" title="What is this?"><span>i</span></button></div>
     <div class="rc-layout">
       <div class="rc-nav">
@@ -2995,6 +2995,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="flex:1;height:1px;background:#1e293b"></div>
   </div>
   <!-- ZONE 3: GROUPTHINK ANALYSIS -->
+  <div style="background:#0f172a;border:1px solid #334155;border-radius:16px;padding:20px 24px">
   <div class="zone3-groupthink" style="padding:14px 18px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:10px">
     <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap">
       <div style="flex:1;min-width:220px">
@@ -3007,6 +3008,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
+    </div>
 
 </div>
   <div id="tab-mgmt" class="panel">
