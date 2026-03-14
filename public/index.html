@@ -759,6 +759,40 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .hms-badge.pulse{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:#f59e0b}
 .hms-desc{font-size:10px;color:#334155;text-align:center;line-height:1.4;margin-top:2px}
 
+
+/* ── THE ROOM TAB ── */
+.movement-bar{display:flex;gap:10px;flex-wrap:wrap;padding:12px 16px;background:rgba(45,212,191,.03);border:1px solid rgba(45,212,191,.1);border-radius:10px;align-items:center}
+.mb-stat{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;min-width:70px}
+.mb-n{font-family:'Fraunces',serif;font-size:24px;font-weight:300;color:#f1f5f9;line-height:1}
+.mb-l{font-size:8px;font-weight:700;letter-spacing:.08em;color:#475569;font-family:'DM Mono',monospace;text-align:center}
+.mb-div{width:1px;background:rgba(255,255,255,.06);align-self:stretch;flex-shrink:0}
+
+/* Stance evolution table */
+.evo-th{background:#0a0f1e;padding:8px 10px;text-align:center;font-size:8px;font-weight:700;letter-spacing:.08em;color:#64748b;font-family:'DM Mono',monospace;white-space:nowrap;border:1px solid rgba(255,255,255,.04)}
+.evo-td{border:1px solid rgba(255,255,255,.03);padding:0}
+.evo-role-td{background:#080d1a;padding:8px 12px}
+.evo-round-cell{background:#080d1a;padding:8px 10px;text-align:center;vertical-align:middle}
+.evo-round-cell.moved{background:rgba(45,212,191,.03)}
+.evo-conf{font-size:9px;color:#475569;font-family:'DM Mono',monospace;margin-top:3px}
+.evo-avatar{border-radius:50%;background:#1e293b;background-size:cover;background-position:center top;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0}
+
+/* Stance pills */
+.stance-pill{font-size:8px;font-weight:700;letter-spacing:.06em;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:4px;white-space:nowrap;display:inline-block}
+.sp-support{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.25);color:#2dd4bf}
+.sp-conditional{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
+.sp-notyet{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.25);color:#64748b}
+.sp-oppose{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171}
+
+/* Role layout */
+.rc-layout{display:grid;grid-template-columns:190px 1fr;gap:0;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;min-height:400px}
+.rc-nav{background:#060b17;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column}
+.rc-nav-item{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);transition:all .15s}
+.rc-nav-item:hover{background:rgba(255,255,255,.03)}
+.rc-nav-active{background:rgba(45,212,191,.05) !important;border-left:2px solid #2dd4bf}
+.rc-panel{background:#07101f;padding:18px 20px;overflow-y:auto;max-height:640px}
+.rc-field-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:4px}
+.rc-field-val{font-size:13px;color:#64748b;line-height:1.6}
+
 </style>
 </head>
 <body>
@@ -1804,7 +1838,693 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
 </div>
-  <div id="tab-room" class="panel"><div class="stub"><div class="stub-icon">◎</div><div class="stub-title">The Room</div><div class="stub-desc">Stance evolution R0→R1→R2, deliberation record per role, groupthink deep-dive</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-room" class="panel">
+
+  <!-- HEADER -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;flex-wrap:wrap;gap:10px">
+    <div style="display:flex;align-items:flex-start;gap:10px">
+      <div>
+        <div class="ri-section-eyebrow">THE ROOM</div>
+        <div class="ri-section-title">How 7 Executives Deliberated to Unanimity</div>
+        <div class="ri-section-sub">Not the outcome — the deliberation itself. How each role entered, what evidence moved them, where they pushed back, and what would bring them back to the table.</div>
+      </div>
+      <button class="info-btn" onclick="showInfo('room',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+    </div>
+  </div>
+
+  <!-- MOVEMENT SUMMARY BAR -->
+  <div class="movement-bar">
+    <div class="mb-stat"><div class="mb-n" style="color:#2dd4bf">4</div><div class="mb-l">ROLES MOVED</div></div>
+    <div class="mb-div"></div>
+    <div class="mb-stat"><div class="mb-n">3</div><div class="mb-l">HELD POSITION</div></div>
+    <div class="mb-div"></div>
+    <div class="mb-stat"><div class="mb-n" style="color:#34d399">0</div><div class="mb-l">FINAL DISSENTS</div></div>
+    <div class="mb-div"></div>
+    <div class="mb-stat"><div class="mb-n" style="color:#f59e0b">7</div><div class="mb-l">CONDITIONS PLACED</div></div>
+    <div class="mb-div"></div>
+    <div class="mb-stat"><div class="mb-n" style="color:#818cf8">3</div><div class="mb-l">ROUNDS</div></div>
+    <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · convergence_flag: true · groupthink_flag: HIGH severity — CFO, CTO, LEGAL converged without surfacing domain-specific risks independently</div></span>
+  </div>
+
+  <!-- ZONE 1: STANCE EVOLUTION TABLE -->
+  <div>
+    <div class="fin-block-label" style="margin-bottom:8px">STANCE EVOLUTION · R0 EXPLORE → R1 DELIBERATE → R2 DECIDE · Hover any cell for source</div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:separate;border-spacing:1px">
+        <thead>
+          <tr>
+            <th class="evo-th" style="width:140px">ROLE</th>
+            <th class="evo-th">
+              <div style="font-size:8px;font-weight:700;letter-spacing:.1em;color:#94a3b8;font-family:'DM Mono',monospace">R0 · EXPLORE</div>
+              <div style="font-size:9px;color:#64748b;margin-top:2px">Initial read-in</div>
+            </th>
+            <th class="evo-th">
+              <div style="font-size:8px;font-weight:700;letter-spacing:.1em;color:#f59e0b;font-family:'DM Mono',monospace">R1 · DELIBERATE</div>
+              <div style="font-size:9px;color:#64748b;margin-top:2px">Evidence reviewed</div>
+            </th>
+            <th class="evo-th">
+              <div style="font-size:8px;font-weight:700;letter-spacing:.1em;color:#2dd4bf;font-family:'DM Mono',monospace">R2 · DECIDE</div>
+              <div style="font-size:9px;color:#64748b;margin-top:2px">Final position</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #2dd4bf33;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#2dd4bf;font-family:'DM Mono',monospace;letter-spacing:.04em">CEO</div>
+            <div class="evo-conf" style="margin-top:1px">moved <span style="color:#2dd4bf">↑</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="CEO R0 conf 72% · SUPPORT stance · "EU expansion is Pillar 2 of strategic plan — three inbound prospects at $175K LTV each makes this a $525K pipeline signal we cannot ignore"">
+          <span class="stance-pill sp-support">APPROVE</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">72%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CEO R2 conf 82% · "governance gate, not an analytical one" · strategic case clear · moved to CONDITIONAL after acknowledging GDPR timeline and CAC uncertainty">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">72%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CEO R2 conf 82% · "governance gate, not an analytical one" · strategic case clear · moved to CONDITIONAL after acknowledging GDPR timeline and CAC uncertainty">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#34d399">82%</span></div>
+        </td>
+    </tr><tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:1.5px solid #34d39933;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#34d399;font-family:'DM Mono',monospace;letter-spacing:.04em">CFO</div>
+            <div class="evo-conf" style="margin-top:1px">moved <span style="color:#34d399">↑</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="CFO R0 conf 58% · NOT_YET stance · "No internal EU CAC data. $50K ceiling is market-derived from EU SaaS benchmarks — not validated for our specific segment. Cannot approve without unit economics confirmation."">
+          <span class="stance-pill sp-notyet">NOT YET</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f87171">58%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CFO R2 conf 74% · moved from NOT_YET to CONDITIONAL · own unit economics model ($175K LTV ÷ $50K ceiling = 3.5× floor) made the financial case · Phase 2 locked behind GO/NO-GO">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f87171">68%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CFO R2 conf 74% · moved from NOT_YET to CONDITIONAL · own unit economics model ($175K LTV ÷ $50K ceiling = 3.5× floor) made the financial case · Phase 2 locked behind GO/NO-GO">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">74%</span></div>
+        </td>
+    </tr><tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:1.5px solid #f472b433;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#f472b4;font-family:'DM Mono',monospace;letter-spacing:.04em">CHRO</div>
+            <div class="evo-conf" style="margin-top:1px">moved <span style="color:#f472b4">↑</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="CHRO R0 conf 65% · SUPPORT · "OPT-2 sequences compliance before revenue — legally mandatory, not optional. No FTE offers until entity formation and GDPR validated."">
+          <span class="stance-pill sp-support">APPROVE</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f87171">65%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CHRO R2 conf 76% · "phased hiring eliminates EU labor law exposure — no FTE offers until GO/NO-GO clears. Social charges add 25–35% to base in Germany and France."">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">72%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CHRO R2 conf 76% · "phased hiring eliminates EU labor law exposure — no FTE offers until GO/NO-GO clears. Social charges add 25–35% to base in Germany and France."">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">76%</span></div>
+        </td>
+    </tr><tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #38bdf833;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#38bdf8;font-family:'DM Mono',monospace;letter-spacing:.04em">COO</div>
+            <div class="evo-conf" style="margin-top:1px">held <span style="color:#38bdf8">→</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="COO R0 conf 70% · CONDITIONAL from the start · "operational readiness requires entity formation first — cannot commit delivery capacity without infrastructure"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">70%</span></div>
+        </td><td class="evo-td evo-round-cell" data-tip="COO R2 conf 76% · held CONDITIONAL throughout · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16-20 week direct hire"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">74%</span></div>
+        </td><td class="evo-td evo-round-cell" data-tip="COO R2 conf 76% · held CONDITIONAL throughout · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16-20 week direct hire"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">76%</span></div>
+        </td>
+    </tr><tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #818cf833;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#818cf8;font-family:'DM Mono',monospace;letter-spacing:.04em">CSO</div>
+            <div class="evo-conf" style="margin-top:1px">moved <span style="color:#818cf8">↑</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="CSO R0 conf 75% · SUPPORT · "3 inbound EU prospects with active timelines — Competitor X is pursuing same logos. Q3 2025 is a competitive response window, not an internal target."">
+          <span class="stance-pill sp-support">APPROVE</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">75%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CSO R2 conf 81% · "partner-led EU cycles average 9–12 months vs 4–6 months direct — OPT-3 would miss the competitive window entirely"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">78%</span></div>
+        </td><td class="evo-td evo-round-cell moved" data-tip="CSO R2 conf 81% · "partner-led EU cycles average 9–12 months vs 4–6 months direct — OPT-3 would miss the competitive window entirely"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#34d399">81%</span></div>
+        </td>
+    </tr><tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #7dd3fc33;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#7dd3fc;font-family:'DM Mono',monospace;letter-spacing:.04em">CTO</div>
+            <div class="evo-conf" style="margin-top:1px">held <span style="color:#7dd3fc">→</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="CTO R0 conf 65% · CONDITIONAL from start · "GDPR data residency feasibility within $150K is the controlling technical unknown — cannot confirm cost estimate without architecture scoping"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f87171">65%</span></div>
+        </td><td class="evo-td evo-round-cell" data-tip="CTO R2 conf 72% · lowest confidence on table — technically honest · "architecture unscoped · if separate EU cloud region required, Phase 1 budget insufficient"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">70%</span></div>
+        </td><td class="evo-td evo-round-cell" data-tip="CTO R2 conf 72% · lowest confidence on table — technically honest · "architecture unscoped · if separate EU cloud region required, Phase 1 budget insufficient"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">72%</span></div>
+        </td>
+    </tr><tr>
+      <td class="evo-td evo-role-td">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:1.5px solid #a78bfa33;width:28px;height:28px;min-width:28px"></div>
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#a78bfa;font-family:'DM Mono',monospace;letter-spacing:.04em">LEGAL</div>
+            <div class="evo-conf" style="margin-top:1px">held <span style="color:#a78bfa">→</span></div>
+          </div>
+        </div>
+      </td>
+      <td class="evo-td evo-round-cell" data-tip="LEGAL R0 conf 70% · CONDITIONAL · "GDPR is a legal requirement, not a best practice. External EU counsel validation required before any EU customer data processing — no exceptions"">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">70%</span></div>
+        </td><td class="evo-td evo-round-cell" data-tip="LEGAL R2 conf 72% · held CONDITIONAL throughout · DPAs and SCCs must execute before customer onboarding · IP assignments must be jurisdiction-specific">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">72%</span></div>
+        </td><td class="evo-td evo-round-cell" data-tip="LEGAL R2 conf 72% · held CONDITIONAL throughout · DPAs and SCCs must execute before customer onboarding · IP assignments must be jurisdiction-specific">
+          <span class="stance-pill sp-conditional">AWC</span>
+          <div class="evo-conf"><span style="font-size:10px;font-family:'DM Mono',monospace;color:#f59e0b">72%</span></div>
+        </td>
+    </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ZONE 2: ROLE DELIBERATION — LEFT NAV + RIGHT PANEL -->
+  <div>
+    <div class="fin-block-label" style="margin-bottom:8px">DELIBERATION RECORD · PER ROLE · Select a role to see their full argument, what moved them, and what would change their position</div>
+    <div class="rc-layout">
+      <div class="rc-nav">
+        <div class="rc-nav-item rc-nav-active" onclick="selectRoleRoom('CEO')" id="rcnav-CEO">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #2dd4bf33;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#2dd4bf;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">CEO</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">Executive</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#2dd4bf">↑</span>
+    </div>
+  </div>
+</div><div class="rc-nav-item " onclick="selectRoleRoom('CFO')" id="rcnav-CFO">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:1.5px solid #34d39933;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#34d399;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">CFO</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">Financial</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#34d399">↑</span>
+    </div>
+  </div>
+</div><div class="rc-nav-item " onclick="selectRoleRoom('CHRO')" id="rcnav-CHRO">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:1.5px solid #f472b433;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#f472b4;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">CHRO</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">People</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#f472b4">↑</span>
+    </div>
+  </div>
+</div><div class="rc-nav-item " onclick="selectRoleRoom('COO')" id="rcnav-COO">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #38bdf833;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#38bdf8;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">COO</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">Operating</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#38bdf8">→</span>
+    </div>
+  </div>
+</div><div class="rc-nav-item " onclick="selectRoleRoom('CSO')" id="rcnav-CSO">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid #818cf833;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#818cf8;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">CSO</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">Strategy</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#818cf8">↑</span>
+    </div>
+  </div>
+</div><div class="rc-nav-item " onclick="selectRoleRoom('CTO')" id="rcnav-CTO">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:1.5px solid #7dd3fc33;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#7dd3fc;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">CTO</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">Technology</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#7dd3fc">→</span>
+    </div>
+  </div>
+</div><div class="rc-nav-item " onclick="selectRoleRoom('LEGAL')" id="rcnav-LEGAL">
+  <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:1.5px solid #a78bfa33;width:34px;height:34px;min-width:34px"></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:10px;font-weight:700;color:#a78bfa;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap">LEGAL</div>
+    <div style="font-size:9px;color:#475569;white-space:nowrap">Legal</div>
+    <div style="display:flex;gap:4px;align-items:center;margin-top:3px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <span style="font-size:8px;font-family:'DM Mono',monospace;color:#a78bfa">→</span>
+    </div>
+  </div>
+</div>
+      </div>
+      <div class="rc-panel">
+        <div id="rcpanel-CEO" style="display:block">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #2dd4bf44;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CEO</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF EXECUTIVE OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2dd4bf">82% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-support">APPROVE</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">72%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">72%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#2dd4bf;font-family:'DM Mono',monospace;font-weight:700">82%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#2dd4bf;background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.15);padding:2px 8px;border-radius:4px'>MOVED</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">The $500K EU launch is approved contingent on Board sign-off at the Feb 15 meeting — this is a governance gate, not an analytical one. The strategic case is clear: three inbound prospects at $525K LTV, a pre-defined EU expansion pillar, strong financial position with 16.7 months runway, and Competitor X moving now. <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 conf 82% · "governance gate, not an analytical one" · strategic case clear · moved to CONDITIONAL after acknowledging GDPR timeline and CAC uncertainty</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">CEO entered R0 at SUPPORT — stronger than most peers. Moved to CONDITIONAL in R1 after acknowledging the GDPR timeline uncertainty and CFO's CAC floor argument. The Feb 15 board gate is a governance constraint, not analytical doubt.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">Board rejects the $500K envelope at Feb 15. Evidence that all 3 EU prospects have committed to a competitor during the delay window. CTO confirms GDPR architecture exceeds $150K Phase 1 budget.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">Board approval of $500K investment envelope at Feb 15 meeting</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">Board does not approve $500K at Feb 15, delaying launch 1+ quarters and ceding ground to Competitor X</div>
+    </div>
+  </div>
+</div><div id="rcpanel-CFO" style="display:none">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png');border:2px solid #34d39944;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CFO</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF FINANCIAL OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#34d399">74% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-notyet">NOT YET</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">58%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">68%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#34d399;font-family:'DM Mono',monospace;font-weight:700">74%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#34d399;background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.15);padding:2px 8px;border-radius:4px'>MOVED</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">The financial case is directionally sound — $525K LTV against $500K investment with 16.7 months runway — but the Board approval threshold is a hard governance constraint. OPT-2 phased structure is the only path that sequences cost commitment correctly. Phase 2 does not release without GO/NO-GO. <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 conf 74% · moved from NOT_YET to CONDITIONAL · own unit economics model ($175K LTV ÷ $50K ceiling = 3.5× floor) made the financial case · Phase 2 locked behind GO/NO-GO</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">CFO was the only role that entered R0 at NOT_YET. The move to CONDITIONAL in R1 was driven by CFO's own unit economics model — $175K LTV ÷ $50K CAC ceiling = 3.5× minimum return. That model made the financial case convincing enough to move.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">EU CAC confirmed to exceed $50K after first 2 deals (kill trigger fires). Phase 1 GDPR costs exceed $150K budget, requiring full repricing. Board rejects investment envelope.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">EU CAC confirmed at or below $50K after first 2 closed logos</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">EU CAC exceeds $50K threshold — LTV/CAC ratio goes negative, Phase 2 halt triggered</div>
+    </div>
+  </div>
+</div><div id="rcpanel-CHRO" style="display:none">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png');border:2px solid #f472b444;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CHRO</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF PEOPLE OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#f472b4">76% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-support">APPROVE</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">65%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">72%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#f472b4;font-family:'DM Mono',monospace;font-weight:700">76%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#f472b4;background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.15);padding:2px 8px;border-radius:4px'>MOVED</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">OPT-2 is the only option that sequences compliance before revenue — which is legally mandatory. The phased structure eliminates irreversible FTE commitments before the May GO/NO-GO. No FTE offers, no onboarding, no offers of employment until entity formation and GDPR are validated. <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 conf 76% · "phased hiring eliminates EU labor law exposure — no FTE offers until GO/NO-GO clears. Social charges add 25–35% to base in Germany and France."</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">CHRO's primary concern was employment law exposure across 3 jurisdictions. Germany works council requirements, UK IR35 classification, and France's mandatory terms all require verified legal structure before any offer. OPT-1 would have violated this sequence.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">EU employment law review reveals works council requirements that block standard hiring in Germany. EU comp bands land above Phase 2 budget model. GDPR timeline slips past GO/NO-GO.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">EU entity legal structure and jurisdiction-specific employment law compliance confirmed before any FTE hiring commitment</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">EU hiring timelines extend 16–20 weeks across 3 jurisdictions — works councils in Germany, IR35 in UK, mandatory notice periods throughout</div>
+    </div>
+  </div>
+</div><div id="rcpanel-COO" style="display:none">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #38bdf844;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">COO</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF OPERATING OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#38bdf8">76% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">70%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">74%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#38bdf8;font-family:'DM Mono',monospace;font-weight:700">76%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:2px 8px;border-radius:4px'>HELD</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">Held CONDITIONAL from R0 to R2. Operational readiness requires entity formation before any EU customer delivery commitment. The two-tranche model works — Phase 1 gates protect against over-committing delivery capacity before infrastructure is in place. <span class="cite"><button class="cite-btn">COO·R2</button><div class="cite-tip">COO R2 conf 76% · held CONDITIONAL throughout · "EOR fallback confirmed if hiring slips — 2-week cycle vs 16-20 week direct hire"</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">COO's concern was capacity. Current team is already committed — EU adds 3 FTEs against an existing delivery load. The EOR fallback (Employer of Record) is the operational hedge if hiring slips past Q3.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">Current team capacity confirmed at limit — EU adds would require US role backfills. Entity formation takes longer than 90 days due to jurisdictional complexity. EOR vendors cannot staff technical roles.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">EU operational delivery model confirmed (EOR vs direct hire) before FTE commitments</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">Current team capacity at limit — EU expansion requires US backfills or delivery quality degrades during ramp</div>
+    </div>
+  </div>
+</div><div id="rcpanel-CSO" style="display:none">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:2px solid #818cf844;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CSO</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF STRATEGY OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#818cf8">81% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-support">APPROVE</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">75%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">78%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#818cf8;font-family:'DM Mono',monospace;font-weight:700">81%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#818cf8;background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.15);padding:2px 8px;border-radius:4px'>MOVED</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">Three inbound EU prospects with active evaluation timelines — the pipeline is real. Competitor X is pursuing at least 2 of the same logos. The Q3 2025 deadline is not internal ambition; it is a competitive response window. Delay means loss, not postponement. <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 conf 81% · "partner-led EU cycles average 9–12 months vs 4–6 months direct — OPT-3 would miss the competitive window entirely"</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">CSO moved to CONDITIONAL in R1 after acknowledging that EU partnership-first approaches (OPT-3) would have 2× longer sales cycles — destroying the competitive timing argument. Direct GTM via OPT-2 is the only path that matches the window.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">All 3 EU prospects confirm they are evaluating Competitor X simultaneously. EU partnership sales cycles confirmed at 9–12 months — too slow to close Q3 2025. Pipeline ACV comes in materially below $175K estimate.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">At least 2 of 3 EU prospects remain active in pipeline at May GO/NO-GO</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">Competitor X captures 2 of 3 EU logos during Q1 2025 delay — market timing window closes permanently</div>
+    </div>
+  </div>
+</div><div id="rcpanel-CTO" style="display:none">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png');border:2px solid #7dd3fc44;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">CTO</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF TECHNOLOGY OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#7dd3fc">72% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">65%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">70%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#7dd3fc;font-family:'DM Mono',monospace;font-weight:700">72%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:2px 8px;border-radius:4px'>HELD</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">The key open question is whether GDPR-compliant data residency is achievable within the $150K Phase 1 budget. If it requires a separate EU cloud region, costs escalate materially. CTO held CONDITIONAL throughout pending resolution of this architecture question. <span class="cite"><button class="cite-btn">CTO·R2</button><div class="cite-tip">CTO R2 conf 72% · lowest confidence on table — technically honest · "architecture unscoped · if separate EU cloud region required, Phase 1 budget insufficient"</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">CTO is the lowest confidence role at 72% final — not because of strategic disagreement but because the architecture is unscoped. This is the most technically honest position on the table: the decision is right, the implementation estimate is uncertain.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">GDPR architecture scoping confirms cost exceeds $150K Phase 1 budget — full repricing required. Separate EU cloud region required — not shared infrastructure. Technical complexity exceeds current team capacity.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">GDPR-compliant data residency architecture confirmed feasible within $150K Phase 1 budget by external EU counsel</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">GDPR implementation timeline exceeds May GO/NO-GO — commercial launch blocked, 3 EU prospects at risk</div>
+    </div>
+  </div>
+</div><div id="rcpanel-LEGAL" style="display:none">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05)">
+    <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png');border:2px solid #a78bfa44;width:48px;height:48px;min-width:48px;border-radius:50%"></div>
+    <div style="flex:1">
+      <div style="font-family:'Fraunces',serif;font-size:18px;color:#f1f5f9;letter-spacing:-.01em">LEGAL</div>
+      <div style="font-size:10px;color:#94a3b8;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:1px">CHIEF LEGAL OFFICER</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+      <span class="stance-pill sp-conditional">AWC</span>
+      <div style="font-size:10px;font-family:'DM Mono',monospace;color:#a78bfa">72% confidence</div>
+    </div>
+  </div>
+
+  <!-- Position trajectory -->
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:7px">
+    <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.07em;flex-shrink:0">TRAJECTORY</div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R0</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">70%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#475569;font-family:'DM Mono',monospace">R1</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#475569;font-family:'DM Mono',monospace">72%</div></div>
+      <div style="color:#334155;font-size:12px">›</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:7.5px;color:#2dd4bf;font-family:'DM Mono',monospace">R2</div><span class="stance-pill sp-conditional">AWC</span><div style="font-size:8px;color:#a78bfa;font-family:'DM Mono',monospace;font-weight:700">72%</div></div>
+    </div>
+    <div style='margin-left:auto;font-size:9px;font-family:DM Mono,monospace;color:#475569;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:2px 8px;border-radius:4px'>HELD</div>
+  </div>
+
+  <!-- Rationale -->
+  <div style="margin-bottom:12px">
+    <div class="rc-field-lbl">FINAL POSITION · R2 RATIONALE</div>
+    <div class="rc-field-val" style="font-size:13px">GDPR compliance is not a best practice in EU — it is a legal requirement. No EU customer data can be processed until external EU counsel certifies the architecture. DPAs and SCCs must execute before any customer onboarding. Entity formation must precede FTE hiring. <span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 conf 72% · held CONDITIONAL throughout · DPAs and SCCs must execute before customer onboarding · IP assignments must be jurisdiction-specific</div></span></div>
+  </div>
+
+  <!-- What moved them -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#f59e0b">WHAT MOVED THIS ROLE</div>
+    <div class="rc-field-val" style="font-size:13px">LEGAL held at 72% throughout. The compliance sequence is clear and was non-negotiable — OPT-1 was eliminated specifically because it violated the legal sequence. The uncertainty is not legal strategy but technical feasibility of GDPR architecture within budget.</div>
+  </div>
+
+  <!-- What would change position -->
+  <div style="margin-bottom:12px;padding:10px 12px;background:rgba(129,140,248,.03);border-left:2px solid rgba(129,140,248,.2);border-radius:0 7px 7px 0">
+    <div class="rc-field-lbl" style="color:#818cf8">WHAT WOULD BRING THEM BACK TO THE TABLE</div>
+    <div class="rc-field-val" style="font-size:13px">GDPR validation confirms architecture not achievable within May 2025 timeline. CBA review reveals works council requirements blocking Germany FTE hiring. DPA negotiations with EU enterprise customers take longer than 30 days.</div>
+  </div>
+
+  <!-- Condition + Risk row -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
+    <div style="padding:10px 12px;background:rgba(52,211,153,.03);border:1px solid rgba(52,211,153,.1);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#34d399">KEY CONDITION</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">External EU counsel GDPR validation completed and signed off before any EU customer data is processed</div>
+    </div>
+    <div style="padding:10px 12px;background:rgba(239,68,68,.03);border:1px solid rgba(239,68,68,.08);border-radius:7px">
+      <div class="rc-field-lbl" style="color:#f87171">TOP RISK FLAGGED</div>
+      <div style="font-size:12.5px;color:#475569;line-height:1.55">GDPR validation not completed by May 2025 GO/NO-GO — commercial launch blocked, all EU customer contracts void</div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONE 3: GROUPTHINK ANALYSIS -->
+  <div style="padding:14px 18px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:10px">
+    <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px">
+        <div class="fin-block-label" style="color:#f87171;margin-bottom:5px">▲ GROUPTHINK · HIGH SEVERITY</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.65">CFO, CTO, and LEGAL converged on OPT-2 without independently surfacing domain-specific execution risks — unusual for a $500K cross-border commitment. The deliberation record shows alignment on direction but insufficient stress-testing of the implementation assumptions. <span class="cite"><button class="cite-btn">D_PACKET·GT</button><div class="cite-tip">D_packet groupthink_flag · severity: HIGH · CFO + CTO + LEGAL converged without surfacing domain risks · facilitator action recommended: assign devil's advocate role before execution begins</div></span></div>
+      </div>
+      <div style="flex:1;min-width:180px">
+        <div class="fin-block-label" style="margin-bottom:5px">FACILITATOR ACTION</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.65">Before Phase 1 execution begins, assign one role as explicit devil's advocate to stress-test the GDPR cost estimate and EU hiring timeline assumptions — the two most technically uncertain elements of the decision.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
   <div id="tab-mgmt" class="panel"><div class="stub"><div class="stub-icon">◧</div><div class="stub-title">Management Handoff</div><div class="stub-desc">Per-role functional mandates, 49 commitments with extracted timelines</div><div class="stub-tag">COMING NEXT</div></div></div>
   <div id="tab-board" class="panel"><div class="stub"><div class="stub-icon">◪</div><div class="stub-title">Board Pre-Read</div><div class="stub-desc">Board action, ELT vote record, financial overview, audit trail</div><div class="stub-tag">COMING NEXT</div></div></div>
 </div>
@@ -1977,6 +2697,11 @@ const INFO_CONTENT = {
     tag: "COMMAND CENTER — ZONE 3",
     title: "Before Anything Can Move",
     body: "The conditions the team placed on their approval. <strong>The decision is not a simple go — it only moves forward if these happen first.</strong> The red KILL GATE is a hard stop: if breached, execution halts regardless of what else is in motion. HIGH items must resolve before Phase 2 capital releases. The number shows how many of the 7 roles independently raised that condition."
+  },
+  room: {
+    tag: "THE ROOM",
+    title: "The Deliberation Record — All 7 Roles",
+    body: "This tab shows the deliberation itself — not the outcome. <strong>Stance evolution table:</strong> every role's position across R0 (exploration), R1 (deliberation), R2 (final vote) with hover tooltips sourced from the actual deliberation record. <strong>Role panels:</strong> select any role in the left nav to see their full argument, what evidence moved them, what they pushed back on, and what would change their position. <strong>Groupthink flag:</strong> the engine detected HIGH-severity convergence — CFO, CTO, and LEGAL aligned without independently surfacing domain risks."
   },
   execution: {
     tag: "COMMAND CENTER — ZONE 4",
@@ -2195,6 +2920,16 @@ let _activeTourSteps = TOUR_STEPS;
 let _activeTabId = 'command'; // tracks current tab
 
 function startContextTour() {
+  if (_activeTabId === 'room') {
+    _activeTourSteps = ROOM_TOUR_STEPS;
+    _tourStep = 0;
+    _tourActive = true;
+    document.getElementById('tour-backdrop').classList.add('active');
+    var dots = document.getElementById('tour-dots');
+    if (dots) dots.innerHTML = _activeTourSteps.map(function(_,i) { return '<div class="tour-dot' + (i===0?' active':'') + '"></div>'; }).join('');
+    showTourStep(0);
+    return;
+  }
   if (_activeTabId === 'options') {
     _activeTourSteps = OPTIONS_TOUR_STEPS;
     _tourStep = 0;
@@ -2803,6 +3538,26 @@ function closeRiskDot() {
   _activeRisk = null;
   document.querySelectorAll('.rm-dot').forEach(d => d.classList.remove('active'));
 }
+
+
+// ── ROOM: selectRole function ──
+function selectRoleRoom(role) {
+  var roles = ['CEO','CFO','CHRO','COO','CSO','CTO','LEGAL'];
+  document.querySelectorAll('.rc-nav-item').forEach(function(el) { el.classList.remove('rc-nav-active'); });
+  var nav = document.getElementById('rcnav-' + role);
+  if (nav) nav.classList.add('rc-nav-active');
+  roles.forEach(function(r) {
+    var p = document.getElementById('rcpanel-' + r);
+    if (p) p.style.display = r === role ? 'block' : 'none';
+  });
+}
+
+const ROOM_TOUR_STEPS = [
+  { selector: ".movement-bar", title: "Deliberation at a Glance", body: "4 roles moved their position across 3 rounds. 3 held throughout. Zero final dissents — unanimous conditional. The groupthink badge means the engine flagged unusually fast convergence among CFO, CTO, and LEGAL.", cardPos: "below" },
+  { selector: ".evo-th", title: "Stance Evolution Table", body: "Every role's position across R0 (exploration), R1 (deliberation), and R2 (final vote). Teal highlight = role moved. <strong>Hover any cell</strong> to see the source quote from that role in that round.", cardPos: "below" },
+  { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back to the table if the decision reversed.", cardPos: "above" },
+  { selector: ".movement-bar + div + div + div", title: "Groupthink Flag", body: "The engine detected HIGH-severity groupthink — CFO, CTO, and LEGAL converged without independently stress-testing the GDPR cost estimate or EU hiring timeline. The facilitator recommendation is to assign a devil's advocate before Phase 1 execution begins.", cardPos: "above" },
+];
 
 // Boot on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', loadData);
