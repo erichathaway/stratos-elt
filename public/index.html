@@ -163,7 +163,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .role-key{font-size:8px;font-weight:700;color:var(--text-primary);letter-spacing:.1em;text-align:center}
 .role-conf{font-size:10px;color:#64748b;text-align:center}
 .role-vote{font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px;white-space:nowrap;text-align:center}
-.signals{margin-top:18px;padding-top:14px;border-top:1px solid #1e293b;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.signals{margin-top:14px;padding-top:11px;border-top:1px solid #1e293b;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .signal{display:flex;align-items:center;gap:5px}
 .signal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .signal-text{font-size:11px;color:#64748b}
@@ -299,7 +299,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 /* ── ENTRANCE ANIMATIONS ── */
 @keyframes zoneUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.zone1,.zone2,.zone3,.zone4{animation:zoneUp .55s cubic-bezier(.22,.68,0,1.1) both;margin-bottom:24px}
+.zone1,.zone2,.zone3,.zone4{animation:zoneUp .55s cubic-bezier(.22,.68,0,1.1) both}
 .zone1{animation-delay:.05s}
 .zone2{animation-delay:.15s}
 .zone3{animation-delay:.25s}
@@ -864,7 +864,10 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .reason{background:#111827 !important;border-color:#1e293b !important}
 .mh-action-row{background:#0f172a !important}
 .rm-wrap{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:16px}
-.opt-bar-cell{border-radius:4px;position:relative}
+.opt-bar-cell{cursor:default;transition:background .12s;border-radius:4px;position:relative}
+.opt-bar-cell.hovered{background:rgba(6,182,212,.08)}
+#opt-chart-hover-panel{display:none;padding:10px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;margin-top:8px}
+#opt-chart-hover-panel.visible{display:block}
 .mh-action-expand-trigger{display:flex;align-items:center;gap:4px;font-size:10px;font-family:'DM Mono',monospace;color:#334155;cursor:pointer;padding:3px 0 0;transition:color .15s;user-select:none;letter-spacing:.04em}
 .mh-action-expand-trigger:hover{color:#64748b}
 .mh-expand-section{max-height:0;overflow:hidden;transition:max-height .3s ease}
@@ -1575,7 +1578,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
       <!-- RIGHT: option comparison visual -->
       <div class="opt-hero-right" id="opt-hero-right">
-        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:12px;border-bottom:1px solid #1e293b;padding-bottom:8px">OPTION COMPARISON · 5 DIMENSIONS</div>
+        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:12px;border-bottom:1px solid #1e293b;padding-bottom:8px">OPTION COMPARISON · 5 DIMENSIONS <span style="color:#475569;font-weight:400">· hover any bar</span></div>
+        <div id="opt-chart-hover-panel">
+          <div id="opt-hover-stat" style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:3px"></div>
           <div id="opt-hover-opt" style="font-size:10px;font-weight:700;font-family:'DM Mono',monospace;color:var(--text-primary);margin-bottom:4px"></div>
           <div id="opt-hover-reason" style="font-size:11px;color:#94a3b8;line-height:1.55"></div>
         </div>
@@ -4676,7 +4681,43 @@ const ROOM_TOUR_STEPS = [
 document.addEventListener('DOMContentLoaded', loadData);
 
 
-// Options chart hover removed
+// ── OPTIONS CHART HOVER PANEL ─────────────────────────────────────────────
+(function() {
+  var panel = document.getElementById('opt-chart-hover-panel');
+  if (!panel) return;
+  var statEl  = document.getElementById('opt-hover-stat');
+  var optEl   = document.getElementById('opt-hover-opt');
+  var rsEl    = document.getElementById('opt-hover-reason');
+  var lastCell = null;
+
+  document.addEventListener('mouseover', function(e) {
+    var cell = e.target.closest('.opt-bar-cell[data-ax]');
+    if (!cell) {
+      if (lastCell) {
+        panel.classList.remove('visible');
+        lastCell.classList.remove('hovered');
+        lastCell = null;
+      }
+      return;
+    }
+    if (lastCell && lastCell !== cell) lastCell.classList.remove('hovered');
+    lastCell = cell;
+    cell.classList.add('hovered');
+    if (statEl) statEl.textContent = cell.dataset.ax || '';
+    if (optEl)  optEl.textContent  = cell.dataset.opt || '';
+    if (rsEl)   rsEl.textContent   = cell.dataset.reason || '';
+    panel.classList.add('visible');
+  });
+  document.addEventListener('mouseout', function(e) {
+    var cell = e.target.closest('.opt-bar-cell[data-ax]');
+    if (!cell) return;
+    var rt = e.relatedTarget;
+    if (rt && rt.closest('.opt-bar-cell[data-ax]')) return;
+    panel.classList.remove('visible');
+    cell.classList.remove('hovered');
+    lastCell = null;
+  });
+})();
 
 // ── BOARD GOV DOC ─────────────────────────────────────────────────────────
 function openGovDoc() {
