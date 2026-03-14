@@ -451,12 +451,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
 /* ── OPTIONS DELIBERATION CARDS ── */
-.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;transition:border-color .2s,background .2s,box-shadow .2s}
-.opt-delib-card:hover{border-color:rgba(255,255,255,.22);background:#162032;box-shadow:0 0 24px rgba(255,255,255,.03)}
-.opt-delib-card:hover .opt-delib-name{color:var(--text-primary)}
-.opt-delib-card:hover .opt-reason-text{color:#94a3b8}
-.opt-delib-card:hover .opt-delib-reason{background:rgba(255,255,255,.025);border-left-color:rgba(255,255,255,.12)}
-.opt-delib-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.opt-delib-card{background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:14px;flex-wrap:wrap}
 .opt-delib-id{font-size:9px;font-weight:700;letter-spacing:.1em;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:4px}
 .opt-delib-name{font-size:16px;color:#cbd5e1;line-height:1.3;font-weight:500}
 .opt-delib-verdict{font-size:9px;font-weight:700;letter-spacing:.08em;padding:4px 10px;border-radius:20px;white-space:nowrap;font-family:'DM Mono',monospace;flex-shrink:0;align-self:flex-start;margin-top:2px}
@@ -479,12 +474,9 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .opt-delib-col{padding:12px 14px;background:rgba(255,255,255,.012);border-radius:7px}
 .opt-delib-col-label{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.07em;margin-bottom:6px}
 .opt-delib-col-text{font-size:13px;color:#64748b;line-height:1.6;transition:color .2s}
-.opt-delib-card:hover .opt-delib-col-text{color:#94a3b8}
-.opt-delib-card:hover .opt-delib-col{background:rgba(255,255,255,.025)}
 .opt-delib-gates{margin-top:2px}
 .opt-gates-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .opt-gate-chip{font-size:10px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:3px;background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.14);color:#64748b;transition:all .2s}
-.opt-delib-card:hover .opt-gate-chip{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.22);color:#94a3b8}
 
 
 /* ── OPTION COMPARE GRID ── */
@@ -1589,38 +1581,38 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
           <!-- OPT-1 -->
           <div class="opt-row-label opt-not-sel">OPT-1</div>
-          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="RISK" data-reason="Full commitment — GDPR + entity + FTEs launched simultaneously. LEGAL flagged 90-day setup minimum blocks commercial launch."><div class="opt-bar opt-bar-bad" style="width:90%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="RETURN" data-reason="Highest upside if executed — 3 FTEs from day 1 compounds pipeline velocity. CFO modeled $700K LTV potential at full scale."><div class="opt-bar opt-bar-good" style="width:85%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="SPEED" data-reason="Fastest path to EU revenue — no phased gates. Eliminated because GDPR compliance prerequisite makes this timeline infeasible."><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="REVERSIBILITY" data-reason="Near-irreversible. FTE commitments, entity formation, and legal costs all lock in before compliance is confirmed."><div class="opt-bar opt-bar-bad" style="width:15%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="RISK"><div class="opt-bar opt-bar-bad" style="width:90%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="RETURN"><div class="opt-bar opt-bar-good" style="width:85%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="SPEED"><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="REVERSIBILITY"><div class="opt-bar opt-bar-bad" style="width:15%"></div></div>
 
           <!-- OPT-2 — WINNER -->
           <div class="opt-row-label opt-sel">OPT-2 ★</div>
-          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="RISK" data-reason="Moderate. Phase 1 ($150K) is capped exposure. GO/NO-GO gate prevents Phase 2 release until compliance and pipeline confirmed."><div class="opt-bar opt-bar-sel" style="width:45%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="RETURN" data-reason="Strong. 3.5× floor on every EU logo at CFO's $50K CAC ceiling. $525K pipeline across 3 confirmed prospects."><div class="opt-bar opt-bar-sel" style="width:80%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="SPEED" data-reason="Moderate. Phase 1 gates add ~3 months before FTE hiring. Trade-off accepted to sequence compliance correctly."><div class="opt-bar opt-bar-sel" style="width:65%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="REVERSIBILITY" data-reason="High. Phase 1 scope limited to legal/compliance work — reversible before FTE and GTM spend commits."><div class="opt-bar opt-bar-sel" style="width:85%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="RISK"><div class="opt-bar opt-bar-sel" style="width:45%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="RETURN"><div class="opt-bar opt-bar-sel" style="width:80%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="SPEED"><div class="opt-bar opt-bar-sel" style="width:65%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="REVERSIBILITY"><div class="opt-bar opt-bar-sel" style="width:85%"></div></div>
 
           <!-- OPT-3 -->
           <div class="opt-row-label opt-not-sel">OPT-3</div>
-          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="RISK" data-reason="Low financial risk — partner model offloads headcount. Eliminated because partner-led cycles run 2× longer; 3 prospects cannot close in runway."><div class="opt-bar opt-bar-med" style="width:20%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="RETURN" data-reason="Poor. Reseller margin compression reduces LTV by 30–40%. CSO: sales cycles 9–12mo vs 4–6mo direct. Pipeline velocity disqualifying."><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="SPEED" data-reason="Moderate entry speed. Partner agreements can move quickly, but pipeline closure timeline is 2× longer than direct."><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="REVERSIBILITY" data-reason="Highly reversible. No FTE commitments, no entity costs. Partner contracts typically 30–90 day out clauses."><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="RISK"><div class="opt-bar opt-bar-med" style="width:20%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="RETURN"><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="SPEED"><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="REVERSIBILITY"><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
 
           <!-- OPT-4 -->
           <div class="opt-row-label opt-not-sel">OPT-4</div>
-          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="RISK" data-reason="Moderate. Comparable risk gate to OPT-2 but achieves it at higher cost — CFO: same protection, $50K more spend."><div class="opt-bar opt-bar-med" style="width:40%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="RETURN" data-reason="Similar return profile to OPT-2, higher burn rate in Phase 1. CFO flagged OPT-2 as superior on unit economics."><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="SPEED" data-reason="Similar to OPT-2 with slightly more Phase 1 overhead. Not a meaningful speed advantage vs the winner."><div class="opt-bar opt-bar-med" style="width:60%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="REVERSIBILITY" data-reason="Good reversibility. Phased structure preserved. Eliminated primarily on cost efficiency grounds vs OPT-2."><div class="opt-bar opt-bar-med" style="width:75%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="RISK"><div class="opt-bar opt-bar-med" style="width:40%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="RETURN"><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="SPEED"><div class="opt-bar opt-bar-med" style="width:60%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="REVERSIBILITY"><div class="opt-bar opt-bar-med" style="width:75%"></div></div>
 
           <!-- OPT-5 -->
           <div class="opt-row-label opt-not-sel">OPT-5</div>
-          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="RISK" data-reason="Lowest financial risk — no FTEs, minimal commitment. But eliminates the strategic upside entirely. CSO: 3 prospects go cold."><div class="opt-bar opt-bar-good" style="width:10%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="RETURN" data-reason="Poor. No EU revenue, no market footprint, no competitive response to Competitor X. Preserves capital with no deployment path."><div class="opt-bar opt-bar-bad" style="width:30%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="SPEED" data-reason="Slow to revenue — monitor-only means no EU revenue until a future decision cycle. Cedes Q3 2025 competitive window."><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
-          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="REVERSIBILITY" data-reason="Fully reversible — nothing committed. But the strategic cost is the 3 inbound prospects likely lost during the observation period."><div class="opt-bar opt-bar-good" style="width:90%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="RISK"><div class="opt-bar opt-bar-good" style="width:10%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="RETURN"><div class="opt-bar opt-bar-bad" style="width:30%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="SPEED"><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="REVERSIBILITY"><div class="opt-bar opt-bar-good" style="width:90%"></div></div>
         </div>
 
         <!-- Return floor callout -->
