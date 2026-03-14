@@ -1625,13 +1625,6 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
         </div>
       </div>
 
-    <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
-    <div id="opt-rejected-section">
-      <div class="zone-title" id="opt-rejected-label" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
-      <div id="opt-cards-wrap"><div id="opt-rejected-container">
-        <!-- JS populated -->
-      </div></div>
-    </div>
 
     <!-- POSITION MOVEMENT ACROSS ROUNDS -->
     <div class="zone3" id="opt-position-movement" style="margin-top:4px">
@@ -2102,6 +2095,16 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       </div>
     </div>
   </div>
+
+
+    <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
+    <div id="opt-rejected-section">
+      <div class="zone-title" id="opt-rejected-label" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+      <div id="opt-cards-wrap"><div id="opt-rejected-container">
+        <!-- JS populated -->
+      </div></div>
+    </div>
+
 
 </div>
   <div id="tab-room" class="panel">
@@ -3948,6 +3951,12 @@ const OPTIONS_TOUR_STEPS = [
     cardPos: "below"
   },
   {
+    selector: "#opt-position-movement",
+    title: "Position Movement Across Rounds",
+    body: "How consensus formed: which roles moved between R0 and R2, what evidence shifted them, and what conditions they attached before approving. OPT-1 died in R0. OPT-3–5 eliminated in R1. R2 was consensus formation, not new deliberation.",
+    cardPos: "below"
+  },
+  {
     selector: "#opt-cards-wrap",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
@@ -3957,12 +3966,6 @@ const OPTIONS_TOUR_STEPS = [
     selector: "#opt-compare-grid",
     title: "How the Options Compare",
     body: "OPT-2 wins on <strong>RISK, RETURN, and REVERSIBILITY</strong> simultaneously. OPT-1 had higher speed but unacceptable risk. OPT-3 through OPT-5 failed on returns or feasibility.",
-    cardPos: "above"
-  },
-  {
-    selector: "#opt-position-movement",
-    title: "Position Movement Across Rounds",
-    body: "How consensus formed: which roles moved between R0 and R2, what evidence shifted them, and what conditions they attached before approving. OPT-1 died in R0. OPT-3–5 eliminated in R1. R2 was consensus formation, not new deliberation.",
     cardPos: "above"
   }
 ];
