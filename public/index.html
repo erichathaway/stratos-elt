@@ -2233,6 +2233,12 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   </div>
 
 
+
+  <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
+    <div style="flex:1;height:1px;background:#1e293b"></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">STANCE EVOLUTION · ROUND BY ROUND</div>
+    <div style="flex:1;height:1px;background:#1e293b"></div>
+  </div>
   <!-- ZONE 1: STANCE EVOLUTION TABLE -->
   <div style="width:100%">
     <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">STANCE EVOLUTION · R0→R1→R2 · Hover any cell for source <button class="info-btn" onclick="showInfo('stanceevo',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
@@ -2402,6 +2408,12 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
   </div>
 
+
+  <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
+    <div style="flex:1;height:1px;background:#1e293b"></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">FULL DELIBERATION RECORD · PER ROLE</div>
+    <div style="flex:1;height:1px;background:#1e293b"></div>
+  </div>
   <!-- ZONE 2: ROLE DELIBERATION — LEFT NAV + RIGHT PANEL -->
   <div>
     <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap">DELIBERATION RECORD · PER ROLE · Select a role to see their full argument, what moved them, and what would change their position <button class="info-btn" onclick="showInfo('deliberationrec', this)" title="What is this?"><span>i</span></button></div>
@@ -2912,8 +2924,14 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
   </div>
 
+
+  <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
+    <div style="flex:1;height:1px;background:#1e293b"></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">GROUPTHINK ANALYSIS</div>
+    <div style="flex:1;height:1px;background:#1e293b"></div>
+  </div>
   <!-- ZONE 3: GROUPTHINK ANALYSIS -->
-  <div style="padding:14px 18px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:10px">
+  <div class="zone3-groupthink" style="padding:14px 18px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:10px">
     <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap">
       <div style="flex:1;min-width:220px">
         <div class="fin-block-label" style="color:#f87171;margin-bottom:5px;display:flex;align-items:center;gap:5px">▲ GROUPTHINK · HIGH SEVERITY <button class="info-btn" onclick="showInfo('groupthink', this)" title="What is this?"><span>i</span></button></div>
@@ -3422,18 +3440,24 @@ function toggleExpand(id) {
     var tipContent = cite.querySelector('.cite-tip');
     if (!tipContent) return;
     tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
+    // Measure using position:absolute off-screen, then switch to fixed for display
+    tip.style.position = 'absolute';
+    tip.style.visibility = 'hidden';
     tip.style.display = 'block';
-    tip.style.left = '-9999px';
-    tip.style.top = '0px';
-    var h = tip.offsetHeight;
+    tip.style.left = '0px';
+    tip.style.top = '-9999px';
+    document.body.appendChild(tip);
+    var h = tip.offsetHeight || 80;
     var w = 360;
+    tip.style.position = 'fixed';
+    tip.style.visibility = '';
     var rect = btn.getBoundingClientRect();
     var x = rect.left + rect.width / 2 - w / 2;
     var y = rect.top - h - 10;
     if (y < 8) y = rect.bottom + 8;
     x = Math.max(10, Math.min(x, window.innerWidth - w - 10));
     tip.style.left = x + 'px';
-    tip.style.top  = y + 'px';
+    tip.style.top = y + 'px';
   }
 
   function hideTip() {
@@ -3885,65 +3909,46 @@ let _activeTourSteps = TOUR_STEPS;
 let _activeTabId = 'command'; // tracks current tab
 
 function startContextTour() {
-  if (_activeTabId === 'risk') {
-    _activeTourSteps = RISK_TOUR_STEPS;
-    _tourStep = 0;
-    _tourActive = true;
-    document.getElementById('tour-backdrop').classList.add('active');
-    var dots = document.getElementById('tour-dots');
-    if (dots) dots.innerHTML = _activeTourSteps.map(function(_,i){ return '<div class="tour-dot'+(i===0?' active':'')+'"></div>'; }).join('');
-    showTourStep(0); return;
-  }
-  if (_activeTabId === 'room') {
-    _activeTourSteps = ROOM_TOUR_STEPS;
-    _tourStep = 0;
-    _tourActive = true;
-    document.getElementById('tour-backdrop').classList.add('active');
-    var dots = document.getElementById('tour-dots');
-    if (dots) dots.innerHTML = _activeTourSteps.map(function(_,i) { return '<div class="tour-dot' + (i===0?' active':'') + '"></div>'; }).join('');
-    showTourStep(0);
-    return;
-  }
-  if (_activeTabId === 'options') {
-    _activeTourSteps = OPTIONS_TOUR_STEPS;
-    _tourStep = 0;
-    _tourActive = true;
-    showTab('options', document.querySelector('[onclick*=\"options\"]'));
-    setTimeout(function() { showTourStep(0); }, 300);
-  } else if (_activeTabId === 'risk') {
-    _activeTourSteps = RISK_TOUR_STEPS;
-    _tourStep = 0;
-    _tourActive = true;
-    document.getElementById('tour-backdrop').classList.add('active');
-    var dots = document.getElementById('tour-dots');
-    if (dots) dots.innerHTML = _activeTourSteps.map(function(_,i) { return '<div class="tour-dot' + (i===0?' active':'') + '"></div>'; }).join('');
-    showTourStep(0);
-  } else if (_activeTabId === 'mgmt') {
-    _activeTourSteps = [
-      { selector: ".mh-priority-action", title: "Top 3 Actions — In Sequence", body: "ACT-001 (Board approval) must happen before ACT-002 and ACT-003 can begin. These are ELT consensus, not recommendations — every role agreed these are the controlling first steps.", cardPos: "below" },
-      { selector: ".mh-pill-tabs", title: "Department Briefs", body: "Select any role to see their complete Phase 1 action plan: specific timing, success metric per action, and what they own in the execution architecture.", cardPos: "below" },
-      { selector: ".mh-actions-table", title: "Action Format", body: "Every action has a timing (when), a success metric (how you know it worked), and a color code — teal is forward motion, amber is time-sensitive, red is a kill gate dependency.", cardPos: "above" },
-    ];
-    _tourStep = 0; _tourActive = true;
-    document.getElementById('tour-backdrop').classList.add('active');
-    var td = document.getElementById('tour-dots');
-    if (td) td.innerHTML = _activeTourSteps.map(function(_,i){return '<div class="tour-dot'+(i===0?' active':'')+'"></div>';}).join('');
-    showTourStep(0);
-  } else if (_activeTabId === 'board') {
-    window.scrollTo(0, 0);
-    _activeTourSteps = [
-      { selector: ".ri-section-title", title: "The Governance Record", body: "Everything a board member needs to understand the decision, vote record, and financial controls — without reading the full deliberation transcript.", cardPos: "below" },
-      { selector: ".gaps-wrap", title: "Vote Record", body: "Every role's final vote, confidence %, and one-line rationale. 7-0 conditional — no dissents. Fiduciary record of who voted what and why.", cardPos: "below" },
-      { selector: ".board-condition", title: "Kill Gate Conditions", body: "Three hard kill gates that halt execution if breached. If any fires, the board is notified within 5 business days. These aren't soft conditions — they are binding commitments the ELT made when they voted.", cardPos: "above" },
-    ];
-    _tourStep = 0; _tourActive = true;
-    document.getElementById('tour-backdrop').classList.add('active');
-    var td2 = document.getElementById('tour-dots');
-    if (td2) td2.innerHTML = _activeTourSteps.map(function(_,i){return '<div class="tour-dot'+(i===0?' active':'')+'"></div>';}).join('');
-    showTourStep(0);
-  } else {
-    startTour();
-  }
+  var tab = _activeTabId;
+  // Build step arrays inline for mgmt/board (no const needed)
+  var MGMT_STEPS = [
+    { selector: ".mh-priority-action", title: "Top 3 Actions — In Sequence",
+      body: "ACT-001 (Board approval) must happen before ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps.", cardPos: "below" },
+    { selector: ".mh-pill-tabs", title: "Department Briefs",
+      body: "Select any role to see their full Phase 1 action plan: timing, success metric, and what they own.", cardPos: "below" },
+    { selector: ".mh-actions-table", title: "Action Format",
+      body: "Every action has timing, success metric, and color: teal = forward motion, amber = time-sensitive, red = kill gate.", cardPos: "above" },
+    { selector: ".cf-grid", title: "Cross-Functional Dependencies",
+      body: "4 workstreams that span departments. Each has a named gate — if either side slips, downstream execution halts. CTO-LEGAL is the highest-risk pairing.", cardPos: "above" },
+  ];
+  var BOARD_STEPS = [
+    { selector: ".ri-section-title", title: "The Governance Record",
+      body: "Everything a board member needs to understand the decision, vote record, and financial controls — in under 5 minutes.", cardPos: "below" },
+    { selector: ".gaps-wrap", title: "Vote Record — 7-0",
+      body: "Every role's final vote, confidence %, and one-line rationale. No dissents. The fiduciary record of who voted what and why.", cardPos: "below" },
+    { selector: ".board-condition", title: "Kill Gate Conditions",
+      body: "Three hard kill gates that halt execution if breached. Board is notified within 5 business days. These are binding commitments.", cardPos: "above" },
+  ];
+
+  var steps = null;
+  if (tab === 'risk')        steps = RISK_TOUR_STEPS;
+  else if (tab === 'options') steps = OPTIONS_TOUR_STEPS;
+  else if (tab === 'room')   steps = ROOM_TOUR_STEPS;
+  else if (tab === 'mgmt')   steps = MGMT_STEPS;
+  else if (tab === 'board')  steps = BOARD_STEPS;
+  else { startTour(); return; }
+
+  _activeTourSteps = steps;
+  _tourStep = 0;
+  _tourActive = true;
+  var bd = document.getElementById('tour-backdrop');
+  if (bd) bd.classList.add('active');
+  var td = document.getElementById('tour-dots');
+  if (td) td.innerHTML = steps.map(function(_,i) {
+    return '<div class="tour-dot'+(i===0?' active':'')+'"></div>';
+  }).join('');
+  window.scrollTo(0, 0);
+  showTourStep(0);
 }
 
 function startOptionsTour() {
@@ -4601,7 +4606,7 @@ const ROOM_TOUR_STEPS = [
   { selector: ".movement-bar", title: "Deliberation at a Glance", body: "4 roles moved their position across 3 rounds. 3 held throughout. Zero final dissents — unanimous conditional. The groupthink badge means the engine flagged unusually fast convergence among CFO, CTO, and LEGAL.", cardPos: "below" },
   { selector: ".evo-th", title: "Stance Evolution Table", body: "Every role's position across R0 (exploration), R1 (deliberation), and R2 (final vote). Teal highlight = role moved. <strong>Hover any cell</strong> to see the source quote from that role in that round.", cardPos: "below" },
   { selector: ".rc-layout", title: "Full Deliberation Record", body: "Select any role in the left nav to see their complete argument: rationale, what evidence moved them, what they pushed back on, and what would bring them back to the table if the decision reversed.", cardPos: "above" },
-  { selector: ".movement-bar + div + div + div", title: "Groupthink Flag", body: "The engine detected HIGH-severity groupthink — CFO, CTO, and LEGAL converged without independently stress-testing the GDPR cost estimate or EU hiring timeline. The facilitator recommendation is to assign a devil's advocate before Phase 1 execution begins.", cardPos: "above" },
+  { selector: ".zone3-groupthink", title: "Groupthink Flag", body: "HIGH-severity — CFO, CTO, and LEGAL converged without independently stress-testing the GDPR cost estimate or EU hiring timeline. Assign a devil's advocate before Phase 1 execution begins.", cardPos: "above" },
 ];
 
 // Boot on DOMContentLoaded
