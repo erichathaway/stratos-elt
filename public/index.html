@@ -383,7 +383,9 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
 
 /* ── OPTIONS TAB ── */
-.opt-hero{background:linear-gradient(135deg,rgba(45,212,191,.06),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.14);border-radius:14px;padding:24px;position:relative;overflow:hidden}
+.opt-hero{background:linear-gradient(135deg,rgba(45,212,191,.06),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.14);border-radius:14px;padding:24px;position:relative;overflow:hidden;display:flex;gap:28px;align-items:stretch}
+.opt-hero-left{flex:1;min-width:0}
+.opt-hero-right{flex-shrink:0;width:320px;display:flex;flex-direction:column;justify-content:center;gap:0}
 .opt-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.08),transparent 70%);pointer-events:none}
 .opt-hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:.12em;color:#2dd4bf;font-family:'DM Mono',monospace;margin-bottom:8px}
 .opt-hero-title{font-family:'Fraunces',serif;font-size:clamp(20px,2.8vw,30px);font-weight:600;color:#f1f5f9;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
@@ -459,6 +461,24 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .opt-gates-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .opt-gate-chip{font-size:10px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:3px;background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.14);color:#64748b;transition:all .2s}
 .opt-delib-card:hover .opt-gate-chip{background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.22);color:#94a3b8}
+
+
+/* ── OPTION COMPARE GRID ── */
+.opt-compare-grid{display:grid;grid-template-columns:44px repeat(4,1fr);gap:3px 6px;align-items:center}
+.opt-ax-label{font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.06em;text-align:center;line-height:1.2}
+.opt-row-label{font-size:8.5px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap}
+.opt-row-label.opt-sel{color:#2dd4bf}
+.opt-row-label.opt-not-sel{color:#334155}
+.opt-bar-cell{height:10px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden;position:relative}
+.opt-bar{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.opt-bar-sel{background:linear-gradient(90deg,rgba(45,212,191,.5),rgba(45,212,191,.8))}
+.opt-bar-bad{background:rgba(239,68,68,.35)}
+.opt-bar-good{background:rgba(52,211,153,.35)}
+.opt-bar-med{background:rgba(100,116,139,.35)}
+/* Return floor callout */
+.opt-return-callout{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.12);border-radius:8px}
+.opt-return-num{font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#2dd4bf;line-height:1;flex-shrink:0}
+.opt-return-label{font-size:10px;color:#64748b;line-height:1.5;flex:1}
 
 </style>
 </head>
@@ -845,14 +865,74 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- WINNER HERO — populated by data layer -->
     <div class="opt-hero" id="opt-hero">
-      <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7–0 CONDITIONAL APPROVE</div>
-      <div class="opt-hero-title" id="opt-winner-label">Phased EU Entry (Conservative)</div>
-      <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · option_tally · OPT-2: 7 votes all CONDITIONAL_SUPPORT · confidence range 72% (CTO/LEGAL) to 82% (CEO) · convergence_flag: true</div></span> <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 conf 74% · Two-tranche structure — Phase 1 $150K clears GDPR and entity gates before any FTE spend commits · Phase 2 $350K unlocks only on GO/NO-GO passage</div></span></div>
-      <div class="opt-hero-meta">
-        <span class="opt-risk-badge">● MEDIUM RISK</span>
-        <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
-        <button class="info-btn" onclick="event.stopPropagation();showInfo('options',this)" title="What is this?" style="position:static;transform:none;z-index:1;display:inline-flex;margin-left:4px"><span>i</span></button>
-        <button class="tour-btn" onclick="startOptionsTour()" style="font-size:9px;padding:3px 9px;margin-left:4px">Tour ▶</button>
+      <!-- LEFT: text content -->
+      <div class="opt-hero-left">
+        <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7–0 CONDITIONAL APPROVE</div>
+        <div class="opt-hero-title" id="opt-winner-label">Phased EU Entry (Conservative)</div>
+        <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · option_tally · OPT-2: 7 votes all CONDITIONAL_SUPPORT · confidence range 72% (CTO/LEGAL) to 82% (CEO) · convergence_flag: true</div></span> <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 conf 74% · Two-tranche structure — Phase 1 $150K clears GDPR and entity gates before any FTE spend commits · Phase 2 $350K unlocks only on GO/NO-GO passage</div></span></div>
+        <div class="opt-hero-meta">
+          <span class="opt-risk-badge">● MEDIUM RISK</span>
+          <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
+          <button class="info-btn" onclick="event.stopPropagation();showInfo('options',this)" title="What is this?" style="position:static;transform:none;z-index:1;display:inline-flex;margin-left:4px"><span>i</span></button>
+          <button class="tour-btn" onclick="startOptionsTour()" style="font-size:9px;padding:3px 9px;margin-left:4px">Tour ▶</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: option comparison visual -->
+      <div class="opt-hero-right" id="opt-hero-right">
+        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.08em;margin-bottom:10px">OPTION COMPARISON · 5 DIMENSIONS</div>
+
+        <!-- Sparkline comparison bars for all 5 options across 4 axes -->
+        <div class="opt-compare-grid" id="opt-compare-grid">
+          <!-- Axis headers -->
+          <div></div>
+          <div class="opt-ax-label">RISK</div>
+          <div class="opt-ax-label">RETURN</div>
+          <div class="opt-ax-label">SPEED</div>
+          <div class="opt-ax-label">REVERSIBILITY</div>
+
+          <!-- OPT-1 -->
+          <div class="opt-row-label opt-not-sel">OPT-1</div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:90%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:85%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:15%"></div></div>
+
+          <!-- OPT-2 — WINNER -->
+          <div class="opt-row-label opt-sel">OPT-2 ★</div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:45%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:80%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:65%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:85%"></div></div>
+
+          <!-- OPT-3 -->
+          <div class="opt-row-label opt-not-sel">OPT-3</div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:20%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
+
+          <!-- OPT-4 -->
+          <div class="opt-row-label opt-not-sel">OPT-4</div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:40%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:60%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:75%"></div></div>
+
+          <!-- OPT-5 -->
+          <div class="opt-row-label opt-not-sel">OPT-5</div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:10%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:30%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
+          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:90%"></div></div>
+        </div>
+
+        <!-- Return floor callout -->
+        <div class="opt-return-callout">
+          <span class="opt-return-num">3.5×</span>
+          <span class="opt-return-label">minimum return floor<br><span style="color:#475569">$175K LTV ÷ $50K CAC ceiling</span></span>
+          <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU customer · CAC ceiling $50K · return floor 3.5× on every closed logo · below ceiling = immediately accretive</div></span>
+        </div>
       </div>
     </div>
 
@@ -926,17 +1006,21 @@ function toggleExpand(id) {
     var tipContent = cite.querySelector('.cite-tip');
     if (!tipContent) return;
     tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
+    // Force wide layout BEFORE measuring height
+    tip.style.width = '380px';
+    tip.style.maxWidth = '440px';
+    tip.style.minWidth = '320px';
+    tip.style.whiteSpace = 'normal';
     tip.style.display = 'block';
+    tip.style.left = '-9999px'; // off-screen while measuring
 
     var rect = btn.getBoundingClientRect();
-    var w = Math.min(440, Math.max(320, tip.scrollWidth + 32));
-    tip.style.maxWidth = w + 'px';
     var h = tip.offsetHeight;
+    var w = 380;
 
     var x = rect.left + rect.width/2 - w/2;
     var y = rect.top - h - 10;
     if (y < 8) y = rect.bottom + 10;
-    // clamp to viewport with generous margins for wide tooltips
     x = Math.max(12, Math.min(x, window.innerWidth - w - 12));
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
