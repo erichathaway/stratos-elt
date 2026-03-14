@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StratOS — EU Market Entry Decision</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;font-size:13px;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(14,165,233,.07),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(45,212,191,.04),transparent)}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1)}
+
+.header{border-bottom:1px solid rgba(255,255,255,.07);background:rgba(3,7,17,.97);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1060px;margin:0 auto;padding:0 16px}
+.header-top{display:flex;align-items:center;justify-content:space-between;height:48px}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-icon{width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#0ea5e9,#2dd4bf);display:flex;align-items:center;justify-content:center;font-size:12px}
+.logo-name{font-size:14px;font-weight:700;color:#f1f5f9}
+.logo-div{color:#1e293b;margin:0 4px}
+.logo-sub{font-size:10px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.06em}
+.run-meta{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.05em}
+.tabs{display:flex;overflow-x:auto}
+.tab{background:none;border:none;cursor:pointer;padding:9px 14px;font-size:11px;font-weight:400;color:#475569;border-bottom:2px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all .15s}
+.tab.active{color:#f1f5f9;border-bottom-color:#2dd4bf;font-weight:600}
+.tab:hover{color:#94a3b8}
+
+.content{max-width:1060px;margin:0 auto;padding:22px 16px}
+.panel{display:none}.panel.active{display:flex;flex-direction:column;gap:16px}
+.stub{display:flex;flex-direction:column;align-items:center;justify-content:center;height:340px;gap:10px;opacity:.35}
+.stub-icon{font-size:32px}.stub-title{font-size:15px;font-weight:600}
+.stub-desc{font-size:12px;color:#64748b;max-width:300px;text-align:center;line-height:1.6}
+.stub-tag{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-top:4px}
+/* ── INFO BUTTON ── */
+.info-btn{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.35);font-size:9px;font-weight:700;font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s;z-index:20;line-height:1;user-select:none}
+.info-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.32);color:rgba(255,255,255,.75);transform:translateX(-50%) scale(1.15)}
+/* zone1 needs relative positioning already; zone3/4 have it. For zone2 cards: */
+.card{position:relative}
+.concern-card{position:relative}
+.openq-card{position:relative}
+.zone3{position:relative}
+.zone4{position:relative}
+.zone1{position:relative}
+
+/* ── INFO MODAL ── */
+/* ── DRAGGABLE INFO PANEL ── */
+.info-panel{display:none;position:fixed;z-index:9000;width:300px;background:#0d1525;border:1px solid rgba(255,255,255,.12);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.55),0 0 0 1px rgba(45,212,191,.06);overflow:hidden;user-select:none}
+.info-panel.open{display:block;animation:panelIn .16s ease}
+@keyframes panelIn{from{opacity:0;transform:scale(.95) translateY(-4px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.info-panel-drag{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:rgba(255,255,255,.035);border-bottom:1px solid rgba(255,255,255,.07);cursor:grab;gap:8px}
+.info-panel-drag:active{cursor:grabbing}
+.info-panel-drag-dots{display:flex;gap:3px;opacity:.3;flex-shrink:0}
+.info-panel-drag-dots span{width:3px;height:3px;border-radius:50%;background:#94a3b8}
+.info-panel-close{background:none;border:none;color:#475569;font-size:14px;cursor:pointer;padding:1px 5px;border-radius:3px;transition:color .15s;flex-shrink:0;line-height:1}
+.info-panel-close:hover{color:#94a3b8}
+.info-panel-body{padding:14px 15px}
+.info-modal-tag{font-size:9px;font-weight:700;letter-spacing:.1em;color:#2dd4bf;font-family:'DM Mono',monospace;margin-bottom:6px}
+.info-modal-title{font-family:'Fraunces',serif;font-size:16px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2}
+.info-modal-body{font-size:12px;color:#64748b;line-height:1.7}
+.info-modal-body strong{color:#94a3b8;font-weight:600}
+
+/* ── NULL STATE ── */
+.null-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px 16px;gap:6px;opacity:.4}
+.null-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2)}
+.null-text{font-size:11px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em}
+
+
+/* ── CITATIONS ── */
+.cite{position:relative;display:inline-block;vertical-align:middle;margin-left:4px;z-index:20}
+.cite-btn{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);color:#2dd4bf;font-size:9px;font-family:'DM Mono',monospace;padding:1px 6px;border-radius:3px;cursor:default;font-weight:600;letter-spacing:.03em;transition:all .15s;white-space:nowrap}
+.cite-btn:hover{background:rgba(45,212,191,.22);border-color:rgba(45,212,191,.55)}
+/* tooltip — absolute, above the badge, centred, caret below */
+.cite-tip{
+  visibility:hidden;opacity:0;
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;transform:translateX(-50%);
+  background:#0d1628;
+  border:1px solid rgba(45,212,191,.22);
+  border-radius:8px;
+  padding:9px 13px;
+  font-size:11px;color:#94a3b8;
+  white-space:nowrap;
+  z-index:9999;pointer-events:none;
+  line-height:1.6;
+  font-family:'DM Sans',sans-serif;font-weight:400;letter-spacing:0;
+  transition:opacity .15s,visibility .15s;
+  max-width:280px;white-space:normal;
+  text-align:left;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+}
+/* caret */
+.cite-tip::after{
+  content:'';position:absolute;
+  top:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;
+  border-top-color:#0d1628;
+}
+.cite:hover .cite-tip{visibility:visible;opacity:1}
+/* RIGHT-EDGE variant — pin tooltip to right side of badge */
+.cite.tip-left .cite-tip{left:auto;right:0;transform:none}
+.cite.tip-left .cite-tip::after{left:auto;right:12px;transform:none}
+/* LEFT-EDGE variant — pin tooltip to left side of badge */
+.cite.tip-right .cite-tip{left:0;transform:none}
+.cite.tip-right .cite-tip::after{left:12px;transform:none}
+
+/* ── ZONE 1 ── */
+.zone1{background:linear-gradient(135deg,rgba(14,165,233,.05),rgba(45,212,191,.05));border:1px solid rgba(45,212,191,.12);border-radius:14px;padding:22px;position:relative}
+.zone1::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.07),transparent 70%);pointer-events:none}
+.verdict-grid{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.verdict-left{flex:1;min-width:220px}
+.verdict-right{display:flex;flex-direction:column;gap:14px;min-width:200px}
+.decision-label{font-size:9px;font-weight:700;letter-spacing:.12em;color:#f59e0b;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);padding:2px 8px;border-radius:4px;font-family:'DM Mono',monospace}
+.decision-title{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,3vw,32px);font-weight:600;line-height:1.1;color:#f1f5f9;margin-top:9px;letter-spacing:-.02em}
+.decision-title span{color:#2dd4bf}
+.decision-q{font-size:12px;color:#64748b;line-height:1.6;max-width:380px;margin-top:8px}
+.winning-option{margin-top:12px;background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.2);border-radius:7px;padding:8px 11px;display:inline-block}
+.wo-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.06em;margin-bottom:1px}
+.wo-name{font-size:12px;font-weight:600;color:#2dd4bf}
+.wo-desc{font-size:11px;color:#475569;margin-top:2px}
+
+.conf-num{display:flex;align-items:baseline;gap:2px;justify-content:flex-end}
+.conf-big{font-family:'Fraunces',serif;font-size:40px;font-weight:300;color:#f1f5f9;line-height:1}
+.conf-pct{font-size:14px;color:#475569}
+.conf-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.08em;text-align:right}
+.conf-range{font-size:10px;color:#475569;text-align:right;margin-top:1px}
+.conf-bar{margin-top:4px;position:relative;height:3px;background:rgba(255,255,255,.06);border-radius:2px}
+.conf-fill{position:absolute;height:100%;background:rgba(45,212,191,.35);border-radius:2px}
+.conf-avg{position:absolute;width:3px;height:100%;background:#2dd4bf;transform:translateX(-50%)}
+.roles-meta{font-size:10px;color:#64748b;font-family:'DM Mono',monospace;margin-bottom:6px;text-align:right}
+.roles-grid{display:flex;gap:4px;flex-wrap:wrap}
+.role-pill{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 4px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;flex:1;min-width:52px;transition:border-color .15s,background .15s}
+.role-pill:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.055);cursor:default}
+.role-img-wrap{position:relative}
+.role-img{width:34px;height:34px;border-radius:50%;background-size:cover;background-position:center 20%;flex-shrink:0;display:block;background-color:#0f172a}
+.role-dot{position:absolute;bottom:-2px;right:-2px;width:10px;height:10px;border-radius:50%;border:2px solid #030711}
+.role-key{font-size:8px;font-weight:700;color:#e2e8f0;letter-spacing:.06em;text-align:center}
+.role-conf{font-size:10px;color:#64748b;text-align:center}
+.role-vote{font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px;white-space:nowrap;text-align:center}
+.signals{margin-top:14px;padding-top:11px;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.signal{display:flex;align-items:center;gap:5px}
+.signal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.signal-text{font-size:11px;color:#64748b}
+/* Groupthink — subtle inline badge in signals row */
+.gt-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:5px;cursor:pointer;font-size:10px;color:#fde68a;font-family:'DM Mono',monospace;font-weight:600;letter-spacing:.04em;transition:background .15s}
+.gt-badge:hover{background:rgba(245,158,11,.12)}
+
+/* ── ZONE 2 ── */
+.zone2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:15px;transition:border-color .18s,background .18s,box-shadow .18s}
+.card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.035);box-shadow:0 0 0 1px rgba(45,212,191,.08) inset}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.card-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.07em;font-family:'DM Mono',monospace}
+.card-link{background:none;border:none;cursor:pointer;font-size:9px;color:#2dd4bf;font-family:'DM Mono',monospace}
+.reasons{display:flex;flex-direction:column;gap:6px}
+.reason{padding:8px 9px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.05);font-size:12px;color:#cbd5e1;line-height:1.55}
+.right-col{display:flex;flex-direction:column;gap:8px}
+
+/* ── EXPANDABLE CARDS — fixed layout ── */
+/* No overflow:hidden on cards — that was clipping the content */
+.concern-card{background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.15);border-radius:12px;flex:1;transition:border-color .18s,box-shadow .18s}
+.concern-card:hover{border-color:rgba(239,68,68,.28);box-shadow:0 0 0 1px rgba(239,68,68,.06) inset}
+.card-trigger{padding:12px 13px;cursor:pointer;display:flex;flex-direction:column;gap:0}
+.concern-title{font-size:11px;font-weight:700;color:#f87171;letter-spacing:.07em;font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.concern-title .toggle-arrow{font-size:11px;color:#f87171;transition:transform .2s;flex-shrink:0;margin-left:6px}
+.concern-card.open .toggle-arrow{transform:rotate(180deg)}
+.concern-text{font-size:12px;color:#cbd5e1;line-height:1.55}
+/* Expand section sits OUTSIDE the card-trigger, inside the card — no clipping */
+.expand-section{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.concern-card.open .expand-section{max-height:600px}
+.openq-card.open .expand-section{max-height:600px}
+.expand-inner{padding:0 13px 13px;border-top:1px solid rgba(239,68,68,.1);padding-top:10px}
+.expand-inner-indigo{padding:0 13px 13px;border-top:1px solid rgba(129,140,248,.1);padding-top:10px}
+.concern-item{padding:7px 10px;background:rgba(239,68,68,.04);border-radius:5px;border-left:2px solid rgba(239,68,68,.22);font-size:11px;color:#94a3b8;line-height:1.55;margin-bottom:6px}
+.concern-item:last-child{margin-bottom:0}
+.openq-item{padding:7px 10px;background:rgba(129,140,248,.04);border-radius:5px;border-left:2px solid rgba(129,140,248,.2);font-size:11px;color:#94a3b8;line-height:1.55;margin-bottom:6px}
+.openq-item:last-child{margin-bottom:0}
+
+.openq-card{background:rgba(129,140,248,.04);border:1px solid rgba(129,140,248,.15);border-radius:12px;flex:1;transition:border-color .18s,box-shadow .18s}
+.openq-card:hover{border-color:rgba(129,140,248,.28);box-shadow:0 0 0 1px rgba(129,140,248,.06) inset}
+.openq-title{font-size:11px;font-weight:700;color:#818cf8;letter-spacing:.07em;font-family:'DM Mono',monospace;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.openq-title .toggle-arrow{font-size:11px;color:#818cf8;transition:transform .2s;flex-shrink:0;margin-left:6px}
+.openq-card.open .toggle-arrow{transform:rotate(180deg)}
+.openq-badges{display:flex;gap:3px;margin-bottom:5px}
+.openq-badge{font-size:8px;font-weight:700;color:#818cf8;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);padding:1px 4px;border-radius:3px}
+.openq-text{font-size:12px;color:#cbd5e1;line-height:1.55}
+.openq-note{font-size:10px;color:#475569;margin-top:4px}
+
+/* ── ZONE 3 ── */
+.zone3{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:17px;transition:border-color .18s}
+.zone3:hover{border-color:rgba(255,255,255,.12)}
+.zone-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}
+.zone-title{font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.07em;font-family:'DM Mono',monospace;margin-bottom:2px}
+.zone-sub{font-size:12px;color:#475569}
+.zone-num{font-family:'Fraunces',serif;font-size:18px;font-weight:300;color:#f59e0b;opacity:.6}
+.cond-row{display:flex;gap:9px;padding:9px 5px;border-bottom:1px solid rgba(255,255,255,.05);border-radius:5px;transition:background .12s}
+.cond-row:last-child{border-bottom:none}
+.cond-row:hover{background:rgba(255,255,255,.025)}
+.cond-num{min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0;margin-top:3px}
+.cond-num.kill{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171}
+.cond-num.high{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:#f59e0b}
+.cond-num.med{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);color:#818cf8}
+.cond-text{font-size:12px;color:#e2e8f0;line-height:1.5}
+.cond-meta{display:flex;gap:5px;margin-top:3px;flex-wrap:wrap;align-items:center}
+.cond-owner-lbl{font-size:10px;color:#64748b}
+.cond-owner{font-size:9px;font-weight:700;color:#2dd4bf;background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.2);padding:1px 4px;border-radius:3px}
+.cond-freq{font-size:10px;color:#475569}
+.sev-kill{font-size:8px;font-weight:700;color:#f87171;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);padding:1px 4px;border-radius:3px}
+.sev-high{font-size:8px;font-weight:700;color:#f59e0b;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);padding:1px 4px;border-radius:3px}
+.sev-med{font-size:8px;font-weight:700;color:#818cf8;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);padding:1px 4px;border-radius:3px}
+
+/* ── ZONE 4 ── */
+.zone4{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px 24px;transition:border-color .18s}
+.zone4:hover{border-color:rgba(255,255,255,.12)}
+.seq-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+/* KPI row — no overflow:hidden so citations pop above */
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);border-radius:8px;margin-bottom:24px;border:1px solid rgba(255,255,255,.07)}
+.kpi-cell{background:#030711;padding:14px 14px 10px;display:flex;flex-direction:column;gap:4px;transition:background .15s;position:relative}
+.kpi-cell:first-child{border-radius:7px 0 0 7px}
+.kpi-cell:last-child{border-radius:0 7px 7px 0}
+.kpi-cell:hover{background:#080f1d}
+.kpi-n{font-family:'Fraunces',serif;font-size:22px;font-weight:300;line-height:1;display:flex;align-items:center;gap:6px}
+.kpi-n.pos{color:#34d399}.kpi-n.neg{color:#f87171}.kpi-n.neu{color:#f1f5f9}.kpi-n.warn{color:#f59e0b}
+.kpi-l{font-size:9px;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.06em}
+
+/* Timeline */
+.tl-outer{position:relative;padding:0;margin:0}
+.tl-spine{position:absolute;top:26px;left:16.6%;right:16.6%;height:2px;z-index:0;display:flex;align-items:center}
+.tl-spine-kill{flex:1;height:2px;background:linear-gradient(90deg,#ef4444,rgba(239,68,68,.5));position:relative}
+.tl-spine-kill::after{content:'▶';position:absolute;right:-7px;top:50%;transform:translateY(-50%);font-size:8px;color:rgba(239,68,68,.7)}
+.tl-spine-normal{flex:1;height:2px;background:rgba(255,255,255,.09);position:relative}
+.tl-spine-normal::after{content:'▶';position:absolute;right:-7px;top:50%;transform:translateY(-50%);font-size:8px;color:rgba(255,255,255,.2)}
+.tl-phases{display:grid;grid-template-columns:repeat(3,1fr);position:relative;z-index:1}
+.tl-phase{display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:0 6px;transition:opacity .15s}
+.tl-phase:hover .tl-node-wrap{transform:scale(1.07)}
+.tl-num{font-size:9px;font-weight:700;letter-spacing:.14em;font-family:'DM Mono',monospace;color:#1e293b;margin-bottom:8px;text-align:center}
+.tl-phase.active .tl-num{color:#94a3b8}
+.tl-node-wrap{position:relative;transition:transform .18s;display:flex;align-items:center;justify-content:center;width:52px;height:52px;flex-shrink:0}
+.tl-node{width:44px;height:44px;border-radius:50%;border:1.5px solid;transition:all .22s;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'DM Mono',monospace}
+.tl-node.kill{border-color:#ef4444;color:#f87171;box-shadow:0 0 0 3px rgba(239,68,68,.08)}
+.tl-node.pause{border-color:#f59e0b;color:#f59e0b;font-size:14px;box-shadow:0 0 0 3px rgba(245,158,11,.07)}
+.tl-node.monitor{border-color:#2dd4bf;color:#2dd4bf;box-shadow:0 0 0 3px rgba(45,212,191,.07)}
+.tl-phase.active .tl-node.kill{background:rgba(239,68,68,.12);box-shadow:0 0 0 4px rgba(239,68,68,.12),0 0 20px rgba(239,68,68,.18)}
+.tl-phase.active .tl-node.pause{background:rgba(245,158,11,.1);box-shadow:0 0 0 4px rgba(245,158,11,.1),0 0 20px rgba(245,158,11,.15)}
+.tl-phase.active .tl-node.monitor{background:rgba(45,212,191,.09);box-shadow:0 0 0 4px rgba(45,212,191,.09),0 0 20px rgba(45,212,191,.12)}
+.tl-badge{position:absolute;top:0;right:0;width:16px;height:16px;border-radius:50%;background:#ef4444;font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid #030711;font-family:'DM Mono',monospace;z-index:3}
+.tl-below{margin-top:13px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.tl-phase-name{font-size:10px;font-weight:700;letter-spacing:.09em;font-family:'DM Mono',monospace;color:#94a3b8}
+.tl-gate-name{font-size:13px;font-weight:600;color:#94a3b8;line-height:1.3;margin-top:1px}
+.tl-gate-sub{font-size:11px;color:#334155;margin-top:1px}
+.tl-owner{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:3px;margin-top:4px}
+.own-legal{color:#f87171;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.22)}
+.own-cfo{color:#34d399;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)}
+.own-all{color:#2dd4bf;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.18)}
+.tl-drawer{display:none;margin-top:20px}.tl-drawer.open{display:block;animation:fadeSlide .18s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.tl-drawer-inner{border:1px solid rgba(255,255,255,.08);border-radius:10px;overflow:hidden;background:rgba(4,9,20,.9)}
+.tl-drawer-bar{height:3px}
+.tl-drawer-bar.kill{background:linear-gradient(90deg,#ef4444,rgba(239,68,68,.3))}
+.tl-drawer-bar.pause{background:linear-gradient(90deg,#f59e0b,rgba(245,158,11,.3))}
+.tl-drawer-bar.monitor{background:linear-gradient(90deg,#2dd4bf,rgba(45,212,191,.3))}
+.tl-legend{display:flex;gap:18px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.05);flex-wrap:wrap}
+.tll{display:flex;align-items:center;gap:6px;font-size:10px;color:#475569;font-family:'DM Mono',monospace}
+.tll-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+.footer{border-top:1px solid rgba(255,255,255,.05);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.footer-id{font-size:9px;color:#475569;font-family:'DM Mono',monospace}
+.footer-actions{display:flex;gap:6px}
+.footer-btn{background:none;border:1px solid rgba(255,255,255,.08);color:#475569;font-size:9px;font-family:'DM Mono',monospace;padding:4px 8px;border-radius:4px;cursor:pointer;transition:all .15s}
+.footer-btn:hover{border-color:rgba(255,255,255,.18);color:#94a3b8}
+
+@media(max-width:640px){.zone2{grid-template-columns:1fr}.verdict-grid{flex-direction:column}.kpi-row{grid-template-columns:1fr 1fr}}
+
+/* ── ENTRANCE ANIMATIONS ── */
+@keyframes zoneUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.zone1,.zone2,.zone3,.zone4{animation:zoneUp .55s cubic-bezier(.22,.68,0,1.1) both}
+.zone1{animation-delay:.05s}
+.zone2{animation-delay:.15s}
+.zone3{animation-delay:.25s}
+.zone4{animation-delay:.35s}
+
+/* ── ZONE1 CURSOR SPOTLIGHT ── */
+.zone1{background:linear-gradient(135deg,rgba(14,165,233,.05),rgba(45,212,191,.05));transition:background .3s}
+.zone1-spotlight{position:absolute;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.09) 0%,transparent 65%);width:400px;height:400px;transform:translate(-50%,-50%);transition:opacity .4s;opacity:0}
+
+/* ── CARD HOVER — warmer depth glow ── */
+.card:hover{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.035);box-shadow:0 0 20px rgba(14,165,233,.06),0 0 0 1px rgba(45,212,191,.08) inset}
+.concern-card:hover{border-color:rgba(239,68,68,.32);box-shadow:0 0 18px rgba(239,68,68,.07),0 0 0 1px rgba(239,68,68,.06) inset}
+.openq-card:hover{border-color:rgba(129,140,248,.32);box-shadow:0 0 18px rgba(129,140,248,.07),0 0 0 1px rgba(129,140,248,.06) inset}
+.zone3:hover{border-color:rgba(255,255,255,.14);box-shadow:0 0 20px rgba(45,212,191,.04)}
+.zone4:hover{border-color:rgba(255,255,255,.14);box-shadow:0 0 20px rgba(14,165,233,.04)}
+
+/* ── ROLE PILL — micro lift ── */
+.role-pill{transition:border-color .15s,background .15s,transform .15s,box-shadow .15s}
+.role-pill:hover{border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.06);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.role-img{transition:transform .2s}
+.role-pill:hover .role-img{transform:scale(1.04)}
+
+/* ── CONDITION ROW stagger ── */
+@keyframes condIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.cond-row:nth-child(1){animation:condIn .4s .4s both}
+.cond-row:nth-child(2){animation:condIn .4s .47s both}
+.cond-row:nth-child(3){animation:condIn .4s .54s both}
+.cond-row:nth-child(4){animation:condIn .4s .61s both}
+.cond-row:nth-child(5){animation:condIn .4s .68s both}
+.cond-row:nth-child(6){animation:condIn .4s .75s both}
+
+/* ── CONFIDENCE BAR animated fill ── */
+.conf-fill{width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1) .8s}
+.conf-fill.loaded{width:10%}
+.conf-avg{opacity:0;transition:opacity .4s 1.6s}
+.conf-avg.loaded{opacity:1}
+
+/* ── SECTION TITLE underline grow ── */
+.zone-title,.card-title{position:relative;display:inline-block}
+.zone-title::after,.card-title::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:rgba(45,212,191,.4);transition:width .3s ease}
+.zone3:hover .zone-title::after,.zone4:hover .zone-title::after,.card:hover .card-title::after{width:100%}
+
+/* ── KPI CELL subtle hover glow ── */
+.kpi-cell{transition:background .15s}
+.kpi-cell:hover{background:#0a1320}
+.kpi-cell:nth-child(1):hover .kpi-n{color:#4ade80;transition:color .2s}
+.kpi-cell:nth-child(2):hover .kpi-n{color:#fbbf24;transition:color .2s}
+.kpi-cell:nth-child(3):hover .kpi-n{color:#4ade80;transition:color .2s}
+.kpi-cell:nth-child(4):hover .kpi-n{color:#93c5fd;transition:color .2s}
+
+/* ── TIMELINE phase hover ── */
+.tl-phase{transition:transform .18s}
+.tl-phase:hover{transform:translateY(-3px)}
+
+/* ── SIGNALS row items ── */
+.signal{transition:opacity .15s}
+.signals:hover .signal{opacity:.5}
+.signals:hover .signal:hover{opacity:1}
+
+/* ── WINNING OPTION subtle pulse border on load ── */
+@keyframes optionPulse{0%,100%{border-color:rgba(20,184,166,.2)}50%{border-color:rgba(20,184,166,.5)}}
+.winning-option{animation:optionPulse 2.5s ease-in-out 1s 2}
+
+/* ── INFO BUTTON refined ── */
+.info-btn{transition:all .2s cubic-bezier(.34,1.56,.64,1)}
+.info-btn:hover{transform:translateX(-50%) scale(1.25);background:rgba(45,212,191,.15);border-color:rgba(45,212,191,.5);color:#2dd4bf}
+
+
+/* ── GUIDED TOUR ── */
+.tour-btn{background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.3);color:#2dd4bf;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;padding:4px 10px;border-radius:5px;cursor:pointer;letter-spacing:.05em;transition:all .18s;white-space:nowrap}
+.tour-btn:hover{background:rgba(45,212,191,.18);border-color:rgba(45,212,191,.55);box-shadow:0 0 12px rgba(45,212,191,.15)}
+
+/* Backdrop — full screen blur with cutout */
+.tour-backdrop{display:none;position:fixed;inset:0;z-index:8000;pointer-events:all}
+.tour-backdrop.active{display:block}
+/* Four overlay quadrants that surround the spotlight, all blurred */
+.tour-fog{position:fixed;background:rgba(3,7,17,.75);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);transition:all .35s cubic-bezier(.4,0,.2,1);pointer-events:none;z-index:8001}
+#tour-fog-top   {top:0;left:0;right:0}
+#tour-fog-bottom{bottom:0;left:0;right:0}
+#tour-fog-left  {left:0}
+#tour-fog-right {right:0}
+
+/* Spotlight border ring */
+.tour-ring{position:fixed;border:2px solid rgba(45,212,191,.7);border-radius:12px;box-shadow:0 0 0 4px rgba(45,212,191,.12),0 0 40px rgba(45,212,191,.18);transition:all .35s cubic-bezier(.4,0,.2,1);pointer-events:none;z-index:8002}
+.tour-ring.active{display:block}
+
+/* Tour card */
+.tour-card{position:fixed;background:#0a1525;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:18px 20px;width:300px;box-shadow:0 16px 48px rgba(0,0,0,.6);z-index:8003;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.tour-card-step{font-size:9px;font-weight:700;letter-spacing:.12em;color:#475569;font-family:'DM Mono',monospace;margin-bottom:4px}
+.tour-card-title{font-family:'Fraunces',serif;font-size:17px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:8px;line-height:1.2}
+.tour-card-body{font-size:12px;color:#64748b;line-height:1.65;margin-bottom:16px}
+.tour-card-body strong{color:#94a3b8}
+.tour-card-nav{display:flex;align-items:center;justify-content:space-between}
+.tour-dots{display:flex;gap:5px}
+.tour-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);transition:background .2s}
+.tour-dot.active{background:#2dd4bf}
+.tour-card-btns{display:flex;gap:6px}
+.tour-btn-prev{background:none;border:1px solid rgba(255,255,255,.1);color:#475569;font-size:10px;font-family:'DM Mono',monospace;padding:5px 10px;border-radius:5px;cursor:pointer;transition:all .15s}
+.tour-btn-prev:hover{border-color:rgba(255,255,255,.25);color:#94a3b8}
+.tour-btn-next{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.35);color:#2dd4bf;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;padding:5px 12px;border-radius:5px;cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.tour-btn-next:hover{background:rgba(45,212,191,.22);border-color:rgba(45,212,191,.6)}
+.tour-btn-skip{background:none;border:none;color:#334155;font-size:10px;font-family:'DM Mono',monospace;cursor:pointer;padding:5px 0;transition:color .15s}
+.tour-btn-skip:hover{color:#475569}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">⬡</div>
+      <span class="logo-name">StratOS</span>
+      <span class="logo-div">|</span>
+      <span class="logo-sub">DECISION RESULTS</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px"><span class="run-meta">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</span><button class="tour-btn" onclick="startTour()" title="Guided tour">Tour <span style="font-size:10px">▸</span></button></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('command',this)">⬡ Command Center</button>
+    <button class="tab" onclick="showTab('options',this)">◈ Options</button>
+    <button class="tab" onclick="showTab('risk',this)">◉ Risk &amp; Intelligence</button>
+    <button class="tab" onclick="showTab('room',this)">◎ The Room</button>
+    <button class="tab" onclick="showTab('mgmt',this)">◧ Management</button>
+    <button class="tab" onclick="showTab('board',this)">◪ Board</button>
+  </div>
+  </div><!-- end header-inner -->
+</div>
+
+<div class="content">
+  <div id="tab-command" class="panel active">
+
+    <!-- ZONE 1 -->
+    <div class="zone1">
+      <button class="info-btn" onclick=\"showInfo('zone1', this)\" title="What is this?">i</button>
+      <div class="verdict-grid">
+        <div class="verdict-left">
+          <span class="decision-label">FINAL DECISION</span>
+          <div class="decision-title">Approve With<br><span>Conditions</span></div>
+          <div class="decision-q">Should TechFlow proceed with a phased EU market entry, allocating $500K to establish GDPR-compliant infrastructure, hire 3 EU FTEs, and close 3 enterprise logos in UK, Germany, and France by Q3 2025?</div>
+          <div class="winning-option">
+            <div class="wo-label">SELECTED OPTION</div>
+            <div class="wo-name">OPT-2 · Phased EU Entry (Conservative)</div>
+            <div class="wo-desc">Phase 1 ($150K) entity + GDPR gate → May GO/NO-GO → Phase 2 ($350K) FTE + GTM</div>
+          </div>
+        </div>
+        <div class="verdict-right">
+          <div>
+            <div class="conf-num"><span class="conf-big">77</span><span class="conf-pct">%</span></div>
+            <div class="conf-label">AVG CONFIDENCE
+              <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip" id="ct1">D_packet confidence_summary.by_role<br>CEO 82% · CSO 81% · CFO 74%<br>CHRO 76% · COO 76% · CTO 72% · LEGAL 72%</div></span>
+            </div>
+            <div class="conf-range">Range: 72% – 82%</div>
+            <div class="conf-bar">
+              <div class="conf-fill" style="left:72%;width:10%"></div>
+              <div class="conf-avg" style="left:77%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="roles-meta">7 ROLES · 3 ROUNDS · 0 DISSENTS</div>
+            <div class="roles-grid">
+              <!-- CEO -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" style="border:1.5px solid rgba(45,212,191,.4)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#2dd4bf;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(45,212,191,.4)">CEO</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">CEO</div><div class="role-conf">82%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+              <!-- CSO -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png" style="border:1.5px solid rgba(129,140,248,.4)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#818cf8;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(129,140,248,.4)">CSO</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">CSO</div><div class="role-conf">81%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+              <!-- CFO -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png" style="border:1.5px solid rgba(52,211,153,.4)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#34d399;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(52,211,153,.4)">CFO</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">CFO</div><div class="role-conf">74%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+              <!-- CHRO -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png" style="border:1.5px solid rgba(244,114,180,.4)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#f472b4;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(244,114,180,.4)">CHRO</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">CHRO</div><div class="role-conf">76%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+              <!-- COO -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png" style="border:1.5px solid rgba(56,189,248,.4)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#38bdf8;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(56,189,248,.4)">COO</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">COO</div><div class="role-conf">76%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+              <!-- CTO -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" style="border:1.5px solid rgba(125,211,252,.4);filter:hue-rotate(180deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#7dd3fc;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(125,211,252,.4)">CTO</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">CTO</div><div class="role-conf">72%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+              <!-- LEGAL -->
+              <div class="role-pill">
+                <div class="role-img-wrap">
+                  <img class="role-img" src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png" style="border:1.5px solid rgba(167,139,250,.4);filter:saturate(0.6) hue-rotate(220deg)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                  <div class="role-img" style="display:none;background:#0f1f2e;color:#a78bfa;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(167,139,250,.4)">LEG</div>
+                  <span class="role-dot" style="background:#f59e0b"></span>
+                </div>
+                <div class="role-key">LEGAL</div><div class="role-conf">72%</div>
+                <span class="role-vote" style="color:#f59e0b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)">AWC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signals row — groupthink as a subtle inline badge, not a hero warning -->
+      <div class="signals">
+        <div class="signal"><div class="signal-dot" style="background:#f59e0b"></div><span class="signal-text">7–0 conditional · 40+ conditions · 1 KILL gate (spend ceiling)<span class="cite"><button class="cite-btn">F1·ALL ROLES</button><div class="cite-tip">Aggregated from F1 top_conditions across all 7 roles · final round · engine_stage_outputs</div></span></span></div>
+        <div class="signal"><div class="signal-dot" style="background:#34d399"></div><span class="signal-text">$525K LTV pipeline at $175K × 3 targets<span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU customer · 3 target logos = $525K implied pipeline</div></span></span></div>
+        <div class="signal"><div class="signal-dot" style="background:#2dd4bf"></div><span class="signal-text">3 inbound EU prospects confirmed<span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · UK, Germany, France · prospects at early pipeline stage · not yet proposal</div></span></span></div>
+        <!-- Groupthink: subtle badge at end of signals -->
+        <div style="margin-left:auto">
+          <span class="gt-badge" onclick="showTab('room',document.querySelectorAll('.tab')[3])" title="All 7 roles converged without domain-specific dissent — review deliberation">⚠ GROUPTHINK DETECTED · HIGH → See The Room</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE 2 -->
+    <div class="zone2">
+      <div class="card">
+        <button class="info-btn" onclick=\"showInfo('why', this)\" title="What is this?">i</button>
+        <div class="card-header">
+          <span class="card-title">WHY THIS DECISION</span>
+          <button class="card-link" onclick="showTab('options',document.querySelectorAll('.tab')[1])">OPTIONS →</button>
+        </div>
+        <div class="reasons">
+          <div class="reason">Two-tranche structure preserves optionality. Phase 1 ($150K) clears GDPR and entity gates before any FTE spend is committed. May 2025 GO/NO-GO is binding — failure halts Phase 2 entirely.
+            <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 · "Phase 2 unlocks only on pipeline confirmation — no automatic spend authorization"</div></span>
+          </div>
+          <div class="reason">EU CAC ceiling $50K vs $175K LTV — 3.5× return. Three inbound EU prospects provide demand signal before capital deployment.
+            <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K · CAC ceiling $50K · "strongest unit economics case for international expansion at this stage"</div></span>
+            <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · 3 inbound EU prospects confirmed · UK, Germany, France</div></span>
+          </div>
+          <div class="reason">Phased hiring eliminates EU labor law exposure — no FTE offers until GO/NO-GO clears. Social charges add 25–35% to base in Germany and France.
+            <span class="cite"><button class="cite-btn">CHRO·R1</button><div class="cite-tip">CHRO R1 · EU FTE comp modeled with Radford EMEA data · social charges 25–35% above base in Germany/France</div></span>
+            <span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 · "UK, Germany, France are three distinct labor law regimes — single counsel for all three is insufficient"</div></span>
+          </div>
+        </div>
+      </div>
+      <div class="right-col">
+
+        <!-- PRIMARY CONCERN — expandable, no overflow:hidden -->
+        <div class="concern-card" id="concern-card">
+          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('concern', this)\" title="What is this?">i</button>
+          <div class="card-trigger" onclick="toggleExpand('concern-card')">
+            <div class="concern-title">
+              PRIMARY CONCERN
+              <span class="toggle-arrow">▾</span>
+            </div>
+            <div class="concern-text">CFO, CTO, and LEGAL converged without surfacing domain-specific risks — unusual for a $500K cross-border commitment. The deliberation record warrants a second look before execution.
+              <span class="cite"><button class="cite-btn" onclick="event.stopPropagation()">D_PACKET·GT</button><div class="cite-tip">D_packet.groupthink_flag.detected = true<br>severity = HIGH · option_unanimity = true · unanimous_stance = true</div></span>
+            </div>
+          </div>
+          <div class="expand-section">
+            <div class="expand-inner">
+              <div class="concern-item">
+                <strong style="color:#fca5a5;font-size:10px;font-family:'DM Mono',monospace">CFO: No downside scenario modeled</strong><br>
+                CFO cited no stress test on runway if Phase 2 spend accelerates before first EU revenue arrives. 74% confidence is the lowest of the financial roles.
+                <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · confidence 74% · no delayed-revenue downside scenario present in deliberation record</div></span>
+              </div>
+              <div class="concern-item">
+                <strong style="color:#fca5a5;font-size:10px;font-family:'DM Mono',monospace">CTO: GDPR budget unconfirmed</strong><br>
+                CTO accepted the $150K Phase 1 envelope without producing an independent cost estimate for isolated EU data residency architecture.
+                <span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 · GDPR architecture flagged as "pending scoping" · budget confirmation outstanding at R2 close</div></span>
+              </div>
+              <div class="concern-item">
+                <strong style="color:#fca5a5;font-size:10px;font-family:'DM Mono',monospace">LEGAL: No France/Germany specific analysis</strong><br>
+                LEGAL approved with conditions but did not surface jurisdiction-specific exposure in Germany or France — both materially stricter than UK post-Brexit.
+                <span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 · conditions placed but no France/Germany specific analysis in deliberation record</div></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPEN QUESTION — expandable -->
+        <div class="openq-card" id="openq-card">
+          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('openq', this)\" title="What is this?">i</button>
+          <div class="card-trigger" onclick="toggleExpand('openq-card')">
+            <div class="openq-title">
+              OPEN QUESTION
+              <span class="toggle-arrow">▾</span>
+            </div>
+            <div class="openq-badges" style="margin-top:4px"><span class="openq-badge">CTO</span><span class="openq-badge">LEGAL</span><span class="openq-badge">CFO</span></div>
+            <div class="openq-text">Is GDPR-compliant data residency architecture feasible within the $150K Phase 1 budget — or does it require Phase 2 capital?
+              <span class="cite"><button class="cite-btn" onclick="event.stopPropagation()">CTO·R1</button><div class="cite-tip">CTO R1 · flagged GDPR architecture as "pending scoping" · not resolved by R2</div></span>
+            </div>
+            <div class="openq-note">Raised R1 and R2 — unresolved. CTO sign-off required before May 2025 GO/NO-GO.</div>
+          </div>
+          <div class="expand-section">
+            <div class="expand-inner-indigo">
+              <div class="openq-item">
+                <strong style="color:#a5b4fc;font-size:10px;font-family:'DM Mono',monospace">WHY IT MATTERS</strong><br>
+                If GDPR architecture requires Phase 2 capital, the two-tranche structure collapses. Phase 1 cannot complete within $150K and the GO/NO-GO gate cannot be reached. Entire timeline shifts minimum 3 months.
+              </div>
+              <div class="openq-item">
+                <strong style="color:#a5b4fc;font-size:10px;font-family:'DM Mono',monospace">WHAT RESOLVES IT</strong><br>
+                CTO must produce a scoping estimate for isolated EU cloud region (AWS eu-west or Azure Germany North) with data residency controls, DPA-compliant logging, and SCCs — confirmed by April 2025 pre-GO/NO-GO.
+              </div>
+              <div class="openq-item">
+                <strong style="color:#a5b4fc;font-size:10px;font-family:'DM Mono',monospace">LEGAL DEPENDENCY</strong><br>
+                External EU counsel must validate GDPR infrastructure before any EU customer data is processed. DPAs and SCCs must execute before onboarding — this is a precondition to revenue, not a formality.
+                <span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 · "DPAs and SCCs must be executed before EU customer onboarding" — explicit kill condition</div></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ZONE 3: Conditions -->
+    <div class="zone3">
+      <button class="info-btn" onclick=\"showInfo('conditions', this)\" title="What is this?">i</button>
+      <div class="zone-header">
+        <div>
+          <div class="zone-title">WHAT HAS TO HAPPEN BEFORE THIS MOVES FORWARD</div>
+          <div class="zone-sub">Top conditions by cross-role frequency — each must clear before execution</div>
+        </div>
+        <span class="zone-num">40+</span>
+      </div>
+      <div class="cond-row">
+        <div class="cond-num kill">!</div>
+        <div>
+          <div class="cond-text">Total EU spend must not exceed $500K without Board re-approval<span class="cite"><button class="cite-btn">CFO·ALL</button><div class="cite-tip">CFO placed spend kill gate across R0, R1, R2 · cited by all 7 roles · "any overrun without board approval halts execution"</div></span></div>
+          <div class="cond-meta"><span class="cond-owner-lbl">Owner:</span><span class="cond-owner">CFO + BOARD</span><span class="cond-freq">· cited by 7 roles</span><span class="sev-kill">KILL GATE</span></div>
+        </div>
+      </div>
+      <div class="cond-row">
+        <div class="cond-num high">1</div>
+        <div>
+          <div class="cond-text">Board must approve $500K spend envelope at February 15 board meeting before any commitment beyond Phase 1 compliance costs<span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 · "Board approval at Feb 15 is precedent to any spend commitment — not a formality"</div></span></div>
+          <div class="cond-meta"><span class="cond-owner-lbl">Owner:</span><span class="cond-owner">CEO</span><span class="cond-freq">· cited by 6 roles</span><span class="sev-high">HIGH</span></div>
+        </div>
+      </div>
+      <div class="cond-row">
+        <div class="cond-num high">2</div>
+        <div>
+          <div class="cond-text">GDPR-compliant infrastructure must be certified operational before any EU customer data processing or commercial contracts executed<span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 · "GDPR certification is not optional — it is a precondition to revenue in any EU jurisdiction"</div></span><span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 · technical feasibility flagged as pending · budget confirmation outstanding</div></span></div>
+          <div class="cond-meta"><span class="cond-owner-lbl">Owner:</span><span class="cond-owner">CTO + LEGAL</span><span class="cond-freq">· cited by 6 roles</span><span class="sev-high">HIGH</span></div>
+        </div>
+      </div>
+      <div class="cond-row">
+        <div class="cond-num high">3</div>
+        <div>
+          <div class="cond-text">May 2025 GO/NO-GO checkpoint is binding — kill criteria must be defined before Phase 1 begins, not at the checkpoint<span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · "GO/NO-GO must have explicit kill criteria agreed before Phase 1 begins — not defined at checkpoint"</div></span></div>
+          <div class="cond-meta"><span class="cond-owner-lbl">Owner:</span><span class="cond-owner">CEO</span><span class="cond-freq">· cited by 5 roles</span><span class="sev-high">HIGH</span></div>
+        </div>
+      </div>
+      <div class="cond-row">
+        <div class="cond-num high">4</div>
+        <div>
+          <div class="cond-text">EU legal entity must be established and external EU employment counsel engaged before any EU FTE hiring commences<span class="cite"><button class="cite-btn">LEGAL·R1</button><div class="cite-tip">LEGAL R1 · "UK, Germany, France are three distinct labor law regimes — single counsel insufficient"</div></span></div>
+          <div class="cond-meta"><span class="cond-owner-lbl">Owner:</span><span class="cond-owner">LEGAL</span><span class="cond-freq">· cited by 5 roles</span><span class="sev-high">HIGH</span></div>
+        </div>
+      </div>
+      <div class="cond-row">
+        <div class="cond-num med">5</div>
+        <div>
+          <div class="cond-text">EU CAC must remain at or below $50K after first 2 closed deals — confirmed before Phase 2 GTM budget release<span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · $50K CAC ceiling · $175K LTV · "above ceiling unit economics invert and Phase 2 does not justify capital"</div></span></div>
+          <div class="cond-meta"><span class="cond-owner-lbl">Owner:</span><span class="cond-owner">CFO + CSO</span><span class="cond-freq">· cited by 4 roles</span><span class="sev-med">MEDIUM</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZONE 4: Execution -->
+    <div class="zone4">
+      <button class="info-btn" onclick=\"showInfo('execution', this)\" title="What is this?">i</button>
+      <div class="seq-hdr">
+        <div>
+          <div class="zone-title">EXECUTION SEQUENCE</div>
+          <div class="zone-sub">Gate-dependency chain — Phase 2 capital locked until GO/NO-GO clears</div>
+        </div>
+      </div>
+
+      <!-- KPI row — position:relative on cells so citations don't get clipped -->
+      <div class="kpi-row">
+        <div class="kpi-cell">
+          <div class="kpi-n pos">$500K</div>
+          <div class="kpi-l">TOTAL INVESTMENT <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · Full $500K: $150K Phase 1, $350K Phase 2 · Board authorization required Feb 15</div></span></div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-n warn">$50K</div>
+          <div class="kpi-l">CAC CEILING <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · EU CAC ceiling $50K · "above this threshold unit economics invert"</div></span></div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-n pos">$175K</div>
+          <div class="kpi-l">LTV / CUSTOMER <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · $175K LTV per EU enterprise customer · 3 targets = $525K implied pipeline</div></span></div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-n neu">12 mo</div>
+          <div class="kpi-l">RUNWAY FLOOR <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · 12-month runway floor is a hard condition post-Phase 1 commitment</div></span></div>
+        </div>
+      </div>
+
+      <div class="tl-outer">
+        <div class="tl-spine">
+          <div class="tl-spine-kill"></div>
+          <div class="tl-spine-normal"></div>
+        </div>
+        <div class="tl-phases">
+          <div class="tl-phase" id="tlp-phase1" onclick="openTLGate('phase1',this)">
+            <div class="tl-num">01</div>
+            <div class="tl-node-wrap">
+              <div class="tl-node kill">P1</div>
+              <div class="tl-badge">3</div>
+            </div>
+            <div class="tl-below">
+              <span class="tl-phase-name">~10 Weeks</span>
+              <span class="tl-gate-name">Foundation &amp; Readiness</span>
+              <span class="tl-gate-sub">Board · Entity · GDPR</span>
+              <span class="tl-owner own-legal">LEGAL + CTO</span>
+            </div>
+          </div>
+          <div class="tl-phase" id="tlp-gonogo" onclick="openTLGate('gonogo',this)">
+            <div class="tl-num">◆</div>
+            <div class="tl-node-wrap">
+              <div class="tl-node pause">◆</div>
+            </div>
+            <div class="tl-below">
+              <span class="tl-phase-name">May 2025</span>
+              <span class="tl-gate-name">GO / NO-GO Gate</span>
+              <span class="tl-gate-sub">Pipeline · CAC · GDPR</span>
+              <span class="tl-owner own-all">ELT BINDING</span>
+            </div>
+          </div>
+          <div class="tl-phase" id="tlp-phase2" onclick="openTLGate('phase2',this)">
+            <div class="tl-num">02</div>
+            <div class="tl-node-wrap">
+              <div class="tl-node monitor">P2</div>
+            </div>
+            <div class="tl-below">
+              <span class="tl-phase-name">~20 Weeks</span>
+              <span class="tl-gate-name">Execution</span>
+              <span class="tl-gate-sub">FTE + GTM + Q3 Launch</span>
+              <span class="tl-owner own-cfo">CFO + CSO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-drawer" id="tl-drawer">
+        <div class="tl-drawer-inner" id="tl-drawer-inner"></div>
+      </div>
+
+      <div class="tl-legend">
+        <div class="tll"><div class="tll-dot" style="background:rgba(239,68,68,.2);border:1.5px solid #ef4444"></div>KILL GATE — blocks execution if triggered</div>
+        <div class="tll"><div class="tll-dot" style="background:rgba(245,158,11,.15);border:1.5px solid #f59e0b"></div>DECISION GATE — ELT binds on passage</div>
+        <div class="tll"><div class="tll-dot" style="background:rgba(45,212,191,.12);border:1.5px solid #2dd4bf"></div>EXECUTION — active monitoring window</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="tab-options" class="panel"><div class="stub"><div class="stub-icon">◈</div><div class="stub-title">Options Analysis</div><div class="stub-desc">OPT-1 through OPT-3 vote record, financial mechanics, reversal protocol</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-risk" class="panel"><div class="stub"><div class="stub-icon">◉</div><div class="stub-title">Risk &amp; Intelligence</div><div class="stub-desc">Risk matrix, 5 EI evidence items, dependency map, research gaps</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-room" class="panel"><div class="stub"><div class="stub-icon">◎</div><div class="stub-title">The Room</div><div class="stub-desc">Stance evolution R0→R1→R2, deliberation record per role, groupthink deep-dive</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-mgmt" class="panel"><div class="stub"><div class="stub-icon">◧</div><div class="stub-title">Management Handoff</div><div class="stub-desc">Per-role functional mandates, 49 commitments with extracted timelines</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-board" class="panel"><div class="stub"><div class="stub-icon">◪</div><div class="stub-title">Board Pre-Read</div><div class="stub-desc">Board action, ELT vote record, financial overview, audit trail</div><div class="stub-tag">COMING NEXT</div></div></div>
+</div>
+
+<div class="footer">
+  <span class="footer-id">STRATOS · RUN-20260313193333-v9i71lgw · ELT · R0–R2 COMPLETE · APPROVED_WITH_CONDITIONS</span>
+  <div class="footer-actions">
+    <button class="footer-btn">Export PDF</button>
+    <button class="footer-btn">Share Link</button>
+    <button class="footer-btn">Gov Doc ↗</button>
+  </div>
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick') && t.getAttribute('onclick').includes("'" + id + "'")) t.classList.add('active');
+  });
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+}
+
+function toggleExpand(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// cite tooltip edge detection — runs once on hover to flip direction if near viewport edge
+document.addEventListener('mouseover', function(e) {
+  var btn = e.target.closest('.cite-btn');
+  if (!btn) return;
+  var cite = btn.closest('.cite');
+  if (!cite) return;
+  var rect = cite.getBoundingClientRect();
+  var tipW = 280;
+  // Reset any previous flip classes
+  cite.classList.remove('tip-left','tip-right');
+  // Near right edge — anchor tip to right of badge
+  if (rect.left + tipW/2 > window.innerWidth - 20) cite.classList.add('tip-left');
+  // Near left edge — anchor tip to left of badge
+  else if (rect.left - tipW/2 < 20) cite.classList.add('tip-right');
+});
+
+const TL_DATA = {
+  phase1: {
+    type:'kill', phase:'PHASE 01 · ~10 WEEKS · $150K', title:'Foundation & Readiness',
+    subtitle:'Three kill gates must clear before Phase 2 capital deploys or any EU customer data is processed.',
+    items:[
+      {owner:'CEO + BOARD', gate:'KILL GATE', label:'Board Approves $500K Envelope — Feb 15', cite:'CEO·R2', citeText:'CEO R2 · "Board approval at Feb 15 is precedent to any spend commitment"', detail:'Full $500K authorization required before Phase 1 spend exceeds compliance costs. No FTE offers, GTM budget, or vendor contracts until board vote confirmed.'},
+      {owner:'LEGAL', gate:'KILL GATE', label:'EU Legal Entity + Employment Counsel Engaged', cite:'LEGAL·R1', citeText:'LEGAL R1 · "UK, Germany, France — three distinct labor law regimes"', detail:'Registered EU entity in at least one jurisdiction before commercial contracts or FTE hiring. External counsel for UK, Germany, France required — simultaneously, not sequentially.'},
+      {owner:'CTO + LEGAL', gate:'KILL GATE', label:'GDPR-Compliant Data Residency Certified', cite:'CTO·R1', citeText:'CTO R1 · GDPR architecture "pending scoping" · budget confirmation outstanding at R2 close', detail:'Isolated EU cloud region with data residency controls. DPAs and SCCs executed before any customer onboarding. CTO must confirm feasibility within $150K Phase 1 budget — currently unresolved.'}
+    ]
+  },
+  gonogo: {
+    type:'pause', phase:'DECISION GATE · MAY 2025', title:'GO / NO-GO Checkpoint',
+    subtitle:'Binding ELT decision. All three criteria must pass before Phase 2 capital ($350K) is released.',
+    items:[
+      {owner:'CSO + CFO', gate:'REQUIRED', label:'≥2 of 3 EU Prospects Active in Pipeline', cite:'CSO·R2', citeText:'CSO R2 · 3 inbound prospects identified · 2 minimum required at proposal stage', detail:'3 inbound EU prospects confirmed. At least 2 must be active (proposal stage or beyond) by May 2025. Pipeline coverage of 3× required before Q3 launch.'},
+      {owner:'CTO', gate:'REQUIRED', label:'GDPR Infrastructure Confirmed Within Phase 1 Budget', cite:'CTO·R1', citeText:'CTO R1 · flagged as "pending scoping" · if Phase 2 capital required, timeline shifts 3+ months', detail:'CTO sign-off that compliant architecture can be delivered within $150K. If Phase 2 capital required, GO/NO-GO is automatically deferred.'},
+      {owner:'CFO', gate:'REQUIRED', label:'Phase 1 ≤$150K · Runway Floor ≥12 Months', cite:'CFO·R2', citeText:'CFO R2 · 12-month runway floor is a hard condition · breach defers Phase 2', detail:'Phase 1 spend within $150K. EU CAC tracking shows ≤$50K trajectory. Runway maintained at 12 months post-commitment.'}
+    ]
+  },
+  phase2: {
+    type:'monitor', phase:'PHASE 02 · ~20 WEEKS · $350K', title:'Execution — FTE Hiring + GTM',
+    subtitle:'Unlocks upon GO/NO-GO passage. Active monitoring against CAC, pipeline, and runway metrics.',
+    items:[
+      {owner:'CHRO', gate:'MONITOR', label:'3 EU FTE Hires Within 16-Week Window', cite:'CHRO·R1', citeText:'CHRO R1 · ≤16 weeks · job postings live March 2025 · social charges 25–35% above base in Germany/France', detail:'Sales, Customer Success, Technical Leads. CHRO confirms hiring within ≤16 weeks with postings live by March 2025.'},
+      {owner:'CSO', gate:'MONITOR', label:'3 Enterprise Logos Closed by Q3 2025', cite:'CSO·R2', citeText:'CSO R2 · Q3 2025 target · UK, Germany, France · $525K implied LTV pipeline', detail:'Target customers in UK, Germany, France. Revenue confirms EU CAC tracking. Failure triggers halt on further GTM expansion.'},
+      {owner:'CFO', gate:'KILL IF BREACHED', label:'Total Spend Within $500K · CAC ≤$50K', cite:'CFO·R1', citeText:'CFO R1 · $50K CAC ceiling · $175K LTV · "above ceiling unit economics invert"', detail:'Any spend exceeding $500K without Board approval triggers immediate halt. Currency risk policy required before EUR-denominated contracts.'}
+    ]
+  }
+};
+const GATE_COLORS = {kill:'#ef4444',pause:'#f59e0b',monitor:'#2dd4bf'};
+let _active = null;
+function openTLGate(id, el) {
+  const drawer = document.getElementById('tl-drawer');
+  const inner = document.getElementById('tl-drawer-inner');
+  const data = TL_DATA[id];
+  if (!data) return;
+  if (_active === id && drawer.classList.contains('open')) {
+    drawer.classList.remove('open'); _active = null;
+    document.querySelectorAll('.tl-phase').forEach(p => p.classList.remove('active'));
+    return;
+  }
+  _active = id;
+  document.querySelectorAll('.tl-phase').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const c = GATE_COLORS[data.type];
+  inner.innerHTML = `
+    <div class="tl-drawer-bar ${data.type}"></div>
+    <div style="padding:14px 18px 10px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;gap:12px">
+      <div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:.1em;color:${c};font-family:'DM Mono',monospace;margin-bottom:4px">${data.phase}</div>
+        <div style="font-family:'Fraunces',serif;font-size:16px;color:#f1f5f9;letter-spacing:-.01em;margin-bottom:3px">${data.title}</div>
+        <div style="font-size:12px;color:#475569;line-height:1.5">${data.subtitle}</div>
+      </div>
+      <div onclick="openTLGate('${id}',null)" style="cursor:pointer;font-size:16px;color:#475569;padding:2px 6px;flex-shrink:0">✕</div>
+    </div>
+    ${data.items.map(item=>`
+    <div style="padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;gap:12px;align-items:flex-start">
+      <div style="flex-shrink:0;margin-top:2px">
+        <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:3px;white-space:nowrap;color:${c};background:rgba(0,0,0,.3);border:1px solid ${c}44">${item.owner}</div>
+        <div style="font-size:8px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 5px;border-radius:3px;margin-top:3px;white-space:nowrap;color:#94a3b8;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08)">${item.gate}</div>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:600;color:#e2e8f0;margin-bottom:5px;line-height:1.35">${item.label} <span title="${item.citeText}" style="background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);color:#2dd4bf;font-size:9px;font-family:'DM Mono',monospace;padding:1px 6px;border-radius:3px;cursor:default">${item.cite}</span></div>
+        <div style="font-size:12px;color:#64748b;line-height:1.6">${item.detail}</div>
+      </div>
+    </div>`).join('')}`;
+  drawer.classList.add('open');
+  setTimeout(()=>drawer.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+
+
+// ── INFO MODAL ──
+const INFO_CONTENT = {
+  zone1: {
+    tag: "COMMAND CENTER — ZONE 1",
+    title: "The Verdict at a Glance",
+    body: "This is what the AI executive team decided. <strong>The big number on the right is average confidence</strong> — how certain the team is, 0–100%. Each face is one executive role. The amber dot means approved with conditions. The winning option is the path they selected. The question is exactly what was put to them."
+  },
+  why: {
+    tag: "COMMAND CENTER — ZONE 2",
+    title: "Why the Team Said Yes",
+    body: "The three strongest reasons the executive team supported this decision. <strong>Each reason is backed by a citation</strong> — the small teal badge tells you which role said it and in which deliberation round. Hover the badge to see the exact source. This is the business case stripped to its core logic."
+  },
+  concern: {
+    tag: "COMMAND CENTER — ZONE 2",
+    title: "The Biggest Worry",
+    body: "The most significant risk raised during deliberation — even though the team voted yes. <strong>Approval with conditions means real concerns are on the table.</strong> Click anywhere on this card to expand it and see the top gaps identified by individual roles — things the team flagged but did not fully resolve before voting."
+  },
+  openq: {
+    tag: "COMMAND CENTER — ZONE 2",
+    title: "The Unanswered Question",
+    body: "The most important thing the team could not answer during deliberation. <strong>This is not a minor detail</strong> — if it goes unresolved it could stall or reverse the decision entirely. Click to expand and see why it matters, what resolves it, and which roles own the answer."
+  },
+  conditions: {
+    tag: "COMMAND CENTER — ZONE 3",
+    title: "Before Anything Can Move",
+    body: "The conditions the team placed on their approval. <strong>The decision is not a simple go — it only moves forward if these happen first.</strong> The red KILL GATE is a hard stop: if breached, execution halts regardless of what else is in motion. HIGH items must resolve before Phase 2 capital releases. The number shows how many of the 7 roles independently raised that condition."
+  },
+  execution: {
+    tag: "COMMAND CENTER — ZONE 4",
+    title: "How This Gets Done",
+    body: "The execution path from decision to launch. <strong>Phase 1 must clear all three kill gates before Phase 2 capital is released.</strong> The diamond in the middle is a binding GO/NO-GO vote in May 2025 — the ELT decides again before the remaining $350K deploys. The four numbers at the top are the financial guardrails. Click any phase node to see the specific gates and who owns them."
+  }
+};
+
+function showInfo(key, triggerEl) {
+  var data = INFO_CONTENT[key];
+  if (!data) return;
+  var panel = document.getElementById('info-panel');
+  document.getElementById('info-modal-tag').textContent = data.tag;
+  document.getElementById('info-modal-title').textContent = data.title;
+  document.getElementById('info-modal-body').innerHTML = data.body;
+
+  // Position near the clicked button, keep on screen
+  var rect = triggerEl ? triggerEl.getBoundingClientRect() : {left: window.innerWidth/2 - 150, bottom: 60};
+  var x = rect.left + window.scrollX;
+  var y = rect.bottom + window.scrollY + 8;
+  // Clamp so panel stays on screen
+  var pw = 300;
+  x = Math.max(8, Math.min(x, window.innerWidth - pw - 8));
+  y = Math.max(8, Math.min(y, window.pageYOffset + window.innerHeight - 280));
+
+  panel.style.left = x + 'px';
+  panel.style.top = y + 'px';
+  panel.classList.add('open');
+}
+
+function closeInfo() {
+  document.getElementById('info-panel').classList.remove('open');
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeInfo();
+});
+
+// ── DRAG LOGIC ──
+(function() {
+  var panel, drag, isDragging = false, startX, startY, origX, origY;
+  document.addEventListener('DOMContentLoaded', function() {
+    panel = document.getElementById('info-panel');
+    drag  = document.getElementById('info-panel-drag');
+    drag.addEventListener('mousedown', function(e) {
+      if (e.target.classList.contains('info-panel-close')) return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      origX = parseInt(panel.style.left) || 0;
+      origY = parseInt(panel.style.top)  || 0;
+      document.body.style.userSelect = 'none';
+    });
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    var nx = origX + dx;
+    var ny = origY + dy;
+    // Keep on screen
+    nx = Math.max(0, Math.min(nx, window.innerWidth - 304));
+    ny = Math.max(0, Math.min(ny, window.innerHeight - 60));
+    panel.style.left = nx + 'px';
+    panel.style.top  = ny + 'px';
+  });
+  document.addEventListener('mouseup', function() {
+    if (isDragging) {
+      isDragging = false;
+      document.body.style.userSelect = '';
+    }
+  });
+})();
+
+
+// ── CURSOR SPOTLIGHT on Zone 1 ──
+(function() {
+  var zone1 = document.querySelector('.zone1');
+  var spot  = document.getElementById('zone1-spotlight');
+  if (!zone1 || !spot) return;
+  zone1.addEventListener('mouseenter', function() { spot.style.opacity = '1'; });
+  zone1.addEventListener('mouseleave', function() { spot.style.opacity = '0'; });
+  zone1.addEventListener('mousemove', function(e) {
+    var r = zone1.getBoundingClientRect();
+    spot.style.left = (e.clientX - r.left) + 'px';
+    spot.style.top  = (e.clientY - r.top)  + 'px';
+  });
+})();
+
+// ── COUNTER ANIMATION for confidence ──
+(function() {
+  var el = document.querySelector('.conf-big');
+  if (!el) return;
+  var target = 77, duration = 1200, start = null;
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function step(ts) {
+    if (!start) start = ts;
+    var progress = Math.min((ts - start) / duration, 1);
+    el.textContent = Math.round(easeOut(progress) * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+  setTimeout(function() { requestAnimationFrame(step); }, 200);
+})();
+
+// ── CONFIDENCE BAR animate in ──
+(function() {
+  var fill = document.querySelector('.conf-fill');
+  var avg  = document.querySelector('.conf-avg');
+  if (fill) setTimeout(function() { fill.classList.add('loaded'); }, 300);
+  if (avg)  setTimeout(function() { avg.classList.add('loaded');  }, 300);
+})();
+
+// ── CURSOR-AWARE glow on cards ──
+document.querySelectorAll('.card, .concern-card, .openq-card').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    var r = card.getBoundingClientRect();
+    var x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
+    var y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+    card.style.background = 'radial-gradient(circle at ' + x + '% ' + y + '%, rgba(45,212,191,.04) 0%, rgba(255,255,255,.02) 60%)';
+  });
+  card.addEventListener('mouseleave', function() {
+    card.style.background = '';
+  });
+});
+
+
+// ── GUIDED TOUR ──
+const TOUR_STEPS = [
+  {
+    selector: ".zone1",
+    title: "The Verdict",
+    body: "Start here. This card shows the <strong>final decision</strong>, which option was selected, the team's average confidence score, and every executive's vote. Amber dots mean approved with conditions — the team said yes, but with guardrails.",
+    cardPos: "below"
+  },
+  {
+    selector: ".zone2",
+    title: "Why & What to Watch",
+    body: "Left: the three strongest reasons the team approved. Right: the biggest concern raised and the one question that was not fully answered before the vote. <strong>Click either card to expand</strong> the full detail.",
+    cardPos: "below"
+  },
+  {
+    selector: ".zone3",
+    title: "Conditions — Non-Negotiable",
+    body: "These are the gates placed on approval. <strong>The red KILL item stops execution immediately</strong> if breached. HIGH items must clear before Phase 2 capital releases. Each number shows how many of the 7 roles raised that condition.",
+    cardPos: "above"
+  },
+  {
+    selector: ".zone4",
+    title: "The Execution Path",
+    body: "Phase 1 to GO/NO-GO gate to Phase 2. <strong>Phase 2's $350K does not release until May 2025.</strong> The four numbers are the CFO's financial guardrails. Click any phase node to see who owns each gate.",
+    cardPos: "above"
+  },
+  {
+    selector: ".tabs",
+    title: "Five More Views",
+    body: "Each tab goes deeper: <strong>Options</strong> shows what was rejected and why. <strong>Risk</strong> has the full matrix. <strong>The Room</strong> shows stance evolution. <strong>Management</strong> is per-department briefs. <strong>Board</strong> is the pre-read packet.",
+    cardPos: "below"
+  },
+  {
+    selector: ".signals",
+    title: "Teal Badges = Sources",
+    body: "Every number has a <strong>teal citation badge</strong>. Hover any badge to see which role said it, in which deliberation round, and what they said. Nothing on this page is unsourced.",
+    cardPos: "above"
+  }
+];
+
+let _tourStep = 0;
+let _tourActive = false;
+
+function startTour() {
+  _tourStep = 0;
+  _tourActive = true;
+  document.getElementById('tour-backdrop').classList.add('active');
+  // Build dots
+  var dots = document.getElementById('tour-dots');
+  dots.innerHTML = TOUR_STEPS.map((_,i) => '<div class="tour-dot" id="tdot'+i+'"></div>').join('');
+  renderTourStep();
+}
+
+function endTour() {
+  _tourActive = false;
+  document.getElementById('tour-backdrop').classList.remove('active');
+  document.getElementById('tour-card').style.display = 'none';
+  document.getElementById('tour-ring').style.cssText = '';
+  ['tour-fog-top','tour-fog-bottom','tour-fog-left','tour-fog-right'].forEach(function(id){
+    document.getElementById(id).style.cssText = '';
+  });
+}
+
+function tourBackdropClick(e) {
+  if (e.target === document.getElementById('tour-backdrop')) endTour();
+}
+
+function tourStep(dir) {
+  _tourStep = Math.max(0, Math.min(TOUR_STEPS.length - 1, _tourStep + dir));
+  renderTourStep();
+}
+
+function renderTourStep() {
+  var step = TOUR_STEPS[_tourStep];
+  var el = document.querySelector(step.selector);
+  if (!el) { tourStep(1); return; }
+
+  // Scroll element into view smoothly
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  setTimeout(function() {
+    var rect = el.getBoundingClientRect();
+    var pad = 10;
+    var rx = rect.left - pad, ry = rect.top - pad;
+    var rw = rect.width + pad*2, rh = rect.height + pad*2;
+
+    // Position fog panels around the spotlight
+    var fog = {
+      top:    { top:0, left:0, right:0, height: ry + 'px' },
+      bottom: { bottom:0, left:0, right:0, top: (ry+rh) + 'px' },
+      left:   { top: ry+'px', left:0, width: rx+'px', height: rh+'px' },
+      right:  { top: ry+'px', left: (rx+rw)+'px', right:0, height: rh+'px' }
+    };
+    Object.entries(fog).forEach(function(entry) {
+      var fogEl = document.getElementById('tour-fog-' + entry[0]);
+      Object.assign(fogEl.style, entry[1]);
+    });
+
+    // Position ring
+    var ring = document.getElementById('tour-ring');
+    ring.style.left   = rx + 'px';
+    ring.style.top    = ry + 'px';
+    ring.style.width  = rw + 'px';
+    ring.style.height = rh + 'px';
+    ring.classList.add('active');
+
+    // Position card
+    var card = document.getElementById('tour-card');
+    card.style.display = 'block';
+    var cardW = 300, cardH = 200, margin = 16;
+    var cx, cy;
+
+    if (step.cardPos === 'below') {
+      cy = ry + rh + margin;
+      // Clamp bottom
+      if (cy + cardH > window.innerHeight) cy = ry - cardH - margin;
+    } else {
+      cy = ry - cardH - margin;
+      if (cy < 10) cy = ry + rh + margin;
+    }
+    // Horizontally center on element, clamped to viewport
+    cx = rx + rw/2 - cardW/2;
+    cx = Math.max(12, Math.min(cx, window.innerWidth - cardW - 12));
+
+    card.style.left = cx + 'px';
+    card.style.top  = cy + 'px';
+
+    // Content
+    document.getElementById('tour-step-label').textContent = 'STEP ' + (_tourStep+1) + ' OF ' + TOUR_STEPS.length;
+    document.getElementById('tour-card-title').textContent = step.title;
+    document.getElementById('tour-card-body').innerHTML = step.body;
+
+    // Dots
+    TOUR_STEPS.forEach(function(_,i) {
+      var d = document.getElementById('tdot'+i);
+      if (d) d.classList.toggle('active', i === _tourStep);
+    });
+
+    // Buttons
+    document.getElementById('tour-prev').style.opacity = _tourStep === 0 ? '0.3' : '1';
+    document.getElementById('tour-prev').disabled = _tourStep === 0;
+    var nextBtn = document.getElementById('tour-next');
+    if (_tourStep === TOUR_STEPS.length - 1) {
+      nextBtn.textContent = 'Done ✓';
+      nextBtn.onclick = endTour;
+    } else {
+      nextBtn.textContent = 'Next →';
+      nextBtn.onclick = function() { tourStep(1); };
+    }
+  }, 150);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (!_tourActive) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') tourStep(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   tourStep(-1);
+  if (e.key === 'Escape') endTour();
+});
+
+</script>
+
+<!-- DRAGGABLE INFO PANEL -->
+<div class="info-panel" id="info-panel">
+  <div class="info-panel-drag" id="info-panel-drag">
+    <div class="info-panel-drag-dots">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+    <div style="font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;flex:1;text-align:center">drag to move</div>
+    <button class="info-panel-close" onclick="closeInfo()">✕</button>
+  </div>
+  <div class="info-panel-body">
+    <div class="info-modal-tag" id="info-modal-tag">SECTION GUIDE</div>
+    <div class="info-modal-title" id="info-modal-title">Title</div>
+    <div class="info-modal-body" id="info-modal-body">Body</div>
+  </div>
+</div>
+
+
+<!-- GUIDED TOUR -->
+<div class="tour-backdrop" id="tour-backdrop" onclick="tourBackdropClick(event)"></div>
+<div class="tour-fog" id="tour-fog-top"></div>
+<div class="tour-fog" id="tour-fog-bottom"></div>
+<div class="tour-fog" id="tour-fog-left"></div>
+<div class="tour-fog" id="tour-fog-right"></div>
+<div class="tour-ring" id="tour-ring"></div>
+<div class="tour-card" id="tour-card" style="display:none">
+  <div class="tour-card-step" id="tour-step-label">STEP 1 OF 6</div>
+  <div class="tour-card-title" id="tour-card-title">Title</div>
+  <div class="tour-card-body" id="tour-card-body">Body</div>
+  <div class="tour-card-nav">
+    <div class="tour-dots" id="tour-dots"></div>
+    <div class="tour-card-btns">
+      <button class="tour-btn-skip" onclick="endTour()">Skip tour</button>
+      <button class="tour-btn-prev" id="tour-prev" onclick="tourStep(-1)">← Back</button>
+      <button class="tour-btn-next" id="tour-next" onclick="tourStep(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── LIVE DATA LAYER ──────────────────────────────────────────────────────────
+// Reads run_id from URL param, falls back to reference run
+// Fetches /api/data and populates the dashboard in-place
+
+const DEFAULT_RUN = 'RUN-20260313193333-v9i71lgw';
+
+// Role color map — used for dot and pill tinting
+const ROLE_COLORS = {
+  CEO:   { hex: '#2dd4bf', rgb: '45,212,191'  },
+  CSO:   { hex: '#818cf8', rgb: '129,140,248' },
+  CFO:   { hex: '#34d399', rgb: '52,211,153'  },
+  CHRO:  { hex: '#f472b4', rgb: '244,114,180' },
+  COO:   { hex: '#38bdf8', rgb: '56,189,248'  },
+  CTO:   { hex: '#7dd3fc', rgb: '125,211,252' },
+  LEGAL: { hex: '#a78bfa', rgb: '167,139,250' },
+};
+
+// Supabase avatar map (same public bucket used in original design)
+const AVATAR_URLS = {
+  CEO:   'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png',
+  CSO:   'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png',
+  CFO:   'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/30a40b401_generated_image.png',
+  CHRO:  'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png',
+  COO:   'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png',
+  CTO:   'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png',
+  LEGAL: 'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/b0901d508_generated_image.png',
+};
+
+function getRunId() {
+  const p = new URLSearchParams(window.location.search);
+  return p.get('run_id') || DEFAULT_RUN;
+}
+
+function safeArr(v) { return Array.isArray(v) ? v : []; }
+function pct(v)     { return Math.round((parseFloat(v)||0)*100); }
+function norm(v)     { return String(v||'').trim(); }
+
+async function loadData() {
+  const run_id = getRunId();
+
+  // Update run meta in header
+  const metaEl = document.querySelector('.run-meta');
+  if (metaEl) metaEl.textContent = run_id + ' · loading…';
+
+  try {
+    const res = await fetch(`/api/data?run_id=${encodeURIComponent(run_id)}`);
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    const d = await res.json();
+    populateDashboard(d);
+  } catch (err) {
+    if (metaEl) metaEl.textContent = run_id + ' · data load failed';
+    console.error('StratOS data load error:', err);
+  }
+}
+
+function populateDashboard(d) {
+  const { outputBlob: ob, stageOutputs, dPacket, f1Outputs, master, run_id } = d;
+
+  // ── Meta bar ──────────────────────────────────────────────────────────────
+  const metaEl = document.querySelector('.run-meta');
+  const mode   = ob?.mode || master?.mode || 'ELT';
+  const rounds = [...new Set(stageOutputs.map(r => r.round))].length;
+  const roles  = [...new Set(stageOutputs.map(r => r.role_key))].length;
+  if (metaEl) metaEl.textContent = `${run_id} · ${mode} · ${rounds} ROUNDS · ${roles} ROLES`;
+
+  // ── Decision question ──────────────────────────────────────────────────────
+  const question = ob?.dashboard?.decision_question
+    || ob?.input_data?.question
+    || master?.payload_json?.input_data?.question
+    || null;
+  const qEl = document.querySelector('.decision-q');
+  if (qEl && question) qEl.textContent = question;
+
+  // ── Winning option ─────────────────────────────────────────────────────────
+  const winLabel = ob?.dashboard?.approved_option_label || null;
+  const winId    = ob?.dashboard?.approved_option_id    || null;
+  const winDesc  = ob?.dashboard?.approved_option_desc  || ob?.dashboard?.financial_mechanics?.summary || null;
+  const woName = document.querySelector('.wo-name');
+  const woDesc = document.querySelector('.wo-desc');
+  if (woName && winLabel) woName.textContent = (winId ? winId + ' · ' : '') + winLabel;
+  if (woDesc && winDesc)  woDesc.textContent = winDesc;
+
+  // ── Confidence ────────────────────────────────────────────────────────────
+  const avgConf = ob?.dashboard?.decision_confidence
+    || (stageOutputs.length ? Math.round(stageOutputs.reduce((s,r)=>s+(r.confidence_score||0),0)/stageOutputs.length*100) : 77);
+  const confRange = dPacket?.confidence_summary || null;
+  const confMin = confRange ? pct(confRange.min) : 72;
+  const confMax = confRange ? pct(confRange.max) : 82;
+
+  // Override the counter animation target
+  window._confTarget = Math.round(avgConf);
+  const confBig = document.querySelector('.conf-big');
+  if (confBig) confBig.textContent = Math.round(avgConf);
+
+  const confRangeEl = document.querySelector('.conf-range');
+  if (confRangeEl) {
+    const textNode = confRangeEl.firstChild;
+    if (textNode) textNode.textContent = `Range: ${confMin}% – ${confMax}%`;
+  }
+
+  // Reposition bar fill
+  const fill = document.querySelector('.conf-fill');
+  const avg  = document.querySelector('.conf-avg');
+  const span = confMax - confMin;
+  if (fill && span > 0) {
+    fill.style.left  = confMin + '%';
+    fill.style.width = span + '%';
+  }
+  if (avg) avg.style.left = Math.round(avgConf) + '%';
+
+  // ── Role pills ────────────────────────────────────────────────────────────
+  const finalRound = stageOutputs.reduce((mx,r) => Math.max(mx, parseInt(r.round)||0), 0);
+  const finalRoles = stageOutputs.filter(r => parseInt(r.round) === finalRound);
+
+  const pillsContainer = document.querySelector('.roles-grid');
+  if (pillsContainer && finalRoles.length) {
+    pillsContainer.innerHTML = '';
+    const rolesMetaEl = document.querySelector('.roles-meta');
+    if (rolesMetaEl) rolesMetaEl.textContent = `${roles} ROLES · ${rounds} ROUNDS · ${finalRoles.filter(r=>r.vote==='APPROVE').length} FULL APPROVE`;
+
+    finalRoles.forEach(function(r) {
+      const rk    = r.role_key;
+      const conf  = pct(r.confidence_score);
+      const vote  = norm(r.vote) || norm(r.stance);
+      const color = ROLE_COLORS[rk] || { hex: '#94a3b8', rgb: '148,163,184' };
+      const isApprove = vote === 'APPROVE';
+      const dotColor  = isApprove ? '#10b981' : '#f59e0b';
+      const voteColor = isApprove ? '#10b981' : '#f59e0b';
+      const voteBg    = isApprove ? 'rgba(16,185,129,.15)' : 'rgba(245,158,11,.15)';
+      const voteBdr   = isApprove ? 'rgba(16,185,129,.3)' : 'rgba(245,158,11,.3)';
+      const voteShort = vote.length > 6 ? 'AWC' : vote;
+      const avatarUrl = AVATAR_URLS[rk] || '';
+
+      pillsContainer.innerHTML += `
+        <div class="role-pill">
+          <div class="role-img-wrap">
+            <img class="role-img" src="${avatarUrl}" style="border:1.5px solid rgba(${color.rgb},.4)" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="role-img" style="display:none;background:#0f1f2e;color:${color.hex};font-size:9px;font-weight:700;font-family:'DM Mono',monospace;align-items:center;justify-content:center;border:1.5px solid rgba(${color.rgb},.4)">${rk.slice(0,3)}</div>
+            <span class="role-dot" style="background:${dotColor}"></span>
+          </div>
+          <div class="role-key">${rk}</div>
+          <div class="role-conf">${conf}%</div>
+          <span class="role-vote" style="color:${voteColor};background:${voteBg};border:1px solid ${voteBdr}">${voteShort}</span>
+        </div>`;
+    });
+  }
+
+  // ── Signals bar ──────────────────────────────────────────────────────────
+  const allConds = [];
+  f1Outputs.forEach(function(r) {
+    let tc = r.top_conditions;
+    if (typeof tc === 'string') { try { tc = JSON.parse(tc); } catch { tc = []; } }
+    if (Array.isArray(tc)) allConds.push(...tc);
+  });
+  const killCount = 1; // from dPacket if available
+  const ltv = ob?.dashboard?.financial_mechanics?.ltv_per_customer || 175000;
+  const cac = ob?.dashboard?.financial_mechanics?.cac_ceiling      || 50000;
+  const pipeline = ltv * 3;
+  const fmt = (n) => '$' + (n >= 1000000 ? (n/1000000).toFixed(1)+'M' : n >= 1000 ? Math.round(n/1000)+'K' : n);
+
+  // Update signals text nodes directly
+  const signalTexts = document.querySelectorAll('.signal-text');
+  if (signalTexts[0]) {
+    const t = signalTexts[0];
+    const firstText = t.firstChild;
+    if (firstText) firstText.textContent = `${finalRoles.length}–0 conditional · ${allConds.length}+ conditions · ${killCount} KILL gate (spend ceiling)`;
+  }
+  if (signalTexts[1]) {
+    const firstText = signalTexts[1].firstChild;
+    if (firstText) firstText.textContent = `${fmt(pipeline)} LTV pipeline at ${fmt(ltv)} × 3 targets`;
+  }
+
+  // ── Groupthink badge ─────────────────────────────────────────────────────
+  const gt    = dPacket?.groupthink_flag || ob?.dashboard?.groupthink_flag || null;
+  const gtEl  = document.querySelector('.gt-badge');
+  if (gtEl && gt) {
+    if (!gt.triggered && !gt.detected) {
+      gtEl.style.display = 'none'; // no groupthink — hide badge entirely
+    } else {
+      const sev = gt.severity || 'MEDIUM';
+      gtEl.innerHTML = `⚠ GROUPTHINK · ${sev} → See The Room`;
+    }
+  }
+
+  // ── KPI row ───────────────────────────────────────────────────────────────
+  const totalBudget  = ob?.dashboard?.financial_mechanics?.total_investment || 500000;
+  const cacCeiling   = cac;
+  const ltvVal       = ltv;
+  const runwayFloor  = ob?.dashboard?.financial_mechanics?.runway_floor_months || 12;
+
+  const kpiNums = document.querySelectorAll('.kpi-n');
+  if (kpiNums[0]) kpiNums[0].firstChild.textContent = fmt(totalBudget);
+  if (kpiNums[1]) kpiNums[1].firstChild.textContent = fmt(cacCeiling);
+  if (kpiNums[2]) kpiNums[2].firstChild.textContent = fmt(ltvVal);
+  if (kpiNums[3]) kpiNums[3].firstChild.textContent = runwayFloor + ' mo';
+
+  // ── Conditions zone header count ──────────────────────────────────────────
+  const zoneNum = document.querySelector('.zone-num');
+  if (zoneNum && allConds.length) zoneNum.textContent = allConds.length + '+';
+
+  // ── Page title ────────────────────────────────────────────────────────────
+  if (question) document.title = 'StratOS — ' + question.slice(0, 60);
+}
+
+// Boot on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', loadData);
+
+</script>
+</body>
+</html>
