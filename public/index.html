@@ -534,7 +534,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 1 -->
     <div class="zone1">
-      <button class="info-btn" onclick=\"showInfo('zone1', this)\" title="What is this?"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('zone1', this)" title="What is this?"><span>i</span></button>
       <div class="verdict-grid">
         <div class="verdict-left">
           <span class="decision-label">FINAL DECISION</span>
@@ -651,7 +651,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <!-- ZONE 2 -->
     <div class="zone2">
       <div class="card">
-        <button class="info-btn" onclick=\"showInfo('why', this)\" title="What is this?"><span>i</span></button>
+        <button class="info-btn" onclick="showInfo('why', this)" title="What is this?"><span>i</span></button>
         <div class="card-header">
           <span class="card-title">WHY THIS DECISION</span>
           <button class="card-link" onclick="showTab('options',document.querySelectorAll('.tab')[1])">OPTIONS →</button>
@@ -674,7 +674,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
         <!-- PRIMARY CONCERN — expandable, no overflow:hidden -->
         <div class="concern-card" id="concern-card">
-          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('concern', this)\" title="What is this?"><span>i</span></button>
+          <button class="info-btn" onclick="event.stopPropagation();showInfo('concern', this)" title="What is this?"><span>i</span></button>
           <div class="card-trigger" onclick="toggleExpand('concern-card')">
             <div class="concern-title">
               PRIMARY CONCERN
@@ -707,7 +707,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
         <!-- OPEN QUESTION — expandable -->
         <div class="openq-card" id="openq-card">
-          <button class="info-btn" onclick=\"event.stopPropagation();showInfo('openq', this)\" title="What is this?"><span>i</span></button>
+          <button class="info-btn" onclick="event.stopPropagation();showInfo('openq', this)" title="What is this?"><span>i</span></button>
           <div class="card-trigger" onclick="toggleExpand('openq-card')">
             <div class="openq-title">
               OPEN QUESTION
@@ -743,7 +743,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 3: Conditions -->
     <div class="zone3">
-      <button class="info-btn" onclick=\"showInfo('conditions', this)\" title="What is this?"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('conditions', this)" title="What is this?"><span>i</span></button>
       <div class="zone-header">
         <div>
           <div class="zone-title">WHAT HAS TO HAPPEN BEFORE THIS MOVES FORWARD</div>
@@ -797,7 +797,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- ZONE 4: Execution -->
     <div class="zone4">
-      <button class="info-btn" onclick=\"showInfo('execution', this)\" title="What is this?"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('execution', this)" title="What is this?"><span>i</span></button>
       <div class="seq-hdr">
         <div>
           <div class="zone-title">EXECUTION SEQUENCE</div>
@@ -1052,7 +1052,8 @@ function toggleExpand(id) {
 
   document.addEventListener('mouseout', function(e) {
     if (!e.target.closest('.cite-btn')) return;
-    if (e.relatedTarget && e.relatedTarget.closest('.cite-btn')) return;
+    var rt = e.relatedTarget;
+    if (rt && (rt.closest('.cite-btn') || rt === tip || rt.closest('#cite-tooltip'))) return;
     tip.style.display = 'none';
     activeBtn = null;
   });
