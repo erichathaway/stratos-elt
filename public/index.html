@@ -3053,7 +3053,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   </div>
   <div id="mgmt-briefs-card">
   <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:5px">DEPARTMENT BRIEFS · SELECT A ROLE <button class="info-btn" onclick="showInfo('deptbriefs', this)" title="What is this?"><span>i</span></button></div>
-  <div class="mh-pill-tabs"><button class="mh-pill-btn mh-pill-active" id="mhpill-CEO" onclick="selectMgmtRole('CEO')">
+  <div id="mgmt-dept-briefs"><div class="mh-pill-tabs"><button class="mh-pill-btn mh-pill-active" id="mhpill-CEO" onclick="selectMgmtRole('CEO')">
   <div class="evo-avatar" style="background-image:url('https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png');border:1.5px solid var(--brand-primary)33;width:28px;height:28px;min-width:28px"></div>
   <div><div style="font-size:10px;font-weight:700;color:var(--brand-primary);font-family:'DM Mono',monospace">CEO</div><div style="font-size:9px;color:#475569">Officer</div></div>
 </button><button class="mh-pill-btn " id="mhpill-CFO" onclick="selectMgmtRole('CFO')">
@@ -3096,7 +3096,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
           <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CEO</div><div class="mh-expand-row">Governance gate, not an analytical one. Strategic case clear: 3 inbound prospects at $525K LTV, EU Pillar 2 of strategic plan, Competitor X moving now. Conditional on board approval only.</div>
         </div></div>
       </div>
-    </div>
+    </div></div>
     <div>
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:var(--brand-primary)">›</span> May 2025 — Chair all 4 GO/NO-GO sign-offs — CEO sign-off required <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· GO/NO-GO gate</span></div><div class="mh-phase2-item"><span style="color:var(--brand-primary)">›</span> Ongoing — Monitor Competitor X EU traction and account overlap <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Competitive intel</span></div></div>
@@ -3964,7 +3964,7 @@ const OPTIONS_TOUR_STEPS = [
     cardPos: "below"
   },
   {
-    selector: "#opt-rejected-section",
+    selector: "#opt-rejected-container",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates. This is the governance record — not a post-hoc summary.",
     cardPos: "below"
@@ -4005,7 +4005,7 @@ function startContextTour() {
   var MGMT_STEPS = [
     { selector: '#mgmt-top-actions-card', title: 'Top 3 Actions — In Sequence',
       body: 'ACT-001 (Board approval) must precede ACT-002 and ACT-003. ELT consensus — every role agreed these are the controlling first steps. No other workstream starts until the board vote clears.', cardPos: 'below' },
-    { selector: '.mh-pill-tabs', title: 'Department Briefs — Select a Role',
+    { selector: '#mgmt-dept-briefs', title: 'Department Briefs — Select a Role',
       body: 'Click any role pill to see their complete Phase 1 brief. Action table with timing, success metrics, Phase 2 commitments, and what each role owns in execution. CEO brief shown by default.', cardPos: 'below' },
     { selector: '.cf-grid', title: 'Cross-Functional Dependencies',
       body: '4 workstreams spanning departments. Each has a named gate — if either side slips, execution halts. <strong>CTO-LEGAL is highest risk</strong>: GDPR architecture must be certified before any customer data is processed.', cardPos: 'above' },
