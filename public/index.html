@@ -7,10 +7,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;font-size:14px;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(14,165,233,.07),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(45,212,191,.04),transparent)}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1)}
+body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;font-size:17px;font-weight:500;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(14,165,233,.07),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(45,212,191,.04),transparent)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#1e293b;border-radius:3px}
 
-.header{border-bottom:1px solid rgba(255,255,255,.07);background:rgba(3,7,17,.97);position:sticky;top:0;z-index:100}
+.header{border-bottom:1px solid rgba(255,255,255,.07);background:rgba(7,13,26,.97);position:sticky;top:0;z-index:100}
 .header-inner{max-width:1060px;margin:0 auto;padding:0 16px}
 .header-top{display:flex;align-items:center;justify-content:space-between;height:48px}
 .logo{display:flex;align-items:center;gap:9px}
@@ -817,6 +817,33 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 /* ── BOARD TAB ── */
 .board-condition{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:#64748b;padding:7px 10px;background:rgba(255,255,255,.02);border-radius:5px;line-height:1.45}
 
+/* ── BRAND OVERRIDES P1.1 ── */
+.card{background:#0f172a !important;border-color:#334155 !important}
+.card:hover{background:#162032 !important;border-color:#475569 !important}
+.zone3{background:#0f172a !important;border-color:#334155 !important}
+.zone3:hover{border-color:#475569 !important}
+.role-pill{background:#0f172a !important;border-color:#334155 !important}
+.role-pill:hover{background:#162032 !important;border-color:#475569 !important}
+.reason{background:#111827 !important;border-color:#1e293b !important}
+.mh-action-row{background:#0f172a !important}
+.rm-wrap{background:#0f172a;border:1px solid #334155;border-radius:12px;padding:16px}
+.opt-bar-cell{cursor:default;transition:background .12s;border-radius:4px;position:relative}
+.opt-bar-cell.hovered{background:rgba(45,212,191,.08)}
+#opt-chart-hover-panel{display:none;padding:10px 12px;background:#0f172a;border:1px solid #334155;border-radius:8px;margin-top:8px}
+#opt-chart-hover-panel.visible{display:block}
+.mh-action-expand-trigger{display:flex;align-items:center;gap:4px;font-size:10px;font-family:'DM Mono',monospace;color:#334155;cursor:pointer;padding:3px 0 0;transition:color .15s;user-select:none;letter-spacing:.04em}
+.mh-action-expand-trigger:hover{color:#64748b}
+.mh-expand-section{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.mh-expand-section.open{max-height:500px}
+.mh-expand-inner{padding:8px 0 4px;border-top:1px solid rgba(255,255,255,.05);margin-top:6px}
+.mh-expand-row{font-size:11px;color:#475569;line-height:1.6;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.mh-expand-row:last-child{border-bottom:none}
+.mh-expand-lbl{font-size:9px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.08em;color:#334155;margin-bottom:1px;margin-top:6px}
+.mh-expand-lbl:first-child{margin-top:0}
+#board-gov-doc-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.2);border-radius:7px;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:#2dd4bf;cursor:pointer;letter-spacing:.04em;transition:all .15s}
+#board-gov-doc-btn:hover{background:rgba(45,212,191,.15);border-color:rgba(45,212,191,.35)}
+#board-gov-doc-btn.muted{color:#334155;border-color:#1e293b;background:transparent;font-weight:400}
+
 </style>
 </head>
 <body>
@@ -1216,7 +1243,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
       <!-- RIGHT: option comparison visual -->
       <div class="opt-hero-right" id="opt-hero-right">
-        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px">OPTION COMPARISON · 5 DIMENSIONS</div>
+        <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px">OPTION COMPARISON · 5 DIMENSIONS <span style="color:#475569;font-weight:400">· hover any bar</span></div>
+        <div id="opt-chart-hover-panel">
+          <div id="opt-hover-stat" style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.08em;margin-bottom:3px"></div>
+          <div id="opt-hover-opt" style="font-size:10px;font-weight:700;font-family:'DM Mono',monospace;color:#f1f5f9;margin-bottom:4px"></div>
+          <div id="opt-hover-reason" style="font-size:11px;color:#94a3b8;line-height:1.55"></div>
+        </div>
 
         <!-- Sparkline comparison bars for all 5 options across 4 axes -->
         <div class="opt-compare-grid" id="opt-compare-grid">
@@ -1229,38 +1261,38 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
           <!-- OPT-1 -->
           <div class="opt-row-label opt-not-sel">OPT-1</div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:90%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:85%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:15%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="RISK" data-reason="Full commitment — GDPR + entity + FTEs launched simultaneously. LEGAL flagged 90-day setup minimum blocks commercial launch."><div class="opt-bar opt-bar-bad" style="width:90%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="RETURN" data-reason="Highest upside if executed — 3 FTEs from day 1 compounds pipeline velocity. CFO modeled $700K LTV potential at full scale."><div class="opt-bar opt-bar-good" style="width:85%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="SPEED" data-reason="Fastest path to EU revenue — no phased gates. Eliminated because GDPR compliance prerequisite makes this timeline infeasible."><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-1" data-ax="REVERSIBILITY" data-reason="Near-irreversible. FTE commitments, entity formation, and legal costs all lock in before compliance is confirmed."><div class="opt-bar opt-bar-bad" style="width:15%"></div></div>
 
           <!-- OPT-2 — WINNER -->
           <div class="opt-row-label opt-sel">OPT-2 ★</div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:45%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:80%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:65%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-sel" style="width:85%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="RISK" data-reason="Moderate. Phase 1 ($150K) is capped exposure. GO/NO-GO gate prevents Phase 2 release until compliance and pipeline confirmed."><div class="opt-bar opt-bar-sel" style="width:45%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="RETURN" data-reason="Strong. 3.5× floor on every EU logo at CFO's $50K CAC ceiling. $525K pipeline across 3 confirmed prospects."><div class="opt-bar opt-bar-sel" style="width:80%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="SPEED" data-reason="Moderate. Phase 1 gates add ~3 months before FTE hiring. Trade-off accepted to sequence compliance correctly."><div class="opt-bar opt-bar-sel" style="width:65%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-2 ★" data-ax="REVERSIBILITY" data-reason="High. Phase 1 scope limited to legal/compliance work — reversible before FTE and GTM spend commits."><div class="opt-bar opt-bar-sel" style="width:85%"></div></div>
 
           <!-- OPT-3 -->
           <div class="opt-row-label opt-not-sel">OPT-3</div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:20%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="RISK" data-reason="Low financial risk — partner model offloads headcount. Eliminated because partner-led cycles run 2× longer; 3 prospects cannot close in runway."><div class="opt-bar opt-bar-med" style="width:20%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="RETURN" data-reason="Poor. Reseller margin compression reduces LTV by 30–40%. CSO: sales cycles 9–12mo vs 4–6mo direct. Pipeline velocity disqualifying."><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="SPEED" data-reason="Moderate entry speed. Partner agreements can move quickly, but pipeline closure timeline is 2× longer than direct."><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-3" data-ax="REVERSIBILITY" data-reason="Highly reversible. No FTE commitments, no entity costs. Partner contracts typically 30–90 day out clauses."><div class="opt-bar opt-bar-good" style="width:95%"></div></div>
 
           <!-- OPT-4 -->
           <div class="opt-row-label opt-not-sel">OPT-4</div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:40%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:60%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-med" style="width:75%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="RISK" data-reason="Moderate. Comparable risk gate to OPT-2 but achieves it at higher cost — CFO: same protection, $50K more spend."><div class="opt-bar opt-bar-med" style="width:40%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="RETURN" data-reason="Similar return profile to OPT-2, higher burn rate in Phase 1. CFO flagged OPT-2 as superior on unit economics."><div class="opt-bar opt-bar-med" style="width:70%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="SPEED" data-reason="Similar to OPT-2 with slightly more Phase 1 overhead. Not a meaningful speed advantage vs the winner."><div class="opt-bar opt-bar-med" style="width:60%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-4" data-ax="REVERSIBILITY" data-reason="Good reversibility. Phased structure preserved. Eliminated primarily on cost efficiency grounds vs OPT-2."><div class="opt-bar opt-bar-med" style="width:75%"></div></div>
 
           <!-- OPT-5 -->
           <div class="opt-row-label opt-not-sel">OPT-5</div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:10%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:30%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
-          <div class="opt-bar-cell"><div class="opt-bar opt-bar-good" style="width:90%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="RISK" data-reason="Lowest financial risk — no FTEs, minimal commitment. But eliminates the strategic upside entirely. CSO: 3 prospects go cold."><div class="opt-bar opt-bar-good" style="width:10%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="RETURN" data-reason="Poor. No EU revenue, no market footprint, no competitive response to Competitor X. Preserves capital with no deployment path."><div class="opt-bar opt-bar-bad" style="width:30%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="SPEED" data-reason="Slow to revenue — monitor-only means no EU revenue until a future decision cycle. Cedes Q3 2025 competitive window."><div class="opt-bar opt-bar-bad" style="width:35%"></div></div>
+          <div class="opt-bar-cell" data-opt="OPT-5" data-ax="REVERSIBILITY" data-reason="Fully reversible — nothing committed. But the strategic cost is the 3 inbound prospects likely lost during the observation period."><div class="opt-bar opt-bar-good" style="width:90%"></div></div>
         </div>
 
         <!-- Return floor callout -->
@@ -1274,7 +1306,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
     <div>
-      <div class="zone-title" style="font-size:11px;margin-bottom:12px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY</div>
+      <div class="zone-title" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
       <div id="opt-rejected-container">
         <!-- JS populated -->
       </div>
@@ -1284,7 +1316,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="zone3" style="margin-top:4px">
       <div class="zone-header">
         <div>
-          <div class="zone-title">POSITION MOVEMENT · HOW THE TEAM MOVED</div>
+          <div class="zone-title" style="display:flex;align-items:center;gap:6px">POSITION MOVEMENT · HOW THE TEAM MOVED <button class="info-btn" onclick="showInfo('movement',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
           <div class="zone-sub">R0 exploration → R1 convergence → R2 final vote</div>
         </div>
       </div>
@@ -1431,7 +1463,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <!-- LEFT: OPEN QUESTIONS — what's being done about them ──────────────── -->
     <div class="gaps-wrap">
       <div class="gaps-header">
-        <div class="gaps-eyebrow" style="color:#f59e0b">OPEN QUESTIONS · 4 UNRESOLVED</div>
+        <div class="gaps-eyebrow" style="color:#f59e0b;display:flex;align-items:center;gap:6px">OPEN QUESTIONS · 4 UNRESOLVED <button class="info-btn" onclick="showInfo('openq',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button></div>
         <div class="gaps-title">What's being done to answer them</div>
         <div class="gaps-sub">Each question has a named owner, a specific action underway, and a gate it must clear before execution can proceed.</div>
       </div>
@@ -1561,7 +1593,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
   <!-- HORIZONTAL MILESTONE TIMELINE ───────────────────────────────────────── -->
   <div style="margin-top:28px">
-    <div class="fin-block-label" style="margin-bottom:14px">EXECUTION TIMELINE · KILL GATES &amp; FORWARD TRIGGERS</div>
+    <div class="fin-block-label" style="margin-bottom:14px;display:flex;align-items:center;gap:6px">EXECUTION TIMELINE · KILL GATES &amp; FORWARD TRIGGERS <button class="info-btn" onclick="showInfo('timeline',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div class="hms-track">
 
       <div class="hms-line"></div>
@@ -1626,7 +1658,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <!-- FINANCIAL MODEL ──────────────────────────────────────────────────────── -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 16px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">FINANCIAL MODEL · CFO-VALIDATED</div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">FINANCIAL MODEL · CFO-VALIDATED <button class="info-btn" onclick="showInfo('finmodel',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
@@ -1748,7 +1780,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <!-- SECTION DIVIDER -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">BEFORE THE RISKS — DEPARTMENT UPSIDE</div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">DEPARTMENT UPSIDE <button class="info-btn" onclick="showInfo('deptupside',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
@@ -1814,7 +1846,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <!-- MILESTONE TIMELINE ─────────────────────────────────────────────────── -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em">POST-DECISION GOVERNANCE</div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">POST-DECISION GOVERNANCE <button class="info-btn" onclick="showInfo('milestones',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
@@ -1877,7 +1909,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   </div>
 
   <!-- MOVEMENT SUMMARY BAR -->
-  <div class="movement-bar">
+  <div class="movement-bar" style="position:relative">
     <div class="mb-stat"><div class="mb-n" style="color:#2dd4bf">4</div><div class="mb-l">ROLES MOVED</div></div>
     <div class="mb-div"></div>
     <div class="mb-stat"><div class="mb-n">3</div><div class="mb-l">HELD POSITION</div></div>
@@ -1888,11 +1920,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="mb-div"></div>
     <div class="mb-stat"><div class="mb-n" style="color:#818cf8">3</div><div class="mb-l">ROUNDS</div></div>
     <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · convergence_flag: true · groupthink_flag: HIGH severity — CFO, CTO, LEGAL converged without surfacing domain-specific risks independently</div></span>
+  <button class="info-btn" onclick="showInfo('movebar',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent;margin-left:4px" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button>
   </div>
 
   <!-- ZONE 1: STANCE EVOLUTION TABLE -->
   <div>
-    <div class="fin-block-label" style="margin-bottom:8px">STANCE EVOLUTION · R0 EXPLORE → R1 DELIBERATE → R2 DECIDE · Hover any cell for source</div>
+    <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">STANCE EVOLUTION · R0→R1→R2 · Hover any cell for source <button class="info-btn" onclick="showInfo('stanceevo',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="overflow-x:auto">
       <table style="width:100%;border-collapse:separate;border-spacing:1px">
         <thead>
@@ -2614,6 +2647,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 8</div><div class="mh-action-text">1:1 pre-briefs with each board member before the vote</div><div class="mh-action-metric" style="color:#475569">Board approval probability</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 12</div><div class="mh-action-text">Distribute CFO unit economics model as board pre-read</div><div class="mh-action-metric" style="color:#475569">Board preparedness</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f87171">Feb 15</div><div class="mh-action-text">Facilitate board vote and document formal decision — KILL GATE</div><div class="mh-action-metric" style="color:#f87171">KILL GATE</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">Board approval of $500K investment envelope at Feb 15 meeting — cited as kill gate by all 7 roles</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">No formal board pre-read distributed — CFO unit economics model not yet sent to board members</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CEO</div><div class="mh-expand-row">Governance gate, not an analytical one. Strategic case clear: 3 inbound prospects at $525K LTV, EU Pillar 2 of strategic plan, Competitor X moving now. Conditional on board approval only.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2640,6 +2679,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 12</div><div class="mh-action-text">Build board pre-read: two-tranche model and unit economics</div><div class="mh-action-metric" style="color:#475569">Board readiness</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 15+</div><div class="mh-action-text">Track Phase 1 spend vs $150K cap from first day</div><div class="mh-action-metric" style="color:#475569">Budget guard</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 2025</div><div class="mh-action-text">Establish EU CAC measurement methodology before any EU deal</div><div class="mh-action-metric" style="color:#f87171">Kill trigger setup</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">EU CAC ≤$50K validated after first 2 closed EU deals; Phase 1 spend ≤$150K before GO/NO-GO</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">No internal EU CAC data exists — $50K ceiling derived from EU SaaS benchmarks, not company-specific data</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CFO</div><div class="mh-expand-row">$525K LTV vs $500K investment. Two-tranche structure sequences spend correctly — Phase 2 does not release until GO/NO-GO criteria pass. CAC kill trigger fires above $50K.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2666,6 +2711,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Engage external EU counsel — GDPR architecture scoping</div><div class="mh-action-metric" style="color:#475569">Counsel onboarded</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 31</div><div class="mh-action-text">Deliver GDPR cost estimate vs $150K Phase 1 budget</div><div class="mh-action-metric" style="color:#475569">Budget confirmed</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Weekly</div><div class="mh-action-text">CTO + LEGAL status gate on architecture progress</div><div class="mh-action-metric" style="color:#475569">Early warning</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">GDPR-compliant data residency architecture feasible within $150K Phase 1 budget — controlling unknown flagged by 5 roles</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">GDPR architecture cost estimate not completed — if over budget, full Phase 2 repricing required</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CTO</div><div class="mh-expand-row">GDPR architecture must be scoped by external EU counsel immediately. If cost exceeds $150K Phase 1 budget, Phase 2 halts and board is notified within 5 days.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2692,6 +2743,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Engage external EU counsel — GDPR + employment law scope</div><div class="mh-action-metric" style="color:#475569">Counsel onboarded</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Apr 15</div><div class="mh-action-text">Complete EU employment law review (UK, Germany, France)</div><div class="mh-action-metric" style="color:#475569">Hiring cleared</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f87171">Pre-launch</div><div class="mh-action-text">Execute DPAs and SCCs before any customer onboarding — KILL GATE</div><div class="mh-action-metric" style="color:#f87171">KILL GATE</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">DPAs and SCCs executed before any EU customer onboarding; external EU counsel engaged for GDPR and employment law</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">No Germany/France jurisdiction-specific legal analysis in deliberation record — UK-focused only; France and Germany are materially stricter post-Brexit</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · LEGAL</div><div class="mh-expand-row">Compliance sequence is non-negotiable. No EU data processing until external counsel certifies GDPR. IP assignments must be jurisdiction-specific. Missing jurisdiction analysis is an execution risk not resolved in deliberation.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2718,6 +2775,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Draft JDs for all 3 EU FTE target roles (UK, Germany, France)</div><div class="mh-action-metric" style="color:#475569">Hiring-ready</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 31</div><div class="mh-action-text">Pull Radford EMEA comp benchmarks for all 3 EU roles</div><div class="mh-action-metric" style="color:#475569">Comp bands built</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Apr 15</div><div class="mh-action-text">Confirm EOR vendor as backup path — 2-week vs 16-week direct</div><div class="mh-action-metric" style="color:#475569">Contingency ready</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">No FTE offers until GO/NO-GO gate passes; EU employment law review complete across UK, Germany, France</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">Radford EMEA comp benchmarks not pulled — comp bands unconfirmed for 3 target jurisdictions; 16–20 week hire timeline per jurisdiction not fully validated</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CHRO</div><div class="mh-expand-row">OPT-2 sequences compliance before revenue — legally mandatory. No FTE offers before GDPR gate. EOR vendor as 2-week contingency vs 16-week direct hire is the primary hiring risk mitigation.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2744,6 +2807,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Feb 28</div><div class="mh-action-text">Confirm current US team capacity — identify EU coverage gap</div><div class="mh-action-metric" style="color:#475569">Capacity baseline</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Apr 15</div><div class="mh-action-text">Select EOR vendor for fast-track EU hiring contingency</div><div class="mh-action-metric" style="color:#475569">EOR confirmed</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Pre-GO/NO-GO</div><div class="mh-action-text">Define EU operational delivery model (EOR vs direct hire)</div><div class="mh-action-metric" style="color:#475569">Model confirmed</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">EOR vendor confirmed as fast-track contingency; EU operational delivery model defined and approved before GO/NO-GO gate</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">EOR vendor not yet selected — 2-week vs 16-week direct hire comparison requires vendor-specific validation not completed in deliberation</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · COO</div><div class="mh-expand-row">Operational delivery confirmed with EOR contingency path. Phase 1 gates protect against over-commitment before compliance and pipeline are validated at May GO/NO-GO.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2770,6 +2839,12 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="mh-actions-table">
         <div class="mh-action-header"><div>TIMING</div><div>ACTION</div><div>SUCCESS METRIC</div></div>
         <div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Immediate</div><div class="mh-action-text">Bi-weekly touchpoints with all 3 EU prospects — maintain active status</div><div class="mh-action-metric" style="color:#475569">Pipeline active</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#f59e0b">Mar 2025</div><div class="mh-action-text">Confirm ACV and close probability for each prospect</div><div class="mh-action-metric" style="color:#475569">Pipeline validated</div></div><div class="mh-action-row"><div class="mh-action-timing" style="color:#2dd4bf">Ongoing</div><div class="mh-action-text">Track Competitor X EU GTM activity and account overlap</div><div class="mh-action-metric" style="color:#475569">Competitive intel</div></div>
+        <div class="mh-action-expand-trigger" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▾ Less':'▸ More detail'">▸ More detail</div>
+        <div class="mh-expand-section"><div class="mh-expand-inner">
+          <div class="mh-expand-lbl">APPROVAL CONDITION</div><div class="mh-expand-row">All 3 EU prospects maintain active pipeline status through Phase 1; ACV and close probability confirmed per prospect before GO/NO-GO</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">EVIDENCE GAP</div><div class="mh-expand-row" style="color:#f87171">ACV and close probability not confirmed per prospect — pipeline value is directional ($525K) not deal-level validated; Competitor X account overlap analysis not completed</div>
+          <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CSO</div><div class="mh-expand-row">3 confirmed inbound prospects at $525K total LTV. Q3 2025 is a competitive response window — delay cedes first-mover advantage. Pipeline must be kept warm through Phase 1 regardless of internal compliance timeline.</div>
+        </div></div>
       </div>
     </div>
     <div>
@@ -2793,7 +2868,10 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       </div>
       <button class="info-btn" onclick="showInfo('board',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
-    <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
+      <button id="board-gov-doc-btn" class="muted" onclick="openGovDoc()">⬡ Governance Doc ↗</button>
+    </div>
   </div>
   <div style="background:linear-gradient(135deg,rgba(45,212,191,.07),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.2);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:14px">
     <div>
@@ -2809,7 +2887,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
     <div class="gaps-wrap">
       <div class="gaps-header">
-        <div class="gaps-eyebrow">VOTE RECORD · R2 FINAL</div>
+        <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">VOTE RECORD · R2 FINAL <button class="info-btn" onclick="showInfo('voterec',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
         <div class="gaps-title" style="font-size:16px">7–0 Conditional Approval</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
@@ -2845,7 +2923,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div style="display:flex;flex-direction:column;gap:10px">
       <div class="gaps-wrap" style="flex:1">
         <div class="gaps-header">
-          <div class="gaps-eyebrow">FINANCIAL GUARDRAILS · CFO-VALIDATED</div>
+          <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">FINANCIAL GUARDRAILS · CFO-VALIDATED <button class="info-btn" onclick="showInfo('finmodel',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
           <div class="gaps-title" style="font-size:16px">Kill Triggers + Return Floor</div>
         </div>
         <div style="padding:10px 16px;display:flex;flex-direction:column;gap:6px">
@@ -2865,7 +2943,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     </div>
   </div>
   <div class="fin-scenarios" style="margin-bottom:14px">
-    <div class="fin-block-label" style="margin-bottom:10px">CONDITIONS ON APPROVAL <span class="cite"><button class="cite-btn">F1·ALL·ROLES</button><div class="cite-tip">F1 outputs all rounds · 123 approval gates logged across 7 roles · every role placed conditions · none dissented</div></span></div>
+    <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:6px">CONDITIONS ON APPROVAL <button class="info-btn" onclick="showInfo('conditions',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button> <span class="cite"><button class="cite-btn">F1·ALL·ROLES</button><div class="cite-tip">F1 outputs all rounds · 123 approval gates logged across 7 roles · every role placed conditions · none dissented</div></span></div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">
       <div class="board-condition"><span class="gap-blocker">KILL GATE</span> Board must approve $500K at Feb 15 meeting</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> GDPR compliance certified before EU data processing</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> EU CAC ≤$50K measured after first 2 EU deals</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> EU entity formation before any FTE hiring commitment</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> Phase 1 spend ≤$150K before GO/NO-GO</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> 12-month runway floor maintained post-investment</div>
     </div>
@@ -3084,6 +3162,52 @@ const INFO_CONTENT = {
     title: "What Was Considered — and Why OPT-2 Won",
     body: "Five options were formally evaluated across three deliberation rounds. Each role assessed them independently before the team converged on OPT-2. <strong>This tab shows the full deliberation record</strong> — what each rejected option proposed, the specific tradeoffs that eliminated it, and the entry gates that would have needed to change. Every card is sourced from the options blob and the R0→R2 deliberation record, not written after the fact. The position movement section shows exactly how unanimity emerged."
   }
+
+  finmodel: {
+    tag: 'FINANCIAL MODEL',
+    title: 'CFO-Validated Unit Economics',
+    body: 'Built by CFO in R1 deliberation. <strong>$175K LTV</strong> per EU customer. <strong>$50K CAC ceiling</strong> is the kill trigger — breaching it halts Phase 2 GTM. 3.5× return floor is the minimum on every closed logo below the ceiling. Not projections — modeled constraints tied to real deal data.'
+  },
+  deptupside: {
+    tag: 'DEPARTMENT UPSIDE',
+    title: 'What Each Function Gains',
+    body: 'The reward counterpart to the risk matrix directly above. Each role\'s upside is structured across three horizons: <strong>NOW</strong> (immediate value on approval), <strong>6MO</strong> (mid-term returns), <strong>12MO+</strong> (compounding competitive advantage). This is the deliberation\'s affirmative case — why the team voted yes despite the conditions.'
+  },
+  milestones: {
+    tag: 'POST-DECISION GOVERNANCE',
+    title: 'Accountability Timeline',
+    body: 'Five scheduled checkpoints with binary outcomes. Feb 15 board gate and May GO/NO-GO are hard kills — failure stops Phase 2 entirely. Apr 15 pulse check is the early warning window. This converts the deliberation decision into a tracked execution contract with named owners.'
+  },
+  rejected: {
+    tag: 'OPTIONS EVALUATED',
+    title: 'What Was Considered and Why It Lost',
+    body: 'All options surfaced during deliberation. Each rejection is traceable to specific deliberation data — LEGAL\'s 90-day GDPR minimum killed OPT-1, CSO\'s 2× cycle data killed OPT-3, CFO\'s unit economics made OPT-4 redundant vs OPT-2. Hover any bar for the source rationale.'
+  },
+  movement: {
+    tag: 'POSITION MOVEMENT',
+    title: 'How the Team Moved Across Rounds',
+    body: 'R0 set initial positions. R1 applied cross-role evidence and concentrated the field from 5 options to 2. R2 was consensus formation. Movement from NOT_YET to CONDITIONAL_SUPPORT is the key signal — it indicates positions changed on evidence, not social pressure.'
+  },
+  movebar: {
+    tag: 'DELIBERATION SUMMARY',
+    title: 'Movement Statistics',
+    body: '4 roles changed position from R0 to R2. 3 held position throughout. 0 final dissents. Every role placed at least one condition. The groupthink flag (HIGH severity) signals that CFO, CTO, and LEGAL converged without independently stress-testing implementation assumptions — a structural risk in the deliberation record.'
+  },
+  stanceevo: {
+    tag: 'STANCE EVOLUTION',
+    title: 'Round-by-Round Position Record',
+    body: 'Each cell shows the role\'s vote stance and confidence score for that round. AWC = Approved With Conditions. NOT YET = insufficient evidence to approve. Hover any cell for the source deliberation excerpt. Color progression R0→R1→R2 maps the convergence path directly from engine_stage_outputs.'
+  },
+  voterec: {
+    tag: 'VOTE RECORD',
+    title: 'R2 Final Vote — One Line Per Role',
+    body: 'The final decision expressed at the role level. Every role voted AWC — Approved With Conditions. Confidence range 72% (CTO, LEGAL) to 82% (CEO). Each one-line rationale is extracted from the role\'s R2 deliberation output and is directly traceable to engine_stage_outputs.'
+  },
+  openq: {
+    tag: 'OPEN QUESTIONS',
+    title: 'Unresolved Before Execution',
+    body: 'Questions the team explicitly did not resolve before voting. These are acknowledged gaps that require resolution during Phase 1 execution. The primary unresolved question — GDPR feasibility within $150K — is the controlling gate for Phase 2 capital release.'
+  },
 };
 
 function showInfo(key, triggerEl) {
@@ -3380,10 +3504,10 @@ function renderTourStep() {
   var el = document.querySelector(step.selector);
   if (!el) { tourStep(1); return; }
 
-  // Scroll element into view smoothly
+  // Scroll element into view smoothly, then recompute rect after scroll settles
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  setTimeout(function() {
+  function computeAndRender() {
     var rect = el.getBoundingClientRect();
     var pad = 10;
     var rx = rect.left - pad, ry = rect.top - pad;
@@ -3452,7 +3576,18 @@ function renderTourStep() {
       nextBtn.textContent = 'Next →';
       nextBtn.onclick = function() { tourStep(1); };
     }
-  }, 150);
+  }
+  // rAF chain: scroll first, wait for layout to settle, then compute spotlight
+  var _scrollTimer = null;
+  function onScrollSettle() {
+    if (_scrollTimer) clearTimeout(_scrollTimer);
+    _scrollTimer = setTimeout(function() {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(computeAndRender);
+      });
+    }, 80);
+  }
+  onScrollSettle();
 }
 
 document.addEventListener('keydown', function(e) {
@@ -3614,6 +3749,15 @@ function populateDashboard(d) {
   // ── Confidence ────────────────────────────────────────────────────────────
   const avgConf = ob?.dashboard?.decision_confidence
     || (stageOutputs.length ? Math.round(stageOutputs.reduce((s,r)=>s+(r.confidence_score||0),0)/stageOutputs.length*100) : 77);
+  // Board gov doc button
+  const govDocUrl = master?.doc_url || master?.payload_json?.doc_url || null;
+  const govBtn = document.getElementById('board-gov-doc-btn');
+  if (govBtn && govDocUrl) {
+    govBtn.dataset.url = govDocUrl;
+    govBtn.classList.remove('muted');
+    govBtn.textContent = '⬡ View Governance Doc ↗';
+  }
+
   const confRange = dPacket?.confidence_summary || null;
   const confMin = confRange ? pct(confRange.min) : 72;
   const confMax = confRange ? pct(confRange.max) : 82;
@@ -3959,6 +4103,59 @@ const ROOM_TOUR_STEPS = [
 
 // Boot on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', loadData);
+
+
+// ── OPTIONS CHART HOVER PANEL ─────────────────────────────────────────────
+(function() {
+  var panel = document.getElementById('opt-chart-hover-panel');
+  if (!panel) return;
+  var statEl  = document.getElementById('opt-hover-stat');
+  var optEl   = document.getElementById('opt-hover-opt');
+  var rsEl    = document.getElementById('opt-hover-reason');
+  var lastCell = null;
+
+  document.addEventListener('mouseover', function(e) {
+    var cell = e.target.closest('.opt-bar-cell[data-ax]');
+    if (!cell) {
+      if (lastCell) {
+        panel.classList.remove('visible');
+        lastCell.classList.remove('hovered');
+        lastCell = null;
+      }
+      return;
+    }
+    if (lastCell && lastCell !== cell) lastCell.classList.remove('hovered');
+    lastCell = cell;
+    cell.classList.add('hovered');
+    if (statEl) statEl.textContent = cell.dataset.ax || '';
+    if (optEl)  optEl.textContent  = cell.dataset.opt || '';
+    if (rsEl)   rsEl.textContent   = cell.dataset.reason || '';
+    panel.classList.add('visible');
+  });
+  document.addEventListener('mouseout', function(e) {
+    var cell = e.target.closest('.opt-bar-cell[data-ax]');
+    if (!cell) return;
+    var rt = e.relatedTarget;
+    if (rt && rt.closest('.opt-bar-cell[data-ax]')) return;
+    panel.classList.remove('visible');
+    cell.classList.remove('hovered');
+    lastCell = null;
+  });
+})();
+
+// ── BOARD GOV DOC ─────────────────────────────────────────────────────────
+function openGovDoc() {
+  var btn = document.getElementById('board-gov-doc-btn');
+  if (btn && btn.dataset.url) {
+    window.open(btn.dataset.url, '_blank');
+  } else {
+    // Show a note — doc_url not available for this run
+    if (btn) {
+      btn.textContent = '⬡ Gov doc not generated for this run';
+      setTimeout(function() { btn.textContent = '⬡ Governance Doc ↗'; }, 3000);
+    }
+  }
+}
 
 </script>
 </body>
