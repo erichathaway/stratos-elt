@@ -377,6 +377,48 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .tour-btn-skip{background:none;border:none;color:#334155;font-size:10px;font-family:'DM Mono',monospace;cursor:pointer;padding:5px 0;transition:color .15s}
 .tour-btn-skip:hover{color:#475569}
 
+
+/* ── OPTIONS TAB ── */
+.opt-hero{background:linear-gradient(135deg,rgba(45,212,191,.06),rgba(14,165,233,.04));border:1px solid rgba(45,212,191,.14);border-radius:14px;padding:24px;position:relative;overflow:hidden}
+.opt-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.08),transparent 70%);pointer-events:none}
+.opt-hero-eyebrow{font-size:9px;font-weight:700;letter-spacing:.12em;color:#2dd4bf;font-family:'DM Mono',monospace;margin-bottom:8px}
+.opt-hero-title{font-family:'Fraunces',serif;font-size:clamp(20px,2.8vw,30px);font-weight:600;color:#f1f5f9;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
+.opt-hero-desc{font-size:12px;color:#64748b;line-height:1.6;max-width:540px;margin-bottom:14px}
+.opt-hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.opt-risk-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:20px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b;font-family:'DM Mono',monospace}
+.opt-hero-note{font-size:10px;color:#475569;font-family:'DM Mono',monospace}
+.opt-stats{display:flex;gap:24px;padding-top:16px;border-top:1px solid rgba(45,212,191,.1);flex-wrap:wrap}
+.opt-stat{display:flex;flex-direction:column;gap:2px}
+.opt-stat-n{font-family:'Fraunces',serif;font-size:26px;font-weight:300;color:#f1f5f9;line-height:1}
+.opt-stat-l{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.07em}
+
+/* Rejected cards */
+.opt-rejected-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.opt-rejected{background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;opacity:.65;transition:all .22s;cursor:default}
+.opt-rejected:hover{opacity:1;border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.04)}
+.opt-rejected-label{font-size:9px;color:#64748b;font-family:'DM Mono',monospace;letter-spacing:.07em;margin-bottom:5px}
+.opt-rejected-name{font-family:'Fraunces',serif;font-size:15px;color:#475569;margin-bottom:8px;line-height:1.3;transition:color .22s}
+.opt-rejected:hover .opt-rejected-name{color:#f1f5f9}
+.opt-rejected-votes{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.opt-vote-pip{min-width:26px;height:20px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;padding:0 4px}
+.opt-vote-pip.defer{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.2);color:#475569}
+.opt-vote-pip.avc{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#f59e0b}
+.opt-vote-pip.approve{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:#34d399}
+.opt-rejected-fatal{font-size:11px;color:#64748b;line-height:1.55;border-left:2px solid rgba(255,255,255,.07);padding-left:10px;transition:all .22s}
+.opt-rejected:hover .opt-rejected-fatal{border-left-color:rgba(239,68,68,.3);color:#94a3b8}
+
+/* Reversal items */
+.reversal-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start}
+.reversal-item:last-child{border-bottom:none}
+.reversal-num{width:28px;height:28px;border-radius:50%;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#f87171;font-family:'DM Mono',monospace;flex-shrink:0;margin-top:1px}
+.reversal-body{flex:1}
+.reversal-owner{display:inline-flex;align-items:center;font-size:9px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:3px;margin-bottom:5px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#f87171}
+.reversal-title{font-size:13px;font-weight:600;color:#e2e8f0;margin-bottom:5px;line-height:1.4}
+.reversal-if{font-size:11px;color:#475569;line-height:1.5;margin-bottom:5px}
+.reversal-if strong{color:#f87171}
+.reversal-then{font-size:11px;color:#475569;padding:7px 10px;background:rgba(239,68,68,.04);border-left:2px solid rgba(239,68,68,.22);border-radius:0 4px 4px 0;line-height:1.5}
+.reversal-then strong{color:#fca5a5}
+
 </style>
 </head>
 <body>
@@ -758,7 +800,119 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
   </div>
 
-  <div id="tab-options" class="panel"><div class="stub"><div class="stub-icon">◈</div><div class="stub-title">Options Analysis</div><div class="stub-desc">OPT-1 through OPT-3 vote record, financial mechanics, reversal protocol</div><div class="stub-tag">COMING NEXT</div></div></div>
+  <div id="tab-options" class="panel">
+
+    <!-- WINNER HERO -->
+    <div class="opt-hero">
+      <div class="opt-hero-eyebrow" id="opt-winner-id">OPT-2 · SELECTED · 7 AWC</div>
+      <div class="opt-hero-title" id="opt-winner-label">Phased EU Entry (Conservative)</div>
+      <div class="opt-hero-desc" id="opt-winner-desc">Phase 1 ($150K) entity + GDPR gate → May 2025 GO/NO-GO → Phase 2 ($350K) FTE + GTM</div>
+      <div class="opt-hero-meta">
+        <span class="opt-risk-badge" id="opt-risk-badge">● MEDIUM RISK</span>
+        <span class="opt-hero-note" id="opt-vs-note">vs HIGH on immediate full entry</span>
+      </div>
+      <div class="opt-stats">
+        <div class="opt-stat"><div class="opt-stat-n" id="stat-investment">$500K</div><div class="opt-stat-l">TOTAL INVESTMENT</div></div>
+        <div class="opt-stat"><div class="opt-stat-n" id="stat-cac">$50K</div><div class="opt-stat-l">CAC CEILING</div></div>
+        <div class="opt-stat"><div class="opt-stat-n" id="stat-ltv">$175K</div><div class="opt-stat-l">LTV / CUSTOMER</div></div>
+        <div class="opt-stat"><div class="opt-stat-n" id="stat-votes">7 AWC</div><div class="opt-stat-l">FINAL VOTE</div></div>
+      </div>
+    </div>
+
+    <!-- REJECTED OPTIONS -->
+    <div>
+      <div class="zone-title" style="font-size:11px;margin-bottom:8px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY</div>
+      <div class="opt-rejected-row" id="opt-rejected-row">
+        <!-- populated by data layer -->
+        <div class="opt-rejected">
+          <div class="opt-rejected-label">OPT-1 · IMMEDIATE FULL ENTRY</div>
+          <div class="opt-rejected-name">Full $500K deployment, Q1 start</div>
+          <div class="opt-rejected-votes">
+            <div class="opt-vote-pip defer">CEO</div><div class="opt-vote-pip defer">CFO</div>
+            <div class="opt-vote-pip defer">CTO</div><div class="opt-vote-pip defer">LEGAL</div>
+            <div class="opt-vote-pip defer">CHRO</div><div class="opt-vote-pip defer">COO</div>
+            <div class="opt-vote-pip defer">CSO</div>
+          </div>
+          <div class="opt-rejected-fatal"><strong>Why it failed:</strong> No GDPR gate before EU customer data processing. LEGAL blocked — DPA and SCC execution precedes all commercial contracts. Timeline infeasible.</div>
+        </div>
+        <div class="opt-rejected">
+          <div class="opt-rejected-label">OPT-3 · PARTNERSHIP / RESELLER MODEL</div>
+          <div class="opt-rejected-name">Indirect entry via EU channel partners</div>
+          <div class="opt-rejected-votes">
+            <div class="opt-vote-pip defer">CEO</div><div class="opt-vote-pip defer">CFO</div>
+            <div class="opt-vote-pip defer">CTO</div><div class="opt-vote-pip defer">LEGAL</div>
+            <div class="opt-vote-pip avc">CHRO</div><div class="opt-vote-pip defer">COO</div>
+            <div class="opt-vote-pip defer">CSO</div>
+          </div>
+          <div class="opt-rejected-fatal"><strong>Why it failed:</strong> Revenue capture ~40% of direct model. CSO flagged pipeline velocity risk — partner sales cycles 2× longer. Does not achieve $525K LTV target within runway constraint.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCIAL MECHANICS -->
+    <div class="zone3">
+      <div class="zone-header">
+        <div>
+          <div class="zone-title">FINANCIAL MECHANICS · CFO MODEL</div>
+          <div class="zone-sub" id="fin-headline">The unit economics that closed the debate on OPT-2 vs OPT-1</div>
+        </div>
+      </div>
+      <div id="fin-body" style="font-size:12px;color:#64748b;line-height:1.65;margin-bottom:14px">
+        Two-tranche structure preserves optionality. Phase 1 ($150K) clears GDPR and entity gates before any FTE spend commits. Phase 2 ($350K) unlocks only on May 2025 GO/NO-GO passage — confirmed pipeline, verified CAC, GDPR certified. CFO modeled three scenarios: base, stress, and upside. All three show positive unit economics only if CAC stays at or below $50K ceiling.
+      </div>
+      <div class="kpi-row" id="fin-kpis">
+        <div class="kpi-cell"><div class="kpi-n pos" id="fin-investment">$500K</div><div class="kpi-l">TOTAL BUDGET</div></div>
+        <div class="kpi-cell"><div class="kpi-n warn" id="fin-cac">$50K</div><div class="kpi-l">CAC CEILING</div></div>
+        <div class="kpi-cell"><div class="kpi-n pos" id="fin-ltv">$175K</div><div class="kpi-l">LTV / CUSTOMER</div></div>
+        <div class="kpi-cell"><div class="kpi-n pos" id="fin-pipeline">$525K</div><div class="kpi-l">PIPELINE (3 TARGETS)</div></div>
+      </div>
+      <div style="margin-top:10px;padding:10px 13px;background:rgba(52,211,153,.04);border-left:2px solid rgba(52,211,153,.25);border-radius:0 6px 6px 0;font-size:12px;color:#64748b;line-height:1.6">
+        <strong style="color:#94a3b8">3.5× return floor:</strong> At $50K CAC and $175K LTV, the minimum return on each closed logo is 3.5×. Below the ceiling, every customer is immediately accretive. Above it, the decision architecture reopens.
+        <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU customer · CAC ceiling $50K · "strongest unit economics case for international expansion at this stage"</div></span>
+      </div>
+    </div>
+
+    <!-- REVERSAL PROTOCOL -->
+    <div class="zone3">
+      <div class="zone-header">
+        <div>
+          <div class="zone-title">REVERSAL PROTOCOL · AFTER COMMITMENT</div>
+          <div class="zone-sub">These are not pre-flight conditions — they fire after the decision is already in motion</div>
+        </div>
+        <span class="zone-num" style="color:#f87171">Kill</span>
+      </div>
+      <div id="reversal-items">
+        <div class="reversal-item">
+          <div class="reversal-num">01</div>
+          <div class="reversal-body">
+            <div class="reversal-owner">CFO + BOARD</div>
+            <div class="reversal-title">Total EU spend breaches $500K envelope</div>
+            <div class="reversal-if">IF <strong>any spend commitment exceeds $500K</strong> without explicit Board re-authorization</div>
+            <div class="reversal-then">THEN <strong>immediate halt on all EU activity.</strong> No exceptions, no workarounds. CEO and CFO jointly notify Board within 24 hours. This is not a pause — it is a full stop pending re-authorization.</div>
+          </div>
+        </div>
+        <div class="reversal-item">
+          <div class="reversal-num">02</div>
+          <div class="reversal-body">
+            <div class="reversal-owner">LEGAL</div>
+            <div class="reversal-title">Active CBA or regulatory prohibition found in EU jurisdiction</div>
+            <div class="reversal-if">IF <strong>any collective bargaining agreement or EU regulatory requirement</strong> prohibits unilateral employment changes or commercial activity in UK, Germany, or France</div>
+            <div class="reversal-then">THEN <strong>full stop on all commercial and hiring activity in that jurisdiction.</strong> Minimum 60-day reset. Legal leads, no workaround. Timeline resets entirely for affected markets.</div>
+          </div>
+        </div>
+        <div class="reversal-item">
+          <div class="reversal-num">03</div>
+          <div class="reversal-body">
+            <div class="reversal-owner">CFO</div>
+            <div class="reversal-title">EU CAC exceeds ceiling after first 2 closed deals</div>
+            <div class="reversal-if">IF <strong>EU customer acquisition cost exceeds $50K</strong> after first 2 deals close</div>
+            <div class="reversal-then">THEN <strong>Phase 2 GTM budget release is suspended.</strong> CFO must remodel unit economics before further deployment. Decision architecture reopens — not cancelled, but paused pending new assumptions.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <div id="tab-risk" class="panel"><div class="stub"><div class="stub-icon">◉</div><div class="stub-title">Risk &amp; Intelligence</div><div class="stub-desc">Risk matrix, 5 EI evidence items, dependency map, research gaps</div><div class="stub-tag">COMING NEXT</div></div></div>
   <div id="tab-room" class="panel"><div class="stub"><div class="stub-icon">◎</div><div class="stub-title">The Room</div><div class="stub-desc">Stance evolution R0→R1→R2, deliberation record per role, groupthink deep-dive</div><div class="stub-tag">COMING NEXT</div></div></div>
   <div id="tab-mgmt" class="panel"><div class="stub"><div class="stub-icon">◧</div><div class="stub-title">Management Handoff</div><div class="stub-desc">Per-role functional mandates, 49 commitments with extracted timelines</div><div class="stub-tag">COMING NEXT</div></div></div>
@@ -789,21 +943,44 @@ function toggleExpand(id) {
   document.getElementById(id).classList.toggle('open');
 }
 
-// cite tooltip edge detection — runs once on hover to flip direction if near viewport edge
-document.addEventListener('mouseover', function(e) {
-  var btn = e.target.closest('.cite-btn');
-  if (!btn) return;
-  var cite = btn.closest('.cite');
-  if (!cite) return;
-  var rect = cite.getBoundingClientRect();
-  var tipW = 280;
-  // Reset any previous flip classes
-  cite.classList.remove('tip-left','tip-right');
-  // Near right edge — anchor tip to right of badge
-  if (rect.left + tipW/2 > window.innerWidth - 20) cite.classList.add('tip-left');
-  // Near left edge — anchor tip to left of badge
-  else if (rect.left - tipW/2 < 20) cite.classList.add('tip-right');
-});
+// Global cite tooltip — position:fixed, never clipped by any parent
+(function() {
+  var tip = document.getElementById('cite-tooltip');
+  if (!tip) return;
+  var activeBtn = null;
+
+  document.addEventListener('mouseover', function(e) {
+    var btn = e.target.closest('.cite-btn');
+    if (!btn) { if (activeBtn) { tip.style.display = 'none'; activeBtn = null; } return; }
+    if (btn === activeBtn) return;
+    activeBtn = btn;
+    var cite = btn.closest('.cite');
+    if (!cite) return;
+    var tipContent = cite.querySelector('.cite-tip');
+    if (!tipContent) return;
+    tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
+    tip.style.display = 'block';
+
+    var rect = btn.getBoundingClientRect();
+    var w = Math.min(300, Math.max(200, tip.scrollWidth + 28));
+    tip.style.maxWidth = w + 'px';
+    var h = tip.offsetHeight;
+
+    var x = rect.left + rect.width/2 - w/2;
+    var y = rect.top - h - 10;
+    if (y < 8) y = rect.bottom + 10;
+    x = Math.max(8, Math.min(x, window.innerWidth - w - 8));
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  });
+
+  document.addEventListener('mouseout', function(e) {
+    if (!e.target.closest('.cite-btn')) return;
+    if (e.relatedTarget && e.relatedTarget.closest('.cite-btn')) return;
+    tip.style.display = 'none';
+    activeBtn = null;
+  });
+})();
 
 const TL_DATA = {
   phase1: {
@@ -1190,6 +1367,9 @@ document.addEventListener('keydown', function(e) {
 
 </script>
 
+<!-- CITE TOOLTIP -->
+<div id="cite-tooltip"></div>
+
 <!-- DRAGGABLE INFO PANEL -->
 <div class="info-panel" id="info-panel">
   <div class="info-panel-drag" id="info-panel-drag">
@@ -1264,6 +1444,16 @@ function getRunId() {
 }
 
 function safeArr(v) { return Array.isArray(v) ? v : []; }
+// fmtRaw: handles both numbers AND pre-formatted strings (e.g. "$500K") from Supabase
+function fmtRaw(n) {
+  if (typeof n === 'string') {
+    const stripped = n.replace(/[$,]/g, '');
+    const num = parseFloat(stripped);
+    if (!isNaN(num)) return fmt(num);
+    return n;
+  }
+  return fmt(n || 0);
+}
 function pct(v)     { return Math.round((parseFloat(v)||0)*100); }
 function norm(v)     { return String(v||'').trim(); }
 
@@ -1399,7 +1589,7 @@ function populateDashboard(d) {
   }
   if (signalTexts[1]) {
     const firstText = signalTexts[1].firstChild;
-    if (firstText) firstText.textContent = `${fmt(pipeline)} LTV pipeline at ${fmt(ltv)} × 3 targets`;
+    if (firstText) firstText.textContent = `${fmtRaw(pipeline)} LTV pipeline at ${fmtRaw(ltv)} × 3 targets`;
   }
 
   // ── Groupthink badge ─────────────────────────────────────────────────────
@@ -1421,9 +1611,9 @@ function populateDashboard(d) {
   const runwayFloor  = ob?.dashboard?.financial_mechanics?.runway_floor_months || 12;
 
   const kpiNums = document.querySelectorAll('.kpi-n');
-  if (kpiNums[0]) kpiNums[0].firstChild.textContent = fmt(totalBudget);
-  if (kpiNums[1]) kpiNums[1].firstChild.textContent = fmt(cacCeiling);
-  if (kpiNums[2]) kpiNums[2].firstChild.textContent = fmt(ltvVal);
+  if (kpiNums[0]) kpiNums[0].firstChild.textContent = fmtRaw(totalBudget);
+  if (kpiNums[1]) kpiNums[1].firstChild.textContent = fmtRaw(cacCeiling);
+  if (kpiNums[2]) kpiNums[2].firstChild.textContent = fmtRaw(ltvVal);
   if (kpiNums[3]) kpiNums[3].firstChild.textContent = runwayFloor + ' mo';
 
   // ── Conditions zone header count ──────────────────────────────────────────
