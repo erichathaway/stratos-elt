@@ -1322,28 +1322,36 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
         <div class="ri-section-sub">CFO-validated unit economics, two-tranche capital deployment, and scenario returns. All figures from the deliberation record.</div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
-      <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;color:#64748b;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-bottom:6px">LTV / CUSTOMER</div>
-        <div style="font-size:26px;font-weight:900;color:var(--brand-primary);line-height:1">$175K</div>
-        <div style="font-size:10px;color:#475569;margin-top:4px">Per EU enterprise logo</div>
+
+    <!-- UNIT ECONOMICS ────────────────────────────────────────────────────── -->
+    <div class="fin-unit-row">
+      <div class="fin-unit-card">
+        <div class="fin-unit-n">$175K</div>
+        <div class="fin-unit-l">LTV / CUSTOMER</div>
+        <div class="fin-unit-sub">Per EU enterprise logo <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K per EU customer · based on 3 confirmed inbound prospects · CFO model accepted by all 7 roles</div></span></div>
       </div>
-      <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;color:#64748b;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-bottom:6px">CAC CEILING</div>
-        <div style="font-size:26px;font-weight:900;color:#f59e0b;line-height:1">$50K</div>
-        <div style="font-size:10px;color:#475569;margin-top:4px">Kill trigger fires above this</div>
+      <div class="fin-unit-card warn">
+        <div class="fin-unit-n warn">$50K</div>
+        <div class="fin-unit-l">CAC CEILING</div>
+        <div class="fin-unit-sub">Kill trigger fires above this <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · EU CAC ceiling $50K · above ceiling: Phase 2 halts, CFO remodels, board notified · 'kill trigger, not a pause'</div></span></div>
       </div>
-      <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;color:#64748b;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-bottom:6px">RETURN FLOOR</div>
-        <div style="font-size:26px;font-weight:900;color:#34d399;line-height:1">3.5×</div>
-        <div style="font-size:10px;color:#475569;margin-top:4px">$175K LTV ÷ $50K CAC</div>
+      <div class="fin-unit-card pos">
+        <div class="fin-unit-n pos">3.5×</div>
+        <div class="fin-unit-l">RETURN FLOOR</div>
+        <div class="fin-unit-sub">$175K ÷ $50K ceiling <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV ÷ CAC ceiling = 3.5× minimum return on every closed logo · below ceiling every customer is immediately accretive</div></span></div>
       </div>
-      <div style="background:#0f172a;border:1px solid #334155;border-radius:12px;padding:14px 16px">
-        <div style="font-size:9px;font-weight:700;color:#64748b;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-bottom:6px">TOTAL PIPELINE</div>
-        <div style="font-size:26px;font-weight:900;color:#818cf8;line-height:1">$525K</div>
-        <div style="font-size:10px;color:#475569;margin-top:4px">3 prospects × $175K LTV</div>
+      <div class="fin-unit-card">
+        <div class="fin-unit-n">12mo</div>
+        <div class="fin-unit-l">RUNWAY FLOOR</div>
+        <div class="fin-unit-sub">Post-investment minimum <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · 16.7 months runway remaining post-$500K · 12mo floor maintained as kill condition · budget includes 15% contingency</div></span></div>
+      </div>
+      <div class="fin-unit-card pos">
+        <div class="fin-unit-n pos">$525K</div>
+        <div class="fin-unit-l">TOTAL PIPELINE</div>
+        <div class="fin-unit-sub">3 prospects × $175K <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · 3 inbound EU prospects confirmed active · UK, Germany, France · all initiated contact within past 90 days</div></span></div>
       </div>
     </div>
+
 
 <div style="display:flex;align-items:center;gap:14px;margin:28px 0 16px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
@@ -4062,8 +4070,17 @@ function renderTourStep() {
       requestAnimationFrame(function() {
         requestAnimationFrame(computeAndRender);
       });
-    }, 80);
+    }, 300);
   }
+  // Listen for scroll events to extend the settle window
+  function onScroll() { onScrollSettle(); }
+  window.addEventListener('scroll', onScroll, {passive: true});
+  // Clean up scroll listener after render
+  var _origCompute = computeAndRender;
+  computeAndRender = function() {
+    window.removeEventListener('scroll', onScroll);
+    _origCompute();
+  };
   onScrollSettle();
 }
 
