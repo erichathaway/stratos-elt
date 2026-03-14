@@ -31,13 +31,13 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 .stub-desc{font-size:12px;color:#64748b;max-width:300px;text-align:center;line-height:1.6}
 .stub-tag{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-top:4px}
 /* ── INFO BUTTON ── */
-.info-btn{position:absolute;top:-9px;left:50%;transform:translateX(-50%) translateY(50%);width:18px;height:18px;border-radius:50%;background:transparent;border:none;color:rgba(255,255,255,.2);font-size:11px;display:flex;align-items:center;justify-content:center;cursor:help;transition:all .22s;z-index:2;font-family:'DM Mono',monospace;font-style:italic;font-weight:300;user-select:none;overflow:hidden}
-.info-btn:hover,.zone1:hover .info-btn,.zone3:hover .info-btn,.zone4:hover .info-btn,.card:hover .info-btn,.concern-card:hover .info-btn,.openq-card:hover .info-btn{transform:translateX(-50%) translateY(0);z-index:12;color:rgba(255,255,255,.7);font-style:normal}
-.info-btn span{transition:opacity .15s}
+.info-btn{position:relative;top:auto;left:auto;transform:none;width:16px;height:16px;border-radius:50%;background:transparent;border:none;color:rgba(255,255,255,.2);font-size:10px;display:inline-flex;align-items:center;justify-content:center;cursor:help;transition:color .18s;z-index:2;font-family:'DM Mono',monospace;font-style:italic;font-weight:400;user-select:none;overflow:hidden;vertical-align:middle;flex-shrink:0;margin-left:4px}
+.info-btn:hover{color:rgba(255,255,255,.65);font-style:normal}
+.info-btn span{transition:opacity .15s;font-size:10px}
 .info-btn:hover span{opacity:0}
-.info-btn::after{content:'?';position:absolute;opacity:0;transition:opacity .15s;font-style:normal;font-size:11px;font-weight:500}
+.info-btn::after{content:'?';position:absolute;opacity:0;transition:opacity .15s;font-style:normal;font-size:10px;font-weight:600}
 .info-btn:hover::after{opacity:1}
-/* zone1 needs relative positioning already; zone3/4 have it. For zone2 cards: */
+/* Cards and zones retain position:relative for other purposes */
 .card{position:relative}
 .concern-card{position:relative}
 .openq-card{position:relative}
@@ -1237,7 +1237,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         <div class="opt-hero-meta">
           <span class="opt-risk-badge">● MEDIUM RISK</span>
           <span class="opt-hero-note" id="opt-vs-note">vs HIGH on OPT-1 · vs LOW-RETURN on OPT-3 through OPT-5</span>
-          <button class="info-btn" onclick="event.stopPropagation();showInfo('options',this)" title="What is this?" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.3);margin-left:2px;width:16px;height:16px;font-size:10px" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none';this.style.setProperty('--q','block')" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.querySelector('span').style.display=''"><span>i</span></button>
+          <button class="info-btn" onclick="event.stopPropagation();showInfo('options',this)" title="What is this?" style="color:rgba(255,255,255,.3);margin-left:2px;width:16px;height:16px;font-size:10px" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none';this.style.setProperty('--q','block')" onmouseleave="this.style.color='rgba(255,255,255,.3)';this.querySelector('span').style.display=''"><span>i</span></button>
         </div>
       </div>
 
@@ -1306,7 +1306,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
     <!-- OPTIONS NOT SELECTED — populated by data layer from optionsBlob -->
     <div>
-      <div class="zone-title" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+      <div class="zone-title" style="font-size:11px;margin-bottom:12px;display:flex;align-items:center;gap:6px">OPTIONS EVALUATED · WHAT DIDN'T WIN AND WHY <button class="info-btn" onclick="showInfo('rejected',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
       <div id="opt-rejected-container">
         <!-- JS populated -->
       </div>
@@ -1316,7 +1316,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="zone3" style="margin-top:4px">
       <div class="zone-header">
         <div>
-          <div class="zone-title" style="display:flex;align-items:center;gap:6px">POSITION MOVEMENT · HOW THE TEAM MOVED <button class="info-btn" onclick="showInfo('movement',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+          <div class="zone-title" style="display:flex;align-items:center;gap:6px">POSITION MOVEMENT · HOW THE TEAM MOVED <button class="info-btn" onclick="showInfo('movement',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
           <div class="zone-sub">R0 exploration → R1 convergence → R2 final vote</div>
         </div>
       </div>
@@ -1338,7 +1338,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         <div class="ri-section-title">Exposure Matrix + Financial Model</div>
         <div class="ri-section-sub">6 risks plotted by consensus impact × probability. CFO unit economics and scenario analysis below. Click any dot to expand.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('risk',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('risk',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <div class="rm-legend-item"><div class="rm-leg-dot" style="background:#2dd4bf;border-color:#2dd4bf"></div>CEO</div>
@@ -1463,7 +1463,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <!-- LEFT: OPEN QUESTIONS — what's being done about them ──────────────── -->
     <div class="gaps-wrap">
       <div class="gaps-header">
-        <div class="gaps-eyebrow" style="color:#f59e0b;display:flex;align-items:center;gap:6px">OPEN QUESTIONS · 4 UNRESOLVED <button class="info-btn" onclick="showInfo('openq',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+        <div class="gaps-eyebrow" style="color:#f59e0b;display:flex;align-items:center;gap:6px">OPEN QUESTIONS · 4 UNRESOLVED <button class="info-btn" onclick="showInfo('openq',this)" style="color:rgba(255,255,255,.25);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button></div>
         <div class="gaps-title">What's being done to answer them</div>
         <div class="gaps-sub">Each question has a named owner, a specific action underway, and a gate it must clear before execution can proceed.</div>
       </div>
@@ -1593,7 +1593,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 
   <!-- HORIZONTAL MILESTONE TIMELINE ───────────────────────────────────────── -->
   <div style="margin-top:28px">
-    <div class="fin-block-label" style="margin-bottom:14px;display:flex;align-items:center;gap:6px">EXECUTION TIMELINE · KILL GATES &amp; FORWARD TRIGGERS <button class="info-btn" onclick="showInfo('timeline',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+    <div class="fin-block-label" style="margin-bottom:14px;display:flex;align-items:center;gap:6px">EXECUTION TIMELINE · KILL GATES &amp; FORWARD TRIGGERS <button class="info-btn" onclick="showInfo('timeline',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div class="hms-track">
 
       <div class="hms-line"></div>
@@ -1658,7 +1658,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <!-- FINANCIAL MODEL ──────────────────────────────────────────────────────── -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 16px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">FINANCIAL MODEL · CFO-VALIDATED <button class="info-btn" onclick="showInfo('finmodel',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">FINANCIAL MODEL · CFO-VALIDATED <button class="info-btn" onclick="showInfo('finmodel',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
@@ -1780,7 +1780,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <!-- SECTION DIVIDER -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">DEPARTMENT UPSIDE <button class="info-btn" onclick="showInfo('deptupside',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">DEPARTMENT UPSIDE <button class="info-btn" onclick="showInfo('deptupside',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
@@ -1846,7 +1846,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <!-- MILESTONE TIMELINE ─────────────────────────────────────────────────── -->
   <div style="display:flex;align-items:center;gap:14px;margin:28px 0 20px">
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
-    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">POST-DECISION GOVERNANCE <button class="info-btn" onclick="showInfo('milestones',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+    <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">POST-DECISION GOVERNANCE <button class="info-btn" onclick="showInfo('milestones',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="flex:1;height:1px;background:rgba(255,255,255,.05)"></div>
   </div>
 
@@ -1904,7 +1904,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         <div class="ri-section-title">How 7 Executives Deliberated to Unanimity</div>
         <div class="ri-section-sub">Not the outcome — the deliberation itself. How each role entered, what evidence moved them, where they pushed back, and what would bring them back to the table.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('room',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('room',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
   </div>
 
@@ -1920,12 +1920,12 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="mb-div"></div>
     <div class="mb-stat"><div class="mb-n" style="color:#818cf8">3</div><div class="mb-l">ROUNDS</div></div>
     <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · convergence_flag: true · groupthink_flag: HIGH severity — CFO, CTO, LEGAL converged without surfacing domain-specific risks independently</div></span>
-  <button class="info-btn" onclick="showInfo('movebar',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent;margin-left:4px" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button>
+  <button class="info-btn" onclick="showInfo('movebar',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent;margin-left:4px" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button>
   </div>
 
   <!-- ZONE 1: STANCE EVOLUTION TABLE -->
   <div>
-    <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">STANCE EVOLUTION · R0→R1→R2 · Hover any cell for source <button class="info-btn" onclick="showInfo('stanceevo',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+    <div class="fin-block-label" style="margin-bottom:8px;display:flex;align-items:center;gap:6px">STANCE EVOLUTION · R0→R1→R2 · Hover any cell for source <button class="info-btn" onclick="showInfo('stanceevo',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
     <div style="overflow-x:auto">
       <table style="width:100%;border-collapse:separate;border-spacing:1px">
         <thead>
@@ -2590,7 +2590,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         <div class="ri-section-title">What Each Team Does Next</div>
         <div class="ri-section-sub">Per-department action briefs sourced from the deliberation record. Every item has a timing and success metric. Select a department to see their full brief.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('mgmt',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('mgmt',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
   </div>
   <div class="fin-scenarios" style="margin-bottom:14px">
@@ -2866,7 +2866,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
         <div class="ri-section-title">One-Page Decision Record</div>
         <div class="ri-section-sub">Complete governance record for fiduciary review. Decision, vote record, financial guardrails, open risk, audit trail. Readable in under 5 minutes.</div>
       </div>
-      <button class="info-btn" onclick="showInfo('board',this)" title="About this view" style="position:relative;top:4px;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
+      <button class="info-btn" onclick="showInfo('board',this)" title="About this view" style="color:rgba(255,255,255,.25);width:16px;height:16px;font-size:10px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.7)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.25)';this.querySelector('span').style.display=''"><span>i</span></button>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
       <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
@@ -2887,7 +2887,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
     <div class="gaps-wrap">
       <div class="gaps-header">
-        <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">VOTE RECORD · R2 FINAL <button class="info-btn" onclick="showInfo('voterec',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+        <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">VOTE RECORD · R2 FINAL <button class="info-btn" onclick="showInfo('voterec',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
         <div class="gaps-title" style="font-size:16px">7–0 Conditional Approval</div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04)">
@@ -2923,7 +2923,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div style="display:flex;flex-direction:column;gap:10px">
       <div class="gaps-wrap" style="flex:1">
         <div class="gaps-header">
-          <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">FINANCIAL GUARDRAILS · CFO-VALIDATED <button class="info-btn" onclick="showInfo('finmodel',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
+          <div class="gaps-eyebrow" style="display:flex;align-items:center;gap:6px">FINANCIAL GUARDRAILS · CFO-VALIDATED <button class="info-btn" onclick="showInfo('finmodel',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button></div>
           <div class="gaps-title" style="font-size:16px">Kill Triggers + Return Floor</div>
         </div>
         <div style="padding:10px 16px;display:flex;flex-direction:column;gap:6px">
@@ -2943,7 +2943,7 @@ body{background:#070d1a;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     </div>
   </div>
   <div class="fin-scenarios" style="margin-bottom:14px">
-    <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:6px">CONDITIONS ON APPROVAL <button class="info-btn" onclick="showInfo('conditions',this)" style="position:relative;top:0;left:0;transform:none;display:inline-flex;flex-shrink:0;color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button> <span class="cite"><button class="cite-btn">F1·ALL·ROLES</button><div class="cite-tip">F1 outputs all rounds · 123 approval gates logged across 7 roles · every role placed conditions · none dissented</div></span></div>
+    <div class="fin-block-label" style="margin-bottom:10px;display:flex;align-items:center;gap:6px">CONDITIONS ON APPROVAL <button class="info-btn" onclick="showInfo('conditions',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button> <span class="cite"><button class="cite-btn">F1·ALL·ROLES</button><div class="cite-tip">F1 outputs all rounds · 123 approval gates logged across 7 roles · every role placed conditions · none dissented</div></span></div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px">
       <div class="board-condition"><span class="gap-blocker">KILL GATE</span> Board must approve $500K at Feb 15 meeting</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> GDPR compliance certified before EU data processing</div><div class="board-condition"><span class="gap-blocker">KILL GATE</span> EU CAC ≤$50K measured after first 2 EU deals</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> EU entity formation before any FTE hiring commitment</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> Phase 1 spend ≤$150K before GO/NO-GO</div><div class="board-condition"><span class="gap-owner" style="background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2);color:#fbbf24">HIGH</span> 12-month runway floor maintained post-investment</div>
     </div>
@@ -3164,49 +3164,49 @@ const INFO_CONTENT = {
   },
 
   finmodel: {
-    tag: 'FINANCIAL MODEL',
-    title: 'CFO-Validated Unit Economics',
-    body: 'Built by CFO in R1 deliberation. <strong>$175K LTV</strong> per EU customer. <strong>$50K CAC ceiling</strong> is the kill trigger — breaching it halts Phase 2 GTM. 3.5× return floor is the minimum on every closed logo below the ceiling. Not projections — modeled constraints tied to real deal data.'
+    tag: "FINANCIAL MODEL",
+    title: "CFO-Validated Unit Economics",
+    body: "Built by CFO in R1 deliberation. <strong>$175K LTV</strong> per EU customer. <strong>$50K CAC ceiling</strong> is the kill trigger — breaching it halts Phase 2 GTM. 3.5x return floor on every closed logo. Not projections — modeled constraints tied to real deal data."
   },
   deptupside: {
-    tag: 'DEPARTMENT UPSIDE',
-    title: 'What Each Function Gains',
-    body: 'The reward counterpart to the risk matrix directly above. Each role\'s upside is structured across three horizons: <strong>NOW</strong> (immediate value on approval), <strong>6MO</strong> (mid-term returns), <strong>12MO+</strong> (compounding competitive advantage). This is the deliberation\'s affirmative case — why the team voted yes despite the conditions.'
+    tag: "DEPARTMENT UPSIDE",
+    title: "What Each Function Gains",
+    body: "The reward counterpart to the risk matrix directly above. Each role's upside structured across three horizons: <strong>NOW</strong> (immediate value on approval), <strong>6MO</strong> (mid-term returns), <strong>12MO+</strong> (compounding competitive advantage). This is the deliberation's affirmative case — why the team voted yes despite the conditions."
   },
   milestones: {
-    tag: 'POST-DECISION GOVERNANCE',
-    title: 'Accountability Timeline',
-    body: 'Five scheduled checkpoints with binary outcomes. Feb 15 board gate and May GO/NO-GO are hard kills — failure stops Phase 2 entirely. Apr 15 pulse check is the early warning window. This converts the deliberation decision into a tracked execution contract with named owners.'
+    tag: "POST-DECISION GOVERNANCE",
+    title: "Accountability Timeline",
+    body: "Five scheduled checkpoints with binary outcomes. Feb 15 board gate and May GO/NO-GO are hard kills — failure stops Phase 2 entirely. Apr 15 pulse check is the early warning window. This converts the deliberation decision into a tracked execution contract with named owners."
   },
   rejected: {
-    tag: 'OPTIONS EVALUATED',
-    title: 'What Was Considered and Why It Lost',
-    body: 'All options surfaced during deliberation. Each rejection is traceable to specific deliberation data — LEGAL\'s 90-day GDPR minimum killed OPT-1, CSO\'s 2× cycle data killed OPT-3, CFO\'s unit economics made OPT-4 redundant vs OPT-2. Hover any bar for the source rationale.'
+    tag: "OPTIONS EVALUATED",
+    title: "What Was Considered and Why It Lost",
+    body: "All options surfaced during deliberation. Each rejection is traceable to deliberation data — LEGAL's 90-day GDPR minimum killed OPT-1, CSO's 2x cycle data killed OPT-3, CFO's unit economics made OPT-4 redundant vs OPT-2. Hover any bar for the source rationale."
   },
   movement: {
-    tag: 'POSITION MOVEMENT',
-    title: 'How the Team Moved Across Rounds',
-    body: 'R0 set initial positions. R1 applied cross-role evidence and concentrated the field from 5 options to 2. R2 was consensus formation. Movement from NOT_YET to CONDITIONAL_SUPPORT is the key signal — it indicates positions changed on evidence, not social pressure.'
+    tag: "POSITION MOVEMENT",
+    title: "How the Team Moved Across Rounds",
+    body: "R0 set initial positions. R1 applied cross-role evidence and concentrated the field from 5 options to 2. R2 was consensus formation. Movement from NOT_YET to CONDITIONAL_SUPPORT indicates positions changed on evidence, not social pressure."
   },
   movebar: {
-    tag: 'DELIBERATION SUMMARY',
-    title: 'Movement Statistics',
-    body: '4 roles changed position from R0 to R2. 3 held position throughout. 0 final dissents. Every role placed at least one condition. The groupthink flag (HIGH severity) signals that CFO, CTO, and LEGAL converged without independently stress-testing implementation assumptions — a structural risk in the deliberation record.'
+    tag: "DELIBERATION SUMMARY",
+    title: "Movement Statistics",
+    body: "4 roles changed position from R0 to R2. 3 held position throughout. 0 final dissents. Every role placed at least one condition. The groupthink flag (HIGH severity) signals that CFO, CTO, and LEGAL converged without independently stress-testing implementation assumptions."
   },
   stanceevo: {
-    tag: 'STANCE EVOLUTION',
-    title: 'Round-by-Round Position Record',
-    body: 'Each cell shows the role\'s vote stance and confidence score for that round. AWC = Approved With Conditions. NOT YET = insufficient evidence to approve. Hover any cell for the source deliberation excerpt. Color progression R0→R1→R2 maps the convergence path directly from engine_stage_outputs.'
+    tag: "STANCE EVOLUTION",
+    title: "Round-by-Round Position Record",
+    body: "Each cell shows the role's vote stance and confidence score for that round. AWC = Approved With Conditions. NOT YET = insufficient evidence to approve. Hover any cell for the source deliberation excerpt. Color progression R0 to R2 maps the convergence path from engine_stage_outputs."
   },
   voterec: {
-    tag: 'VOTE RECORD',
-    title: 'R2 Final Vote — One Line Per Role',
-    body: 'The final decision expressed at the role level. Every role voted AWC — Approved With Conditions. Confidence range 72% (CTO, LEGAL) to 82% (CEO). Each one-line rationale is extracted from the role\'s R2 deliberation output and is directly traceable to engine_stage_outputs.'
+    tag: "VOTE RECORD",
+    title: "R2 Final Vote — One Line Per Role",
+    body: "The final decision at the role level. Every role voted AWC — Approved With Conditions. Confidence range 72% (CTO, LEGAL) to 82% (CEO). Each one-line rationale is extracted from the role's R2 deliberation output and is directly traceable to engine_stage_outputs."
   },
   openq: {
-    tag: 'OPEN QUESTIONS',
-    title: 'Unresolved Before Execution',
-    body: 'Questions the team explicitly did not resolve before voting. These are acknowledged gaps that require resolution during Phase 1 execution. The primary unresolved question — GDPR feasibility within $150K — is the controlling gate for Phase 2 capital release.'
+    tag: "OPEN QUESTIONS",
+    title: "Unresolved Before Execution",
+    body: "Questions the team explicitly did not resolve before voting. These are acknowledged gaps requiring resolution during Phase 1 execution. The primary unresolved question — GDPR feasibility within $150K — is the controlling gate for Phase 2 capital release."
   },
 };
 
