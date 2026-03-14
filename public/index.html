@@ -561,8 +561,8 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
 /* ── RISK MATRIX ── */
 .rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
 .rm-y-axis{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding-right:10px;padding-bottom:28px}
-.rm-axis-label{writing-mode:vertical-rl;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
-.rm-axis-ticks{writing-mode:vertical-rl;transform:rotate(180deg);display:flex;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0}
+.rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
+.rm-axis-ticks{display:flex;flex-direction:column;justify-content:space-between;height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
 .rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:10px;overflow:hidden;min-height:210px}
 .rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:10px;min-height:70px}
 .mc-ll{background:rgba(52,211,153,.03)}
@@ -1121,7 +1121,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <!-- Y-axis label -->
     <div class="rm-y-axis">
       <div class="rm-axis-label">IMPACT</div>
-      <div class="rm-axis-ticks"><span>HIGH</span><span>MED</span><span>LOW</span></div>
+      <div class="rm-axis-ticks" style="padding-bottom:24px"><span>HIGH</span><span>MED</span><span>LOW</span></div>
     </div>
 
     <div style="flex:1;min-width:0">
@@ -1233,8 +1233,8 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="ri-win-card">
       <div class="ri-win-role">CEO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Board approval signal — decisive execution to investors {cite("CEO·R2","CEO R2 conf 82% · 'governance gate, not an analytical one' · board approval at Feb 15 is the controlling event")}</div>
-        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>3 named EU enterprise logos validate international GTM thesis {cite("CSO·R2","CSO R2 · 3 inbound EU prospects confirmed active pipeline · closing even 1 generates $175K LTV")}</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Board approval signal — decisive execution to investors <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 conf 82% · 'governance gate, not an analytical one' · board approval at Feb 15 is the controlling event</div></span></div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>3 named EU enterprise logos validate international GTM thesis <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · 3 inbound EU prospects confirmed active pipeline · closing even 1 generates $175K LTV</div></span></div>
         <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU market footprint as competitive moat vs Competitor X</div>
       </div>
     </div>
@@ -1242,8 +1242,8 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="ri-win-card">
       <div class="ri-win-role">CFO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Two-tranche structure limits exposure to $150K until May GO/NO-GO {cite("CFO·R2","CFO R2 · Phase 1 $150K clears compliance gates before any FTE spend commits · Phase 2 $350K locked behind GO/NO-GO")}</div>
-        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>$525K LTV pipeline at 3.5× return floor on every closed logo {cite("CFO·R1","CFO R1 · LTV $175K · CAC ceiling $50K · 3.5× minimum return · immediately accretive below ceiling")}</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Two-tranche structure limits exposure to $150K until May GO/NO-GO <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 1 $150K clears compliance gates before any FTE spend commits · Phase 2 $350K locked behind GO/NO-GO</div></span></div>
+        <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>$525K LTV pipeline at 3.5× return floor on every closed logo <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · LTV $175K · CAC ceiling $50K · 3.5× minimum return · immediately accretive below ceiling</div></span></div>
         <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU revenue diversifies ARR concentration — currently 100% US-dependent</div>
       </div>
     </div>
@@ -1251,7 +1251,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="ri-win-card">
       <div class="ri-win-role">CTO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>GDPR architecture built once, reusable across all future EU customers {cite("CTO·R1","CTO R1 · GDPR data residency architecture feasibility is the core Phase 1 question · resolves before any FTE spend")}</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>GDPR architecture built once, reusable across all future EU customers <span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 · GDPR data residency architecture feasibility is the core Phase 1 question · resolves before any FTE spend</div></span></div>
         <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>EU data residency certification becomes sales asset in regulated verticals</div>
         <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>UK + Germany + France infra playbook scales to additional markets without restart</div>
       </div>
@@ -1260,7 +1260,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="ri-win-card">
       <div class="ri-win-role">CHRO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Phased hiring — no FTE offers until GO/NO-GO — eliminates irreversible labor risk {cite("CHRO·R2","CHRO R2 conf 76% · OPT-2 sequences compliance before revenue — legally mandatory · no FTE offers before GDPR gate")}</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>Phased hiring — no FTE offers until GO/NO-GO — eliminates irreversible labor risk <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 conf 76% · OPT-2 sequences compliance before revenue — legally mandatory · no FTE offers before GDPR gate</div></span></div>
         <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>3-jurisdiction EU employment model built (UK/Germany/France) — reusable template</div>
         <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU comp bands and hiring playbook established — future hires take weeks, not months</div>
       </div>
@@ -1269,7 +1269,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="ri-win-card">
       <div class="ri-win-role">LEGAL</div>
       <div class="ri-win-items">
-        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>DPA and SCC frameworks executed before first customer — clean legal foundation {cite("LEGAL·R2","LEGAL R2 conf 72% · DPAs and SCCs must execute before EU customer onboarding · IP assignments must be jurisdiction-specific")}</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>DPA and SCC frameworks executed before first customer — clean legal foundation <span class="cite"><button class="cite-btn">LEGAL·R2</button><div class="cite-tip">LEGAL R2 conf 72% · DPAs and SCCs must execute before EU customer onboarding · IP assignments must be jurisdiction-specific</div></span></div>
         <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>GDPR certification becomes commercial differentiator in regulated EU verticals</div>
         <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU legal entity framework supports future M&A and regulatory engagement at scale</div>
       </div>
@@ -1278,7 +1278,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
     <div class="ri-win-card">
       <div class="ri-win-role">COO + CSO</div>
       <div class="ri-win-items">
-        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>3 active inbound EU prospects — demand signal before first GTM dollar {cite("CSO·R2","CSO R2 · 3 inbound EU prospects confirmed · pipeline validated before capital deployment · no speculation")}</div>
+        <div class="ri-win-item"><span class="ri-horizon short">NOW</span>3 active inbound EU prospects — demand signal before first GTM dollar <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · 3 inbound EU prospects confirmed · pipeline validated before capital deployment · no speculation</div></span></div>
         <div class="ri-win-item"><span class="ri-horizon mid">6MO</span>EU GTM playbook built from real deal cycles — not assumptions</div>
         <div class="ri-win-item"><span class="ri-horizon long">12MO+</span>EU presence enables response SLAs that pure remote models cannot match</div>
       </div>
@@ -1298,7 +1298,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="ri-ms-dot gate1"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">FEB 15, 2025</div>
-        <div class="ri-ms-title">Board Approval Gate {cite("CEO·R2","CEO R2 · Board must approve $500K at Feb 15 meeting — cited by all 7 roles · listed kill criterion on OPT-2")}</div>
+        <div class="ri-ms-title">Board Approval Gate <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 · Board must approve $500K at Feb 15 meeting — cited by all 7 roles · listed kill criterion on OPT-2</div></span></div>
         <div class="ri-ms-detail">Owner: CEO. Binary. Yes → $150K Phase 1 authorized. No → Phase 1 paused, prospects placed on hold.</div>
       </div>
     </div>
@@ -1314,7 +1314,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="ri-ms-dot gate2"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">MAY 2025</div>
-        <div class="ri-ms-title">GO / NO-GO Gate — Phase 2 Capital Release {cite("CFO·R2","CFO R2 · Phase 2 $350K unlocks only on GO/NO-GO passage · GDPR certified · EU entity formed · ≥2 prospects active · Phase 1 spend ≤$150K")}</div>
+        <div class="ri-ms-title">GO / NO-GO Gate — Phase 2 Capital Release <span class="cite"><button class="cite-btn">CFO·R2</button><div class="cite-tip">CFO R2 · Phase 2 $350K unlocks only on GO/NO-GO passage · GDPR certified · EU entity formed · ≥2 prospects active · Phase 1 spend ≤$150K</div></span></div>
         <div class="ri-ms-detail">Owner: CEO + CFO + CTO + LEGAL. Must pass ALL 4 criteria. If all green → $350K Phase 2 releases. Any fail → full stop, board notified within 5 business days.</div>
       </div>
     </div>
@@ -1322,7 +1322,7 @@ body{background:#030711;color:#e2e8f0;font-family:'DM Sans',system-ui,sans-serif
       <div class="ri-ms-dot"></div>
       <div class="ri-ms-body">
         <div class="ri-ms-date">JUL 2025</div>
-        <div class="ri-ms-title">CAC Measurement Checkpoint {cite("CFO·R1","CFO R1 · EU CAC ceiling $50K · hard measurement after first 2 deals · above ceiling: halt Phase 2, CFO remodels, board informed")}</div>
+        <div class="ri-ms-title">CAC Measurement Checkpoint <span class="cite"><button class="cite-btn">CFO·R1</button><div class="cite-tip">CFO R1 · EU CAC ceiling $50K · hard measurement after first 2 deals · above ceiling: halt Phase 2, CFO remodels, board informed</div></span></div>
         <div class="ri-ms-detail">Owner: CFO. After first 2 EU deals close. Hard number vs $50K ceiling. Not optional.</div>
       </div>
     </div>
