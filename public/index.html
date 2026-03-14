@@ -3083,7 +3083,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div style="font-size:12.5px;color:#475569;line-height:1.5">Board approval gate · EU strategic mandate · May GO/NO-GO authority</div>
     </div>
   </div>
-</div>
+
 <div id="mhpanel-CFO" style="display:none">
   <div class="mh-brief-header">
     <div style="display:flex;align-items:center;gap:12px">
@@ -3265,7 +3265,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
           <div class="mh-expand-lbl" style="margin-top:6px">R2 RATIONALE · CSO</div><div class="mh-expand-row">3 confirmed inbound prospects at $525K total LTV. Q3 2025 is a competitive response window — delay cedes first-mover advantage. Pipeline must be kept warm through Phase 1 regardless of internal compliance timeline.</div>
         </div></div>
       </div>
-    </div>
+    </div></div>
     <div>
       <div class="mh-section-lbl">PHASE 2 COMMITMENTS</div>
       <div style="display:flex;flex-direction:column;gap:5px"><div class="mh-phase2-item"><span style="color:#818cf8">›</span> Apr 15 — Confirm ≥2 of 3 EU prospects active — GO/NO-GO criteria <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Pulse check</span></div><div class="mh-phase2-item"><span style="color:#818cf8">›</span> Q3 2025 — First EU logo closed — baseline measurement <span style="color:#334155;font-size:10px;font-family:'DM Mono',monospace">· Revenue milestone</span></div></div>
@@ -3947,7 +3947,7 @@ const OPTIONS_TOUR_STEPS = [
     cardPos: "below"
   },
   {
-    selector: "#opt-cards-wrap",
+    selector: "#opt-rejected-section",
     title: "What Was Rejected and Why",
     body: "<strong>Four other options were formally evaluated.</strong> Each card shows the real mechanics proposed, the tradeoffs that killed it in deliberation, and the specific entry gates.",
     cardPos: "above"
@@ -4340,7 +4340,10 @@ function populateDashboard(d) {
   const avgConf = ob?.dashboard?.decision_confidence
     || (stageOutputs.length ? Math.round(stageOutputs.reduce((s,r)=>s+(r.confidence_score||0),0)/stageOutputs.length*100) : 77);
   // Board gov doc button
-  const govDocUrl = master?.doc_url || master?.payload_json?.doc_url || null;
+  const decId = (run_id || '').replace(/^RUN-/, 'DEC-');
+  const docName = decId ? 'DEC-GOV_' + decId : null;
+  const govDocUrl = master?.doc_url || master?.payload_json?.doc_url ||
+    (docName ? 'https://drive.google.com/drive/search?q=' + encodeURIComponent(docName) : null);
   const govBtn = document.getElementById('board-gov-doc-btn');
   if (govBtn && govDocUrl) {
     govBtn.dataset.url = govDocUrl;
@@ -4705,15 +4708,20 @@ document.addEventListener('DOMContentLoaded', loadData);
 // ── BOARD GOV DOC ─────────────────────────────────────────────────────────
 function openGovDoc() {
   var btn = document.getElementById('board-gov-doc-btn');
-  if (btn && btn.dataset.url) {
-    window.open(btn.dataset.url, '_blank');
-  } else {
-    // Show a note — doc_url not available for this run
-    if (btn) {
-      btn.textContent = '⬡ Gov doc not generated for this run';
-      setTimeout(function() { btn.textContent = '⬡ Governance Doc ↗'; }, 3000);
-    }
+  // Use data-url set from master state, or derive from run_id
+  var url = (btn && btn.dataset.url) || null;
+  if (!url) {
+    // Derive: RUN-XXXXXXXX-YYYYYYYY -> DEC-XXXXXXXX-YYYYYYYY -> DEC-GOV_DEC-XXXXXXXX-YYYYYYYY
+    var runId = getRunId();
+    var decId = runId.replace(/^RUN-/, 'DEC-');
+    var docName = 'DEC-GOV_' + decId;
+    var folderId = '1vMkb6BvezX3H9feWqEs8qzrbodg7xa60';
+    // Search link: opens Google Drive folder filtered to doc name
+    url = 'https://drive.google.com/drive/folders/' + folderId + '?usp=drive_link';
+    // Try direct search URL for the specific doc
+    url = 'https://drive.google.com/drive/search?q=' + encodeURIComponent(docName);
   }
+  window.open(url, '_blank');
 }
 
 // ── RISK MATRIX AXIS ALIGNMENT ────────────────────────────────────────────
