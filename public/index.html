@@ -584,7 +584,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .rm-wrap{display:flex;gap:0;align-items:stretch;margin-bottom:12px}
 .rm-y-axis{display:flex;flex-direction:column;align-items:center;padding-right:10px;padding-top:8px}
 .rm-axis-label{writing-mode:vertical-lr;transform:rotate(180deg);font-size:8.5px;font-weight:700;letter-spacing:.12em;color:#64748b;font-family:'DM Mono',monospace}
-.rm-axis-ticks{position:relative;height:auto;min-height:210px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;position:absolute;right:0;padding:4px 0;text-align:right}
+.rm-axis-ticks{position:relative;height:212px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;padding:4px 0;text-align:right}
 .rm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:12px;overflow:hidden;min-height:210px}
 .rm-cell{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;padding:8px;min-height:70px}
 .mc-ll{background:rgba(52,211,153,.03)}
@@ -598,6 +598,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .mc-hh{background:rgba(239,68,68,.1)}
 .rm-corner{position:absolute;top:5px;left:7px;font-size:7.5px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.05em}
 .rm-corner.act{color:#fca5a5}
+.rm-axis-ticks span{position:absolute;right:0;text-align:right}
 .rm-x-axis{display:flex;justify-content:space-around;padding-top:8px;font-size:8px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.05em;position:relative}
 .rm-urgency{font-size:9px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:4px}
 .rm-urgency.act{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171}
@@ -904,6 +905,38 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .cf-gate-dot.kill{background:#f43f5e}
 .cf-gate-dot.warn{background:#f59e0b}
 
+
+/* ── CONFIDENCE × CONVERGENCE CHART ── */
+.cc-chart-wrap{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:16px 20px;margin-bottom:16px}
+.cc-chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.cc-chart-title{font-size:11px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.1em;color:#64748b}
+.cc-chart-legend{display:flex;gap:12px}
+.cc-legend-item{display:flex;align-items:center;gap:5px;font-size:9px;font-family:'DM Mono',monospace;color:#64748b;letter-spacing:.06em}
+.cc-legend-dot{width:8px;height:3px;border-radius:2px;flex-shrink:0}
+.cc-chart-body{position:relative;height:60px;margin-bottom:8px}
+.cc-svg{width:100%;height:100%;overflow:visible}
+.cc-round-labels{display:flex;justify-content:space-around;padding:0 4px}
+.cc-round-lbl{font-size:8px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.08em;text-align:center;flex:1}
+.cc-round-lbl.active{color:var(--brand-primary)}
+.cc-role-dots-row{display:flex;gap:3px;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid #1e293b}
+.cc-role-conf{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;min-width:36px}
+.cc-role-conf-key{font-size:8px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.06em}
+.cc-role-conf-bar{width:100%;height:3px;border-radius:2px;background:#1e293b;position:relative;overflow:hidden}
+.cc-role-conf-fill{position:absolute;left:0;top:0;height:100%;border-radius:2px;transition:width .5s ease}
+.cc-role-conf-val{font-size:8px;font-family:'DM Mono',monospace;color:#64748b}
+
+/* ── MULTI-OWNER RISK DOTS ── */
+.rm-dot-group{display:flex;gap:-6px;position:relative;cursor:pointer;transition:transform .15s}
+.rm-dot-group:hover{transform:scale(1.08)}
+.rm-dot-group .rm-dot-mini{width:30px;height:30px;border-radius:50%;background:#0f172a;border:2px solid #334155;overflow:hidden;flex-shrink:0;position:relative;transition:border-color .15s}
+.rm-dot-group .rm-dot-mini:not(:first-child){margin-left:-8px;z-index:1}
+.rm-dot-group .rm-dot-mini:first-child{z-index:2}
+.rm-dot-group .rm-dot-mini img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.rm-dot-group.active .rm-dot-mini{border-color:var(--brand-primary)}
+.rm-dot-group .rm-dot-mini.cto-border{border-color:rgba(125,211,252,.5)}
+.rm-dot-group .rm-dot-mini.legal-border{border-color:rgba(167,139,250,.5)}
+.rm-dot-group .rm-dot-mini.ceo-border{border-color:rgba(6,182,212,.5)}
+.rm-dot-group .rm-dot-mini.cso-border{border-color:rgba(129,140,248,.5)}
 </style>
 </head>
 <body>
@@ -1441,10 +1474,17 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
         </div>
         <div class="rm-cell mc-hh">
           <div class="rm-corner act">ACT NOW</div>
-          <!-- MULTI: GDPR timeline -->
-          <div class="rm-dot multi" data-risk="gdpr"
-               data-tip="GDPR Timeline · CTO + LEGAL · Commercial launch blocked if slips past May 2025"
-               onclick="openRiskDot('gdpr',this)">L+C</div>
+          <!-- MULTI: GDPR timeline — CTO + LEGAL side by side -->
+          <div class="rm-dot-group" data-risk="gdpr"
+               onclick="openRiskDot('gdpr',this)"
+               title="GDPR Timeline · CTO + LEGAL · Click for detail">
+            <div class="rm-dot-mini cto-border">
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/17955f790_generated_image.png" alt="CTO">
+            </div>
+            <div class="rm-dot-mini legal-border">
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/271bbdaca_generated_image.png" alt="LEGAL">
+            </div>
+          </div>
         </div>
 
         <!-- ROW 2: MEDIUM impact ─── -->
@@ -1468,11 +1508,16 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
         </div>
         <div class="rm-cell mc-hm">
           <div class="rm-corner">MANAGE</div>
-          <!-- CEO: competitor window -->
-          <div class="rm-dot ceo" data-risk="competitor"
-               data-tip="Competitor X Window · CEO · Q3 2025 launch delay cedes first-mover advantage"
-               onclick="openRiskDot('competitor',this)">
-            <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center top">
+          <!-- CEO + CSO: competitor window (both own this) -->
+          <div class="rm-dot-group" data-risk="competitor"
+               onclick="openRiskDot('competitor',this)"
+               title="Competitor X Window · CEO + CSO · Click for detail">
+            <div class="rm-dot-mini ceo-border">
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" alt="CEO">
+            </div>
+            <div class="rm-dot-mini cso-border">
+              <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69a9074fa4f49577dbdbdb81/ba90605b5_generated_image.png" alt="CSO">
+            </div>
           </div>
         </div>
 
@@ -1973,7 +2018,63 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div class="mb-stat"><div class="mb-n" style="color:#818cf8">3</div><div class="mb-l">ROUNDS</div></div>
     <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet R2 · convergence_flag: true · groupthink_flag: HIGH severity — CFO, CTO, LEGAL converged without surfacing domain-specific risks independently</div></span>
   <button class="info-btn" onclick="showInfo('movebar',this)" style="color:rgba(255,255,255,.2);width:14px;height:14px;font-size:9px;border:none;background:transparent;margin-left:4px" onmouseenter="this.style.color='rgba(255,255,255,.6)';this.querySelector('span').style.display='none'" onmouseleave="this.style.color='rgba(255,255,255,.2)';this.querySelector('span').style.display=''"><span>i</span></button>
+  
+  <!-- CONFIDENCE × CONVERGENCE CHART -->
+  <div class="cc-chart-wrap">
+    <div class="cc-chart-header">
+      <div>
+        <div class="cc-chart-title">CONFIDENCE × CONVERGENCE · R0 → R1 → R2</div>
+        <div style="font-size:10px;color:#475569;margin-top:2px">Team confidence rose as spread narrowed — deliberation was working</div>
+      </div>
+      <div class="cc-chart-legend">
+        <div class="cc-legend-item"><div class="cc-legend-dot" style="background:var(--brand-primary)"></div>AVG CONFIDENCE</div>
+        <div class="cc-legend-item"><div class="cc-legend-dot" style="background:#8b5cf6;opacity:.7"></div>SPREAD</div>
+      </div>
+    </div>
+    <div class="cc-chart-body">
+      <svg class="cc-svg" viewBox="0 0 400 60" preserveAspectRatio="none">
+        <line x1="30" y1="0" x2="400" y2="0" stroke="#1e293b" stroke-width="1"/>
+        <line x1="30" y1="30" x2="400" y2="30" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="30" y1="60" x2="400" y2="60" stroke="#1e293b" stroke-width="1"/>
+        <text x="0" y="5" font-size="7" fill="#334155" font-family="monospace">90%</text>
+        <text x="0" y="35" font-size="7" fill="#334155" font-family="monospace">70%</text>
+        <text x="0" y="62" font-size="7" fill="#334155" font-family="monospace">50%</text>
+        <!-- Confidence line R0=68(y=33) R1=72(y=27) R2=76(y=21) -->
+        <polyline points="80,33 200,27 340,21" fill="none" stroke="rgba(6,182,212,0.6)" stroke-width="2"/>
+        <circle cx="80" cy="33" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
+        <circle cx="200" cy="27" r="4" fill="#0f172a" stroke="var(--brand-primary)" stroke-width="2"/>
+        <circle cx="340" cy="21" r="5" fill="var(--brand-primary)" stroke="var(--brand-primary)" stroke-width="2"/>
+        <text x="80" y="26" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">68%</text>
+        <text x="200" y="20" font-size="8" fill="rgba(6,182,212,.8)" text-anchor="middle" font-family="monospace">72%</text>
+        <text x="340" y="14" font-size="9" fill="var(--brand-primary)" text-anchor="middle" font-family="monospace" font-weight="700">76%</text>
+        <!-- Spread: R0=17pp(y=9) R1=10pp(y=30) R2=10pp(y=30) -->
+        <polyline points="80,9 200,30 340,30" fill="none" stroke="rgba(139,92,246,0.7)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <circle cx="80" cy="9" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+        <circle cx="200" cy="30" r="3" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.5"/>
+        <circle cx="340" cy="30" r="4" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
+        <text x="80" y="5" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±17pp</text>
+        <text x="240" y="44" font-size="7" fill="rgba(139,92,246,.8)" text-anchor="middle" font-family="monospace">±10pp — held</text>
+        <line x1="140" y1="0" x2="140" y2="60" stroke="#1e293b" stroke-width="1"/>
+        <line x1="270" y1="0" x2="270" y2="60" stroke="#1e293b" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="cc-round-labels">
+      <div class="cc-round-lbl">R0 · EXPLORE<br><span style="color:#475569;font-size:7px">Initial positions</span></div>
+      <div class="cc-round-lbl">R1 · DELIBERATE<br><span style="color:#f59e0b;font-size:7px">Evidence applied</span></div>
+      <div class="cc-round-lbl active">R2 · DECIDE<br><span style="font-size:7px">Final vote</span></div>
+    </div>
+    <div class="cc-role-dots-row">
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:var(--brand-primary)">CEO</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:82%;background:var(--brand-primary)"></div></div><div class="cc-role-conf-val">82%</div></div>
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:#34d399">CFO</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:74%;background:#34d399"></div></div><div class="cc-role-conf-val">74%</div></div>
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:#f472b4">CHRO</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:76%;background:#f472b4"></div></div><div class="cc-role-conf-val">76%</div></div>
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:#38bdf8">COO</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:76%;background:#38bdf8"></div></div><div class="cc-role-conf-val">76%</div></div>
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:#818cf8">CSO</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:81%;background:#818cf8"></div></div><div class="cc-role-conf-val">81%</div></div>
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:#7dd3fc">CTO</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:72%;background:#7dd3fc"></div></div><div class="cc-role-conf-val">72%</div></div>
+      <div class="cc-role-conf"><div class="cc-role-conf-key" style="color:#a78bfa">LEGAL</div><div class="cc-role-conf-bar"><div class="cc-role-conf-fill" style="width:72%;background:#a78bfa"></div></div><div class="cc-role-conf-val">72%</div></div>
+    </div>
+    <div style="margin-top:8px;font-size:10px;color:#334155;font-family:'DM Mono',monospace;letter-spacing:.04em">+8pp avg gain R0→R2 · Spread ±17pp→±10pp · 5 of 7 roles PERSUADABLE <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet confidence_summary · avg 76% R2 vs 68% R0 · spread narrowed from 17pp to 10pp · convergence_flag: true · CFO largest mover +16pp</div></span></div>
   </div>
+
 
   <!-- ZONE 1: STANCE EVOLUTION TABLE -->
   <div>
@@ -4247,7 +4348,7 @@ function openRiskDot(id, el) {
     closeRiskDot(); return;
   }
   _activeRisk = id;
-  document.querySelectorAll('.rm-dot').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.rm-dot, .rm-dot-group').forEach(d => d.classList.remove('active'));
   if (el) el.classList.add('active');
 
   const impCls = data.impact === 'HIGH' ? 'imp-high' : data.impact === 'MEDIUM' ? 'imp-med' : 'imp-low';
@@ -4277,7 +4378,7 @@ function closeRiskDot() {
   const detail = document.getElementById('risk-detail');
   if (detail) detail.classList.remove('open');
   _activeRisk = null;
-  document.querySelectorAll('.rm-dot').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.rm-dot, .rm-dot-group').forEach(d => d.classList.remove('active'));
 }
 
 
