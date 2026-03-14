@@ -879,6 +879,31 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 #board-gov-doc-btn:hover{background:rgba(6,182,212,.15);border-color:rgba(6,182,212,.35)}
 #board-gov-doc-btn.muted{color:#334155;border-color:#1e293b;background:transparent;font-weight:400}
 
+/* ── PERSUADABILITY METRIC ── */
+.persuad-row{display:flex;align-items:center;gap:5px;margin-top:3px}
+.persuad-pct{font-size:10px;font-family:'DM Mono',monospace;font-weight:700}
+.persuad-tag{font-size:8px;font-weight:700;letter-spacing:.08em;font-family:'DM Mono',monospace;padding:1px 6px;border-radius:4px}
+.persuad-tag.persuadable{color:var(--brand-primary);background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2)}
+.persuad-tag.hardened{color:#94a3b8;background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.18)}
+.persuad-cite{font-size:8px;color:#475569;font-family:'DM Mono',monospace}
+/* ── CROSS-FUNCTIONAL SECTION ── */
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cf-card{background:#0f172a;border:1px solid #334155;border-radius:16px;padding:16px 18px;transition:border-color .18s}
+.cf-card:hover{border-color:#475569}
+.cf-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cf-roles{display:flex;align-items:center;gap:6px}
+.cf-role-pill{font-size:9px;font-weight:700;letter-spacing:.08em;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:6px}
+.cf-arrow{font-size:11px;color:#334155;margin:0 2px}
+.cf-status{font-size:8px;font-weight:700;letter-spacing:.1em;font-family:'DM Mono',monospace;margin-left:auto;padding:2px 7px;border-radius:4px}
+.cf-status.active{color:var(--brand-primary);background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2)}
+.cf-status.at-risk{color:#f59e0b;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)}
+.cf-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:4px}
+.cf-desc{font-size:12px;color:#64748b;line-height:1.6}
+.cf-gate{display:flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:10px;font-family:'DM Mono',monospace;color:#475569;line-height:1.5}
+.cf-gate-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.cf-gate-dot.kill{background:#f43f5e}
+.cf-gate-dot.warn{background:#f59e0b}
+
 </style>
 </head>
 <body>
@@ -2208,6 +2233,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:var(--brand-primary)">82% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:var(--brand-primary)">84%</span>
+      <span class="persuad-tag persuadable">PERSUADABLE</span>
+      <span class="persuad-cite">D_PACKET·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2264,6 +2294,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:#34d399">74% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:#34d399">76%</span>
+      <span class="persuad-tag persuadable">PERSUADABLE</span>
+      <span class="persuad-cite">D_PKT·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2320,6 +2355,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:#f472b4">76% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:#f472b4">80%</span>
+      <span class="persuad-tag persuadable">PERSUADABLE</span>
+      <span class="persuad-cite">D_PKT·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2376,6 +2416,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:#38bdf8">76% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:#38bdf8">71%</span>
+      <span class="persuad-tag persuadable">PERSUADABLE</span>
+      <span class="persuad-cite">D_PKT·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2432,6 +2477,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:#818cf8">81% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:#818cf8">78%</span>
+      <span class="persuad-tag persuadable">PERSUADABLE</span>
+      <span class="persuad-cite">D_PKT·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2488,6 +2538,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:#7dd3fc">72% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:#7dd3fc">58%</span>
+      <span class="persuad-tag hardened">HARDENED</span>
+      <span class="persuad-cite">D_PKT·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2544,6 +2599,11 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
       <span class="stance-pill sp-conditional">AWC</span>
       <div style="font-size:10px;font-family:'DM Mono',monospace;color:#a78bfa">72% confidence</div>
+    <div class="persuad-row">
+      <span class="persuad-pct" style="color:#a78bfa">55%</span>
+      <span class="persuad-tag hardened">HARDENED</span>
+      <span class="persuad-cite">D_PKT·PERSUAD</span>
+    </div>
     </div>
   </div>
 
@@ -2884,6 +2944,79 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   </div>
 </div></div>
 </div>
+  <!-- CROSS-FUNCTIONAL DEPENDENCIES -->
+  <div style="margin-top:28px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+      <div style="flex:1;height:1px;background:#1e293b"></div>
+      <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.1em;display:flex;align-items:center;gap:6px">CROSS-FUNCTIONAL DEPENDENCIES &amp; WORKSTREAMS <button class="info-btn" onclick="showInfo('crossfunc',this)" title="What is this?"><span>i</span></button></div>
+      <div style="flex:1;height:1px;background:#1e293b"></div>
+    </div>
+    <div style="font-size:12px;color:#64748b;margin-bottom:14px;line-height:1.6">4 workstreams require active coordination across departments. Each dependency has a named gate — if it slips, it blocks downstream execution.</div>
+    <div class="cf-grid">
+
+      <!-- CTO ↔ LEGAL: GDPR Architecture -->
+      <div class="cf-card">
+        <div class="cf-header">
+          <div class="cf-roles">
+            <span class="cf-role-pill" style="color:#7dd3fc;background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.2)">CTO</span>
+            <span class="cf-arrow">↔</span>
+            <span class="cf-role-pill" style="color:#a78bfa;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2)">LEGAL</span>
+          </div>
+          <span class="cf-status active">ACTIVE</span>
+        </div>
+        <div class="cf-title">GDPR Architecture + Compliance Certification</div>
+        <div class="cf-desc">CTO scopes data residency architecture; LEGAL certifies GDPR compliance before any EU data is processed. Neither can proceed without the other — CTO's cost estimate gates LEGAL's counsel engagement, and LEGAL's certification gates CTO's build.</div>
+        <div class="cf-gate"><span class="cf-gate-dot kill"></span>KILL GATE: Both must clear before May 2025 GO/NO-GO · $150K budget ceiling · <span class="cite"><button class="cite-btn">CTO·R1</button><div class="cite-tip">CTO R1 · GDPR architecture feasibility is the controlling unknown · cost must be confirmed before Phase 2 releases · LEGAL certification is prerequisite for EU data processing</div></span></div>
+      </div>
+
+      <!-- CEO ↔ CFO: Board Approval Package -->
+      <div class="cf-card">
+        <div class="cf-header">
+          <div class="cf-roles">
+            <span class="cf-role-pill" style="color:#06b6d4;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.2)">CEO</span>
+            <span class="cf-arrow">↔</span>
+            <span class="cf-role-pill" style="color:#34d399;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2)">CFO</span>
+          </div>
+          <span class="cf-status at-risk">PENDING</span>
+        </div>
+        <div class="cf-title">Board Approval Package + Unit Economics</div>
+        <div class="cf-desc">CFO builds the unit economics pre-read ($175K LTV, $50K CAC ceiling, two-tranche model); CEO uses it to facilitate the Feb 15 board vote. CFO's model is the financial backbone of CEO's governance case — without it, board approval probability drops significantly.</div>
+        <div class="cf-gate"><span class="cf-gate-dot kill"></span>KILL GATE: Feb 15 board vote · CFO pre-read must distribute by Feb 12 · <span class="cite"><button class="cite-btn">CEO·R2</button><div class="cite-tip">CEO R2 · governance gate not analytical · 1:1 board pre-briefs Feb 8 · CFO unit economics pre-read Feb 12 · board vote Feb 15</div></span></div>
+      </div>
+
+      <!-- CHRO ↔ LEGAL: EU Employment Law -->
+      <div class="cf-card">
+        <div class="cf-header">
+          <div class="cf-roles">
+            <span class="cf-role-pill" style="color:#f472b4;background:rgba(244,114,180,.08);border:1px solid rgba(244,114,180,.2)">CHRO</span>
+            <span class="cf-arrow">↔</span>
+            <span class="cf-role-pill" style="color:#a78bfa;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2)">LEGAL</span>
+          </div>
+          <span class="cf-status active">ACTIVE</span>
+        </div>
+        <div class="cf-title">EU Employment Law + Hiring Readiness</div>
+        <div class="cf-desc">LEGAL completes employment law review (UK, Germany, France) before CHRO can issue any FTE offers. CHRO's Radford EMEA comp benchmarks and JDs must be ready before LEGAL finalizes the jurisdiction-specific offer structures. Neither team can finalize hiring until both complete.</div>
+        <div class="cf-gate"><span class="cf-gate-dot warn"></span>HIGH: Employment law review due Apr 15 · No FTE offers until GO/NO-GO · EOR vendor as 2-week contingency · <span class="cite"><button class="cite-btn">CHRO·R2</button><div class="cite-tip">CHRO R2 · no FTE offers before GDPR gate · EOR vendor confirmed as backup · Radford benchmarks by Mar 31 · JDs drafted by Feb 28</div></span></div>
+      </div>
+
+      <!-- COO ↔ CSO: EU Delivery Model + Pipeline -->
+      <div class="cf-card">
+        <div class="cf-header">
+          <div class="cf-roles">
+            <span class="cf-role-pill" style="color:#38bdf8;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2)">COO</span>
+            <span class="cf-arrow">↔</span>
+            <span class="cf-role-pill" style="color:#818cf8;background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2)">CSO</span>
+          </div>
+          <span class="cf-status active">ACTIVE</span>
+        </div>
+        <div class="cf-title">EU Operational Delivery Model + Pipeline Velocity</div>
+        <div class="cf-desc">CSO must keep 3 EU prospects active through Phase 1 while COO builds the EOR-vs-direct-hire delivery model. CSO's deal timelines directly set COO's capacity requirements — if a prospect accelerates, COO needs an EOR vendor already confirmed. If COO is slow, CSO faces prospect attrition.</div>
+        <div class="cf-gate"><span class="cf-gate-dot warn"></span>HIGH: EOR vendor selected by Apr 15 · All 3 prospects active at May GO/NO-GO · ACV confirmed Mar 2025 · <span class="cite"><button class="cite-btn">CSO·R2</button><div class="cite-tip">CSO R2 · 3 inbound EU prospects confirmed active · bi-weekly touchpoints · ACV validation by Mar 2025 · Competitor X account overlap tracking</div></span></div>
+      </div>
+
+    </div>
+  </div>
+
   <div id="tab-board" class="panel">
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px">
     <div style="display:flex;align-items:flex-start;gap:10px">
@@ -2893,10 +3026,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
         <div class="ri-section-sub">Complete governance record for fiduciary review. Decision, vote record, financial guardrails, open risk, audit trail. Readable in under 5 minutes.</div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-      <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
-      <button id="board-gov-doc-btn" class="muted" onclick="openGovDoc()">⬡ Governance Doc ↗</button>
-    </div>
+    <div style="font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.04em">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</div>
   </div>
   <div style="background:linear-gradient(135deg,rgba(6,182,212,.07),rgba(14,165,233,.04));border:1px solid rgba(6,182,212,.2);border-radius:12px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:14px">
     <div>
@@ -2907,6 +3037,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
       <div style="font-size:48px;font-weight:900;color:var(--brand-primary);line-height:1">76<span style="font-size:18px;color:#34d399">%</span></div>
       <div style="font-size:9px;font-weight:700;font-family:'DM Mono',monospace;color:#475569;letter-spacing:.08em;text-align:right">AVG CONFIDENCE<br>RANGE 72–82% <span class="cite"><button class="cite-btn">D_PACKET·R2</button><div class="cite-tip">D_packet confidence_summary · avg 76% · min 72% (CTO, LEGAL) · max 82% (CEO) · spread 10pp — tight convergence</div></span></div>
+      <button id="board-gov-doc-btn" class="muted" onclick="openGovDoc()" style="margin-top:6px">⬡ Governance Doc ↗</button>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
@@ -3233,6 +3364,11 @@ const INFO_CONTENT = {
     tag: "OPEN QUESTIONS",
     title: "Unresolved Before Execution",
     body: "Questions the team explicitly did not resolve before voting. These are acknowledged gaps requiring resolution during Phase 1 execution. The primary unresolved question — GDPR feasibility within $150K — is the controlling gate for Phase 2 capital release."
+  },
+  crossfunc: {
+    tag: "CROSS-FUNCTIONAL DEPENDENCIES",
+    title: "Where Teams Must Coordinate or Execution Stalls",
+    body: "4 workstreams that span department boundaries. Each has a named gate — if either side slips, the downstream execution halts. CTO-LEGAL is the highest-risk pairing: GDPR architecture and compliance certification must align before the May GO/NO-GO. CEO-CFO is the Feb 15 bottleneck."
   },
 };
 
