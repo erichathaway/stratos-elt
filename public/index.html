@@ -4764,6 +4764,38 @@ window._alignRiskAxis = alignRiskAxisTicks;
 <script>
 var ROLES=['CEO','CFO','COO','CHRO','CTO','CSO','LEGAL','CMO','CRO','CIO'];
 
+// Portal tooltip — appended to body, escapes all overflow/stacking contexts
+var _portal=null;
+function _getPortal(){
+  if(!_portal){
+    _portal=document.createElement('div');
+    _portal.id='cite-portal';
+    _portal.style.cssText='display:none;position:fixed;z-index:99999;background:#0d1628;border:1px solid rgba(6,182,212,.22);border-radius:8px;padding:9px 13px;font-size:11px;color:#94a3b8;pointer-events:none;line-height:1.6;font-family:inherit;min-width:360px;max-width:420px;white-space:normal;text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.5);';
+    document.body.appendChild(_portal);
+  }
+  return _portal;
+}
+document.addEventListener('mouseover',function(e){
+  var btn=e.target.closest('.cite-btn');
+  if(!btn) return;
+  var tip=btn.parentElement&&btn.parentElement.querySelector('.cite-tip');
+  if(!tip) return;
+  var p=_getPortal();
+  p.innerHTML=tip.innerHTML;
+  var r=btn.getBoundingClientRect();
+  var left=Math.min(r.left,window.innerWidth-430);
+  if(left<10) left=10;
+  p.style.display='block';
+  p.style.left=left+'px';
+  p.style.top=r.top+'px';
+  p.style.transform='translateY(calc(-100% - 6px))';
+});
+document.addEventListener('mouseout',function(e){
+  if(!e.target.closest('.cite-btn')){return;}
+  var p=document.getElementById('cite-portal');
+  if(p) p.style.display='none';
+});
+
 function addCiteIcons(){
   document.querySelectorAll('.cite-btn').forEach(function(btn){
     if(btn.dataset.iconDone) return;
@@ -4808,7 +4840,6 @@ function enrichCiteSources(){
   });
 }
 
-// Intercept fetch to capture API data and trigger enrichment
 (function(){
   var origFetch=window.fetch;
   window.fetch=function(){
@@ -4816,13 +4847,9 @@ function enrichCiteSources(){
     return origFetch.apply(window,args).then(function(resp){
       var url=typeof args[0]==='string'?args[0]:(args[0]&&args[0].url)||'';
       if(url.includes('/api/data')){
-        var clone=resp.clone();
-        clone.json().then(function(data){
+        resp.clone().json().then(function(data){
           window._lastData=data;
-          setTimeout(function(){
-            addCiteIcons();
-            enrichCiteSources();
-          },400);
+          setTimeout(function(){addCiteIcons();enrichCiteSources();},400);
         }).catch(function(){});
       }
       return resp;
