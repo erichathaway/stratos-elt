@@ -4765,10 +4765,10 @@ function addCiteIcons(){
     var t=btn.textContent.trim();
     var icon='';
     if(ROLES.some(function(r){return t.startsWith(r+'\u00b7')||t.startsWith(r+' ');})) icon='👤';
-    else if(/\bEI\b|\bRX\b/.test(t)) icon='🌐';
+    else if(/\bEI\b|\bRX\b/.test(t)) icon='☁️';
     else if(/PINECONE/i.test(t)) icon='📄';
     else if(/D_PACKET|F[123]/.test(t)) icon='📊';
-    else icon='📊';
+    else icon='📗';
     btn.textContent=icon+'\u202f'+t;
     btn.dataset.iconDone='1';
   });
