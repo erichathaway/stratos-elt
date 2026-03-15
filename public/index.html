@@ -4759,22 +4759,9 @@ window._alignRiskAxis = alignRiskAxisTicks;
 </script>
 <script>
 var ROLES=['CEO','CFO','COO','CHRO','CTO','CSO','LEGAL','CMO','CRO','CIO'];
-function addCiteIcons(){
-  document.querySelectorAll('.cite-btn').forEach(function(btn){
-    if(btn.dataset.iconDone) return;
-    var t=btn.textContent.trim();
-    var icon='';
-    if(ROLES.some(function(r){return t.startsWith(r+'\u00b7')||t.startsWith(r+' ');})) icon='👤';
-    else if(/\bEI\b|\bRX\b/.test(t)) icon='☁️';
-    else if(/PINECONE/i.test(t)) icon='📄';
-    else if(/D_PACKET|F[123]/.test(t)) icon='📊';
-    else icon='📗';
-    btn.textContent=icon+'\u202f'+t;
-    btn.dataset.iconDone='1';
-  });
-}
+function addCiteIcons(){document.querySelectorAll('.cite-btn').forEach(function(btn){if(btn.dataset.iconDone)return;var t=btn.textContent.trim();var icon=ROLES.some(function(r){return t.includes(r+'\u00b7')||t.includes(r+' ');})?'👤':/\bEI\b|\bRX\b/.test(t)?'☁️':/PINECONE/i.test(t)?'📄':/D_PACKET|F[123]/.test(t)?'📊':'📗';btn.textContent=icon+'\u202f'+t;btn.dataset.iconDone='1';});}
+document.addEventListener('mouseover',function(e){var btn=e.target.closest('.cite-btn');if(!btn)return;var tip=btn.parentElement.querySelector('.cite-tip');if(!tip)return;var r=btn.getBoundingClientRect();tip.style.top=(r.top-tip.offsetHeight-8)+'px';tip.style.left=Math.min(r.left,window.innerWidth-440)+'px';});
 new MutationObserver(addCiteIcons).observe(document.body,{childList:true,subtree:true});
-document.addEventListener('mouseover',function(e){var b=e.target.closest('.cite-btn');if(!b)return;var t=b.parentElement.querySelector('.cite-tip');if(!t)return;var r=b.getBoundingClientRect();if(r.left+420>window.innerWidth-20){t.style.left='auto';t.style.right='0';}else{t.style.left='0';t.style.right='auto';}});
 </script>
 </body>
 </html>
