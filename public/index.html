@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,6 +123,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
   border:5px solid transparent;
   border-top-color:#0d1628;
 }
+.cite-tip.cite-tip-visible{visibility:visible;opacity:1}
 .cite:hover .cite-tip{visibility:visible;opacity:1}
 /* RIGHT-EDGE variant — pin tooltip to right side of badge */
 .cite.tip-left .cite-tip{left:auto;right:0;transform:none}
@@ -4701,7 +4703,9 @@ const ROOM_TOUR_STEPS = [
 ];
 
 // Boot on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', loadData);
+document.addEventListener('DOMContentLoaded', function(){
+  loadData().catch(function(){ setTimeout(loadData, 800); });
+});
 
 
 
@@ -4759,9 +4763,77 @@ window._alignRiskAxis = alignRiskAxisTicks;
 </script>
 <script>
 var ROLES=['CEO','CFO','COO','CHRO','CTO','CSO','LEGAL','CMO','CRO','CIO'];
-function addCiteIcons(){document.querySelectorAll('.cite-btn').forEach(function(btn){if(btn.dataset.iconDone)return;var t=btn.textContent.trim();var icon=ROLES.some(function(r){return t.includes(r+'\u00b7')||t.includes(r+' ');})?'👤':/\bEI\b|\bRX\b/.test(t)?'☁️':/PINECONE/i.test(t)?'📄':/D_PACKET|F[123]/.test(t)?'📊':'📗';btn.textContent=icon+'\u202f'+t;btn.dataset.iconDone='1';});}
-document.addEventListener('mouseover',function(e){var btn=e.target.closest('.cite-btn');if(!btn)return;var tip=btn.parentElement.querySelector('.cite-tip');if(!tip)return;var r=btn.getBoundingClientRect();tip.style.top=(r.top-tip.offsetHeight-8)+'px';tip.style.left=Math.min(r.left,window.innerWidth-440)+'px';});
-new MutationObserver(addCiteIcons).observe(document.body,{childList:true,subtree:true});
+
+function addCiteIcons(){
+  document.querySelectorAll('.cite-btn').forEach(function(btn){
+    if(btn.dataset.iconDone) return;
+    var t=btn.textContent.trim();
+    var icon=ROLES.some(function(r){return t.startsWith(r+'·')||t.startsWith(r+' ');})?'👤'
+      :/EI|RX/.test(t)?'☁️'
+      :/PINECONE/i.test(t)?'📄'
+      :/D_PACKET|F[123]/.test(t)?'📊'
+      :'📗';
+    btn.textContent=icon+' '+t;
+    btn.dataset.iconDone='1';
+  });
+}
+
+function enrichCiteSources(){
+  if(!window._lastData) return;
+  var lookup={};
+  (window._lastData.stageOutputs||[]).forEach(function(row){
+    var key=row.role_key+'·R'+row.round;
+    var sources=[];
+    try{
+      var ev=JSON.parse(row.evidence_cited||'[]');
+      sources=ev.map(function(s){
+        if(typeof s!=='string') return '';
+        return s.replace(/^EVIDENCE-Rd+_w+_Fd+:s*/,'').trim();
+      }).filter(function(s){return s&&s.length>4&&!s.startsWith('EVIDENCE-');});
+    }catch(e){}
+    if(sources.length) lookup[key]=sources;
+  });
+  document.querySelectorAll('.cite').forEach(function(cite){
+    var btn=cite.querySelector('.cite-btn');
+    var tip=cite.querySelector('.cite-tip');
+    if(!btn||!tip||tip.querySelector('.cite-src')) return;
+    var label=btn.textContent.trim().replace(/^[^A-Z]+/,'').trim();
+    var sources=lookup[label];
+    if(!sources||!sources.length) return;
+    var div=document.createElement('div');
+    div.className='cite-src';
+    div.style.cssText='margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:#64748b;font-family:DM Mono,monospace;line-height:1.5;white-space:normal';
+    div.textContent='📎 '+sources.slice(0,2).map(function(s){return s.substring(0,55);}).join(' · ');
+    tip.appendChild(div);
+  });
+}
+
+// Intercept fetch to capture API data and trigger enrichment
+(function(){
+  var origFetch=window.fetch;
+  window.fetch=function(){
+    var args=arguments;
+    return origFetch.apply(window,args).then(function(resp){
+      var url=typeof args[0]==='string'?args[0]:(args[0]&&args[0].url)||'';
+      if(url.includes('/api/data')){
+        var clone=resp.clone();
+        clone.json().then(function(data){
+          window._lastData=data;
+          setTimeout(function(){
+            addCiteIcons();
+            enrichCiteSources();
+          },400);
+        }).catch(function(){});
+      }
+      return resp;
+    });
+  };
+})();
+
+new MutationObserver(function(){
+  addCiteIcons();
+  enrichCiteSources();
+}).observe(document.body,{childList:true,subtree:true});
 </script>
 </body>
 </html>
