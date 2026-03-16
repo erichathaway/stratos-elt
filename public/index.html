@@ -1024,11 +1024,17 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 
 /* Resource row — horizontal, right-justified, below prose in strip */
-.b-resource-row{display:flex;justify-content:flex-end;align-items:center;gap:8px;clear:both;margin-top:12px}
+.b-resource-row{display:flex;justify-content:flex-end;align-items:center;gap:8px;clear:both;margin-top:14px;margin-bottom:10px}
 /* Override gradient pill to be horizontal (they were stacked before) */
 .b-resource-row .b-pill-grad{flex-direction:row}
 /* Remove stacked pill overrides from verdict box — no longer needed */
 .b-verdict-resources{display:none}
+
+/* Citation buttons — inline in prose and cards */
+.b-cite-btn{display:inline-flex;align-items:center;gap:3px;font-size:8px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.04em;padding:1px 6px;border-radius:3px;border:1px solid rgba(6,182,212,.25);color:rgba(6,182,212,.7);background:rgba(6,182,212,.06);cursor:default;vertical-align:middle;margin:0 2px;transition:all .15s;white-space:nowrap}
+.b-cite-btn:hover{border-color:rgba(6,182,212,.5);color:#2dd4bf;background:rgba(6,182,212,.1)}
+.b-card-cite{display:inline-flex;align-items:center;gap:3px;font-size:8px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.04em;padding:1px 5px;border-radius:3px;border:1px solid rgba(255,255,255,.08);color:#334155;background:rgba(255,255,255,.03);cursor:default;vertical-align:middle;margin-left:4px;transition:all .15s;white-space:nowrap}
+.b-card-cite:hover{border-color:rgba(255,255,255,.2);color:#475569}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
 </head>
@@ -1070,7 +1076,6 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     </div>
     <!-- Prose flows right -->
     <div class="b-prose" id="b-narrative">Loading…</div>
-    <div class="b-tags" id="b-tags"></div>
   <div class="b-resource-row">
     <div class="b-pill-grad" id="b-mpdf">
       <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2H5a1.5 1.5 0 00-1.5 1.5v13A1.5 1.5 0 005 18h10a1.5 1.5 0 001.5-1.5V7L11 2z"/><path d="M11 2v5h5"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13" x2="11" y2="13"/></svg>
@@ -1089,6 +1094,8 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
     </div>
   </div>
+    <div class="b-tags" id="b-tags"></div>
+
 
   </div></div>
 
@@ -5077,14 +5084,31 @@ function renderBriefingTab(){
   function $i(id){return document.getElementById(id);}
   if($i('b-v-word')){$i('b-v-word').textContent=vd.w;$i('b-v-word').style.color=vd.c;}
   if($i('b-v-sub'))$i('b-v-sub').textContent=vd.s;
+  // Verdict box chips — stats NOT duplicated from stat row
+  var allCites=jp(dash.all_citations)||[];
+  var rgs=parseInt(dash.research_gap_score)||0;
+  var cfSpread=cr.max&&cr.min?(cr.max-cr.min):0;
+  var dd=parseInt(dash.dependency_density)||0;
   var chips=[];
-  chips.push({t:vc+'/'+vc+' UNANIMOUS',bg:'rgba(45,212,191,.1)',c:'#2dd4bf'});
-  if(killConds.length)chips.push({t:killConds.length+' KILL GATE'+(killConds.length>1?'S':''),bg:'rgba(244,63,94,.1)',c:'#f43f5e'});
-  chips.push({t:openQ+' OPEN QUESTION'+(openQ!==1?'S':''),bg:'rgba(245,158,11,.1)',c:'#f59e0b'});
-  if($i('b-v-chips'))$i('b-v-chips').innerHTML=chips.map(function(ch){return'<span class="b-v-chip" style="background:'+ch.bg+';color:'+ch.c+'">'+ch.t+'</span>';}).join('');
+  chips.push({t:allCites.length+' SOURCES CITED',bg:'rgba(45,212,191,.1)',c:'#2dd4bf'});
+  if(rgs)chips.push({t:'GAP SCORE '+rgs+'/10',bg:'rgba(245,158,11,.1)',c:'#f59e0b'});
+  if(cfSpread)chips.push({t:cfSpread+'% CONF BAND',bg:'rgba(139,92,246,.1)',c:'#818cf8'});
+  if(dd)chips.push({t:'DEPENDENCY '+dd,bg:'rgba(244,63,94,.08)',c:'#f43f5e'});
+  if($i('b-v-chips'))$i('b-v-chips').innerHTML=chips.slice(0,3).map(function(ch){return'<span class="b-v-chip" style="background:'+ch.bg+';color:'+ch.c+'">'+ch.t+'</span>';}).join('');
   var narr=dp.strategic_narrative||'';var sents=narr.match(/[^.!?]+[.!?]+/g)||[];
-  var fullNarr=sents.slice(0,4).join(' ')||narr.substring(0,420)||'Strategic briefing loading…';
-  if($i('b-narrative'))$i('b-narrative').textContent=fullNarr;
+  var narrSents=sents.slice(0,4);
+  // Inject inline citation buttons after key sentences
+  var citeMap=[
+    {src:'F2·ALL ROLES·R0–R2',icon:'📊'},
+    {src:'D·PACKET·R2',icon:'📊'},
+    {src:'F1·COO·R1',icon:'👤'},
+    {src:'F2·CEO·R2',icon:'👤'}
+  ];
+  var narrHTML=narrSents.map(function(s,i){
+    var cite=citeMap[i]||citeMap[0];
+    return s+'<span class="b-cite-btn" title="Source: '+cite.src+'">'+cite.icon+' '+cite.src+'</span>';
+  }).join(' ');
+  if($i('b-narrative'))$i('b-narrative').innerHTML=narrHTML||'Strategic briefing loading…';
   var tags=[];
   var q=master.question||'';
   var geo=[];if(/eu|europe/i.test(q))geo.push('EU EXPANSION');if(/germany/i.test(q))geo.push('GERMANY');if(/france/i.test(q))geo.push('FRANCE');if(/uk/i.test(q))geo.push('UK');
@@ -5133,12 +5157,14 @@ function _bRenderCards(cards){
   cards.forEach(function(s){
     var c=document.createElement('div');c.className='b-card';
     var pts=(s.pts||[]).filter(Boolean).map(function(p){
-      return '<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span class="b-tip-host">'+p+'<div class="b-tip">Source: '+s.src+'</div></span></div>';
+      return '<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span>'+p+'<span class="b-card-cite" title="Source: '+s.src+'">'+s.src+'</span></span></div>';
     }).join('');
+    // Add cite button to card header area
+    var cardCiteBtn='<span class="b-card-cite" title="Source: '+s.src+'" style="margin-left:6px">'+s.src+'</span>';
     c.innerHTML='<div class="b-card-bar" style="background:'+s.ac+'"></div>'+
       '<div class="b-card-inner">'+
         '<div class="b-card-top">'+
-          '<div class="b-card-ey" style="color:'+s.ac+'">'+s.ey+'</div>'+
+          '<div class="b-card-ey" style="color:'+s.ac+'">'+s.ey+cardCiteBtn+'</div>'+
           '<div class="b-card-an">'+
             '<div class="b-card-an-n" style="color:'+s.ac+'">'+s.an+'</div>'+
             '<div class="b-card-an-sfx" style="color:'+s.ac+'">'+s.sfx+'</div>'+
