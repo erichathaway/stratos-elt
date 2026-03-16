@@ -5067,9 +5067,11 @@ function bIconForType(t){
   return m[t]||'data';
 }
 function bBuildCite(src,tip,iconType,url){
-  var btn='<button class="cite-btn"'+(url?' onclick="window.open(''+url+'','_blank')" style="cursor:pointer"':'')+'>'+src+'</button>';
+  // url support added post-citation_registry — onclick omitted until registry is live
+  var btn='<button class="cite-btn">'+src+'</button>';
   return '<span class="cite tip-left">'+btn+'<div class="cite-tip">'+tip+'</div></span>';
 }
+
 function bGetCite(key,citReg,fallbackSrc,fallbackTip){
   if(citReg&&citReg[key]){
     var r=citReg[key];
