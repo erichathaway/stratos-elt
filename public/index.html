@@ -5102,7 +5102,7 @@ function renderBriefingTab(){
   ];
   var narrHTML=narrSents.map(function(s,i){
     var cite=citeMap[i]||citeMap[0];
-    return s+'<span class="cite tip-right"><button class="cite-btn">'+cite.icon+' '+cite.src+'</button><div class="cite-tip">'+cite.src+'<br><span style="color:#64748b;font-size:10px">Source: deliberation stage '+cite.src.toLowerCase()+'</span></div></span>';
+    return s+'<span class="cite tip-right"><button class="cite-btn">'+cite.src+'</button><div class="cite-tip">'+cite.src+'<br><span style="color:#64748b;font-size:10px">Source: deliberation stage '+cite.src.toLowerCase()+'</span></div></span>';
   }).join(' ');
   if($i('b-narrative'))$i('b-narrative').innerHTML=narrHTML||'Strategic briefing loading…';
   var tags=[];
@@ -5150,14 +5150,13 @@ function renderBriefingTab(){
 }
 function _bRenderCards(cards){
   var g=document.getElementById('b-grid');if(!g)return;g.innerHTML='';
-  cards.forEach(function(s){
+  cards.forEach(function(s,i){
     var c=document.createElement('div');c.className='b-card';
-    var tipId='bct'+i+Date.now();
     var pts=(s.pts||[]).filter(Boolean).map(function(p,pi){
       return '<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span>'+p+'</span></div>';
     }).join('');
     // Card eyebrow cite — full .cite pattern
-    var cardCiteBtn='<span class="cite tip-left" style="margin-left:6px"><button class="cite-btn">👤 '+s.src+'</button><div class="cite-tip">'+s.src+'<br><span style="color:#64748b;font-size:10px">Source: deliberation '+s.src.toLowerCase()+'</span></div></span>';
+    var cardCiteBtn='<span class="cite tip-left" style="margin-left:6px"><button class="cite-btn">'+s.src+'</button><div class="cite-tip">'+s.src+'<br><span style="color:#64748b;font-size:10px">Source: deliberation '+s.src.toLowerCase()+'</span></div></span>';
     c.innerHTML='<div class="b-card-bar" style="background:'+s.ac+'"></div>'+
       '<div class="b-card-inner">'+
         '<div class="b-card-top">'+
