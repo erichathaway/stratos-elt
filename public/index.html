@@ -5055,6 +5055,29 @@ new MutationObserver(function(){
   enrichCiteSources();
 }).observe(document.body,{childList:true,subtree:true});
 
+/* === BRIEFING CITATION HELPERS === */
+function bIconForType(t){
+  var m={
+    'TIER_1_AUTHORITATIVE':'📊','TIER_2_REPUTABLE':'📰','TIER_3_UNVERIFIED':'🌐',
+    'EXTERNAL_RESEARCH':'🔬','SPREADSHEET':'📊','INTERNAL_GOVERNANCE':'📋',
+    'INTERNAL_STRATEGY':'📌','INTERNAL_ANALYSIS':'📈','INTERNAL_POLICY':'📜',
+    'INTERNAL_DOCUMENT':'📄','EXTERNAL_LINK':'🔗'
+  };
+  return m[t]||'📊';
+}
+function bBuildCite(src,tip,iconType,url){
+  var btn='<button class="cite-btn"'+(url?' onclick="window.open(''+url+'','_blank')" style="cursor:pointer"':'')+'>'+src+'</button>';
+  return '<span class="cite tip-left">'+btn+'<div class="cite-tip">'+tip+'</div></span>';
+}
+function bGetCite(key,citReg,fallbackSrc,fallbackTip){
+  if(citReg&&citReg[key]){
+    var r=citReg[key];
+    var tip=(r.label||fallbackSrc)+(r.sheet?' · '+r.sheet:'')+(r.column?' · '+r.column:'');
+    return {src:r.label||fallbackSrc,tip:tip,iconType:r.icon_type,url:r.url||null};
+  }
+  return {src:fallbackSrc,tip:fallbackTip,iconType:'INTERNAL_DOCUMENT',url:null};
+}
+
 /* === BRIEFING TAB v4.0 === */
 var _bRendered=false,_bOpenCard=null,_bPlayId=null;
 function renderBriefingTab(){
@@ -5062,6 +5085,13 @@ function renderBriefingTab(){
   if(_bRendered)return;_bRendered=true;
   var d=window._lastData,ob=d.outputBlob||{},dash=ob.dashboard||{},es=ob.executive_summary||{},dp=ob.direction_package||{},master=d.master||{};
   function jp(v){try{return typeof v==='string'?JSON.parse(v):v;}catch(e){return v||{};}}
+  var citReg=jp(ob.citation_registry)||null;
+  // Parse all_citations into a lookup map: 'R2_CEO_F0' → evidence text
+  var allCiteMap={};
+  (jp(dash.all_citations)||[]).forEach(function(s){
+    var m=String(s).match(/^EVIDENCE-R(\d)_(\w+)_F(\d+):\s*(.+)$/);
+    if(m)allCiteMap['R'+m[1]+'_'+m[2]+'_F'+m[3]]=m[4].trim().substring(0,120);
+  });
   var vs=jp(dash.vote_split)||{},cr=jp(dash.confidence_range)||{};
   var conds=jp(dash.all_conditions)||[],fm=jp(dash.financial_mechanics)||{};
   var gt=jp(dash.groupthink_flag)||{},rp=jp(dash.role_assessment_preview)||[];
@@ -5102,7 +5132,7 @@ function renderBriefingTab(){
   ];
   var narrHTML=narrSents.map(function(s,i){
     var c=citeMap[i]||citeMap[0];
-    return s+' <span class="cite tip-right"><button class="cite-btn">'+c.s+'</button><div class="cite-tip">'+c.t+'</div></span>';
+    return s+' '+bBuildCite(c.src,c.tip,c.iconType,c.url);
   }).join(' ');
   if($i('b-narrative'))$i('b-narrative').innerHTML=narrHTML||'Strategic briefing loading…';
   var tags=[];
@@ -5125,32 +5155,32 @@ function renderBriefingTab(){
   var pConds=conds.filter(function(c){return c.condition&&/dpo|chro|hir|people/i.test(c.condition);});
   var fConds=conds.filter(function(c){return c.condition&&/$|capital|phase|fund/i.test(c.condition);});
   // Source citations per card area
-  // Per-card cite: src tag + descriptive tip text matching Command Center pattern
+  // Per-card cite — uses citation_registry when available (next run), falls back to real all_citations text
   var citeSrc={
-    room:{s:'F2·ALL ROLES·R0–R2',t:'Aggregated from all '+vc+' role deliberations across '+(rnd+1)+' rounds · engine_stage_outputs'},
-    fin:{s:'F2·CFO·R1',t:'CFO R1 · Phase structure · $150K immediate + $350K gated behind two kill gates'},
-    board:{s:'F2·LEGAL·R2',t:'Legal R2 · board authorization threshold triggered · governance packet required'},
-    mgmt:{s:'F2·COO·R1',t:'COO R1 · customer success at ~95% capacity · Phase 2 veto authority confirmed'},
-    people:{s:'F2·CHRO·R1',t:'CHRO R1 · DPO hire on critical path · blocks legal entity + GDPR workstreams'},
-    next:{s:'F2·CEO·R2',t:'CEO R2 · three unresolved questions block all capital deployment'}
+    room:bGetCite('F2·ALL ROLES',citReg,'F2·ALL ROLES·R0–R2',allCiteMap['R2_CEO_F2']||'Aggregated from all '+vc+' role deliberations across '+(rnd+1)+' rounds · engine_stage_outputs'),
+    fin:bGetCite('F2·CFO·R1',citReg,'F2·CFO·R1',allCiteMap['R1_CFO_F1']||'CFO R1 · Phase structure · $150K immediate + $350K gated behind kill gates'),
+    board:bGetCite('F2·LEGAL·R2',citReg,'F2·LEGAL·R2',allCiteMap['R2_LEGAL_F0']||'Legal R2 · board authorization threshold triggered · governance packet required'),
+    mgmt:bGetCite('F2·COO·R1',citReg,'F2·COO·R1',allCiteMap['R1_COO_F0']||'COO R1 · customer success capacity constrained · Phase 2 veto authority'),
+    people:bGetCite('F2·CHRO·R1',citReg,'F2·CHRO·R1',allCiteMap['R1_CHRO_F0']||'CHRO R1 · DPO hire on critical path · blocks legal entity + GDPR workstreams'),
+    next:bGetCite('F2·CEO·R2',citReg,'F2·CEO·R2',allCiteMap['R2_CEO_F0']||'CEO R2 · three unresolved questions block all capital deployment')
   };
   var CARDS=[
-    {id:'room',ey:'THE ROOM',ac:'#818cf8',an:rnd+' rounds',sfx:'OF DELIBERATION',src:citeSrc.room.s,stip:citeSrc.room.t,
-     sentence:'Every executive had a voice across '+rnd+' structured rounds. The conversation moved from cautious concern to conditional approval — no one was overruled or absent.',
+    {id:'room',ey:'THE ROOM',ac:'#818cf8',an:rnd+' rounds',sfx:'OF DELIBERATION',src:citeSrc.room.src,stip:citeSrc.room.tip,iconType:citeSrc.room.iconType,url:citeSrc.room.url,
+     sentence:'Every executive had a voice across '+rnd+' structured rounds. '+(rp[0]?rp[0].role_key+' led at '+Math.round((rp[0].confidence_score||0)*100)+'% confidence, moving from '+rp[0].movement.r0_stance.replace(/_/g,' ')+' to '+rp[0].movement.final_stance.replace(/_/g,' ')+'.':'The conversation moved from cautious concern to conditional approval.'),
      pts:rp.slice(0,3).map(function(r){return r.role_key+': '+(r.vote||'').replace(/_/g,' ')+' ('+(Math.round((r.confidence_score||0)*100))+'% confidence)';})},
-    {id:'fin',ey:'FINANCIAL',ac:'#34d399',an:'$'+phase1+'K',sfx:'RELEASES NOW',src:citeSrc.fin.s,stip:citeSrc.fin.t,
+    {id:'fin',ey:'FINANCIAL',ac:'#34d399',an:'$'+phase1+'K',sfx:'RELEASES NOW',src:citeSrc.fin.src,stip:citeSrc.fin.tip,iconType:citeSrc.fin.iconType,url:citeSrc.fin.url,
      sentence:(fm.mechanics_summary||'The first tranche releases immediately for legal entity setup only. The remaining capital is gated behind two formal checkpoints.').substring(0,200),
      pts:fConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'board',ey:'BOARD',ac:'#f59e0b',an:nextGate||'MAR 31',sfx:'NEXT HARD DATE',src:citeSrc.board.s,stip:citeSrc.board.t,
-     sentence:'This spend level triggers mandatory board authorization. Two formal kill gates are now active — the first arrives on a technical answer, not a financial one.',
+    {id:'board',ey:'BOARD',ac:'#f59e0b',an:nextGate||'MAR 31',sfx:'NEXT HARD DATE',src:citeSrc.board.src,stip:citeSrc.board.tip,iconType:citeSrc.board.iconType,url:citeSrc.board.url,
+     sentence:'This spend level triggers mandatory board authorization. '+(risks[0]?risks[0].risk.substring(0,120)+'…':'Two formal kill gates are now active — the first arrives on a technical answer, not a financial one.'),
      pts:bConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'mgmt',ey:'MANAGEMENT',ac:'#38bdf8',an:'95%',sfx:'TEAM CAPACITY NOW',src:citeSrc.mgmt.s,stip:citeSrc.mgmt.t,
+    {id:'mgmt',ey:'MANAGEMENT',ac:'#38bdf8',an:'95%',sfx:'TEAM CAPACITY NOW',src:citeSrc.mgmt.src,stip:citeSrc.mgmt.tip,iconType:citeSrc.mgmt.iconType,url:citeSrc.mgmt.url,
      sentence:'Operations flagged that customer success is near its ceiling. Launching without capacity relief is the single most likely way this plan fails quietly.',
      pts:mConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'people',ey:'PEOPLE',ac:'#f472b4',an:'DPO',sfx:'MUST BE HIRED FIRST',src:citeSrc.people.s,stip:citeSrc.people.t,
+    {id:'people',ey:'PEOPLE',ac:'#f472b4',an:'DPO',sfx:'MUST BE HIRED FIRST',src:citeSrc.people.src,stip:citeSrc.people.tip,iconType:citeSrc.people.iconType,url:citeSrc.people.url,
      sentence:'A Data Protection Officer must be in place before this expansion can legally operate anywhere in the EU. That single hire sits on the critical path.',
      pts:pConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'next',ey:'WHAT HAPPENS NEXT',ac:'#2dd4bf',an:acts.length||'3 things',sfx:'MUST HAPPEN FIRST',src:citeSrc.next.s,stip:citeSrc.next.t,
+    {id:'next',ey:'WHAT HAPPENS NEXT',ac:'#2dd4bf',an:acts.length||'3 things',sfx:'MUST HAPPEN FIRST',src:citeSrc.next.src,stip:citeSrc.next.tip,iconType:citeSrc.next.iconType,url:citeSrc.next.url,
      sentence:'Before any real work begins, three questions need answers. Until they land, the decision is approved in principle but paused in practice — no capital, no hiring, no GTM.',
      pts:acts.slice(0,3).map(function(a){return a.action||String(a);})}
   ];
@@ -5160,12 +5190,12 @@ function _bRenderCards(cards){
   var g=document.getElementById('b-grid');if(!g)return;g.innerHTML='';
   cards.forEach(function(s,i){
     var c=document.createElement('div');c.className='b-card';
-    // Cite 1 — inline after sentence text (always visible)
-    var cite1='<span class="cite tip-left"><button class="cite-btn">'+s.src+'</button><div class="cite-tip">'+s.stip+'</div></span>';
+    // Cite 1 — inline after sentence (always visible), with icon_type + URL from citation_registry
+    var cite1=bBuildCite(s.src,s.stip,s.iconType,s.url);
     // Cite 2 — on first bullet in fold only (max 2 total per card)
     var rawPts=(s.pts||[]).filter(Boolean);
     var pts=rawPts.map(function(p,pi){
-      var cTag=pi===0?(' <span class="cite tip-left"><button class="cite-btn">'+s.src+'</button><div class="cite-tip">'+s.stip+'</div></span>'):'';
+      var cTag=pi===0?(' '+bBuildCite(s.src,s.stip,s.iconType,s.url)):'';
       return '<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span>'+p+cTag+'</span></div>';
     }).join('');
     c.innerHTML=
