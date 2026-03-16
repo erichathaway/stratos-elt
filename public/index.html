@@ -1022,6 +1022,13 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .b-next-btn{display:flex;align-items:center;gap:8px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.06em;color:#2dd4bf;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.25);border-radius:6px;padding:7px 14px;cursor:pointer;transition:all .2s}
 .b-next-btn:hover{background:rgba(45,212,191,.16);border-color:rgba(45,212,191,.5)}
 
+
+/* Resource row — horizontal, right-justified, below prose in strip */
+.b-resource-row{display:flex;justify-content:flex-end;align-items:center;gap:8px;clear:both;padding-top:14px;margin-top:14px;border-top:1px solid rgba(255,255,255,.05)}
+/* Override gradient pill to be horizontal (they were stacked before) */
+.b-resource-row .b-pill-grad{flex-direction:row}
+/* Remove stacked pill overrides from verdict box — no longer needed */
+.b-verdict-resources{display:none}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
 </head>
@@ -1060,28 +1067,29 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
       <div class="b-v-word" id="b-v-word">—</div>
       <div class="b-v-sub" id="b-v-sub">WITH CONDITIONS</div>
       <div class="b-v-chips" id="b-v-chips"></div>
-      <div class="b-verdict-resources">
-        <div class="b-pill-grad" id="b-mpdf">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2H5a1.5 1.5 0 00-1.5 1.5v13A1.5 1.5 0 005 18h10a1.5 1.5 0 001.5-1.5V7L11 2z"/><path d="M11 2v5h5"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13" x2="11" y2="13"/></svg>
-          EXEC SUMMARY
-        </div>
-        <div class="b-pill-grad" id="b-a1" onclick="bTog('b-a1')">
-          <span class="b-pill-dot"></span>
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10a6.5 6.5 0 0113 0"/><rect x="2" y="10" width="3.5" height="5.5" rx="1.5"/><rect x="14.5" y="10" width="3.5" height="5.5" rx="1.5"/></svg>
-          1-MIN BRIEF
-          <div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
-        </div>
-        <div class="b-pill-grad" id="b-a3" onclick="bTog('b-a3')">
-          <span class="b-pill-dot"></span>
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="6" height="9" rx="3"/><path d="M4 10a6 6 0 0012 0"/><line x1="10" y1="16" x2="10" y2="18.5"/><line x1="7.5" y1="18.5" x2="12.5" y2="18.5"/></svg>
-          3-MIN DEEP DIVE
-          <div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
-        </div>
-      </div>
     </div>
     <!-- Prose flows right -->
     <div class="b-prose" id="b-narrative">Loading…</div>
     <div class="b-tags" id="b-tags"></div>
+  <div class="b-resource-row">
+    <div class="b-pill-grad" id="b-mpdf">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2H5a1.5 1.5 0 00-1.5 1.5v13A1.5 1.5 0 005 18h10a1.5 1.5 0 001.5-1.5V7L11 2z"/><path d="M11 2v5h5"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13" x2="11" y2="13"/></svg>
+      EXECUTIVE SUMMARY<span style="font-size:8px;opacity:.35;margin-left:4px">PDF</span>
+    </div>
+    <div class="b-pill-grad" id="b-a1" onclick="bTog('b-a1')">
+      <span class="b-pill-dot"></span>
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10a6.5 6.5 0 0113 0"/><rect x="2" y="10" width="3.5" height="5.5" rx="1.5"/><rect x="14.5" y="10" width="3.5" height="5.5" rx="1.5"/></svg>
+      1-MINUTE BRIEF
+      <div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
+    </div>
+    <div class="b-pill-grad" id="b-a3" onclick="bTog('b-a3')">
+      <span class="b-pill-dot"></span>
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="6" height="9" rx="3"/><path d="M4 10a6 6 0 0012 0"/><line x1="10" y1="16" x2="10" y2="18.5"/><line x1="7.5" y1="18.5" x2="12.5" y2="18.5"/></svg>
+      3-MINUTE DEEP DIVE
+      <div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
+    </div>
+  </div>
+
   </div></div>
 
   <div class="b-stats">
