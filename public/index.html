@@ -5057,13 +5057,14 @@ new MutationObserver(function(){
 
 /* === BRIEFING CITATION HELPERS === */
 function bIconForType(t){
+  // Return icon label strings — no emoji literals to avoid surrogate pair syntax errors
   var m={
-    'TIER_1_AUTHORITATIVE':'📊','TIER_2_REPUTABLE':'📰','TIER_3_UNVERIFIED':'🌐',
-    'EXTERNAL_RESEARCH':'🔬','SPREADSHEET':'📊','INTERNAL_GOVERNANCE':'📋',
-    'INTERNAL_STRATEGY':'📌','INTERNAL_ANALYSIS':'📈','INTERNAL_POLICY':'📜',
-    'INTERNAL_DOCUMENT':'📄','EXTERNAL_LINK':'🔗'
+    'TIER_1_AUTHORITATIVE':'data','TIER_2_REPUTABLE':'data','TIER_3_UNVERIFIED':'data',
+    'EXTERNAL_RESEARCH':'data','SPREADSHEET':'data','INTERNAL_GOVERNANCE':'data',
+    'INTERNAL_STRATEGY':'data','INTERNAL_ANALYSIS':'data','INTERNAL_POLICY':'data',
+    'INTERNAL_DOCUMENT':'data','EXTERNAL_LINK':'data'
   };
-  return m[t]||'📊';
+  return m[t]||'data';
 }
 function bBuildCite(src,tip,iconType,url){
   var btn='<button class="cite-btn"'+(url?' onclick="window.open(''+url+'','_blank')" style="cursor:pointer"':'')+'>'+src+'</button>';
@@ -5072,8 +5073,9 @@ function bBuildCite(src,tip,iconType,url){
 function bGetCite(key,citReg,fallbackSrc,fallbackTip){
   if(citReg&&citReg[key]){
     var r=citReg[key];
-    var tip=(r.label||fallbackSrc)+(r.sheet?' · '+r.sheet:'')+(r.column?' · '+r.column:'');
-    return {src:r.label||fallbackSrc,tip:tip,iconType:r.icon_type,url:r.url||null};
+    var label=r.label||fallbackSrc;
+    var tip=label+(r.sheet?' · '+r.sheet:'')+(r.column?' · '+r.column:'');
+    return {src:label,tip:tip,iconType:r.icon_type||'INTERNAL_DOCUMENT',url:r.url||null};
   }
   return {src:fallbackSrc,tip:fallbackTip,iconType:'INTERNAL_DOCUMENT',url:null};
 }
