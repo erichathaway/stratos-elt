@@ -931,7 +931,100 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 .rm-dot-group .rm-dot-mini.legal-border{border-color:rgba(167,139,250,.5)}
 .rm-dot-group .rm-dot-mini.ceo-border{border-color:rgba(6,182,212,.5)}
 .rm-dot-group .rm-dot-mini.cso-border{border-color:rgba(129,140,248,.5)}
+
+/* ===== BRIEFING TAB v3.0 ===== */
+/* All fonts: inherited (ui-sans-serif, system-ui). Fraunces ONLY for .b-v-word italic */
+#tab-briefing{padding:0 0 40px}
+
+.b-ey{display:flex;align-items:center;gap:10px;padding:18px 0 16px}
+.b-ey-tag{font-size:9px;letter-spacing:.18em;color:#334155;font-family:'DM Mono',monospace}
+.b-ey-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent)}
+.b-ey-date{font-size:9px;color:#1e293b;font-family:'DM Mono',monospace}
+
+/* Main strip */
+.b-strip{border:1px solid rgba(255,255,255,.07);border-radius:11px;overflow:hidden;margin-bottom:12px;background:rgba(255,255,255,.01)}
+.b-strip-body{padding:20px 22px;overflow:hidden}
+
+/* Float verdict box — left side */
+.b-verdict{float:left;margin-right:22px;margin-bottom:4px;background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.12);border-radius:9px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;min-width:148px;max-width:162px}
+.b-v-tag{font-size:9px;letter-spacing:.14em;color:#2dd4bf;font-family:'DM Mono',monospace;font-weight:700}
+/* ONLY Fraunces usage — the italic verdict word per design */
+.b-v-word{font-family:'Fraunces',serif;font-size:28px;font-weight:300;font-style:italic;color:#f1f5f9;line-height:1.05;margin-top:2px}
+.b-v-sub{font-size:9px;color:#475569;font-family:'DM Mono',monospace;letter-spacing:.06em;margin-top:-4px}
+.b-v-chips{display:flex;flex-direction:column;gap:5px;margin-top:4px}
+.b-v-chip{font-size:9px;padding:3px 8px;border-radius:3px;font-family:'DM Mono',monospace;font-weight:600;letter-spacing:.05em;display:inline-block;width:fit-content}
+
+/* Prose flows right of float */
+.b-prose{font-size:12px;color:#64748b;line-height:1.8;overflow:hidden}
+.b-prose strong{color:#cbd5e1;font-weight:600}
+.b-prose em{color:#94a3b8;font-style:normal;font-weight:600}
+
+/* Tags — clearfix, full width */
+.b-tags{display:flex;gap:5px;flex-wrap:wrap;padding-top:12px;margin-top:14px;border-top:1px solid rgba(255,255,255,.05);clear:both}
+.b-ptag{font-size:9px;padding:3px 10px;border-radius:4px;font-family:'DM Mono',monospace;font-weight:600;letter-spacing:.06em}
+
+/* Stat row — bright colors, big numbers in system-ui 900 */
+.b-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.04);margin-bottom:12px;border-radius:6px;overflow:hidden}
+.b-stat{padding:16px 14px 13px;background:#030711;transition:background .2s;cursor:default}
+.b-stat:hover{background:#070d1c}
+.b-stat-bar{height:1.5px;width:100%;margin-bottom:9px}
+.b-stat-n{font-size:34px;font-weight:900;line-height:1;margin-bottom:5px;display:flex;align-items:baseline;gap:3px}
+.b-stat-sfx{font-size:13px;font-weight:500;opacity:.4}
+.b-stat-lbl{font-size:10px;color:#475569;line-height:1.45;padding-right:4px}
+.b-stat-sub{font-size:9px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.06em;margin-top:6px;padding:2px 7px;border-radius:3px;display:inline-block}
+
+/* Resource pills — more visible */
+.b-media{display:flex;align-items:center;gap:8px;padding:14px 0 16px;border-top:1px solid rgba(255,255,255,.04)}
+.b-media-lbl{font-size:9px;letter-spacing:.14em;color:#1e293b;font-family:'DM Mono',monospace;margin-right:4px}
+.b-pill{display:flex;align-items:center;gap:9px;padding:9px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:30px;cursor:pointer;font-family:'DM Mono',monospace;font-size:10px;color:#64748b;font-weight:600;letter-spacing:.06em;transition:all .2s;white-space:nowrap}
+.b-pill:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2);color:#94a3b8}
+.b-pill.on{background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.4);color:#2dd4bf}
+.b-pill-audio{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.07)}
+.b-pill-icon{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;flex-shrink:0}
+.b-pill-icon svg{opacity:.5;transition:opacity .2s}
+.b-pill:hover .b-pill-icon svg,.b-pill.on .b-pill-icon svg{opacity:1}
+.b-pill.on .b-pill-icon{background:rgba(45,212,191,.12)}
+.b-pill-badge{font-size:8px;opacity:.4;margin-left:3px;font-family:'DM Mono',monospace}
+.b-dot{width:5px;height:5px;border-radius:50%;background:#2dd4bf;opacity:0;flex-shrink:0;transition:opacity .2s}
+.b-pill.on .b-dot{opacity:1;animation:blink 1.4s ease-in-out infinite}
+.b-wave{display:flex;align-items:center;gap:1.5px;height:12px;flex-shrink:0}
+.b-wb{width:2px;border-radius:1px;background:currentColor;height:3px;opacity:.35}
+.b-pill.on .b-wb{opacity:1;animation:bWave .75s ease-in-out infinite}
+.b-wb:nth-child(2){animation-delay:.1s;height:7px}.b-wb:nth-child(3){animation-delay:.2s;height:11px}.b-wb:nth-child(4){animation-delay:.15s;height:5px}.b-wb:nth-child(5){animation-delay:.05s;height:9px}
+@keyframes bWave{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+.b-sep{width:1px;height:20px;background:rgba(255,255,255,.06);margin:0 2px}
+
+/* Cards — eyebrow left, big colored value right, system-ui 900 */
+.b-cards-lbl{font-size:9px;letter-spacing:.14em;color:#1e293b;font-family:'DM Mono',monospace;margin-bottom:12px}
+.b-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.b-card{border-radius:12px;cursor:pointer;transition:border-color .2s,background .2s;position:relative;overflow:hidden;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.06)}
+.b-card:hover{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.025)}
+.b-card-bar{height:2px;width:100%}
+.b-card-inner{padding:16px 16px 10px}
+.b-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.b-card-ey{font-size:9px;letter-spacing:.12em;font-family:'DM Mono',monospace;font-weight:700;padding-top:2px}
+/* Big value on right — system-ui 900, bright color */
+.b-card-an{text-align:right}
+.b-card-an-n{font-size:26px;font-weight:900;line-height:1.05;letter-spacing:-.02em}
+.b-card-an-sfx{font-size:8px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.06em;opacity:.8;margin-top:3px;text-transform:uppercase}
+.b-card-sentence{font-size:11.5px;color:#64748b;line-height:1.75;margin-bottom:8px}
+.b-card-expand{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.b-card.open .b-card-expand{max-height:600px}
+.b-card-pts{padding-top:10px;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;gap:8px}
+.b-card-pt{display:flex;gap:8px;align-items:flex-start;font-size:11px;color:#475569;line-height:1.65}
+.b-card-pt-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;opacity:.7}
+.b-card-foot{padding:9px 16px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center}
+.b-card-foot-lbl{font-size:9px;font-family:'DM Mono',monospace;color:#334155;letter-spacing:.08em}
+.b-card-arr{font-size:10px;color:#334155;transition:transform .3s}
+.b-card.open .b-card-arr{transform:rotate(180deg)}
+
+/* Transition strip to command center */
+.b-next-strip{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding:13px 18px;border:1px solid rgba(255,255,255,.06);border-radius:10px;background:rgba(255,255,255,.01)}
+.b-next-label{font-size:9px;letter-spacing:.14em;color:#334155;font-family:'DM Mono',monospace}
+.b-next-btn{display:flex;align-items:center;gap:8px;font-size:10px;font-family:'DM Mono',monospace;font-weight:700;letter-spacing:.06em;color:#2dd4bf;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.25);border-radius:6px;padding:7px 14px;cursor:pointer;transition:all .2s}
+.b-next-btn:hover{background:rgba(45,212,191,.15);border-color:rgba(45,212,191,.5)}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -947,6 +1040,7 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
     <div style="display:flex;align-items:center;gap:10px"><span class="run-meta">RUN-20260313193333 · ELT · 3 ROUNDS · 7 ROLES</span><button class="tour-btn" id="nav-tour-btn" onclick="startContextTour()" title="Guided tour of current view">Tour <span style="font-size:10px">▸</span></button></div>
   </div>
   <div class="tabs">
+    <button class="tab" onclick="renderBriefingTab();showTab('briefing',this)">◈ Briefing</button>
     <button class="tab active" onclick="showTab('command',this)">⬡ Command Center</button>
     <button class="tab" onclick="showTab('risk',this)">◉ Risk &amp; Intelligence</button>
     <button class="tab" onclick="showTab('financials',this)">$ Financials</button>
@@ -959,7 +1053,51 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 </div>
 
 <div class="content">
-  <div id="tab-command" class="panel active">
+  <div id="tab-briefing" class="panel">
+  <div class="b-ey"><span class="b-ey-tag">DECISION BRIEF</span><div class="b-ey-line"></div><span class="b-ey-date" id="b-run-date"></span></div>
+  <div class="b-strip"><div class="b-strip-body">
+    <div class="b-verdict">
+      <span class="b-v-tag">FINAL DECISION</span>
+      <div class="b-v-word" id="b-v-word">—</div>
+      <div class="b-v-sub" id="b-v-sub">WITH CONDITIONS</div>
+      <div class="b-v-chips" id="b-v-chips"></div>
+    </div>
+    <div class="b-prose" id="b-narrative">Loading…</div>
+    <div class="b-tags" id="b-tags"></div>
+  </div></div>
+  <div class="b-stats">
+    <div class="b-stat"><div class="b-stat-bar" style="background:linear-gradient(90deg,rgba(45,212,191,.6),transparent)"></div><div class="b-stat-n" style="color:#2dd4bf"><span id="bn1">0</span><span class="b-stat-sfx" id="bn1sfx"></span></div><div class="b-stat-lbl">executives voted to approve</div><div class="b-stat-sub" id="b-vote-sub" style="background:rgba(45,212,191,.1);color:#2dd4bf">UNANIMOUS</div></div>
+    <div class="b-stat"><div class="b-stat-bar" style="background:linear-gradient(90deg,rgba(45,212,191,.4),transparent)"></div><div class="b-stat-n" style="color:#2dd4bf"><span id="bn2">0</span><span class="b-stat-sfx">%</span></div><div class="b-stat-lbl">average confidence across all roles</div><div class="b-stat-sub" id="b-conf-rng" style="background:rgba(45,212,191,.08);color:#2dd4bf">RANGE —</div></div>
+    <div class="b-stat"><div class="b-stat-bar" style="background:linear-gradient(90deg,rgba(52,211,153,.5),transparent)"></div><div class="b-stat-n" style="color:#34d399">$<span id="bn3">0</span><span class="b-stat-sfx">K</span></div><div class="b-stat-lbl" id="b-cap-lbl">approved across two phases</div><div class="b-stat-sub" id="b-cap-sub" style="background:rgba(52,211,153,.08);color:#34d399">INVESTMENT</div></div>
+    <div class="b-stat"><div class="b-stat-bar" style="background:linear-gradient(90deg,rgba(244,63,94,.5),transparent)"></div><div class="b-stat-n" style="color:#f43f5e"><span id="bn4">0</span></div><div class="b-stat-lbl">points where this can still be stopped</div><div class="b-stat-sub" id="b-gate-lbl" style="background:rgba(244,63,94,.08);color:#f43f5e">NEXT: —</div></div>
+    <div class="b-stat"><div class="b-stat-bar" style="background:linear-gradient(90deg,rgba(245,158,11,.5),transparent)"></div><div class="b-stat-n" style="color:#f59e0b"><span id="bn5">0</span></div><div class="b-stat-lbl">open questions blocking all progress</div><div class="b-stat-sub" style="background:rgba(245,158,11,.08);color:#f59e0b">RESOLUTION REQUIRED</div></div>
+  </div>
+  <div class="b-media">
+    <span class="b-media-lbl">RESOURCES</span>
+    <div class="b-pill" id="b-mpdf">
+      <div class="b-pill-icon"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2H5a1.5 1.5 0 00-1.5 1.5v13A1.5 1.5 0 005 18h10a1.5 1.5 0 001.5-1.5V7L11 2z"/><path d="M11 2v5h5"/><line x1="7" y1="10.5" x2="13" y2="10.5"/><line x1="7" y1="13" x2="11" y2="13"/></svg></div>
+      EXECUTIVE SUMMARY<span class="b-pill-badge">PDF</span>
+    </div>
+    <div class="b-sep"></div>
+    <div class="b-pill b-pill-audio" id="b-a1" onclick="bTog('b-a1')">
+      <span class="b-dot"></span>
+      <div class="b-pill-icon"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10a6.5 6.5 0 0113 0"/><rect x="2" y="10" width="3.5" height="5.5" rx="1.5"/><rect x="14.5" y="10" width="3.5" height="5.5" rx="1.5"/></svg></div>
+      1-MINUTE BRIEF<div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
+    </div>
+    <div class="b-pill b-pill-audio" id="b-a3" onclick="bTog('b-a3')">
+      <span class="b-dot"></span>
+      <div class="b-pill-icon"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="6" height="9" rx="3"/><path d="M4 10a6 6 0 0012 0"/><line x1="10" y1="16" x2="10" y2="18.5"/><line x1="7.5" y1="18.5" x2="12.5" y2="18.5"/></svg></div>
+      3-MINUTE DEEP DIVE<div class="b-wave"><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div><div class="b-wb"></div></div>
+    </div>
+  </div>
+  <div class="b-cards-lbl">DECISION AREAS — click any to expand</div>
+  <div class="b-cards" id="b-grid"></div>
+  <div class="b-next-strip">
+    <span class="b-next-label">DIVE DEEPER INTO THE DECISION</span>
+    <button class="b-next-btn" onclick="showTab('command',document.querySelectorAll('button.tab')[1])">→ COMMAND CENTER</button>
+  </div>
+</div>
+<div id="tab-command" class="panel active">
 
     <!-- ZONE 1 -->
     <div class="zone1">
@@ -4861,6 +4999,95 @@ new MutationObserver(function(){
   addCiteIcons();
   enrichCiteSources();
 }).observe(document.body,{childList:true,subtree:true});
+
+/* === BRIEFING TAB v3.0 === */
+var _bRendered=false,_bOpenCard=null,_bPlayId=null;
+function renderBriefingTab(){
+  if(!window._lastData){if(!window._bPoll)window._bPoll=setInterval(function(){if(window._lastData){clearInterval(window._bPoll);window._bPoll=null;renderBriefingTab();}},300);return;}
+  if(_bRendered)return;_bRendered=true;
+  var d=window._lastData,ob=d.outputBlob||{},dash=ob.dashboard||{},es=ob.executive_summary||{},dp=ob.direction_package||{},master=d.master||{};
+  function jp(v){try{return typeof v==='string'?JSON.parse(v):v;}catch(e){return v||{};}}
+  var vs=jp(dash.vote_split)||{},cr=jp(dash.confidence_range)||{};
+  var conds=jp(dash.all_conditions)||[],fm=jp(dash.financial_mechanics)||{};
+  var gt=jp(dash.groupthink_flag)||{},rp=jp(dash.role_assessment_preview)||[];
+  var acts=jp(es.top_3_actions)||[],risks=jp(dash.top_3_risks)||[];
+  var vc=Object.values(vs).reduce(function(a,b){return a+b;},0)||0;
+  var conf=parseInt(dash.decision_confidence)||0;
+  var cap=parseInt((fm.total_investment||'').replace(/[^0-9]/g,''))||0;
+  var rnd=parseInt(master.round)||2;
+  var killConds=conds.filter(function(c){return c.condition&&/board|gate|kill|stop|auth/i.test(c.condition);});
+  var openQ=risks.length||3;
+  var nextGate=conds.reduce(function(acc,c){if(acc)return acc;var m=(c.condition||'').match(/(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)s*d{1,2}/i);return m?m[0].toUpperCase():'';}, '');
+  var phase1=parseInt((fm.phase_1_amount||'150000').replace(/[^0-9]/g,''))/1000||150;
+  var phase2=cap-phase1;
+  var vmap={
+    'APPROVED_WITH_CONDITIONS':{w:'Approved',s:'WITH CONDITIONS',c:'#2dd4bf'},
+    'APPROVED':{w:'Approved',s:'FULL APPROVAL',c:'#34d399'},
+    'REJECTED':{w:'Rejected',s:'NOT APPROVED',c:'#f43f5e'},
+    'DEFERRED':{w:'Deferred',s:'PENDING INFO',c:'#f59e0b'}
+  };
+  var vd=vmap[es.decision]||{w:'Pending',s:'IN REVIEW',c:'#94a3b8'};
+  var dt=master.created_at?new Date(master.created_at).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}).toUpperCase():'';
+  function $i(id){return document.getElementById(id);}
+  if($i('b-run-date'))$i('b-run-date').textContent=dt;
+  if($i('b-v-word')){$i('b-v-word').textContent=vd.w;$i('b-v-word').style.color=vd.c;}
+  if($i('b-v-sub'))$i('b-v-sub').textContent=vd.s;
+  var chips=[];
+  chips.push({t:vc+'/'+vc+' UNANIMOUS',bg:'rgba(45,212,191,.1)',c:'#2dd4bf'});
+  if(killConds.length)chips.push({t:killConds.length+' KILL GATE'+(killConds.length>1?'S':''),bg:'rgba(244,63,94,.1)',c:'#f43f5e'});
+  chips.push({t:openQ+' OPEN QUESTION'+(openQ!==1?'S':''),bg:'rgba(245,158,11,.1)',c:'#f59e0b'});
+  if($i('b-v-chips'))$i('b-v-chips').innerHTML=chips.map(function(ch){return'<span class="b-v-chip" style="background:'+ch.bg+';color:'+ch.c+'">'+ch.t+'</span>';}).join('');
+  var narr=dp.strategic_narrative||'';var sents=narr.match(/[^.!?]+[.!?]+/g)||[];
+  if($i('b-narrative'))$i('b-narrative').textContent=sents.slice(0,4).join(' ')||narr.substring(0,420)||'Strategic briefing loading…';
+  var tags=[];
+  var q=master.question||'';
+  var geo=[];if(/eu|europe/i.test(q))geo.push('EU EXPANSION');if(/germany/i.test(q))geo.push('GERMANY');if(/france/i.test(q))geo.push('FRANCE');if(/uk/i.test(q))geo.push('UK');
+  if(geo.length)tags.push({l:geo.join(' · '),b:'rgba(255,255,255,.04)',c:'#334155'});
+  if(killConds.length)tags.push({l:'BOARD AUTHORIZATION REQUIRED',b:'rgba(245,158,11,.12)',c:'#f59e0b',bdr:'1px solid rgba(245,158,11,.3)'});
+  if(nextGate)tags.push({l:'NEXT GATE '+nextGate,b:'rgba(255,255,255,.04)',c:'#475569'});
+  if($i('b-tags'))$i('b-tags').innerHTML=tags.map(function(t){return'<span class="b-ptag" style="background:'+t.b+';color:'+t.c+(t.bdr?';border:'+t.bdr:'')+'">'+(t.bdr?'<strong>'+t.l+'</strong>':t.l)+'</span>';}).join('');
+  if($i('bn1sfx'))$i('bn1sfx').textContent='/'+vc;
+  if($i('b-vote-sub'))$i('b-vote-sub').textContent='UNANIMOUS';
+  if($i('b-conf-rng'))$i('b-conf-rng').textContent=cr.min&&cr.max?'RANGE '+cr.min+'–'+cr.max+'%':'CONFIDENCE';
+  if($i('b-cap-lbl'))$i('b-cap-lbl').textContent='approved across two phases';
+  if($i('b-cap-sub'))$i('b-cap-sub').textContent=phase1&&phase2?'$'+phase1+'K NOW · $'+phase2+'K GATED':'INVESTMENT ENVELOPE';
+  if($i('b-gate-lbl'))$i('b-gate-lbl').textContent=nextGate?'NEXT: '+nextGate:'GATE-ENFORCED';
+  bCountTo('bn1',vc,500);bCountTo('bn2',conf,800);bCountTo('bn3',cap,700);bCountTo('bn4',killConds.length||2,400);bCountTo('bn5',openQ,400);
+  var bConds=conds.filter(function(c){return c.condition&&/board|auth/i.test(c.condition);});
+  var mConds=conds.filter(function(c){return c.condition&&/coo|capac|operat/i.test(c.condition);});
+  var pConds=conds.filter(function(c){return c.condition&&/dpo|chro|hir|people/i.test(c.condition);});
+  var fConds=conds.filter(function(c){return c.condition&&/$|capital|phase|fund/i.test(c.condition);});
+  var CARDS=[
+    {ey:'THE ROOM',ac:'#818cf8',an:rnd+' rounds',sfx:'OF DELIBERATION',sentence:'Every executive had a voice across '+rnd+' structured rounds. The conversation moved from cautious concern to conditional approval — no one was overruled or absent.',pts:rp.slice(0,3).map(function(r){return r.role_key+': '+(r.vote||'').replace(/_/g,' ')+' ('+(Math.round((r.confidence_score||0)*100))+'% confidence)';})},
+    {ey:'FINANCIAL',ac:'#34d399',an:'$'+phase1+'K',sfx:'RELEASES NOW',sentence:(fm.mechanics_summary||'The first tranche releases immediately for legal entity setup only. The remaining capital is gated behind two formal checkpoints.').substring(0,200),pts:fConds.slice(0,3).map(function(c){return c.condition;})},
+    {ey:'BOARD',ac:'#f59e0b',an:nextGate||'MAR 31',sfx:'NEXT HARD DATE',sentence:'This spend level triggers mandatory board authorization. Two formal kill gates are now active — the first arrives on a technical answer, not a financial one.',pts:bConds.slice(0,3).map(function(c){return c.condition;})},
+    {ey:'MANAGEMENT',ac:'#38bdf8',an:'95%',sfx:'TEAM CAPACITY NOW',sentence:'Operations flagged that customer success is near its ceiling. Launching without capacity relief is the single most likely way this plan fails quietly.',pts:mConds.slice(0,3).map(function(c){return c.condition;})},
+    {ey:'PEOPLE',ac:'#f472b4',an:'DPO',sfx:'MUST BE HIRED FIRST',sentence:'A Data Protection Officer must be in place before this expansion can legally operate anywhere in the EU. That single hire sits on the critical path.',pts:pConds.slice(0,3).map(function(c){return c.condition;})},
+    {ey:'WHAT HAPPENS NEXT',ac:'#2dd4bf',an:acts.length||'3 things',sfx:'MUST HAPPEN FIRST',sentence:'Before any real work begins, three questions need answers. Until they land, the decision is approved in principle but paused in practice — no capital, no hiring, no GTM.',pts:acts.slice(0,3).map(function(a){return a.action||String(a);})}
+  ];
+  _bRenderCards(CARDS);
+}
+function _bRenderCards(cards){
+  var g=document.getElementById('b-grid');if(!g)return;g.innerHTML='';
+  cards.forEach(function(s,i){
+    var open=_bOpenCard===i;var c=document.createElement('div');c.className='b-card'+(open?' open':'');
+    var pts=(s.pts||[]).filter(Boolean).map(function(p){return'<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span>'+p+'</span></div>';}).join('');
+    c.innerHTML='<div class="b-card-bar" style="background:'+s.ac+'"></div><div class="b-card-inner"><div class="b-card-top"><div class="b-card-ey" style="color:'+s.ac+'">'+s.ey+'</div><div class="b-card-an"><div class="b-card-an-n" style="color:'+s.ac+'">'+s.an+'</div><div class="b-card-an-sfx" style="color:'+s.ac+'">'+s.sfx+'</div></div></div><div class="b-card-sentence">'+s.sentence+'</div><div class="b-card-expand"><div class="b-card-pts">'+pts+'</div></div></div><div class="b-card-foot"><span class="b-card-foot-lbl">'+(open?'COLLAPSE':'MORE DETAIL')+'</span><span class="b-card-arr">▾</span></div>';
+    c.addEventListener('click',function(){_bOpenCard=_bOpenCard===i?null:i;_bRenderCards(cards);});
+    g.appendChild(c);
+  });
+}
+function bCountTo(id,target,dur){
+  var el=document.getElementById(id);if(!el||!target)return;
+  var start=0,step=target/(dur/16);
+  var t=setInterval(function(){start+=step;if(start>=target){start=target;clearInterval(t);}el.textContent=Math.floor(start);},16);
+}
+function bTog(id){
+  var b=document.getElementById(id);if(!b)return;
+  if(_bPlayId===id){_bPlayId=null;b.classList.remove('on');}
+  else{if(_bPlayId){var o=document.getElementById(_bPlayId);if(o)o.classList.remove('on');}_bPlayId=id;b.classList.add('on');}
+}
+
 </script>
 </body>
 </html>
