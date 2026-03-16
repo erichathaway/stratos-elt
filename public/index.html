@@ -5095,14 +5095,14 @@ function renderBriefingTab(){
   var narrSents=sents.slice(0,4);
   // Inject inline citation buttons after key sentences
   var citeMap=[
-    {src:'F2·ALL ROLES·R0–R2',icon:'📊'},
-    {src:'D·PACKET·R2',icon:'📊'},
-    {src:'F1·COO·R1',icon:'👤'},
-    {src:'F2·CEO·R2',icon:'👤'}
+    {s:'F2·ALL ROLES·R0–R2',t:'Aggregated stance across all '+vc+' roles · '+(rnd+1)+' deliberation rounds · engine_stage_outputs'},
+    {s:'D·PACKET·R2',t:'D_packet confidence_summary.by_role · weighted avg '+conf+'% across all roles'},
+    {s:'F1·COO·R1',t:'COO R1 · operational capacity flagged as primary execution risk · 95% ceiling'},
+    {s:'F2·CEO·R2',t:'CEO R2 · final convergence · conditional approval with three pre-conditions'}
   ];
   var narrHTML=narrSents.map(function(s,i){
-    var cite=citeMap[i]||citeMap[0];
-    return s+'<span class="cite tip-right"><button class="cite-btn">'+cite.src+'</button><div class="cite-tip">'+cite.src+'<br><span style="color:#64748b;font-size:10px">Source: deliberation stage '+cite.src.toLowerCase()+'</span></div></span>';
+    var c=citeMap[i]||citeMap[0];
+    return s+' <span class="cite tip-right"><button class="cite-btn">'+c.s+'</button><div class="cite-tip">'+c.t+'</div></span>';
   }).join(' ');
   if($i('b-narrative'))$i('b-narrative').innerHTML=narrHTML||'Strategic briefing loading…';
   var tags=[];
@@ -5125,24 +5125,32 @@ function renderBriefingTab(){
   var pConds=conds.filter(function(c){return c.condition&&/dpo|chro|hir|people/i.test(c.condition);});
   var fConds=conds.filter(function(c){return c.condition&&/$|capital|phase|fund/i.test(c.condition);});
   // Source citations per card area
-  var citeSrc={room:'F2·DELIBERATION·ALL ROUNDS',fin:'F2·CFO·R1–R2',board:'F2·LEGAL·R2',mgmt:'F2·COO·R1',people:'F2·CHRO·R1–R2',next:'F2·CEO·R2'};
+  // Per-card cite: src tag + descriptive tip text matching Command Center pattern
+  var citeSrc={
+    room:{s:'F2·ALL ROLES·R0–R2',t:'Aggregated from all '+vc+' role deliberations across '+(rnd+1)+' rounds · engine_stage_outputs'},
+    fin:{s:'F2·CFO·R1',t:'CFO R1 · Phase structure · $150K immediate + $350K gated behind two kill gates'},
+    board:{s:'F2·LEGAL·R2',t:'Legal R2 · board authorization threshold triggered · governance packet required'},
+    mgmt:{s:'F2·COO·R1',t:'COO R1 · customer success at ~95% capacity · Phase 2 veto authority confirmed'},
+    people:{s:'F2·CHRO·R1',t:'CHRO R1 · DPO hire on critical path · blocks legal entity + GDPR workstreams'},
+    next:{s:'F2·CEO·R2',t:'CEO R2 · three unresolved questions block all capital deployment'}
+  };
   var CARDS=[
-    {id:'room',ey:'THE ROOM',ac:'#818cf8',an:rnd+' rounds',sfx:'OF DELIBERATION',src:citeSrc.room,
+    {id:'room',ey:'THE ROOM',ac:'#818cf8',an:rnd+' rounds',sfx:'OF DELIBERATION',src:citeSrc.room.s,stip:citeSrc.room.t,
      sentence:'Every executive had a voice across '+rnd+' structured rounds. The conversation moved from cautious concern to conditional approval — no one was overruled or absent.',
      pts:rp.slice(0,3).map(function(r){return r.role_key+': '+(r.vote||'').replace(/_/g,' ')+' ('+(Math.round((r.confidence_score||0)*100))+'% confidence)';})},
-    {id:'fin',ey:'FINANCIAL',ac:'#34d399',an:'$'+phase1+'K',sfx:'RELEASES NOW',src:citeSrc.fin,
+    {id:'fin',ey:'FINANCIAL',ac:'#34d399',an:'$'+phase1+'K',sfx:'RELEASES NOW',src:citeSrc.fin.s,stip:citeSrc.fin.t,
      sentence:(fm.mechanics_summary||'The first tranche releases immediately for legal entity setup only. The remaining capital is gated behind two formal checkpoints.').substring(0,200),
      pts:fConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'board',ey:'BOARD',ac:'#f59e0b',an:nextGate||'MAR 31',sfx:'NEXT HARD DATE',src:citeSrc.board,
+    {id:'board',ey:'BOARD',ac:'#f59e0b',an:nextGate||'MAR 31',sfx:'NEXT HARD DATE',src:citeSrc.board.s,stip:citeSrc.board.t,
      sentence:'This spend level triggers mandatory board authorization. Two formal kill gates are now active — the first arrives on a technical answer, not a financial one.',
      pts:bConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'mgmt',ey:'MANAGEMENT',ac:'#38bdf8',an:'95%',sfx:'TEAM CAPACITY NOW',src:citeSrc.mgmt,
+    {id:'mgmt',ey:'MANAGEMENT',ac:'#38bdf8',an:'95%',sfx:'TEAM CAPACITY NOW',src:citeSrc.mgmt.s,stip:citeSrc.mgmt.t,
      sentence:'Operations flagged that customer success is near its ceiling. Launching without capacity relief is the single most likely way this plan fails quietly.',
      pts:mConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'people',ey:'PEOPLE',ac:'#f472b4',an:'DPO',sfx:'MUST BE HIRED FIRST',src:citeSrc.people,
+    {id:'people',ey:'PEOPLE',ac:'#f472b4',an:'DPO',sfx:'MUST BE HIRED FIRST',src:citeSrc.people.s,stip:citeSrc.people.t,
      sentence:'A Data Protection Officer must be in place before this expansion can legally operate anywhere in the EU. That single hire sits on the critical path.',
      pts:pConds.slice(0,3).map(function(c){return c.condition;})},
-    {id:'next',ey:'WHAT HAPPENS NEXT',ac:'#2dd4bf',an:acts.length||'3 things',sfx:'MUST HAPPEN FIRST',src:citeSrc.next,
+    {id:'next',ey:'WHAT HAPPENS NEXT',ac:'#2dd4bf',an:acts.length||'3 things',sfx:'MUST HAPPEN FIRST',src:citeSrc.next.s,stip:citeSrc.next.t,
      sentence:'Before any real work begins, three questions need answers. Until they land, the decision is approved in principle but paused in practice — no capital, no hiring, no GTM.',
      pts:acts.slice(0,3).map(function(a){return a.action||String(a);})}
   ];
@@ -5152,27 +5160,29 @@ function _bRenderCards(cards){
   var g=document.getElementById('b-grid');if(!g)return;g.innerHTML='';
   cards.forEach(function(s,i){
     var c=document.createElement('div');c.className='b-card';
-    var pts=(s.pts||[]).filter(Boolean).map(function(p,pi){
-      return '<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span>'+p+'</span></div>';
+    // Cite 1 — inline after sentence text (always visible)
+    var cite1='<span class="cite tip-left"><button class="cite-btn">'+s.src+'</button><div class="cite-tip">'+s.stip+'</div></span>';
+    // Cite 2 — on first bullet in fold only (max 2 total per card)
+    var rawPts=(s.pts||[]).filter(Boolean);
+    var pts=rawPts.map(function(p,pi){
+      var cTag=pi===0?(' <span class="cite tip-left"><button class="cite-btn">'+s.src+'</button><div class="cite-tip">'+s.stip+'</div></span>'):'';
+      return '<div class="b-card-pt"><div class="b-card-pt-dot" style="background:'+s.ac+'"></div><span>'+p+cTag+'</span></div>';
     }).join('');
-    // Card eyebrow cite — full .cite pattern
-    var cardCiteBtn='<span class="cite tip-left" style="margin-left:6px"><button class="cite-btn">'+s.src+'</button><div class="cite-tip">'+s.src+'<br><span style="color:#64748b;font-size:10px">Source: deliberation '+s.src.toLowerCase()+'</span></div></span>';
-    c.innerHTML='<div class="b-card-bar" style="background:'+s.ac+'"></div>'+
+    c.innerHTML=
+      '<div class="b-card-bar" style="background:'+s.ac+'"></div>'+
       '<div class="b-card-inner">'+
         '<div class="b-card-top">'+
-          '<div class="b-card-ey" style="color:'+s.ac+'">'+s.ey+cardCiteBtn+'</div>'+
-          '<div class="b-card-an">'+
-            '<div class="b-card-an-n" style="color:'+s.ac+'">'+s.an+'</div>'+
-            '<div class="b-card-an-sfx" style="color:'+s.ac+'">'+s.sfx+'</div>'+
-          '</div>'+
+          '<div class="b-card-ey" style="color:'+s.ac+'">'+s.ey+'</div>'+
+          '<div class="b-card-an"><div class="b-card-an-n" style="color:'+s.ac+'">'+s.an+'</div><div class="b-card-an-sfx" style="color:'+s.ac+'">'+s.sfx+'</div></div>'+
         '</div>'+
-        '<div class="b-card-sentence">'+s.sentence+'</div>'+
+        '<div class="b-card-sentence">'+s.sentence+' '+cite1+'</div>'+
         '<div class="b-card-expand"><div class="b-card-pts">'+pts+'</div></div>'+
       '</div>'+
       '<div class="b-card-foot"><span class="b-card-foot-hint">HOVER TO EXPAND</span></div>';
     g.appendChild(c);
   });
 }
+
 function bCountTo(id,target,dur){
   var el=document.getElementById(id);if(!el||!target)return;
   var start=0,step=target/(dur/16);
