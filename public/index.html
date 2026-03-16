@@ -979,14 +979,14 @@ body{background:var(--bg-page);color:var(--text-primary);font-family:ui-sans-ser
 
 /* Tooltip system */
 .b-tip-host{position:relative;display:inline-block}
-.b-tip-host .b-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#0a1422;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 13px;font-size:11px;color:#94a3b8;width:230px;white-space:normal;line-height:1.65;opacity:0;pointer-events:none;transition:opacity .18s;z-index:200;font-family:'DM Mono',monospace;letter-spacing:.02em;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.b-tip-host .b-tip{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#0d1829;border:1px solid rgba(45,212,191,.2);border-radius:8px;padding:10px 13px;font-size:11px;color:#94a3b8;width:230px;white-space:normal;line-height:1.65;opacity:0;pointer-events:none;transition:opacity .18s;z-index:9999;font-family:'DM Mono',monospace;letter-spacing:.02em;box-shadow:0 12px 32px rgba(0,0,0,.7)}
 .b-tip-host:hover .b-tip{opacity:1}
-.b-tip-host .b-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#0a1422}
+.b-tip-host .b-tip::after{content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-bottom-color:#0d1829}
 
 /* Stat row */
-.b-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.04);margin-bottom:12px;border-radius:6px;overflow:hidden}
-.b-stat{padding:16px 14px 13px;background:#030711;transition:background .2s;cursor:default}
-.b-stat:hover{background:#070d1c}
+.b-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.04);margin-bottom:12px;border-radius:6px;overflow:visible}
+.b-stat{padding:16px 14px 13px;background:#030711;transition:background .2s;cursor:default;position:relative}
+.b-stat:hover{background:#070d1c;z-index:100}
 .b-stat-bar{height:1.5px;width:100%;margin-bottom:9px}
 .b-stat-n{font-size:34px;font-weight:900;line-height:1;margin-bottom:5px;display:flex;align-items:baseline;gap:3px}
 .b-stat-sfx{font-size:13px;font-weight:500;opacity:.4}
