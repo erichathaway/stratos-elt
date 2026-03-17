@@ -4493,7 +4493,7 @@ async function loadData() {
   if (metaEl) metaEl.textContent = run_id + ' · loading…';
 
   try {
-    const res = await fetch(`/api/data?run_id=${encodeURIComponent(run_id)}`);
+    const res = await fetch(run_id ? `/api/data?run_id=${encodeURIComponent(run_id)}` : '/api/data');
     if (!res.ok) throw new Error(`API ${res.status}`);
     const d = await res.json();
     populateDashboard(d);
