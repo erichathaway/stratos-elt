@@ -4430,7 +4430,7 @@ document.addEventListener('keydown', function(e) {
 // Reads run_id from URL param, falls back to reference run
 // Fetches /api/data and populates the dashboard in-place
 
-const DEFAULT_RUN = null; // dynamic — api/data.js resolves latest run
+const DEFAULT_RUN = 'RUN-20260313193333-v9i71lgw';
 
 // Role color map — used for dot and pill tinting
 const ROLE_COLORS = {
@@ -4456,7 +4456,7 @@ const AVATAR_URLS = {
 
 function getRunId() {
   const p = new URLSearchParams(window.location.search);
-  return p.get('run_id') || null;
+  return p.get('run_id') || DEFAULT_RUN;
 }
 
 function safeArr(v) { return Array.isArray(v) ? v : []; }
@@ -4490,10 +4490,10 @@ async function loadData() {
 
   // Update run meta in header
   const metaEl = document.querySelector('.run-meta');
-  if (metaEl) metaEl.textContent = (run_id || 'latest') + ' · loading…';
+  if (metaEl) metaEl.textContent = run_id + ' · loading…';
 
   try {
-    const res = await fetch(run_id ? `/api/data?run_id=${encodeURIComponent(run_id)}` : '/api/data');
+    const res = await fetch(`/api/data?run_id=${encodeURIComponent(run_id)}`);
     if (!res.ok) throw new Error(`API ${res.status}`);
     const d = await res.json();
     populateDashboard(d);
