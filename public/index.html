@@ -4668,6 +4668,27 @@ function populateDashboard(d) {
 
   // ── Page title ────────────────────────────────────────────────────────────
   if (question) document.title = 'StratOS — ' + question.slice(0, 60);
+
+  // ── GOV blob: wire executive summary PDF and audio briefs ─────────────────
+  const gov = d.govBlob || null;
+  const mpdf = document.getElementById('b-mpdf');
+  const a1 = document.getElementById('b-a1');
+  const a3 = document.getElementById('b-a3');
+  if (gov && gov.brief_html_url && mpdf) {
+    mpdf.style.cursor = 'pointer';
+    mpdf.onclick = function(){ window.open(gov.brief_html_url, '_blank'); };
+    mpdf.title = 'Open Executive Summary';
+  }
+  if (gov && gov.audio_brief_url && a1) {
+    window._audioUrls = window._audioUrls || {};
+    window._audioUrls['b-a1'] = gov.audio_brief_url;
+    a1.title = 'Play 1-minute brief (' + Math.round((gov.audio_brief_sec||0)/60*10)/10 + ' min)';
+  }
+  if (gov && gov.audio_deep_url && a3) {
+    window._audioUrls = window._audioUrls || {};
+    window._audioUrls['b-a3'] = gov.audio_deep_url;
+    a3.title = 'Play 3-minute deep dive (' + Math.round((gov.audio_deep_sec||0)/60*10)/10 + ' min)';
+  }
 }
 
 // ── Populate rejected options from live optionsBlob ──────────────────────────
