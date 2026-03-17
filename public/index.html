@@ -3686,9 +3686,9 @@ function toggleExpand(id) {
   var tip = document.getElementById('cite-tooltip');
   if (!tip) return;
 
-  function showTip(btn) {
+function showTip(btn) {
     var cite=btn.closest('.cite'); if(!cite)return;
-    var q=cite.dataset.q, srcLabel=cite.dataset.src||btn.textContent.trim().replace(/^[^w]+/,'').trim();
+    var q=cite.dataset.q, srcLabel=cite.dataset.src||btn.textContent.trim().replace(/^[^\w]+/,'').trim();
     var iconType=cite.dataset.icon||'INTERNAL_DOCUMENT', url=cite.dataset.url;
     if(!q){var tc=cite.querySelector('.cite-tip');q=tc?(tc.textContent||tc.innerHTML):null;}
     if(!q)return;
@@ -3703,7 +3703,7 @@ function toggleExpand(id) {
     var srcHtml=url
       ?'<a href="'+url+'" target="_blank" rel="noopener" style="color:var(--brand-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">'+srcLabel+'<svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7"/><path d="M8 1h3v3"/><path d="M4.5 7.5L11 1"/></svg></a>'
       :'<span style="color:#64748b">'+srcLabel+'</span>';
-    tip.innerHTML='<div style="font-size:12px;color:#cbd5e1;line-height:1.65;margin-bottom:8px;white-space:normal">'+q+'</div><div style="border-top:1px solid rgba(255,255,255,.07);padding-top:7px;display:flex;align-items:center;gap:7px"><span style="flex-shrink:0;display:flex">'+iconSvg+'</span><span style="font-size:9.5px;font-family:'DM Mono',monospace;letter-spacing:.04em">'+srcHtml+'</span></div>';
+    tip.innerHTML='<div style="font-size:12px;color:#cbd5e1;line-height:1.65;margin-bottom:8px;white-space:normal">'+q+'</div><div style="border-top:1px solid rgba(255,255,255,.07);padding-top:7px;display:flex;align-items:center;gap:7px"><span style="flex-shrink:0;display:flex">'+iconSvg+'</span><span style="font-size:9.5px;font-family:\'DM Mono\',monospace;letter-spacing:.04em">'+srcHtml+'</span></div>';
     var w=360,rect=btn.getBoundingClientRect();
     var x=Math.max(10,Math.min(rect.left+rect.width/2-w/2,window.innerWidth-w-10));
     var y=rect.top<150?rect.bottom+8:rect.top-145;
