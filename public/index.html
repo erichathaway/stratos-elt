@@ -3686,28 +3686,22 @@ function toggleExpand(id) {
   var tip = document.getElementById('cite-tooltip');
   if (!tip) return;
 
-function showTip(btn) {
-    var cite=btn.closest('.cite'); if(!cite)return;
-    var q=cite.dataset.q, srcLabel=cite.dataset.src||btn.textContent.trim().replace(/^[^\w]+/,'').trim();
-    var iconType=cite.dataset.icon||'INTERNAL_DOCUMENT', url=cite.dataset.url;
-    if(!q){var tc=cite.querySelector('.cite-tip');q=tc?(tc.textContent||tc.innerHTML):null;}
-    if(!q)return;
-    var ICONS={
-      sheet:'<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="1" width="14" height="14" rx="1.5"/><path d="M1 5h14M1 9h14M5 5v9"/></svg>',
-      research:'<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"><circle cx="6.5" cy="6.5" r="5"/><path d="M10.5 10.5l3.5 3.5"/></svg>',
-      link:'<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"><path d="M6.5 9.5a4 4 0 005.66 0l1.5-1.5a4 4 0 00-5.66-5.66l-.75.75"/><path d="M9.5 6.5a4 4 0 00-5.66 0l-1.5 1.5a4 4 0 005.66 5.66l.75-.75"/></svg>',
-      gov:'<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"><path d="M8 1l7 3v1H1V4l7-3z"/><path d="M2.5 5v7M5.5 5v7M8 5v7M10.5 5v7M13.5 5v7M1 12h14"/></svg>',
-      doc:'<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"><path d="M9 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V6L9 1z"/><path d="M9 1v5h5"/><path d="M5 9h6M5 12h4"/></svg>'
-    };
-    var iconSvg=ICONS[bIconForType(iconType)]||ICONS.doc;
-    var srcHtml=url
-      ?'<a href="'+url+'" target="_blank" rel="noopener" style="color:var(--brand-primary);text-decoration:none;display:inline-flex;align-items:center;gap:4px">'+srcLabel+'<svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7"/><path d="M8 1h3v3"/><path d="M4.5 7.5L11 1"/></svg></a>'
-      :'<span style="color:#64748b">'+srcLabel+'</span>';
-    tip.innerHTML='<div style="font-size:12px;color:#cbd5e1;line-height:1.65;margin-bottom:8px;white-space:normal">'+q+'</div><div style="border-top:1px solid rgba(255,255,255,.07);padding-top:7px;display:flex;align-items:center;gap:7px"><span style="flex-shrink:0;display:flex">'+iconSvg+'</span><span style="font-size:9.5px;font-family:\'DM Mono\',monospace;letter-spacing:.04em">'+srcHtml+'</span></div>';
-    var w=360,rect=btn.getBoundingClientRect();
-    var x=Math.max(10,Math.min(rect.left+rect.width/2-w/2,window.innerWidth-w-10));
-    var y=rect.top<150?rect.bottom+8:rect.top-145;
-    tip.style.left=x+'px';tip.style.top=y+'px';tip.style.display='block';
+  function showTip(btn) {
+    var cite = btn.closest('.cite');
+    if (!cite) return;
+    var tipContent = cite.querySelector('.cite-tip');
+    if (!tipContent) return;
+    tip.innerHTML = tipContent.innerHTML || tipContent.textContent;
+    var w = 360;
+    var rect = btn.getBoundingClientRect();
+    var x = rect.left + rect.width / 2 - w / 2;
+    // Show above by default; flip below if near top of viewport
+    var y = rect.top - 110;
+    if (rect.top < 130) y = rect.bottom + 8;
+    x = Math.max(10, Math.min(x, window.innerWidth - w - 10));
+    tip.style.left = x + 'px';
+    tip.style.top = y + 'px';
+    tip.style.display = 'block';
   }
 
   function hideTip() {
@@ -4436,7 +4430,7 @@ document.addEventListener('keydown', function(e) {
 // Reads run_id from URL param, falls back to reference run
 // Fetches /api/data and populates the dashboard in-place
 
-const DEFAULT_RUN = 'RUN-20260313193333-v9i71lgw';
+const DEFAULT_RUN = null; // dynamic — api/data.js resolves latest run
 
 // Role color map — used for dot and pill tinting
 const ROLE_COLORS = {
@@ -4462,7 +4456,7 @@ const AVATAR_URLS = {
 
 function getRunId() {
   const p = new URLSearchParams(window.location.search);
-  return p.get('run_id') || DEFAULT_RUN;
+  return p.get('run_id') || null;
 }
 
 function safeArr(v) { return Array.isArray(v) ? v : []; }
@@ -4496,10 +4490,10 @@ async function loadData() {
 
   // Update run meta in header
   const metaEl = document.querySelector('.run-meta');
-  if (metaEl) metaEl.textContent = run_id + ' · loading…';
+  if (metaEl) metaEl.textContent = (run_id || 'latest') + ' · loading…';
 
   try {
-    const res = await fetch(`/api/data?run_id=${encodeURIComponent(run_id)}`);
+    const res = await fetch(run_id ? `/api/data?run_id=${encodeURIComponent(run_id)}` : '/api/data');
     if (!res.ok) throw new Error(`API ${res.status}`);
     const d = await res.json();
     populateDashboard(d);
@@ -5063,20 +5057,19 @@ new MutationObserver(function(){
 
 /* === BRIEFING CITATION HELPERS === */
 function bIconForType(t){
-  if(!t)return 'doc';
-  if(t==='SPREADSHEET')return 'sheet';
-  if(t==='EXTERNAL_RESEARCH'||t==='TIER_1_AUTHORITATIVE'||t==='TIER_2_REPUTABLE')return 'research';
-  if(t==='EXTERNAL_LINK')return 'link';
-  if(t==='INTERNAL_GOVERNANCE')return 'gov';
-  return 'doc';
+  // Return icon label strings — no emoji literals to avoid surrogate pair syntax errors
+  var m={
+    'TIER_1_AUTHORITATIVE':'data','TIER_2_REPUTABLE':'data','TIER_3_UNVERIFIED':'data',
+    'EXTERNAL_RESEARCH':'data','SPREADSHEET':'data','INTERNAL_GOVERNANCE':'data',
+    'INTERNAL_STRATEGY':'data','INTERNAL_ANALYSIS':'data','INTERNAL_POLICY':'data',
+    'INTERNAL_DOCUMENT':'data','EXTERNAL_LINK':'data'
+  };
+  return m[t]||'data';
 }
 function bBuildCite(src,tip,iconType,url){
-  var safeQ=(tip||'').replace(/"/g,'&quot;');
-  var safeSrc=(src||'').replace(/"/g,'&quot;');
-  var safeUrl=(url||'').replace(/"/g,'&quot;');
+  // url support added post-citation_registry — onclick omitted until registry is live
   var btn='<button class="cite-btn">'+src+'</button>';
-  var attrs=' data-q="'+safeQ+'" data-src="'+safeSrc+'" data-icon="'+(iconType||'INTERNAL_DOCUMENT')+'"'+(url?' data-url="'+safeUrl+'"':'');
-  return '<span class="cite tip-left"'+attrs+'>'+btn+'<div class="cite-tip" style="display:none"></div></span>';
+  return '<span class="cite tip-left">'+btn+'<div class="cite-tip">'+tip+'</div></span>';
 }
 
 function bGetCite(key,citReg,fallbackSrc,fallbackTip){
