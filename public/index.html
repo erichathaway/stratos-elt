@@ -4038,7 +4038,7 @@ document.addEventListener('keydown', function(e) {
 (function() {
   var el = document.querySelector('.conf-big');
   if (!el) return;
-  var target = 77, duration = 1200, start = null;
+  var target = window._confTarget || 67, duration = 1200, start = null;
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
   function step(ts) {
     if (!start) start = ts;
