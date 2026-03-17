@@ -5135,10 +5135,7 @@ function renderBriefingTab(){
     {s:'F1·COO·R1',t:'COO R1 · operational capacity flagged as primary execution risk · 95% ceiling'},
     {s:'F2·CEO·R2',t:'CEO R2 · final convergence · conditional approval with three pre-conditions'}
   ];
-  var narrHTML=narrSents.map(function(s,i){
-    var c=citeMap[i]||citeMap[0];
-    return s+' '+bBuildCite(c.src,c.tip,c.iconType,c.url);
-  }).join(' ');
+  var narrHTML=narrSents.join(' ');
   if($i('b-narrative'))$i('b-narrative').innerHTML=narrHTML||'Strategic briefing loading…';
   var tags=[];
   var q=master.question||'';
