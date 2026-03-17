@@ -4992,31 +4992,72 @@ document.addEventListener('mouseout',function(e){
 function addCiteIcons(){
   document.querySelectorAll('.cite-btn').forEach(function(btn){
     if(btn.dataset.iconDone) return;
-    var t=btn.textContent.trim();
-    var icon=ROLES.some(function(r){return t.startsWith(r+'·')||t.startsWith(r+' ');})?'👤'
-      :/EI|RX/.test(t)?'☁️'
-      :/PINECONE/i.test(t)?'📄'
-      :/D_PACKET|F[123]/.test(t)?'📊'
-      :'📗';
-    btn.textContent=icon+' '+t;
+    var t=btn.textContent.trim().replace(/^[^\w]+/,'').trim();
+    var cite=btn.closest('.cite');
+    var itype=cite?cite.dataset.iconType:'';
+    var icon;
+    if(ROLES.some(function(r){return t.startsWith(r+'\u00b7')||t.startsWith(r+' ');})){icon='👤';}
+    else if(itype==='EXTERNAL_RESEARCH'){icon='☁️';}
+    else if(itype==='SPREADSHEET'){icon='📊';}
+    else if(/D_PACKET|F[123]/.test(t)){icon='📊';}
+    else {icon='📗';}
+    btn.textContent=icon+' '+btn.textContent.trim();
     btn.dataset.iconDone='1';
   });
 }
-
 function enrichCiteSources(){
   if(!window._lastData) return;
+  // Parse every evidence string pattern into {source, statement, iconType}
+  function parseEv(s){
+    s=String(s).trim();
+    // External: Source — statement
+    if(/^External:/i.test(s)){
+      var m=s.match(/^External:\s*([^—\-]+?)(?:\s*[—\-]+\s*(.+))?$/);
+      return {source:m?m[1].trim():s,statement:m&&m[2]?m[2].trim():'',iconType:'EXTERNAL_RESEARCH'};
+    }
+    // Bare external research — known sources without "External:" prefix
+    if(/^(Gainsight|Gartner|Forrester|McKinsey|TSIA|SHRM|Radford|Mercer|IDC|G2|Deloitte|PwC|BCG|OECD|GDPR Article)/i.test(s)){
+      var m2=s.match(/^([^:—]+?)(?:[:\-—]+\s*(.+))?$/);
+      return {source:m2?m2[1].trim():s,statement:m2&&m2[2]?m2[2].trim():'',iconType:'EXTERNAL_RESEARCH'};
+    }
+    // ROLE R1/R2 position: statement
+    if(/^(CEO|CSO|CFO|CHRO|COO|CTO|LEGAL)\s+R\d+\s+position:/i.test(s)){
+      var m3=s.match(/^(\w+)\s+(R\d+)\s+position:\s*(.+)$/i);
+      return {source:m3?m3[1]+' '+m3[2]:'',statement:m3?m3[3]:'',iconType:'ROLE_POSITION'};
+    }
+    // Peer synthesis
+    if(/^Peer synthesis:/i.test(s)){
+      return {source:'Peer Synthesis',statement:s.replace(/^Peer synthesis:\s*/i,''),iconType:'PEER_SYNTHESIS'};
+    }
+    // P&L, snake_case doc refs like Strategic_Plan, Financial_Model_Master
+    if(/^P&L$|^[A-Z][A-Za-z0-9]+(_[A-Za-z0-9]+)+$/.test(s)){
+      var label=s.replace(/_/g,' ');
+      var itype=/budget|financial|model|P&L|headcount/i.test(s)?'SPREADSHEET':'INTERNAL_DOCUMENT';
+      return {source:label,statement:'',iconType:itype};
+    }
+    // EVIDENCE-ID: Source — statement
+    if(/^EVIDENCE-/.test(s)&&s.includes('—')){
+      var m4=s.match(/^EVIDENCE-(\S+?):\s*([^—]+?)\s*—\s*(.+)$/);
+      if(m4) return {source:m4[2].trim(),statement:m4[3].trim(),iconType:'INTERNAL_DOCUMENT'};
+    }
+    // EVIDENCE-ID: statement OR EVIDENCE-ID (statement)
+    if(/^EVIDENCE-/.test(s)){
+      var m5=s.match(/^EVIDENCE-\S+?[:\s(]+(.+?)\)?$/);
+      var stmt=m5?m5[1].replace(/\)$/,'').trim():'';
+      var itype2=/OKR|budget|FY20|capital.*alloc|Q1.*OKR|headcount/i.test(stmt)?'SPREADSHEET':'INTERNAL_DOCUMENT';
+      return {source:s.match(/^EVIDENCE-(\S+)/)?s.match(/^EVIDENCE-(\S+)/)[1]:'',statement:stmt,iconType:itype2};
+    }
+    return {source:s,statement:'',iconType:'INTERNAL_DOCUMENT'};
+  }
   var lookup={};
   (window._lastData.stageOutputs||[]).forEach(function(row){
-    var key=row.role_key+'·R'+row.round;
-    var sources=[];
+    var key=row.role_key+'\u00b7R'+row.round;
+    var parsed=[];
     try{
-      var ev=JSON.parse(row.evidence_cited||'[]');
-      sources=ev.map(function(s){
-        if(typeof s!=='string') return '';
-        return s.replace(/^EVIDENCE-\S+[\s:(]+/,'').replace(/\)$/,'').trim();
-      }).filter(function(s){return s&&s.length>4&&!s.startsWith('EVIDENCE-');});
+      var ev=JSON.parse(row.evidence_cited||row.evidence_used||'[]');
+      parsed=ev.map(parseEv).filter(function(p){return p.source||p.statement;});
     }catch(e){}
-    if(sources.length) lookup[key]=sources;
+    if(parsed.length) lookup[key]=parsed;
   });
   document.querySelectorAll('.cite').forEach(function(cite){
     var btn=cite.querySelector('.cite-btn');
@@ -5024,16 +5065,29 @@ function enrichCiteSources(){
     if(!btn||!tip||tip.querySelector('.cite-src')) return;
     var label=btn.textContent.trim().replace(/^[^\w]+/,'').trim();
     var roleM=label.match(/(CEO|CSO|CFO|CHRO|COO|CTO|LEGAL)/),roundM=label.match(/R(\d+)/);
-    var sources=(roleM&&roundM)?lookup[roleM[1]+'·R'+roundM[1]]:null;
-    if(!sources||!sources.length) return;
+    var items=(roleM&&roundM)?lookup[roleM[1]+'\u00b7R'+roundM[1]]:null;
+    if(!items||!items.length) return;
+    // Dominant icon type
+    var ext=items.filter(function(p){return p.iconType==='EXTERNAL_RESEARCH';}).length;
+    var sheet=items.filter(function(p){return p.iconType==='SPREADSHEET';}).length;
+    cite.dataset.iconType=ext>0?'EXTERNAL_RESEARCH':sheet>0?'SPREADSHEET':'INTERNAL_DOCUMENT';
+    // Build rich source list in tip
     var div=document.createElement('div');
     div.className='cite-src';
-    div.style.cssText='margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:#64748b;font-family:DM Mono,monospace;line-height:1.5;white-space:normal';
-    div.textContent='📎 '+sources.slice(0,2).map(function(s){return s.substring(0,55);}).join(' · ');
+    div.style.cssText='margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.08);font-size:9px;color:#64748b;font-family:DM Mono,monospace;line-height:1.8;white-space:normal';
+    var lines=items.slice(0,4).map(function(p){
+      var icon=p.iconType==='EXTERNAL_RESEARCH'?'☁️'
+        :p.iconType==='SPREADSHEET'?'📊'
+        :p.iconType==='ROLE_POSITION'?'👤'
+        :p.iconType==='PEER_SYNTHESIS'?'🔗'
+        :'📗';
+      var text=(p.source||'')+(p.statement?' — '+p.statement.substring(0,60):'');
+      return icon+' '+text.substring(0,85);
+    });
+    div.textContent=lines.join('\n');
     tip.appendChild(div);
   });
 }
-
 (function(){
   var origFetch=window.fetch;
   window.fetch=function(){
