@@ -5136,7 +5136,7 @@ function renderBriefingTab(){
   ];
   var narrHTML=narrSents.map(function(s,i){
     var c=citeMap[i]||citeMap[0];
-    return s+' '+bBuildCite(c.src,c.tip,c.iconType,c.url);
+    return s+' '+bBuildCite(c.s,c.t,'INTERNAL_DOCUMENT',null);
   }).join(' ');
   if($i('b-narrative'))$i('b-narrative').innerHTML=narrHTML||'Strategic briefing loading…';
   var tags=[];
