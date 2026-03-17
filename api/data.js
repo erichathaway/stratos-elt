@@ -3,8 +3,14 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
 
-  const { run_id } = req.query;
-  if (!run_id) { res.status(400).json({ error: 'run_id required' }); return; }
+  let { run_id } = req.query;
+  if (!run_id) {
+    // No run_id supplied — resolve latest completed run from engine_master_state
+    const latestRes = await fetch(`${SB_URL}/rest/v1/engine_master_state?order=created_at.desc&limit=1`, {headers: h});
+    const latestRows = await latestRes.json();
+    run_id = latestRows?.[0]?.run_id;
+    if (!run_id) { res.status(404).json({ error: 'No runs found in engine_master_state' }); return; }
+  }
 
   const SB_URL = process.env.SUPABASE_URL;
   const SB_KEY = process.env.SUPABASE_ANON_KEY;
