@@ -3688,7 +3688,7 @@ function toggleExpand(id) {
 
   function showTip(btn) {
     var cite=btn.closest('.cite'); if(!cite)return;
-    var q=cite.dataset.q, srcLabel=cite.dataset.src||btn.textContent.trim().replace(/^[^\w]+/,'').trim();
+    var q=cite.dataset.q, srcLabel=cite.dataset.src||btn.textContent.trim().replace(/^[^w]+/,'').trim();
     var iconType=cite.dataset.icon||'INTERNAL_DOCUMENT', url=cite.dataset.url;
     if(!q){var tc=cite.querySelector('.cite-tip');q=tc?(tc.textContent||tc.innerHTML):null;}
     if(!q)return;
