@@ -4047,7 +4047,7 @@ document.addEventListener('keydown', function(e) {
     if (progress < 1) requestAnimationFrame(step);
     else el.textContent = target;
   }
-  setTimeout(function() { requestAnimationFrame(step); }, 200);
+  setTimeout(function() { target = window._confTarget || target; requestAnimationFrame(step); }, 800);
 })();
 
 // ── CONFIDENCE BAR animate in ──
