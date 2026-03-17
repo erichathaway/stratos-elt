@@ -55,6 +55,29 @@ export default async function handler(req, res) {
       unwrap(govRes),
     ]);
 
+    // Transform Drive webViewLinks to direct-stream URLs for audio
+    function driveAudioUrl(link) {
+      if (!link) return null;
+      const m = link.match(/\/d\/([a-zA-Z0-9_-]+)\//);
+      return m ? `https://drive.google.com/uc?export=download&id=${m[1]}` : link;
+    }
+    function driveEmbedUrl(link) {
+      if (!link) return null;
+      const m = link.match(/\/d\/([a-zA-Z0-9_-]+)\//);
+      return m ? `https://drive.google.com/file/d/${m[1]}/preview` : link;
+    }
+    if (govBlob) {
+      govBlob.audio_brief_url = driveAudioUrl(govBlob.audio_brief_url);
+      govBlob.audio_deep_url  = driveAudioUrl(govBlob.audio_deep_url);
+      govBlob.brief_html_url  = driveEmbedUrl(govBlob.brief_html_url);
+      if (govBlob.walkthrough_sections) {
+        govBlob.walkthrough_sections = govBlob.walkthrough_sections.map(s => ({
+          ...s,
+          audio_url: driveAudioUrl(s.view_link)
+        }));
+      }
+    }
+
     res.status(200).json({
       run_id,
       outputBlob,
