@@ -25,13 +25,14 @@ export default async function handler(req, res) {
   const enc = encodeURIComponent(run_id);
 
   try {
-    const [blobRes, stageRes, dpacketRes, f1Res, masterRes, optionsRes] = await Promise.all([
+    const [blobRes, stageRes, dpacketRes, f1Res, masterRes, optionsRes, govRes] = await Promise.all([
       fetch(`${SB_URL}/rest/v1/engine_blobs?run_id=eq.${enc}&blob_type=eq.OUTPUT&order=created_at.desc&limit=1`, {headers: h}),
       fetch(`${SB_URL}/rest/v1/engine_stage_outputs?run_id=eq.${enc}&section=eq.D&order=round.asc,role_key.asc`, {headers: h}),
       fetch(`${SB_URL}/rest/v1/engine_blobs?run_id=eq.${enc}&blob_type=eq.D_packet&order=round.desc&limit=1`, {headers: h}),
       fetch(`${SB_URL}/rest/v1/engine_stage_outputs?run_id=eq.${enc}&section=eq.F1&order=round.asc`, {headers: h}),
       fetch(`${SB_URL}/rest/v1/engine_master_state?run_id=eq.${enc}&limit=1`, {headers: h}),
       fetch(`${SB_URL}/rest/v1/engine_blobs?run_id=eq.${enc}&blob_type=eq.options&order=created_at.desc&limit=1`, {headers: h}),
+      fetch(`${SB_URL}/rest/v1/engine_blobs?run_id=eq.${enc}&blob_type=eq.GOV&order=created_at.desc&limit=1`, {headers: h}),
     ]);
 
     const unwrap = async (r) => {
@@ -44,13 +45,14 @@ export default async function handler(req, res) {
       } catch { return raw; }
     };
 
-    const [outputBlob, stageOutputs, dPacket, f1Outputs, masterRows, optionsBlob] = await Promise.all([
+    const [outputBlob, stageOutputs, dPacket, f1Outputs, masterRows, optionsBlob, govBlob] = await Promise.all([
       unwrap(blobRes),
       stageRes.json(),
       unwrap(dpacketRes),
       f1Res.json(),
       masterRes.json(),
       unwrap(optionsRes),
+      unwrap(govRes),
     ]);
 
     res.status(200).json({
@@ -61,6 +63,7 @@ export default async function handler(req, res) {
       f1Outputs: f1Outputs || [],
       master: masterRows?.[0] ?? null,
       optionsBlob,
+      govBlob,
       fetched_at: new Date().toISOString()
     });
   } catch (err) {
