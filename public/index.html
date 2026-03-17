@@ -5013,7 +5013,7 @@ function enrichCiteSources(){
       var ev=JSON.parse(row.evidence_cited||'[]');
       sources=ev.map(function(s){
         if(typeof s!=='string') return '';
-        return s.replace(/^EVIDENCE-Rd+_w+_Fd+:s*/,'').trim();
+        return s.replace(/^EVIDENCE-\S+[\s:(]+/,'').replace(/\)$/,'').trim();
       }).filter(function(s){return s&&s.length>4&&!s.startsWith('EVIDENCE-');});
     }catch(e){}
     if(sources.length) lookup[key]=sources;
@@ -5022,8 +5022,9 @@ function enrichCiteSources(){
     var btn=cite.querySelector('.cite-btn');
     var tip=cite.querySelector('.cite-tip');
     if(!btn||!tip||tip.querySelector('.cite-src')) return;
-    var label=btn.textContent.trim().replace(/^[^A-Z]+/,'').trim();
-    var sources=lookup[label];
+    var label=btn.textContent.trim().replace(/^[^\w]+/,'').trim();
+    var roleM=label.match(/(CEO|CSO|CFO|CHRO|COO|CTO|LEGAL)/),roundM=label.match(/R(\d+)/);
+    var sources=(roleM&&roundM)?lookup[roleM[1]+'·R'+roundM[1]]:null;
     if(!sources||!sources.length) return;
     var div=document.createElement('div');
     div.className='cite-src';
